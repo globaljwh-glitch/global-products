@@ -9,6 +9,7 @@ Route::get('/', function () {
 
 Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::resource('categories', App\Http\Controllers\Admin\CategoryController::class);
+    Route::resource('products', App\Http\Controllers\Admin\ProductController::class);
 });
 
 Route::get('/dashboard', function () {
