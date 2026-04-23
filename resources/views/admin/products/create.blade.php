@@ -1,18 +1,11 @@
 <x-app-layout>
-<div class="p-6 max-w-4xl mx-auto">
 
-    <h1 class="text-xl font-semibold mb-4">Create Product</h1>
+    <div class="max-w-7xl mx-auto py-6">
 
-    <form method="POST" enctype="multipart/form-data" action="{{ route('products.store') }}">
-        @csrf
+        <h1 class="text-2xl font-semibold mb-6">Create Product</h1>
 
         @include('admin.products.form')
 
-        <button class="bg-blue-600 text-white px-4 py-2 rounded mt-4">
-            Save
-        </button>
-    </form>
+    </div>
 
-</div>
 </x-app-layout>
-

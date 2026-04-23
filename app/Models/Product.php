@@ -13,8 +13,14 @@ class Product extends Model
         'mpn',
         'price',
         'description',
+        'other',
         'status',
         'display_order',
+        'is_exclusive',
+        'is_featured',
+        'external_url',
+        'external_url_label',
+        'model_number',
     ];
 
     // Categories
@@ -24,9 +30,14 @@ class Product extends Model
     }
 
     // Brands
+    // public function brands()
+    // {
+    //     return $this->belongsToMany(Brand::class);
+    // }
     public function brands()
     {
-        return $this->belongsToMany(Brand::class);
+        return $this->belongsToMany(Brand::class)
+            ->withTimestamps();
     }
 
     // Vendors
@@ -45,11 +56,15 @@ class Product extends Model
     }
 
     // Attributes
+    // public function attributes()
+    // {
+    //     return $this->belongsToMany(Attribute::class, 'product_attributes', 'product_id', 'attribute_id')
+    //         ->withPivot('value')
+    //         ->withTimestamps();
+    // }
     public function attributes()
     {
-        return $this->belongsToMany(Attribute::class)
-            ->withPivot('value')
-            ->withTimestamps();
+        return $this->hasMany(Attribute::class, 'product_id');
     }
 
     public function primaryImage()

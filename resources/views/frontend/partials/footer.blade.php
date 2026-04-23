@@ -1,0 +1,85 @@
+<footer class="blueBg">
+         <div class="container">
+            <div class="row">
+               <div class="col-lg-12">
+                  <div class="footerMenuBlock">
+                     <div class="row">
+                        <div class="d-flex col-md-3 col-sm-6">
+                           <div>
+                              <h5 class="">Company Information</h5>
+                              <ul>
+                                 <li><a href="#">About Us</a></li>
+                                 <li><a href="#">Careers</a></li>
+                                 <li><a href="#">News &amp; Press</a></li>
+                                 <li><a href="#">Investor Relations</a></li>
+                                 <li><a href="#">CSR</a></li>
+                                 <li><a href="#">Distribution Centers</a></li>
+                              </ul>
+                           </div>
+                        </div>
+                        <div class="d-flex col-md-3 col-sm-6">
+                           <div>
+                              <h5 class="">Customer Support</h5>
+                              <ul>
+                                 <li><a href="#">Help Center</a></li>
+                                 <li><a href="#">My Account</a></li>
+                                 <li><a href="#">My Orders</a></li>
+                                 <li><a href="#">Track My Order</a></li>
+                                 <li><a href="#">Shipping & Returns</a></li>
+                                 <li><a href="#">Product Recall / Safety Info</a></li>
+                              </ul>
+                           </div>
+                        </div>
+                        <div class="d-flex col-md-3 col-sm-6">
+                           <div>
+                              <h5 class="">More Ways To Shop</h5>
+                              <ul>
+                                 <li><a href="#">Inventory Clearance</a></li>
+                                 <li><a href="#">Free Shipping</a></li>
+                                 <li><a href="#">New Products</a></li>
+                                 <li><a href="#">Knowledge Center</a></li>
+                                 <li><a href="#">Industrial How-Tos</a></li>
+                                 <li><a href="#">Equipment Financing</a></li>
+                              </ul>
+                           </div>
+                        </div>
+                        <div class="d-flex col-md-3 col-sm-6">
+                           <div>
+                              <h5 class="">Services</h5>
+                              <ul>
+                                 <li><a href="#">Extended Service Plan</a></li>
+                                 <li><a href="#">Affiliate Program</a></li>
+                                 <li><a href="#">Resellers</a></li>
+                                 <li><a href="#">Become A Supplier</a></li>
+                                 <li><a href="#">Safety Services</a></li>
+                                 <li><a href="#">Accessibility Options</a></li>
+                              </ul>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="copyright">
+                     <div class="row">
+                        <div class="col-md-7 order-1 order-md-0">
+                           <p>©2026, Global Products Corporation-All Rights Reserved.</p>
+                        </div>
+                        <div class="text-end col-md-5 order-0 order-md-1">
+                           <ul>
+                              <li><a href="/terms-of-use" data-discover="true">Terms of Use</a><span>|</span><a href="/privacy-policy" data-discover="true">Privacy Policy</a></li>
+                           </ul>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </footer>
+
+      <!-- <script src="js/jquery.min.js"></script>  -->
+      <script src="{{ asset('js/jquery.min.js') }}"></script>
+      <!-- <script src="js/bootstrap.min.js"></script>  -->
+      <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+      <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+      <!-- <script src="js/core.js"></script> -->
+      <script src="{{ asset('js/core.js') }}"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>

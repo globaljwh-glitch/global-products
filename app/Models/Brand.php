@@ -10,12 +10,29 @@ class Brand extends Model
         'name',
         'slug',
         'logo',
+        'banner',
+        'description',
+        'meta_title',
+        'meta_description',
+        'is_featured',
+        'is_exclusive',
         'status',
         'display_order',
     ];
 
+    // public function products()
+    // {
+    //     return $this->belongsToMany(Product::class);
+    // }
+
     public function products()
     {
-        return $this->belongsToMany(Product::class);
+        return $this->belongsToMany(Product::class)
+            ->withTimestamps();
+    }
+
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class);
     }
 }

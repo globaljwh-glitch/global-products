@@ -142,7 +142,7 @@
                                         @csrf
                                         @method('DELETE')
 
-                                        <button onclick="return confirm('Delete?')"
+                                        <button onclick="return confirm('Are you sure you want to delete this category?')"
                                                 class="text-red-600 hover:underline">
                                             Delete
                                         </button>
