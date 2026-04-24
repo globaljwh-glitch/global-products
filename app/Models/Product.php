@@ -70,6 +70,14 @@ class Product extends Model
     public function primaryImage()
     {
         return $this->hasOne(ProductImage::class)
-            ->where('is_primary', true);
+            ->where('is_primary', 1)
+            ->orderBy('display_order');
+    }
+
+    public function mainImage()
+    {
+        return $this->hasOne(ProductImage::class)
+            ->orderBy('is_primary', 'desc')  
+            ->orderBy('display_order', 'asc');
     }
 }
