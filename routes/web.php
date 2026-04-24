@@ -20,6 +20,7 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     //Route::resource('products', App\Http\Controllers\Admin\ProductController::class);
     Route::resource('brands', App\Http\Controllers\Admin\BrandController::class);
     Route::resource('attributes', App\Http\Controllers\Admin\AttributeController::class);
+    Route::get('/products/search', [ProductController::class, 'search']);
 });
 
 // Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {

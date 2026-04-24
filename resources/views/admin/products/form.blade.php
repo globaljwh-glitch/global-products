@@ -317,7 +317,21 @@
 
             </div>
 
-            <div class="grid grid-cols-2 gap-6">
+            <div class="col-span-2 mt-6">
+                <h3 class="text-lg font-semibold mb-3">Related Products</h3>
+
+                <select name="related_products[]" class="form-control select2" multiple>
+                    @if(isset($product))
+                        @foreach($product->relatedProducts as $related)
+                            <option value="{{ $related->id }}" selected>
+                                {{ $related->name }}
+                            </option>
+                        @endforeach
+                    @endif
+                </select>
+            </div>
+
+            <div class="grid grid-cols-2 gap-6 mt-6">
                 <div>
                     <label class="block font-medium">Status</label>
                     <select name="status" class="w-full border rounded px-3 py-2">
@@ -718,4 +732,34 @@ function updateExistingOrder() {
             `;
         });
 }
+</script>
+
+
+<!-- js for related products -->
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    if ($('select[name="related_products[]"]').length) {
+        $('select[name="related_products[]"]').select2({
+            placeholder: 'Search related products',
+            width: '100%',
+            minimumInputLength: 2,
+            ajax: {
+                url: '/admin/products/search',
+                dataType: 'json',
+                delay: 250,
+                data: function (params) {
+                    return {
+                        q: params.term,
+                        exclude_id: {{ $product->id ?? 0 }}
+                    };
+                },
+                processResults: function (data) {
+                    return {
+                        results: data
+                    };
+                }
+            }
+        });
+    }
+});
 </script>

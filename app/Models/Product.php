@@ -80,4 +80,14 @@ class Product extends Model
             ->orderBy('is_primary', 'desc')  
             ->orderBy('display_order', 'asc');
     }
+
+    public function relatedProducts()
+    {
+        return $this->belongsToMany(
+            Product::class,
+            'related_products',
+            'product_id',
+            'related_product_id'
+        );
+    }
 }
