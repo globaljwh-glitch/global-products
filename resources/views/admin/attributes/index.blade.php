@@ -3,13 +3,13 @@
 
     <div class="flex justify-between mb-6 max-w-5xl mx-auto">
         <div>
-            <h1 class="text-2xl font-semibold">Attributes</h1>
-            <p class="text-sm text-gray-500">Manage product attributes</p>
+            <h1 class="text-2xl font-semibold">Attributes Groups</h1>
+            <p class="text-sm text-gray-500">Manage groups</p>
         </div>
 
         <a href="{{ route('attributes.create') }}"
            class="bg-blue-600 text-white px-4 py-2 rounded-lg">
-            + Add Attribute
+            + Add Attribute Group
         </a>
     </div>
 
@@ -25,8 +25,8 @@
 
             <thead class="bg-gray-50 text-gray-600 text-xs uppercase">
                 <tr>
-                    <th class="px-4 py-3 text-left">Name</th>
-                    <th class="px-4 py-3 text-left">Group</th>
+                    <th class="px-4 py-3 text-left">Group Name</th>
+                    <!-- <th class="px-4 py-3 text-left">Group</th> -->
                     <th class="px-4 py-3 text-left">Order</th>
                     <th class="px-4 py-3 text-right">Actions</th>
                 </tr>
@@ -36,22 +36,22 @@
 
                 @forelse($attributes as $attr)
                 <tr>
+                    <!-- <td class="px-4 py-3">{{ $attr->name }}</td> -->
                     <td class="px-4 py-3">{{ $attr->name }}</td>
-                    <td class="px-4 py-3">{{ $attr->group_name }}</td>
                     <td class="px-4 py-3">{{ $attr->display_order }}</td>
                     <td class="px-4 py-3 text-right">
                         <a href="{{ route('attributes.edit', $attr) }}" class="text-blue-600 mr-2">Edit</a>
 
                         <form action="{{ route('attributes.destroy', $attr) }}" method="POST" class="inline">
                             @csrf @method('DELETE')
-                            <button class="text-red-600">Delete</button>
+                            <button class="text-red-600" onclick="return confirm('Delete?')">Delete</button>
                         </form>
                     </td>
                 </tr>
                 @empty
                 <tr>
                     <td colspan="4" class="text-center p-6 text-gray-500">
-                        No attributes found
+                        No groups found
                     </td>
                 </tr>
                 @endforelse

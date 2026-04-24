@@ -6,12 +6,22 @@ window.jQuery = $;
 
 
 // jQuery FIRST
-//import $ from 'jquery';
-//window.$ = window.jQuery = $;
+// import $ from 'jquery';
+// window.$ = window.jQuery = $;
 
 // Select2 FULL (IMPORTANT)
-//import 'select2/dist/js/select2.full.js';
-//import 'select2/dist/css/select2.min.css';
+// select2($);
+// import 'select2/dist/js/select2.full.js';
+// import 'select2/dist/css/select2.min.css';
+
+// IMPORTANT: import Select2 AFTER jQuery
+import select2 from 'select2';
+
+// Manually attach to jQuery
+select2($);
+
+import 'select2/dist/css/select2.min.css';
+
 
 // Alpine
 import Alpine from 'alpinejs';

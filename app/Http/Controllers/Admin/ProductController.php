@@ -23,7 +23,6 @@ class ProductController extends Controller
 
     public function create()
     {
-        //dd(request()->url());
         $product = null;
         $categories = Category::pluck('name', 'id');
         $brands = Brand::pluck('name', 'id');
@@ -115,75 +114,61 @@ class ProductController extends Controller
             }
         }
 
-//                 $existingIds = [];
-
-// // handle only if data exists
-// if (!empty($request->custom_attributes)) {
-
-//     foreach ($request->custom_attributes as $groupId => $rows) {
-
-//         foreach ($rows as $row) {
-
-//             // skip completely empty rows
-//             if (empty($row['name']) && empty($row['value'])) {
-//                 continue;
-//             }
-
-//             // UPDATE (with ownership check)
-//             if (!empty($row['id'])) {
-
-//                 $attr = Attribute::where('id', $row['id'])
-//                     ->where('product_id', $product->id) // 🔥 important
-//                     ->first();
-
-//                 if ($attr) {
-//                     $attr->update([
-//                         'name' => $row['name'],
-//                         'value' => $row['value'],
-//                     ]);
-
-//                     $existingIds[] = $attr->id;
-//                 }
-
-//             } else {
-//                 // CREATE
-//                 $attr = Attribute::create([
-//                     'product_id' => $product->id,
-//                     'attribute_group_id' => $groupId,
-//                     'name' => $row['name'],
-//                     'value' => $row['value'],
-//                 ]);
-
-//                 $existingIds[] = $attr->id;
-//             }
-//         }
-//     }
-// }
+        // attach related products after creation
+        if ($request->filled('related_products')) {
+            $product->relatedProducts()->sync($request->related_products);
+        }
 
         return redirect()->route('admin.products.index')->with('success', 'Product created');
     }
 
     public function edit(Product $product)
     {
+        // $categories = Category::pluck('name', 'id');
+        // $brands = Brand::pluck('name', 'id');
+        // $attributes = \App\Models\Attribute::orderBy('display_order')->get();
+
+        // $product->load('images');
+
+        // $product->load('attributes');
+
+        // $attributeGroups = \App\Models\AttributeGroup::with('attributes')
+        // ->orderBy('display_order')
+        // ->get();
+
+        // $product = Product::with('relatedProducts')->findOrFail($id);
+
+        // return view('admin.products.edit', compact('product', 'categories', 'brands', 'attributes', 'attributeGroups'));
+
+
+        ////////////
+
+
         $categories = Category::pluck('name', 'id');
         $brands = Brand::pluck('name', 'id');
         $attributes = \App\Models\Attribute::orderBy('display_order')->get();
 
-        $product->load('images');
-
-        $product->load('attributes');
-
         $attributeGroups = \App\Models\AttributeGroup::with('attributes')
-        ->orderBy('display_order')
-        ->get();
+            ->orderBy('display_order')
+            ->get();
 
-        return view('admin.products.edit', compact('product', 'categories', 'brands', 'attributes', 'attributeGroups'));
+        $product = Product::with([
+            'images',
+            'attributes',
+            'relatedProducts'
+        ])->findOrFail($id);
+
+        return view('admin.products.edit', compact(
+            'product',
+            'categories',
+            'brands',
+            'attributes',
+            'attributeGroups'
+        ));
     }
 
     public function update(Request $request, Product $product)
     {
-        //dd($product->attributes);
-        //dd($request->all());
         $data = $request->validate([
             'name' => 'required',
             'price' => 'required|numeric',
@@ -271,128 +256,63 @@ class ProductController extends Controller
         $product->categories()->sync($request->categories);
         $product->brands()->sync($request->brands ?? []);
 
-        //$product->attributes()->detach();
-        // $product->attributes()->delete();
-
-        // foreach ($request->custom_attributes ?? [] as $groupId => $rows) {
-
-        //     foreach ($rows as $i => $row) {
-
-        //         if (empty($row['name'])) {
-        //             continue;
-        //         }
-
-        //         $product->attributes()->create([
-        //             'attribute_group_id' => $groupId,
-        //             'name' => $row['name'],
-        //             'value' => $row['value'] ?? null,
-        //             //'display_order' => $i,
-        //             'status' => 1,
-        //         ]);
-        //     }
-        // }
-
         $existingIds = [];
 
-// handle only if data exists
-if (!empty($request->custom_attributes)) {
+        // handle only if data exists
+        if (!empty($request->custom_attributes)) {
 
-    foreach ($request->custom_attributes as $groupId => $rows) {
+            foreach ($request->custom_attributes as $groupId => $rows) {
 
-        foreach ($rows as $row) {
+                foreach ($rows as $row) {
 
-            // skip completely empty rows
-            if (empty($row['name']) && empty($row['value'])) {
-                continue;
-            }
+                    // skip completely empty rows
+                    if (empty($row['name']) && empty($row['value'])) {
+                        continue;
+                    }
 
-            // UPDATE (with ownership check)
-            if (!empty($row['id'])) {
+                    // UPDATE (with ownership check)
+                    if (!empty($row['id'])) {
 
-                $attr = Attribute::where('id', $row['id'])
-                    ->where('product_id', $product->id) // 🔥 important
-                    ->first();
+                        $attr = Attribute::where('id', $row['id'])
+                            ->where('product_id', $product->id)
+                            ->first();
 
-                if ($attr) {
-                    $attr->update([
-                        'name' => $row['name'],
-                        'value' => $row['value'],
-                    ]);
+                        if ($attr) {
+                            $attr->update([
+                                'name' => $row['name'],
+                                'value' => $row['value'],
+                            ]);
 
-                    $existingIds[] = $attr->id;
+                            $existingIds[] = $attr->id;
+                        }
+
+                    } else {
+                        // CREATE
+                        $attr = Attribute::create([
+                            'product_id' => $product->id,
+                            'attribute_group_id' => $groupId,
+                            'name' => $row['name'],
+                            'value' => $row['value'],
+                        ]);
+
+                        $existingIds[] = $attr->id;
+                    }
                 }
-
-            } else {
-                // CREATE
-                $attr = Attribute::create([
-                    'product_id' => $product->id,
-                    'attribute_group_id' => $groupId,
-                    'name' => $row['name'],
-                    'value' => $row['value'],
-                ]);
-
-                $existingIds[] = $attr->id;
             }
         }
-    }
-}
 
-// 🔥 SAFE DELETE (only if something processed)
-if (!empty($existingIds)) {
+        // SAFE DELETE (only if something processed)
+        if (!empty($existingIds)) {
 
-    // Attribute::where('product_id', $product->id)
-    //     ->whereNotIn('id', $existingIds)
-    //     ->delete();
+            Attribute::where('product_id', $product->id)
+                ->whereIn('attribute_group_id', array_keys($request->custom_attributes ?? []))
+                ->whereNotIn('id', $existingIds)
+                ->delete();
 
-    Attribute::where('product_id', $product->id)
-        ->whereIn('attribute_group_id', array_keys($request->custom_attributes ?? []))
-        ->whereNotIn('id', $existingIds)
-        ->delete();
+        }
 
-}
-
-
-
-        // if ($request->has('custom_attributes')) {
-
-        //     foreach ($request->custom_attributes as $groupId => $rows) {
-
-        //         foreach ($rows as $row) {
-
-        //             if (
-        //                 empty($row['name']) ||
-        //                 empty($row['value'])
-        //             ) {
-        //                 continue;
-        //             }
-
-        //             // create or find attribute
-        //             //dd($groupId, $row);
-        //             // $attribute = Attribute::firstOrCreate(
-        //             //     [
-        //             //         'name' => $row['name'],
-        //             //         'attribute_group_id' => $groupId, // ✅ REQUIRED
-        //             //     ],
-        //             //     [
-        //             //         'slug' => \Str::slug($row['name']),
-        //             //         'value' => $row['value'],
-        //             //     ]
-        //             // );
-
-        //             Attribute::create([
-        //                 'product_id' => $product->id,
-        //                 'attribute_group_id' => $groupId,
-        //                 'name' => $row['name'],
-        //                 'value' => $row['value'],
-        //             ]);
-
-        //             // attach value
-        //             // $product->attributes()->attach($attribute->id, [
-        //             //     'value' => $row['value']
-        //             // ]);
-        //         }
-        //     }
-        // }
+        // sync related products
+        $product->relatedProducts()->sync($request->related_products ?? []);
 
         return redirect()->route('admin.products.index')->with('success', 'Product updated');
     }
@@ -402,4 +322,53 @@ if (!empty($existingIds)) {
         $product->delete();
         return back()->with('success', 'Product deleted');
     }
+
+    // public function search(Request $request)
+    // {
+    //     $query = $request->q;
+
+    //     $products = Product::where('name', 'like', "%$query%")
+    //         ->limit(20)
+    //         ->get();
+
+    //     if ($request->has('exclude_id')) {
+    //         $products->where('id', '!=', $request->exclude_id);
+    //     }
+
+    //     return response()->json(
+    //         $products->map(function ($item) {
+    //             return [
+    //                 'id' => $item->id,
+    //                 'text' => $item->name
+    //             ];
+    //         })
+    //     );
+    // }
+
+    public function search(Request $request)
+    {
+        $query = $request->q;
+
+        $products = Product::query();
+
+        if (!empty($query)) {
+            $products->where('name', 'like', "%$query%");
+        }
+
+        if ($request->filled('exclude_id')) {
+            $products->where('id', '!=', $request->exclude_id);
+        }
+
+        $products = $products->limit(20)->get();
+
+        return response()->json(
+            $products->map(function ($item) {
+                return [
+                    'id' => $item->id,
+                    'text' => $item->name
+                ];
+            })
+        );
+    }
+
 }

@@ -7,13 +7,13 @@
             class="w-full border rounded px-3 py-2">
     </div>
 
-    <div>
+    <!-- <div>
         <label>Group Name</label>
         <input type="text" name="group_name"
             value="{{ old('group_name', $attribute->group_name ?? '') }}"
             placeholder="e.g. Product Details"
             class="w-full border rounded px-3 py-2">
-    </div>
+    </div> -->
 
     <div>
         <label>Display Order</label>

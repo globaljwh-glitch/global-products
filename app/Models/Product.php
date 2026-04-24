@@ -72,4 +72,14 @@ class Product extends Model
         return $this->hasOne(ProductImage::class)
             ->where('is_primary', true);
     }
+
+    public function relatedProducts()
+    {
+        return $this->belongsToMany(
+            Product::class,
+            'related_products',
+            'product_id',
+            'related_product_id'
+        );
+    }
 }
