@@ -23,6 +23,8 @@
       }
    </style>
 
+@include('frontend.partials.banner')
+
    <!-- Paste your homepage HTML here -->
    <section class="sectionPadding pb-0">
       <div class="container">

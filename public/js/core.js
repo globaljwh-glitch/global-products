@@ -58,5 +58,67 @@ $('.productSlider').slick({
 });
 /*--------------------------------- Tab/Accordion -------------------------*/
 
+$(document).ready(function () {
+
+  // Tab → Accordion
+  $('button[data-bs-toggle="tab"]').on('shown.bs.tab', function (e) {
+    let target = $(e.target).data("bs-target");
+    let collapseId = tabToCollapse[target];
+
+    // Close all
+    $('.accordion-collapse').removeClass('show');
+    $('.accordion-button').addClass('collapsed');
+
+    // Open current
+    $(collapseId).addClass('show');
+
+    // Remove collapsed from active button
+    $('.accordion-button[data-bs-target="' + collapseId + '"]')
+      .removeClass('collapsed');
+  });
+
+  // Accordion → Tab
+  $('.accordion-button').on('click', function () {
+    let collapseId = $(this).attr('data-bs-target');
+
+    // Close all
+    $('.accordion-collapse').removeClass('show');
+    $('.accordion-button').addClass('collapsed');
+
+    // Open current
+    $(collapseId).addClass('show');
+    $(this).removeClass('collapsed');
+
+    // Activate tab
+    $('button[data-bs-target="' + collapseToTab[collapseId] + '"]').tab('show');
+  });
+
+});
 
 
+/*--------------------------------- UserProfile Tabs -------------------------*/
+
+$(document).ready(function () {
+
+  // Desktop Tabs Click
+  $(".userProfileTabs-links .nav-link").click(function () {
+    var target = $(this).data("target");
+
+    $(".userProfileTabs-links .nav-link").removeClass("active");
+    $(this).addClass("active");
+
+    $(".userProfileTabs-content").removeClass("active");
+    $(target).addClass("active");
+  });
+
+  // Mobile Accordion Click
+  $(".userProfileTabs-content h2").click(function () {
+    if ($(window).width() <= 767) {
+      var parent = $(this).parent();
+
+      $(".userProfileTabs-content").not(parent).removeClass("active");
+      parent.toggleClass("active");
+    }
+  });
+
+});

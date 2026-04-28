@@ -4,12 +4,14 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Frontend\HomeController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Frontend\ProductController as FrontProductController;
+use App\Http\Controllers\Frontend\ContactController;
 
-
-
-
- Route::get('/', [HomeController::class, 'index'])->name('home.index');
-
+Route::get('/contact', [ContactController::class, 'index'])->name('contact');
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+Route::get('/products', [FrontProductController::class, 'index'])->name('products.index');
+Route::get('/product/{slug}', [FrontProductController::class, 'show'])->name('products.show');
+Route::get('/', [HomeController::class, 'index'])->name('home.index');
 
 // Route::get('/', function () {
 //     return view('welcome');

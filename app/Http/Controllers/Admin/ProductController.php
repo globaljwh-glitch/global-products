@@ -124,26 +124,6 @@ class ProductController extends Controller
 
     public function edit(Product $product)
     {
-        // $categories = Category::pluck('name', 'id');
-        // $brands = Brand::pluck('name', 'id');
-        // $attributes = \App\Models\Attribute::orderBy('display_order')->get();
-
-        // $product->load('images');
-
-        // $product->load('attributes');
-
-        // $attributeGroups = \App\Models\AttributeGroup::with('attributes')
-        // ->orderBy('display_order')
-        // ->get();
-
-        // $product = Product::with('relatedProducts')->findOrFail($id);
-
-        // return view('admin.products.edit', compact('product', 'categories', 'brands', 'attributes', 'attributeGroups'));
-
-
-        ////////////
-
-
         $categories = Category::pluck('name', 'id');
         $brands = Brand::pluck('name', 'id');
         $attributes = \App\Models\Attribute::orderBy('display_order')->get();
@@ -152,11 +132,17 @@ class ProductController extends Controller
             ->orderBy('display_order')
             ->get();
 
-        $product = Product::with([
+        // $product = Product::with([
+        //     'images',
+        //     'attributes',
+        //     'relatedProducts'
+        // ])->findOrFail($id);
+
+        $product->load([
             'images',
             'attributes',
             'relatedProducts'
-        ])->findOrFail($id);
+        ]);
 
         return view('admin.products.edit', compact(
             'product',
