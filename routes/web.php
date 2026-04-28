@@ -6,6 +6,7 @@ use App\Http\Controllers\Frontend\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\ProductController as FrontProductController;
 use App\Http\Controllers\Frontend\ContactController;
+use App\Http\Controllers\Frontend\UserController;
 
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
@@ -16,6 +17,59 @@ Route::get('/', [HomeController::class, 'index'])->name('home.index');
 // Route::get('/', function () {
 //     return view('welcome');
 // });
+
+
+Route::middleware('guest')
+    ->prefix('account')
+    ->name('customer.')
+    ->controller(UserController::class)
+    ->group(function () {
+
+        Route::get('/register', 'registerForm')
+            ->name('register');
+
+        Route::post('/register', 'register')
+            ->name('register.submit');
+
+        Route::get('/login', 'loginForm')
+            ->name('login');
+
+        Route::post('/login', 'login')
+            ->name('login.submit');
+
+    });
+
+
+/*
+|--------------------------------------------------------------------------
+| Customer Account (Protected)
+|--------------------------------------------------------------------------
+*/
+
+Route::middleware('auth')
+    ->prefix('account')
+    ->name('customer.')
+    ->controller(UserController::class)
+    ->group(function () {
+
+        Route::get('/dashboard', 'myAccount')
+            ->name('account');
+        Route::post(
+            '/customer/profile-update',
+            [UserController::class, 'updateProfile']
+        )->name('profile.update');
+
+        Route::post(
+            '/customer/profile-image',
+            [UserController::class, 'uploadProfileImage']
+        )->name('profile.image');
+
+        Route::post('/logout', 'logout')
+            ->name('logout');
+
+    });
+
+
 
 Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::resource('categories', App\Http\Controllers\Admin\CategoryController::class);
@@ -63,4 +117,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
