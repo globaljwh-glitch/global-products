@@ -14,22 +14,21 @@
 
                      <li class="userAccount">
 
-                        <a href="{{ route('customer.account') }}" 
-                           aria-expanded="false">
+                        <a href="{{ route('customer.account') }}" aria-expanded="false">
 
                            My Account
                         </a>
 
                         <!-- <ul class="dropdown-menu shadow border-0"> -->
-                          <!-- <li>
-                              <form method="POST" action="{{ route('customer.logout') }}">
-                                 @csrf
+                        <!-- <li>
+                                                <form method="POST" action="{{ route('customer.logout') }}">
+                                                   @csrf
 
-                                 <button type="submit" class="dropdown-item">
-                                    Logout
-                                 </button>
-                              </form>
-                           </li> -->
+                                                   <button type="submit" class="dropdown-item">
+                                                      Logout
+                                                   </button>
+                                                </form>
+                                             </li> -->
 
                         <!-- </ul> -->
 
@@ -79,15 +78,26 @@
             <ul class="navbar-nav m-auto">
                <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-                     data-bs-toggle="dropdown" aria-expanded="false">Products</a>
+                     data-bs-toggle="dropdown" aria-expanded="false">
+                     Products
+                  </a>
+
                   <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                      <li>
-                        <a class="dropdown-item" href="{{ route('products.index') }}">Storage &amp; Shelving</a>
-                        <a class="dropdown-item" href="{{ route('products.index') }}">Safety &amp; Security</a>
-                        <a class="dropdown-item" href="{{ route('products.index') }}">Plumbing &amp; Pumps</a>
-                        <a class="dropdown-item" href="{{ route('products.index') }}">Material Handling</a>
-                        <a class="dropdown-item" href="{{ route('products.index') }}">HVAC &amp; Fans</a>
-                        <a class="dropdown-item" href="{{ route('products.index') }}">Workbenches &amp; Shop Desks</a>
+                        {{-- Show only 6 categories --}}
+                        @foreach($categories->take(6) as $category)
+                           <a class="dropdown-item" href="{{ route('products.index', $category->slug) }}">
+                              {{ ucfirst($category->name) }}
+                           </a>
+                        @endforeach
+
+                        {{-- Divider --}}
+                        <div class="dropdown-divider"></div>
+
+                        {{-- View All Button --}}
+                        <a class="dropdown-item fw-bold text-center" href="{{ route('categories.index') }}">
+                           View All Categories →
+                        </a>
                      </li>
                   </ul>
                </li>

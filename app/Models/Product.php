@@ -26,7 +26,7 @@ class Product extends Model
     // Categories
     public function categories()
     {
-        return $this->belongsToMany(Category::class);
+        return $this->belongsToMany(Category::class, 'category_product');
     }
 
     // Brands
@@ -77,7 +77,7 @@ class Product extends Model
     public function mainImage()
     {
         return $this->hasOne(ProductImage::class)
-            ->orderBy('is_primary', 'desc')  
+            ->orderBy('is_primary', 'desc')
             ->orderBy('display_order', 'asc');
     }
 
@@ -90,4 +90,6 @@ class Product extends Model
             'related_product_id'
         );
     }
+
+    
 }
