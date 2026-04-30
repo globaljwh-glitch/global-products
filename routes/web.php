@@ -7,8 +7,20 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\ProductController as FrontProductController;
 use App\Http\Controllers\Frontend\ContactController;
 use App\Http\Controllers\Frontend\UserController;
+use App\Http\Controllers\Admin\ContactController as AdminContactController;
 
-Route::get('/contact', [ContactController::class, 'index'])->name('contact');
+Route::prefix('admin')->middleware(['auth'])->group(function () {
+
+    Route::get('/contacts', [AdminContactController::class, 'index'])->name('admin.contacts.index');
+
+    Route::get('/contacts/{id}', [AdminContactController::class, 'show'])->name('admin.contacts.show');
+
+});
+
+
+Route::get('/contact', function () {
+    return view('frontend.contact.index'); // adjust if path differs
+})->name('contact');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 Route::get('/products', [FrontProductController::class, 'index'])->name('products.index');
 Route::get('/product/{slug}', [FrontProductController::class, 'show'])->name('products.show');

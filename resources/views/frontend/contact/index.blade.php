@@ -14,24 +14,40 @@
                </div>
             </div>
             <div class="formBlockOuter mt-5">
-               <form>
+               @if ($errors->any())
+                  <div class="alert alert-danger">
+                     <ul>
+                           @foreach ($errors->all() as $error)
+                              <li>{{ $error }}</li>
+                           @endforeach
+                     </ul>
+                  </div>
+               @endif
+
+               @if(session('success'))
+                  <div class="alert alert-success">
+                     {{ session('success') }}
+                  </div>
+               @endif
+               <form action="{{ route('contact.store') }}" method="POST">
+                  @csrf
                   <div class="row">
                      <div class="col-md-6">
-                        <div class="form-group"><label>First Name <span>*</span></label><input class="form-control" type="text" value="" name="first_name"></div>
-                        <div class="form-group"><label>Email Address <span>*</span></label><input class="form-control" type="email" value="" name="email"></div>
-                        <div class="form-group"><label>Company Name <span>*</span></label><input class="form-control" type="text" value="" name="company"></div>
-                        <div class="form-group"><label>City <span>*</span></label><input class="form-control" type="text" value="" name="city"></div>
-                        <div class="form-group"><label>Zip Code <span>*</span></label><input class="form-control" type="text" value="" name="zipcode"></div>
+                        <div class="form-group"><label>First Name <span>*</span></label><input class="form-control" type="text" value="{{ old('first_name') }}" name="first_name"></div>
+                        <div class="form-group"><label>Email Address <span>*</span></label><input class="form-control" type="email" value="{{ old('email') }}" name="email"></div>
+                        <div class="form-group"><label>Company Name <span>*</span></label><input class="form-control" type="text" value="{{ old('company_name') }}" name="company_name"></div>
+                        <div class="form-group"><label>City <span>*</span></label><input class="form-control" type="text" value="{{ old('city') }}" name="city"></div>
+                        <div class="form-group"><label>Zip Code <span>*</span></label><input class="form-control" type="text" value="{{ old('zip_code') }}" name="zip_code"></div>
                      </div>
                      <div class="col-md-6">
-                        <div class="form-group"><label>Last Name <span>*</span></label><input class="form-control" type="text" value="" name="last_name"></div>
-                        <div class="form-group"><label>Phone Number <span>*</span></label><input class="form-control" type="text" value="" name="phone"></div>
-                        <div class="form-group"><label>Street Address <span>*</span></label><input class="form-control" type="text" value="" name="address"></div>
-                        <div class="form-group"><label>State <span>*</span></label><input class="form-control" type="text" value="" name="state"></div>
-                        <div class="form-group"><label>Country <span>*</span></label><input class="form-control" type="text" value="" name="country"></div>
+                        <div class="form-group"><label>Last Name <span>*</span></label><input class="form-control" type="text" value="{{ old('last_name') }}" name="last_name"></div>
+                        <div class="form-group"><label>Phone Number <span>*</span></label><input class="form-control" type="text" value="{{ old('phone') }}" name="phone"></div>
+                        <div class="form-group"><label>Street Address <span>*</span></label><input class="form-control" type="text" value="{{ old('street_address') }}" name="street_address"></div>
+                        <div class="form-group"><label>State <span>*</span></label><input class="form-control" type="text" value="{{ old('state') }}" name="state"></div>
+                        <div class="form-group"><label>Country <span>*</span></label><input class="form-control" type="text" value="{{ old('country') }}" name="country"></div>
                      </div>
                      <div class="col-md-12">
-                        <div class="form-group"><label>What products are you interested in? <span>*</span></label><textarea name="interests" rows="9" class="form-control"></textarea></div>
+                        <div class="form-group"><label>What products are you interested in? <span>*</span></label><textarea rows="9" class="form-control" name="message">{{ old('message') }}</textarea></div>
                         <div class="form-group">
                            <div><button type="submit" class="mt-2 submitBtn btn-lg btn-block customBtn01 redBg d-inline-block">SUBMIT</button></div>
                         </div>
