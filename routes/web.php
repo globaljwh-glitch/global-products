@@ -8,6 +8,14 @@ use App\Http\Controllers\Frontend\ProductController as FrontProductController;
 use App\Http\Controllers\Frontend\ContactController;
 use App\Http\Controllers\Frontend\UserController;
 use App\Http\Controllers\Admin\ContactController as AdminContactController;
+use App\Http\Controllers\Admin\IndustryController;
+
+
+Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () {
+    Route::get('products/search', [ProductController::class, 'search'])
+        ->name('products.search');
+});
+
 
 Route::prefix('admin')->middleware(['auth'])->group(function () {
 
@@ -82,6 +90,9 @@ Route::middleware('auth')
     });
 
 
+Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () {
+    Route::resource('industries', IndustryController::class);
+});
 
 Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::resource('categories', App\Http\Controllers\Admin\CategoryController::class);

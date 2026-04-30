@@ -7,6 +7,7 @@ use App\Models\Brand;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 
 class BrandController extends Controller
 {
@@ -124,6 +125,16 @@ class BrandController extends Controller
 
     public function destroy(Brand $brand)
     {
+        // Delete logo
+        if ($brand->logo && Storage::disk('public')->exists($brand->logo)) {
+            Storage::disk('public')->delete($brand->logo);
+        }
+
+        // Delete banner
+        if ($brand->banner && Storage::disk('public')->exists($brand->banner)) {
+            Storage::disk('public')->delete($brand->banner);
+        }
+
         $brand->delete();
 
         return back()->with('success', 'Brand deleted');

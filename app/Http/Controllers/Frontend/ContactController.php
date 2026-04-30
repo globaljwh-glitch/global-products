@@ -8,6 +8,7 @@ use App\Models\Contact;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ContactAdminMail;
 use App\Mail\ContactUserMail;
+use Illuminate\Support\Facades\Http;
 
 class ContactController extends Controller
 {
@@ -26,6 +27,28 @@ class ContactController extends Controller
             'country'        => 'required|string|max:100',
             'message'        => 'required|string',
         ]);
+
+        // Captcha 
+        $captcha = $request->input('g-recaptcha-response');
+
+        if (!$captcha) {
+            return back()
+                ->withErrors(['g-recaptcha-response' => 'Please verify captcha'])
+                ->withInput();
+        }
+
+        // verify with Google
+        $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
+            'secret' => env('GOOGLE_RECAPTCHA_SECRET'),
+            'response' => $captcha,
+            'remoteip' => $request->ip(),
+        ]);
+
+        if (!data_get($response->json(), 'success')) {
+            return back()
+                ->withErrors(['g-recaptcha-response' => 'Captcha verification failed'])
+                ->withInput();
+        }
 
         $contact = Contact::create($validated);
 

@@ -1,7 +1,7 @@
 @extends('layouts.frontend')
 
 @section('content')
-
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
 <section class="sectionPadding">
          <div class="container">
@@ -48,6 +48,15 @@
                      </div>
                      <div class="col-md-12">
                         <div class="form-group"><label>What products are you interested in? <span>*</span></label><textarea rows="9" class="form-control" name="message">{{ old('message') }}</textarea></div>
+                        <div class="form-group">
+                           <div class="mt-4">
+                              <div class="g-recaptcha" data-sitekey="{{ env('GOOGLE_RECAPTCHA_KEY') }}"></div>
+
+                              @error('g-recaptcha-response')
+                                 <small class="text-danger">{{ $message }}</small>
+                              @enderror
+                           </div>
+                        </div>
                         <div class="form-group">
                            <div><button type="submit" class="mt-2 submitBtn btn-lg btn-block customBtn01 redBg d-inline-block">SUBMIT</button></div>
                         </div>
