@@ -9,6 +9,22 @@ use App\Http\Controllers\Frontend\ContactController;
 use App\Http\Controllers\Frontend\UserController;
 use App\Http\Controllers\Admin\ContactController as AdminContactController;
 use App\Http\Controllers\Admin\IndustryController;
+use App\Http\Controllers\Frontend\CategoryController;
+use App\Http\Controllers\Frontend\BrandController;
+use App\Http\Controllers\Frontend\IndustryController as FrontendIndustryController;
+
+
+Route::get('/terms-of-use', function () {
+    return view('frontend.terms-of-use.index');
+})->name('terms');
+
+Route::get('/about-us', function () {
+    return view('frontend.about-us.index');
+})->name('about');
+
+Route::get('/privacy-policy', function () {
+    return view('frontend.privacy.index');
+})->name('privacy');
 
 
 Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () {
@@ -18,13 +34,18 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
 
 
 Route::prefix('admin')->middleware(['auth'])->group(function () {
-
     Route::get('/contacts', [AdminContactController::class, 'index'])->name('admin.contacts.index');
-
     Route::get('/contacts/{id}', [AdminContactController::class, 'show'])->name('admin.contacts.show');
-
 });
 
+Route::get('/products/{type?}/{slug?}', [FrontProductController::class, 'index'])
+    ->name('products.index');
+Route::get('/categories', [CategoryController::class, 'index'])
+->name('categories.index');
+Route::get('/brands', [BrandController::class, 'index'])
+->name('brands.index');
+Route::get('/industries', [FrontendIndustryController::class, 'index'])
+->name('industries.index');
 
 Route::get('/contact', function () {
     return view('frontend.contact.index'); // adjust if path differs

@@ -236,7 +236,9 @@ ul.listing01 span {
 }
 
 .customBtn01.redBg:hover,
-.customBtn01.bg-white:hover, .customBtn01.blueBg:hover, a.blueBg:hover {
+.customBtn01.bg-white:hover,
+.customBtn01.blueBg:hover,
+a.blueBg:hover {
   background-color: #1e1e1e !important;
   color: #ffffff !important;
 }
@@ -295,7 +297,8 @@ ul.listing01 span {
 }
 
 /*----------------------------- Navigation Block ------------------------------------------*/
-header, .shadow {
+header,
+.shadow {
   box-shadow: 0 1px 9px 0px rgba(0, 0, 0, 0.13);
   -webkit-box-shadow: 0 1px 9px 0px rgba(0, 0, 0, 0.13);
   -moz-box-shadow: 0 1px 9px 0px rgba(0, 0, 0, 0.13);
@@ -463,6 +466,42 @@ a.dropdown-item:last-child {
 
 .blog p {
   line-height: 27px;
+}
+
+.iconBox {
+  padding: 35px 10px 30px 10px;
+  border-radius: 5px;
+  transition: 0.3s;
+  background: #f8f9fa;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.iconBox .icon svg {
+  font-size: 40px;
+  color: #eb001b;
+}
+
+.iconBox p {
+  color: #293341 !important;
+  margin-bottom: 0px;
+  line-height: 25px;
+}
+
+tr.tableHeading th {
+  background-color: #eb001b;
+  color: #ffffff;
+}
+
+.jobCard {
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+
+.policyTextBlock h5 {
+  margin-top: 30px;
 }
 
 /*----------------------------- Products pages  -----------------------------------------*/
@@ -700,7 +739,9 @@ a.dropdown-item:last-child {
   border-radius: 5px;
 }
 
-.productCategoriesFilter ul li a, .userProfileTabs-links li button, .userProfileTabs-links li a{
+.productCategoriesFilter ul li a,
+.userProfileTabs-links li button,
+.userProfileTabs-links li a {
   color: #55544f;
   padding: 9px 14px;
   font-size: 16px;
@@ -711,7 +752,11 @@ a.dropdown-item:last-child {
   text-align: left;
 }
 
-.productCategoriesFilter ul li a:hover, .userProfileTabs-links li button:hover, .userProfileTabs-links li a:hover, .userProfileTabs-links li button.nav-link.active, .userProfileTabs-links li a.nav-link.active {
+.productCategoriesFilter ul li a:hover,
+.userProfileTabs-links li button:hover,
+.userProfileTabs-links li a:hover,
+.userProfileTabs-links li button.nav-link.active,
+.userProfileTabs-links li a.nav-link.active {
   color: #ffffff !important;
   background-color: #eb001b;
 }
@@ -778,28 +823,32 @@ label span {
 
 .loginBlock {
   max-width: 500px;
-  
+
 }
+
 .loginForm {
-    border: 10px solid #fff;
-    padding:30px;
-  }
+  border: 10px solid #fff;
+  padding: 30px;
+}
 
 /*----------------------------- User Profile ------------------------------------------------*/
 
 .userProfileBanner {
-  padding: 50px 0px ;
+  padding: 50px 0px;
 }
+
 .welcomeUser {
   position: relative;
   bottom: 10px;
 }
+
 .userProfileImage {
   position: absolute;
   left: 50%;
-  transform: translate(-50%, 0px);  
+  transform: translate(-50%, 0px);
   z-index: 1;
 }
+
 .userProfileImage a {
   width: 150px;
   height: 150px;
@@ -829,75 +878,157 @@ label span {
   margin-top: 120px;
 }
 
-button svg, .userProfileTabs-links a svg {
+button svg,
+.userProfileTabs-links a svg {
   margin-right: 8px;
 }
 
 .userProfileTabs-content-inner .underLineHeading {
-    padding-bottom: 7px;
+  padding-bottom: 7px;
 }
 
 /*----------------------------- Order Detail ------------------------------------------------*/
 
 .order-box {
-    border: 1px solid #eee;
-    border-radius: 10px;
-    padding: 20px;
-    margin-bottom: 20px;
-    background: #fff;
+  border: 1px solid #dddddd;
+  border-radius: 5px;
+  padding: 20px;
+  margin-bottom: 20px;
+  background: #fff;
 }
 
 /* Small product image */
 .product-img {
-    width: 60px;
-    height: 60px;
-    object-fit: cover;
-    border-radius: 6px;
-    border: 1px solid #ddd;
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 5px;
+  border: 1px solid #ddd;
 }
 
 /* Alternate item rows */
 .product-row:nth-child(odd) {
-    background: #f9f9f9;
+  background: #f7f7f7;
 }
 
 /* Timeline */
 .timeline {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
-    position: relative;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  position: relative;
 }
+
 .timeline::before {
-    content: "";
-    position: absolute;
-    top: 12px;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: #ddd;
+  content: "";
+  position: absolute;
+  top: 12px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: #ddd;
 }
+
 .timeline-step {
-    position: relative;
-    text-align: center;
-    flex: 1;
+  position: relative;
+  text-align: center;
+  flex: 1;
 }
+
 .timeline-step span {
-    display: inline-block;
-    background: #ddd;
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    line-height: 25px;
-    color: #fff;
+  display: inline-block;
+  background: #ddd;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  line-height: 25px;
+  color: #fff;
 }
+
 .timeline-step.active span {
-    background: green;
+  background: green;
 }
+
 .timeline-step p {
-    font-size: 12px;
-    margin-top: 5px;
+  margin-top: 5px;
 }
+
+/*----------------------------- Cart/Checkout -----------------------------------------------*/
+/* Card */
+.shopCartBox {
+  background: #fff;
+  margin-bottom: 20px;
+}
+
+/* Product image */
+.product-img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+/* Quantity buttons */
+.shopCartBox .qty-box {
+  display: flex;
+  align-items: center;
+}
+
+.shopCartBox .qty-box button {
+  width: 30px;
+  height: 30px;
+  border: none;
+  background: #eee;
+}
+
+.shopCartBox .qty-box input {
+  width: 40px;
+  text-align: center;
+  border: none;
+}
+
+/* Sticky summary */
+.sticky-summary {
+  position: sticky;
+  top: 20px;
+  padding: 20px;
+}
+
+/* Coupon */
+.coupon-box input {
+  border-radius: 5px 0 0 5px;
+}
+
+.coupon-box button {
+  border-radius: 0 6px 5px 0;
+}
+
+/* Remove btn */
+.remove-btn {
+  color: #dc3545;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+
+.checkout-box {
+  background: #fff;
+  padding: 20px;
+}
+
+/* Payment method box */
+.payment-option {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.payment-option.active {
+  border-color: #0d6efd;
+  background: #eef5ff;
+}
+
 
 /*----------------------------- Footers ------------------------------------------------*/
 
@@ -1107,6 +1238,7 @@ footer li span {
   svg.svg-inline--fa.fa-bars {
     color: #ffffff;
     font-size: 29px;
+    margin-right: 1px;
   }
 
   .navbar-nav .nav-link {
@@ -1354,13 +1486,33 @@ footer li span {
     padding: 36px 0px 8px 0px;
   }
 
-  .form-control, .productCategoriesFilter ul li a, .userProfileTabs-links li button, .userProfileTabs-links li a {
+  .form-control,
+  .productCategoriesFilter ul li a,
+  .userProfileTabs-links li button,
+  .userProfileTabs-links li a {
     font-size: 15px;
   }
 
   .userProfileTabs .userProfileTabs-content {
     padding: 0px 0px 15px 15px;
   }
+
+  .iconBox .icon svg {
+    font-size: 32px;
+  }
+
+  .iconBox {
+    padding: 25px 10px 25px 10px;
+  }
+
+  .iconBox p {
+    line-height: 22px;
+  }
+
+  .policyTextBlock h5 {
+    margin-top: 20px;
+  }
+
 }
 
 /*------------------------------------- Max-Width: 767 ----------------------------------*/
@@ -1419,7 +1571,8 @@ footer li span {
     display: block !important;
     opacity: 1 !important;
   }
-footer {
+
+  footer {
     padding: 30px 0px 8px 0px;
   }
 
@@ -1451,7 +1604,7 @@ footer {
     border-radius: 5px;
   }
 
-  .userProfileTabs .userProfileTabs-content .userProfileTabs-content-inner  {
+  .userProfileTabs .userProfileTabs-content .userProfileTabs-content-inner {
     display: none;
     padding: 10px 10px 20px 10px;
   }
@@ -1459,9 +1612,22 @@ footer {
   .userProfileTabs .userProfileTabs-content.active .userProfileTabs-content-inner {
     display: block;
   }
+
   .userProfileTabs .userProfileTabs-content.active h2 {
     background: #eb001b;
     color: #fff;
+  }
+
+  .profileInfoOuter {
+    margin-top: 150px;
+  }
+
+  .jobCard {
+    padding: 15px;
+  }
+
+  .policyTextBlock h5 {
+    margin-top: 15px;
   }
 }
 
@@ -1490,6 +1656,19 @@ footer {
 
   .loginForm {
     padding: 15px 10px;
+  }
+
+  .order-box {
+    padding: 10px;
+  }
+
+  .detailTable {
+    overflow: hidden;
+    overflow-x: scroll;
+  }
+
+  .jobCard {
+    padding: 10px;
   }
 }
 

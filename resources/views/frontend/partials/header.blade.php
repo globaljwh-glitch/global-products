@@ -85,14 +85,14 @@
                   <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                      <li>
                         {{-- Show only 6 categories --}}
-                        @foreach($categories->take(6) as $category)
-                           <a class="dropdown-item" href="{{ route('products.index', $category->slug) }}">
+                        @foreach($categories_data->take(6) as $category)
+                           <a class="dropdown-item" href="{{ route('products.index', ['type' => 'category', 'slug' => $category->slug]) }}">
                               {{ ucfirst($category->name) }}
                            </a>
                         @endforeach
 
                         {{-- Divider --}}
-                        <div class="dropdown-divider"></div>
+                        <!-- <div class="dropdown-divider"></div> -->
 
                         {{-- View All Button --}}
                         <a class="dropdown-item fw-bold text-center" href="{{ route('categories.index') }}">
@@ -106,12 +106,20 @@
                      data-bs-toggle="dropdown" aria-expanded="false">Shop By Brands</a>
                   <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                      <li>
-                        <a class="dropdown-item" href="{{ route('products.index') }}">Storage &amp; Shelving</a>
+                        @foreach($brands_data->take(6) as $brand)
+                           <a class="dropdown-item" href="{{ route('products.index', ['type' => 'brand', 'slug' => $brand->slug]) }}">
+                              {{ ucfirst($brand->name) }}
+                           </a>
+                        @endforeach
+                        <a class="dropdown-item fw-bold text-center" href="{{ route('brands.index') }}">
+                           View All Brands →
+                        </a>
+                        <!-- <a class="dropdown-item" href="{{ route('products.index') }}">Storage &amp; Shelving</a>
                         <a class="dropdown-item" href="{{ route('products.index') }}">Safety &amp; Security</a>
                         <a class="dropdown-item" href="{{ route('products.index') }}">Plumbing &amp; Pumps</a>
                         <a class="dropdown-item" href="{{ route('products.index') }}">Material Handling</a>
                         <a class="dropdown-item" href="{{ route('products.index') }}">HVAC &amp; Fans</a>
-                        <a class="dropdown-item" href="{{ route('products.index') }}">Workbenches &amp; Shop Desks</a>
+                        <a class="dropdown-item" href="{{ route('products.index') }}">Workbenches &amp; Shop Desks</a> -->
                      </li>
                   </ul>
                </li>
@@ -120,12 +128,20 @@
                      data-bs-toggle="dropdown" aria-expanded="false">Shop By Industry</a>
                   <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                      <li>
-                        <a class="dropdown-item" href="{{ route('products.index') }}">Storage &amp; Shelving</a>
+                        @foreach($industries_data->take(6) as $industry)
+                           <a class="dropdown-item" href="{{ route('products.index', ['type' => 'industry', 'slug' => $industry->slug]) }}">
+                              {{ ucfirst($industry->name) }}
+                           </a>
+                        @endforeach
+                        <a class="dropdown-item fw-bold text-center" href="{{ route('industries.index') }}">
+                           View All Industries →
+                        </a>
+                        <!-- <a class="dropdown-item" href="{{ route('products.index') }}">Storage &amp; Shelving</a>
                         <a class="dropdown-item" href="{{ route('products.index') }}">Safety &amp; Security</a>
                         <a class="dropdown-item" href="{{ route('products.index') }}">Plumbing &amp; Pumps</a>
                         <a class="dropdown-item" href="{{ route('products.index') }}">Material Handling</a>
                         <a class="dropdown-item" href="{{ route('products.index') }}">HVAC &amp; Fans</a>
-                        <a class="dropdown-item" href="{{ route('products.index') }}">Workbenches &amp; Shop Desks</a>
+                        <a class="dropdown-item" href="{{ route('products.index') }}">Workbenches &amp; Shop Desks</a> -->
                      </li>
                   </ul>
                </li>
@@ -139,7 +155,7 @@
                   <a class="nav-link" href="#" id="" role="">Special Offers</a>
                </li>
                <li class="nav-item">
-                  <a class="nav-link" href="#" id="" role="">About Us</a>
+                  <a class="nav-link" href="{{ route('about') }}" id="" role="">About Us</a>
                </li>
             </ul>
          </div>

@@ -1,51 +1,111 @@
 <?php
 
 namespace App\Http\Controllers\Frontend;
-
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
-
+use App\Models\Industry;
 use App\Models\Category;
+use App\Models\Brand;
 
 class ProductController extends Controller
 {
-    public function index($slug = null)
+    // public function index($slug = null)
+    // {
+
+
+    //     $query = Product::with('mainImage', 'categories')->where('status', 1);
+
+
+    //     if ($slug) {
+    //         $category = Category::where('slug', $slug)->first();
+
+    //         if ($category) {
+    //             $query->whereHas('categories', function ($q) use ($category) {
+    //                 $q->where('categories.id', $category->id);
+    //             });
+    //         }
+    //     }
+
+    //     if (request()->sort) {
+    //         switch (request()->sort) {
+    //             case 'price_low':
+    //                 $query->orderBy('price', 'asc');
+    //                 break;
+    //             case 'price_high':
+    //                 $query->orderBy('price', 'desc');
+    //                 break;
+    //             case 'new':
+    //                 $query->latest();
+    //                 break;
+    //             default:
+    //                 $query->latest();
+    //         }
+    //     } else {
+    //         $query->latest();
+    //     }
+
+    //     $products = $query->paginate(9)->withQueryString();
+
+
+    //     return view('frontend.products.index', compact('products'));
+    // }
+
+    public function index(Request $request, $type = null, $slug = null)
     {
+        $query = Product::with('mainImage', 'categories')
+            ->where('status', 1);
 
+        if ($type && $slug) {
 
-        $query = Product::with('mainImage', 'categories')->where('status', 1);
+            switch ($type) {
 
+                case 'category':
+                    $category = Category::where('slug', $slug)->first();
+                    if ($category) {
+                        $query->whereHas('categories', function ($q) use ($category) {
+                            $q->where('categories.id', $category->id);
+                        });
+                    }
+                    break;
 
-        if ($slug) {
-            $category = Category::where('slug', $slug)->first();
+                case 'brand':
+                    $brand = Brand::where('slug', $slug)->first();
+                    if ($brand) {
+                        $query->whereHas('brands', function ($q) use ($brand) {
+                            $q->where('brands.id', $brand->id);
+                        });
+                    }
+                    
+                    break;
 
-            if ($category) {
-                $query->whereHas('categories', function ($q) use ($category) {
-                    $q->where('categories.id', $category->id);
-                });
+                case 'industry':
+                    $industry = Industry::where('slug', $slug)->first();
+                    if ($industry) {
+                        $query->whereHas('industries', function ($q) use ($industry) {
+                            $q->where('industries.id', $industry->id);
+                        });
+                    }
+                    break;
             }
         }
 
-        if (request()->sort) {
-            switch (request()->sort) {
-                case 'price_low':
-                    $query->orderBy('price', 'asc');
-                    break;
-                case 'price_high':
-                    $query->orderBy('price', 'desc');
-                    break;
-                case 'new':
-                    $query->latest();
-                    break;
-                default:
-                    $query->latest();
-            }
-        } else {
-            $query->latest();
+        // SORTING (same as before)
+        switch ($request->get('sort')) {
+            case 'price_low':
+                $query->orderBy('price', 'asc');
+                break;
+            case 'price_high':
+                $query->orderBy('price', 'desc');
+                break;
+            case 'new':
+                $query->latest();
+                break;
+            default:
+                $query->latest();
         }
 
         $products = $query->paginate(9)->withQueryString();
-
 
         return view('frontend.products.index', compact('products'));
     }
@@ -102,5 +162,46 @@ class ProductController extends Controller
             'relatedProducts',
             'recentlyViewed'
         ));
+    }
+
+    /**
+     * Get Brands
+     */
+    public function GetBrands($slug = null)
+    {
+        $query = Product::with('mainImage', 'brands')->where('status', 1);
+
+        if ($slug) {
+            $brand = Brand::where('slug', $slug)->first();
+
+            if ($brand) {
+                $query->whereHas('brands', function ($q) use ($brand) {
+                    $q->where('brands.id', $brand->id);
+                });
+            }
+        }
+
+        if (request()->sort) {
+            switch (request()->sort) {
+                case 'price_low':
+                    $query->orderBy('price', 'asc');
+                    break;
+                case 'price_high':
+                    $query->orderBy('price', 'desc');
+                    break;
+                case 'new':
+                    $query->latest();
+                    break;
+                default:
+                    $query->latest();
+            }
+        } else {
+            $query->latest();
+        }
+
+        $products = $query->paginate(9)->withQueryString();
+
+
+        return view('frontend.products.brand', compact('products'));
     }
 }

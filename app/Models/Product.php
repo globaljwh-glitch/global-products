@@ -40,6 +40,16 @@ class Product extends Model
             ->withTimestamps();
     }
 
+    // public function industries()
+    // {
+    //     return $this->belongsToMany(Industry::class)
+    //         ->withTimestamps();
+    // }
+    public function industries()
+    {
+        return $this->belongsToMany(Industry::class, 'industry_products');
+    }
+
     // Vendors
     public function vendors()
     {

@@ -232,8 +232,12 @@
          </div>
       </div>
    </section>
+      @include('frontend.partials.login')
 
-   <section class="ctaBlock imageBackground01 sectionPadding">
+      @include('frontend.partials.news')
+
+      @include('frontend.partials.subscribe')
+   <!-- <section class="ctaBlock imageBackground01 sectionPadding">
       <div class="container">
          <div class="row">
             <div class="col-md-5 col-lg-6 d-flex align-items-center">
@@ -326,7 +330,7 @@
             </div>
          </div>
       </div>
-   </section>
+   </section> -->
 
    <script>
       $(document).ready(function () {

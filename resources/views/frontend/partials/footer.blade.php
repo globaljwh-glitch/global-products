@@ -8,7 +8,7 @@
                            <div>
                               <h5 class="">Company Information</h5>
                               <ul>
-                                 <li><a href="#">About Us</a></li>
+                                 <li><a href="{{ route('about') }}">About Us</a></li>
                                  <li><a href="#">Careers</a></li>
                                  <li><a href="#">News &amp; Press</a></li>
                                  <li><a href="#">Investor Relations</a></li>
@@ -65,7 +65,7 @@
                         </div>
                         <div class="text-end col-md-5 order-0 order-md-1">
                            <ul>
-                              <li><a href="/terms-of-use" data-discover="true">Terms of Use</a><span>|</span><a href="/privacy-policy" data-discover="true">Privacy Policy</a></li>
+                              <li><a href="{{ route('terms') }}" data-discover="true">Terms of Use</a><span>|</span><a href="{{ route('privacy') }}" data-discover="true">Privacy Policy</a></li>
                            </ul>
                         </div>
                      </div>
