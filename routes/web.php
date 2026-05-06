@@ -14,6 +14,15 @@ use App\Http\Controllers\Frontend\BrandController;
 use App\Http\Controllers\Frontend\IndustryController as FrontendIndustryController;
 
 
+Route::middleware(['auth'])->prefix('admin')->group(function () {
+    Route::resource('categories', App\Http\Controllers\Admin\CategoryController::class);
+    //Route::resource('products', App\Http\Controllers\Admin\ProductController::class);
+    Route::resource('brands', App\Http\Controllers\Admin\BrandController::class);
+    Route::resource('attributes', App\Http\Controllers\Admin\AttributeController::class);
+    Route::get('/products/search', [ProductController::class, 'search']);
+});
+
+
 Route::get('/terms-of-use', function () {
     return view('frontend.terms-of-use.index');
 })->name('terms');
@@ -115,13 +124,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
     Route::resource('industries', IndustryController::class);
 });
 
-Route::middleware(['auth'])->prefix('admin')->group(function () {
-    Route::resource('categories', App\Http\Controllers\Admin\CategoryController::class);
-    //Route::resource('products', App\Http\Controllers\Admin\ProductController::class);
-    Route::resource('brands', App\Http\Controllers\Admin\BrandController::class);
-    Route::resource('attributes', App\Http\Controllers\Admin\AttributeController::class);
-    Route::get('/products/search', [ProductController::class, 'search']);
-});
+
 
 // Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
 //     Route::resource('products', App\Http\Controllers\Admin\ProductController::class)->except(['show']);

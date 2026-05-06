@@ -95,7 +95,7 @@
                         <!-- <div class="dropdown-divider"></div> -->
 
                         {{-- View All Button --}}
-                        <a class="dropdown-item fw-bold text-center" href="{{ route('categories.index') }}">
+                        <a class="dropdown-item fw-bold text-center" href="/categories">
                            View All Categories →
                         </a>
                      </li>
@@ -111,7 +111,7 @@
                               {{ ucfirst($brand->name) }}
                            </a>
                         @endforeach
-                        <a class="dropdown-item fw-bold text-center" href="{{ route('brands.index') }}">
+                        <a class="dropdown-item fw-bold text-center" href="/brands">
                            View All Brands →
                         </a>
                         <!-- <a class="dropdown-item" href="{{ route('products.index') }}">Storage &amp; Shelving</a>
