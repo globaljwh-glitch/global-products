@@ -40,4 +40,27 @@ class Category extends Model
     {
         return $this->belongsToMany(Brand::class);
     }
+
+    public static function generateSlug($name, $id = null)
+    {
+        $baseSlug = \Str::slug($name);
+
+        $slug = $baseSlug;
+
+        $count = 1;
+
+        while (
+            self::where('slug', $slug)
+                ->when($id, function ($query) use ($id) {
+                    $query->where('id', '!=', $id);
+                })
+                ->exists()
+        ) {
+            $slug = $baseSlug . '-' . $count;
+
+            $count++;
+        }
+
+        return $slug;
+    }
 }

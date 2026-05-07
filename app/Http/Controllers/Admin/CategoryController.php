@@ -66,7 +66,8 @@ class CategoryController extends Controller
         $data['status'] = $request->has('status');
 
         // slug
-        $data['slug'] = Str::slug($request->name);
+        //$data['slug'] = Str::slug($request->name);
+        $data['slug'] = Category::generateSlug($request->name);
 
         // uploads
         $data['image'] = $this->upload($request, 'image');
@@ -108,7 +109,11 @@ class CategoryController extends Controller
         $data['is_featured'] = $request->has('is_featured');
         $data['status'] = $request->has('status');
 
-        $data['slug'] = Str::slug($request->name);
+        //$data['slug'] = Str::slug($request->name);
+        $data['slug'] = Category::generateSlug(
+            $request->name,
+            $category->id
+        );
 
         // uploads
         foreach (['image', 'thumbnail', 'icon'] as $field) {
