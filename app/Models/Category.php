@@ -23,7 +23,9 @@ class Category extends Model
 
     public function parent()
     {
-        return $this->belongsTo(Category::class, 'parent_id');
+        //return $this->belongsTo(Category::class, 'parent_id');
+        return $this->belongsTo(Category::class, 'parent_id')
+        ->with('parent');
     }
 
     public function children()
@@ -62,5 +64,18 @@ class Category extends Model
         }
 
         return $slug;
+    }
+
+    public function getFullPathAttribute()
+    {
+        $path = [];
+        $category = $this;
+
+        while ($category) {
+            array_unshift($path, $category->name);
+            $category = $category->parent;
+        }
+
+        return implode(' > ', $path);
     }
 }

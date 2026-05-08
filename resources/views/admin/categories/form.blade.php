@@ -38,7 +38,7 @@
 
         <div>
             <label class="text-sm font-medium">Parent Category</label>
-            <select name="parent_id" class="w-full mt-1 border rounded-lg px-3 py-2">
+            <select name="parent_id" class="w-full mt-1 border rounded-lg px-3 py-2 form-control select2">
                 <option value="">-- None --</option>
                 @foreach($categories as $cat)
                     <option value="{{ $cat->id }}"
@@ -117,3 +117,33 @@
     </div>
 
 </div>
+
+
+<!-- js for related products -->
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    //if ($('select[name="parent_id[]"]').length) {
+        $('select[name="parent_id"]').select2({
+            placeholder: 'Search parent category',
+            width: '100%',
+            minimumInputLength: 2,
+            ajax: {
+                url: '/admin/categories/search',
+                dataType: 'json',
+                delay: 250,
+                data: function (params) {
+                    return {
+                        q: params.term
+                        //exclude_id: {{ $category->id ?? 0 }}
+                    };
+                },
+                processResults: function (data) {
+                    return {
+                        results: data
+                    };
+                }
+            }
+        });
+    //}
+});
+</script>

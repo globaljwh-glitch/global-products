@@ -141,4 +141,34 @@ class CategoryController extends Controller
         }
         return null;
     }
+
+    // public function search(Request $request)
+    // {
+    //     $categories = Category::where('name', 'like', '%' . $request->q . '%')
+    //         ->limit(20)
+    //         ->get();
+
+    //     return $categories->map(function ($category) {
+    //         return [
+    //             'id' => $category->id,
+    //             'text' => $category->name,
+    //         ];
+    //     });
+    // }
+
+    public function search(Request $request)
+    {
+        $categories = Category::with('parent')
+            ->where('name', 'like', '%' . $request->q . '%')
+            ->get();
+
+        return response()->json(
+            $categories->map(function ($category) {
+                return [
+                    'id' => $category->id,
+                    'text' => $category->full_path,
+                ];
+            })
+        );
+    }
 }
