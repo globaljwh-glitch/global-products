@@ -14,6 +14,7 @@ class HomeController extends Controller
         $categories = Category::whereNull('parent_id')
             ->where('status', 1)
             ->orderBy('display_order', 'asc')
+            ->take(12)
             ->get();
 
         $bestSellers = Product::with('mainImage')

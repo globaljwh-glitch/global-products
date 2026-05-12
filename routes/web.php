@@ -12,6 +12,53 @@ use App\Http\Controllers\Admin\IndustryController;
 use App\Http\Controllers\Frontend\CategoryController;
 use App\Http\Controllers\Frontend\BrandController;
 use App\Http\Controllers\Frontend\IndustryController as FrontendIndustryController;
+use App\Http\Controllers\Frontend\NewsletterController;
+use App\Http\Controllers\Admin\NewsletterSubscriberController;
+use App\Http\Controllers\Admin\OfferController;
+use Illuminate\Support\Facades\File;
+use App\Http\Controllers\Admin\UserController as AdminUserController;
+
+Route::prefix('admin')
+    ->name('admin.')
+    ->middleware(['auth'])
+    ->group(function () {
+
+        Route::get('/users', [AdminUserController::class, 'index'])
+            ->name('users.index');
+
+        Route::get('/users/{user}', [AdminUserController::class, 'show'])
+            ->name('users.show');
+    });
+    
+Route::get('/storage/{path}', function ($path) {
+    $fullPath = storage_path('app/public/' . $path);
+    
+    if (!File::exists($fullPath)) {
+        abort(404);
+    }
+    
+    $mime = File::mimeType($fullPath);
+    return response(File::get($fullPath), 200)
+        ->header('Content-Type', $mime);
+})->where('path', '.*');
+// Route::prefix('admin')
+//     ->name('admin.')
+//     ->middleware(['auth'])
+//     ->group(function () {
+
+//         Route::resource('offers', OfferController::class);
+
+//     });
+
+Route::post('/newsletter/subscribe', [
+    NewsletterController::class,
+    'subscribe'
+])->name('newsletter.subscribe');
+
+Route::get('/newsletter/unsubscribe/{token}', [
+    NewsletterController::class,
+    'unsubscribe'
+])->name('newsletter.unsubscribe');
 
 
 Route::middleware(['auth'])->prefix('admin')->group(function () {
@@ -144,7 +191,30 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
     Route::put('products/{product}', [ProductController::class, 'update'])->name('products.update');
 
     Route::delete('products/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
+
+    Route::resource('offers', OfferController::class);
 });
+
+Route::prefix('admin')
+    ->name('admin.')
+    ->middleware(['auth'])
+    ->group(function () {
+
+        Route::get('/newsletter-subscribers', [
+            NewsletterSubscriberController::class,
+            'index'
+        ])->name('newsletter-subscribers.index');
+
+        Route::get('/newsletter-subscribers/{subscriber}', [
+            NewsletterSubscriberController::class,
+            'show'
+        ])->name('newsletter-subscribers.show');
+
+        Route::delete('/newsletter-subscribers/{subscriber}', [
+            NewsletterSubscriberController::class,
+            'destroy'
+        ])->name('newsletter-subscribers.destroy');
+    });
 
 
 // Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {

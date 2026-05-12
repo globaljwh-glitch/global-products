@@ -54,6 +54,10 @@
                </li>
 
                <li>
+                  <a class="nav-link" href="{{ route('about') }}">About Us</a>
+               </li>
+
+               <li>
                   <a href="{{ route('contact') }}">
                      Contact Us
                   </a>
@@ -103,7 +107,7 @@
                </li>
                <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-                     data-bs-toggle="dropdown" aria-expanded="false">Shop By Brands</a>
+                     data-bs-toggle="dropdown" aria-expanded="false">Brands</a>
                   <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                      <li>
                         @foreach($brands_data->take(6) as $brand)
@@ -125,7 +129,7 @@
                </li>
                <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-                     data-bs-toggle="dropdown" aria-expanded="false">Shop By Industry</a>
+                     data-bs-toggle="dropdown" aria-expanded="false">Industries</a>
                   <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                      <li>
                         @foreach($industries_data->take(6) as $industry)
@@ -149,14 +153,12 @@
                         <a class="nav-link" href="#" id="" role="" >Quick Order</a>
                      </li> -->
                <li class="nav-item">
-                  <a class="nav-link" href="#" id="" role="">Catalog Request</a>
+                  <a class="nav-link" href="#" id="" role="">Catalog</a>
                </li>
                <li class="nav-item">
                   <a class="nav-link" href="#" id="" role="">Special Offers</a>
                </li>
-               <li class="nav-item">
-                  <a class="nav-link" href="{{ route('about') }}" id="" role="">About Us</a>
-               </li>
+               
             </ul>
          </div>
          <div class="headerIcons order-0 order-md-0 order-lg-1 ms-auto me-2 me-sm-4 me-lg-0">
