@@ -19,6 +19,13 @@ use Illuminate\Support\Facades\File;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\BannerController;
+use App\Http\Controllers\Frontend\NewsController as FrontendNewsController;
+
+Route::get('/news', [FrontendNewsController::class, 'index'])
+    ->name('news.index');
+
+Route::get('/news/{slug}', [FrontendNewsController::class, 'details'])
+    ->name('news.details');
 
 Route::prefix('admin')
     ->name('admin.')
