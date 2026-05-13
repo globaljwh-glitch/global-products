@@ -11,7 +11,7 @@
             </div>
          </div>
          <div class="col-md-7 text-center d-flex align-items-center">
-            <div><img src="{{ $banner->image }}" class="imgResponsive"></div>
+            <div><img src="{{ asset($banner->image) }}" class="imgResponsive"></div>
          </div>
       </div>
    </div>
