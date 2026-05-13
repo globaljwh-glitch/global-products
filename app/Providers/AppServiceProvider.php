@@ -11,6 +11,7 @@ use App\Models\Industry;
 use App\Models\Product;
 use App\Models\Banner;
 use App\Models\Offer;
+use App\Models\News;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -66,6 +67,14 @@ class AppServiceProvider extends ServiceProvider
                     ->get();
             });
 
+            $newsData = Cache::remember('header_news', 3600, function () {
+                return News::where('is_featured', 1)
+                    ->where('status', 'published')
+                    ->take(3)
+                    ->get();
+            });
+
+
             $recentlyViewedIds = session()->get('recently_viewed', []);
 
             $recentProducts = collect();
@@ -87,7 +96,8 @@ class AppServiceProvider extends ServiceProvider
                 'globalRecentProducts' => $recentProducts,
                 'banner' => $bannerData, 
                 'offer' => $offerData,
-                'offer_featured' => $offerFeaturedData
+                'offer_featured' => $offerFeaturedData,
+                'news_data' => $newsData
             ]);
         });
     }

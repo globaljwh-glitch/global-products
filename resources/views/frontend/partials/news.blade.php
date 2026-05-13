@@ -1,3 +1,4 @@
+@if($news_data)
 <section class="blogSection sectionPadding">
          <div class="container">
             <div class="row">
@@ -7,7 +8,51 @@
                      <p>Explore the latest insights, tips, freshest and most exciting news</p>
                   </div>
                </div>
-               <div class="d-flex col-md-4">
+
+               @if($news_data->count())
+
+                  @foreach($news_data as $news)
+
+                     <div class="d-flex col-md-4">
+                           <div class="blog bg-white">
+
+                              <div class="blogThumb">
+                                 <img 
+                                       alt="{{ $news->title }}" 
+                                       class="imgHeightResponsive"
+                                       src="{{ asset('storage/'.$news->image) }}">
+                              </div>
+
+                              <div class="blogInfo">
+
+                                 <div class="blogDate">
+                                       {{ \Carbon\Carbon::parse($news->created_at)->format('F d, Y') }}
+                                 </div>
+
+                                 <h5>
+                                       {{ $news->title }}
+                                 </h5>
+
+                                 <p>
+                                       {{ Str::limit(strip_tags($news->description), 120) }}
+                                 </p>
+
+                                 <a href="{{ route('news.details', $news->slug) }}" 
+                                    class="customBtn01 blackBg mt-2 mb-1">
+                                       Read More
+                                 </a>
+
+                              </div>
+
+                           </div>
+                     </div>
+
+                  @endforeach
+
+               @endif
+
+
+               <!-- <div class="d-flex col-md-4">
                   <div class="blog bg-white" href="#">
                      <div class="blogThumb"><img alt="" class="imgHeightResponsive" src="images/blog-thumb-01.jpg"></div>
                      <div class="blogInfo">
@@ -39,7 +84,8 @@
                         <a href="#" class="customBtn01 blackBg mt-2 mb-1">Read More</a>
                      </div>
                   </div>
-               </div>
+               </div> -->
             </div>
          </div>
       </section>
+@endif

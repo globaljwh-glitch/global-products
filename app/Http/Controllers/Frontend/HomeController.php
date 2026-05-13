@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\Banner;
 use App\Models\Offer;
+use App\Models\News;
 
 class HomeController extends Controller
 {
@@ -35,26 +36,29 @@ class HomeController extends Controller
 
         
         $banner = Banner::where('is_featured', 1)
-                    ->where('status', 1)
-                    //->where('page', 'home')
-                    ->latest()
-                    ->first();
+            ->where('status', 1)
+            //->where('page', 'home')
+            ->latest()
+            ->first();
 
         $offer = Offer::where('offer_code', 'OFFER50')
-                    ->where('status', 1)
-                    ->latest()
-                    ->first();
+            ->where('status', 1)
+            ->latest()
+            ->first();
         
         $offer_featured = Offer::where('is_featured', 1)
-                    ->where('status', 1)
-                    ->take(2)
-                    ->get();
+            ->where('status', 1)
+            ->take(2)
+            ->get();
 
-
+        $news_data = News::where('is_featured', 1)
+            ->where('status', 'published')
+            ->take(3)
+            ->get();
 
         return view(
             'frontend.home',
-            compact('categories', 'bestSellers', 'latestProducts', 'banner', 'offer', 'offer_featured')
+            compact('categories', 'bestSellers', 'latestProducts', 'banner', 'offer', 'offer_featured', 'news_data')
         );
     }
 

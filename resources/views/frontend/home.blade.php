@@ -52,7 +52,7 @@
             <div class="col-md-12">
                <div class="headingBlock underLineHeading d-flex align-items-center justify-content-between">
                   <h2>Explore Our Product Categories</h2>
-                  <a href="#" class="customBtn01 blackBg">View All</a>
+                  <a href="/categories" class="customBtn01 blackBg">View All</a>
                </div>
             </div>
             <div class="productCategoriesList">
@@ -85,7 +85,7 @@
             <div class="col-md-12">
                <div class="headingBlock underLineHeading d-flex align-items-center justify-content-between">
                   <h2>Explore Our Best Sellers</h2>
-                  <a href="#" class="customBtn01 redBg">View All</a>
+                  <a href="/products" class="customBtn01 redBg">View All</a>
                </div>
             </div>
             <div class="col-md-12">
@@ -157,7 +157,7 @@
                      and businesses of all sizes—prioritizing efficiency, value, and a customer-first approach. We know
                      your business & its unique needs and we develop, manufacture, and distribute products that meet your
                      needs and exceed your expectations.</p>
-                  <a href="#" class="customBtn01 blackBg mt-2">Know More</a>
+                  <a href="{{ route('about') }}" class="customBtn01 blackBg mt-2">Know More</a>
                </div>
             </div>
          </div>
@@ -170,7 +170,7 @@
             <div class="col-md-12">
                <div class="headingBlock underLineHeading d-flex align-items-center justify-content-between">
                   <h2>Explore Our New Products</h2>
-                  <a href="#" class="customBtn01 blackBg">View All</a>
+                  <a href="/products" class="customBtn01 blackBg">View All</a>
                </div>
             </div>
 
