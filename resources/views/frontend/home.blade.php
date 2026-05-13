@@ -35,7 +35,7 @@
 
                 <div class="col-sm-6">
                     <div class="smallBannerOffers">
-                        <img src="{{ asset($offer->image) }}" 
+                        <img src="{{ asset('storage/'.$offer->image) }}" 
                              class="imgResponsive"
                              alt="">
                     </div>
