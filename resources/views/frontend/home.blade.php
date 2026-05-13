@@ -26,18 +26,26 @@
 @include('frontend.partials.banner')
 
    <!-- Paste your homepage HTML here -->
+    @if($offer_featured->count())
    <section class="sectionPadding pb-0">
       <div class="container">
          <div class="row">
-            <div class="col-sm-6">
-               <div class="smallBannerOffers"><img src="images/small-banner-01.jpg" class="imgResponsive"></div>
-            </div>
-            <div class="col-sm-6">
-               <div class="smallBannerOffers"><img src="images/small-banner-02.jpg" class="imgResponsive"></div>
-            </div>
+
+            @foreach($offer_featured as $offer)
+
+                <div class="col-sm-6">
+                    <div class="smallBannerOffers">
+                        <img src="{{ asset($offer->image) }}" 
+                             class="imgResponsive"
+                             alt="">
+                    </div>
+                </div>
+
+            @endforeach
          </div>
       </div>
    </section>
+   @endif
    <section class="sectionPadding">
       <div class="container">
          <div class="row">

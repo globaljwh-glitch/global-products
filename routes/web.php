@@ -17,6 +17,24 @@ use App\Http\Controllers\Admin\NewsletterSubscriberController;
 use App\Http\Controllers\Admin\OfferController;
 use Illuminate\Support\Facades\File;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
+use App\Http\Controllers\Admin\NewsController;
+use App\Http\Controllers\Admin\BannerController;
+
+Route::prefix('admin')
+    ->name('admin.')
+    ->middleware(['auth'])
+    ->group(function () {
+
+        Route::resource('banners', BannerController::class);
+    });
+    
+Route::prefix('admin')
+    ->name('admin.')
+    ->middleware(['auth'])
+    ->group(function () {
+
+        Route::resource('news', NewsController::class);
+    });
 
 Route::prefix('admin')
     ->name('admin.')

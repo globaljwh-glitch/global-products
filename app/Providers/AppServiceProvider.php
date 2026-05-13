@@ -9,6 +9,8 @@ use App\Models\Category;
 use App\Models\Brand;
 use App\Models\Industry;
 use App\Models\Product;
+use App\Models\Banner;
+use App\Models\Offer;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -33,6 +35,27 @@ class AppServiceProvider extends ServiceProvider
                 return Brand::where('status', 1)
                     ->where('is_featured', 1)
                     ->orderBy('display_order')
+                    ->get();
+            });
+
+            $bannerData = Cache::remember('header_banner', 3600, function () {
+                return Banner::where('is_featured', 1)
+                    ->where('status', 1)
+                    ->latest()
+                    ->first();
+            });
+
+            $offerData = Cache::remember('header_offer', 3600, function () {
+                return Offer::where('offer_code', 'OFFER50')
+                    ->where('status', 1)
+                    ->latest()
+                    ->first();
+            });
+
+            $offerFeaturedData = Cache::remember('header_offer_featured', 3600, function () {
+                return Offer::where('is_featured', 1)
+                    ->where('status', 1)
+                    ->take(2)
                     ->get();
             });
 
@@ -61,7 +84,10 @@ class AppServiceProvider extends ServiceProvider
                 'categories_data' => $categoriesData,
                 'brands_data' => $brandsData,
                 'industries_data' => $industriesData,
-                'globalRecentProducts' => $recentProducts
+                'globalRecentProducts' => $recentProducts,
+                'banner' => $bannerData, 
+                'offer' => $offerData,
+                'offer_featured' => $offerFeaturedData
             ]);
         });
     }

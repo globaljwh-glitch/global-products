@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Banner;
+use App\Models\Offer;
 
 class HomeController extends Controller
 {
@@ -31,9 +33,28 @@ class HomeController extends Controller
             ->take(4)
             ->get();
 
+        
+        $banner = Banner::where('is_featured', 1)
+                    ->where('status', 1)
+                    //->where('page', 'home')
+                    ->latest()
+                    ->first();
+
+        $offer = Offer::where('offer_code', 'OFFER50')
+                    ->where('status', 1)
+                    ->latest()
+                    ->first();
+        
+        $offer_featured = Offer::where('is_featured', 1)
+                    ->where('status', 1)
+                    ->take(2)
+                    ->get();
+
+
+
         return view(
             'frontend.home',
-            compact('categories', 'bestSellers', 'latestProducts')
+            compact('categories', 'bestSellers', 'latestProducts', 'banner', 'offer', 'offer_featured')
         );
     }
 

@@ -2,8 +2,10 @@
    <div class="container">
       <div class="row">
          <div class="col-md-6 d-flex align-items-center">
-            <p class="mb-0 fw-medium">Summer sale discount 50% off! <a href="{{ route('products.index') }}">Shop Now</a>
+            @if($offer)
+            <p class="mb-0 fw-medium">{{ $offer->title }} <a href="{{ route('products.index') }}">{{ ucwords(strtolower($offer->button_text)) }}</a>
             </p>
+            @endif
          </div>
          <div class="col-md-6 d-flex align-items-center justify-content-end">
             <ul class="topInfoList d-flex mb-0 p-0">
