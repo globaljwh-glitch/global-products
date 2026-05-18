@@ -53,5 +53,11 @@ class User extends Authenticatable
         return $this->hasOne(\App\Models\CustomerProfileDetail::class, 'customer_id');
     }
 
-
+    public function favoriteProducts()
+    {
+        return $this->belongsToMany(
+            Product::class,
+            'favorites'
+        )->withTimestamps();
+    }
 }

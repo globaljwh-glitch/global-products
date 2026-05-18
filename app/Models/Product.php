@@ -101,5 +101,11 @@ class Product extends Model
         );
     }
 
-    
+    public function favoritedByUsers()
+    {
+        return $this->belongsToMany(
+            User::class,
+            'favorites'
+        )->withTimestamps();
+    }
 }

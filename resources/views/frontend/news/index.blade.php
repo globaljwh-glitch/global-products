@@ -15,7 +15,81 @@
          </div>
       </section>
 
-      <section class="blogSection sectionPadding">
+
+<section class="blogSection sectionPadding">
+    <div class="container">
+        <div class="row">
+
+            @if($news_data_list->count())
+
+                @foreach($news_data_list as $news)
+
+                    <div class="d-flex col-md-4 mb-4">
+                        <div class="blog bg-white">
+
+                            <div class="blogThumb">
+                                <img 
+                                    alt="{{ $news->title }}"
+                                    class="imgHeightResponsive"
+                                    src="{{ asset('storage/'.$news->image) }}">
+                            </div>
+
+                            <div class="blogInfo">
+
+                                <div class="blogDate">
+                                    {{ \Carbon\Carbon::parse($news->created_at)->format('F d, Y') }}
+                                </div>
+
+                                <h5>
+                                    {{ $news->title }}
+                                </h5>
+
+                                <p>
+                                    {{ \Illuminate\Support\Str::limit(strip_tags($news->description), 120) }}
+                                </p>
+
+                                <a href="{{ route('news.details', $news->slug) }}"
+                                   class="customBtn01 blackBg mt-2 mb-1">
+                                    Read More
+                                </a>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                @endforeach
+
+            @else
+
+                <div class="col-md-12">
+                    <p>No news found.</p>
+                </div>
+
+            @endif
+
+
+            <!-- Pagination -->
+            <div class="col-md-12">
+                <div class="paginationOuter d-flex align-items-center justify-content-between">
+
+                    <div>
+                        Showing 
+                        {{ $news_data_list->firstItem() }}-
+                        {{ $news_data_list->lastItem() }} 
+                        of 
+                        {{ $news_data_list->total() }} results
+                    </div>
+
+                    {{ $news_data_list->links() }}
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+      <!-- <section class="blogSection sectionPadding">
          <div class="container">
             <div class="row">
                <div class="d-flex col-md-4">
@@ -101,9 +175,9 @@
                </div>
             </div>
          </div>
-      </section>
+      </section> -->
 
-      <section class="newsLetterBlock greyBg sectionPadding">
+      <!-- <section class="newsLetterBlock greyBg sectionPadding">
          <div class="container">
             <div class="row">
                <div class="col-md-12 col-lg-6 d-flex align-items-center">
@@ -120,6 +194,8 @@
                </div>
             </div>
          </div>
-      </section>
+      </section> -->
+
+      @include('frontend.partials.subscribe')
 
 @endsection

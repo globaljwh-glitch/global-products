@@ -19,7 +19,7 @@
         </label>
 
         <textarea
-            name="excerpt"
+            name="excerpt" id="excerpt-editor"
             class="w-full rounded-2xl border-gray-300"
         >{{ old('excerpt', $news->excerpt ?? '') }}</textarea>
     </div>
@@ -30,7 +30,7 @@
         </label>
 
         <textarea
-            name="description"
+            name="description" id="description-editor"
             rows="8"
             class="w-full rounded-2xl border-gray-300"
         >{{ old('description', $news->description ?? '') }}</textarea>
@@ -113,3 +113,25 @@
     </div>
 
 </div>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        ClassicEditor
+            .create(document.querySelector('#description-editor'))
+            .catch(error => {
+                console.error(error);
+            });
+    });
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        ClassicEditor
+            .create(document.querySelector('#excerpt-editor'))
+            .catch(error => {
+                console.error(error);
+            });
+    });
+</script>
+

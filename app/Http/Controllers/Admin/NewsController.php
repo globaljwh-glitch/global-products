@@ -37,6 +37,16 @@ class NewsController extends Controller
             'meta_description' => 'nullable',
         ]);
 
+        $description = html_entity_decode($request->description);
+
+        // Remove paragraphs containing only spaces or &nbsp;
+        $description = preg_replace('/<p>(&nbsp;|\s|<br\s*\/?>)*<\/p>/i', '', $description);
+
+        // Remove repeated &nbsp;
+        $description = preg_replace('/(&nbsp;)+/i', ' ', $description);
+
+        $validated['description'] = trim($description);
+
         $validated['slug'] = Str::slug($request->title);
 
         $validated['user_id'] = Auth::id();
@@ -85,6 +95,16 @@ class NewsController extends Controller
             'meta_title' => 'nullable',
             'meta_description' => 'nullable',
         ]);
+
+        $description = html_entity_decode($request->description);
+
+        // Remove paragraphs containing only spaces or &nbsp;
+        $description = preg_replace('/<p>(&nbsp;|\s|<br\s*\/?>)*<\/p>/i', '', $description);
+
+        // Remove repeated &nbsp;
+        $description = preg_replace('/(&nbsp;)+/i', ' ', $description);
+
+        $validated['description'] = trim($description);
 
         $validated['slug'] = Str::slug($request->title);
 

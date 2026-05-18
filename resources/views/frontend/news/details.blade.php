@@ -1,6 +1,65 @@
 @extends('layouts.frontend')
 
 @section('content')
+<!-- <section class="sectionPadding">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-10 m-auto">
+
+                @if($news_detail)
+
+                    <div class="blogDate mb-3">
+                        {{ \Carbon\Carbon::parse($news_detail->created_at)->format('F d, Y') }}
+                    </div>
+
+                    <h2 class="mb-4">
+                        {{ $news_detail->title }}
+                    </h2>
+
+                    @if($news_detail->excerpt)
+                        <p class="mb-4">
+                            {{ strip_tags($news_detail->excerpt) }}
+                        </p>
+                    @endif
+
+
+                    @if($news_detail->image)
+                        <div class="mb-3 mb-md-4 mb-lg-5">
+                            <img 
+                                alt="{{ $news_detail->title }}"
+                                class="imgResponsive"
+                                src="{{ asset('storage/'.$news_detail->image) }}">
+                        </div>
+                    @endif
+
+
+                    <div class="newsContent">
+@php
+    $description = html_entity_decode($news_detail->description);
+
+    $description = preg_replace('/<p>(&nbsp;|\s|<br\s*\/?>)*<\/p>/i', '', $description);
+
+    $description = preg_replace('/(&nbsp;)+/i', ' ', $description);
+@endphp
+                        {!! str_replace('&nbsp;', '', html_entity_decode($description)) !!}
+
+                    </div>
+
+                @else
+
+                    <div class="alert alert-danger">
+                        News not found.
+                    </div>
+
+                @endif
+
+            </div>
+
+        </div>
+    </div>
+</section> -->
+
 
 <section class="sectionPadding">
          <div class="container">
@@ -92,12 +151,11 @@
                      <p>We bring together thoughtful curation, precision, and an unwavering attention to detail to deliver an experience that reflects true quality. From the moment you explore our collection to the final delivery at your doorstep, very touchpoint is carefully designed to feel seamless, refined, and dependable. Our approach goes beyond simply offering products—we focus on creating a sense of trust, consistency, and lasting value. By continuously refining our processes and elevating our standards, we ensure that every interaction embodies excellence and leaves a lasting impression.</p>
                   </div>
 
-
                </div>
             </div>
          </div>
       </section>
-      <section class="blogSection greyBg sectionPadding">
+      <!-- <section class="blogSection greyBg sectionPadding">
          <div class="container">
             <div class="row">
                <div class="col-md-12">
@@ -141,6 +199,8 @@
                </div>
             </div>
          </div>
-      </section>
-      
+      </section> -->
+
+      @include('frontend.partials.news')
+
 @endsection

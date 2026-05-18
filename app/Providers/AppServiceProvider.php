@@ -12,6 +12,7 @@ use App\Models\Product;
 use App\Models\Banner;
 use App\Models\Offer;
 use App\Models\News;
+use Illuminate\Pagination\Paginator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -22,8 +23,10 @@ class AppServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
-        View::composer('*', function ($view) {
 
+        Paginator::useBootstrapFive();
+        
+        View::composer('*', function ($view) {
           
             $categoriesData = Cache::remember('header_categories', 3600, function () {
                 return Category::whereNull('parent_id')

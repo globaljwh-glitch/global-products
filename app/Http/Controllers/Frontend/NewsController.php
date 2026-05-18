@@ -9,19 +9,19 @@ class NewsController extends Controller
 {
     public function index()
     {
-        $news_data = News::where('status', 1)
+        $news_data_list = News::where('status', 'published')
             ->latest()
             ->paginate(9);
 
-        return view('frontend.news.index', compact('news_data'));
+        return view('frontend.news.index', compact('news_data_list'));
     }
 
     public function details($slug)
     {
-        $news = News::where('slug', $slug)
-            ->where('status', 1)
-            ->firstOrFail();
+        $news_detail = News::where('slug', $slug)
+            ->where('status', 'published')
+            ->first();
 
-        return view('frontend.news.details', compact('news'));
+        return view('frontend.news.details', compact('news_detail'));
     }
 }
