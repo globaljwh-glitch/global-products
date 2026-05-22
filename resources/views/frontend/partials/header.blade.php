@@ -166,9 +166,9 @@
          <div class="headerIcons order-0 order-md-0 order-lg-1 ms-auto me-2 me-sm-4 me-lg-0">
             <ul class="mb-0 ps-0">
                <li><a href="#"><i class="fa-solid fa-magnifying-glass"></i></a></li>
-               <li><a href="#"><i class="fa-regular fa-user"></i></a></li>
-               <li><a href="#"><i class="fa-regular fa-heart"></i></a></li>
-               <li><a href="#"><i class="fa-solid fa-cart-shopping"></i></a></li>
+               <li><a href="{{ route('customer.account') }}"><i class="fa-regular fa-user"></i></a></li>
+               <li><a href="/my-wishlist"><i class="fa-regular fa-heart"></i></a></li>
+               <li><a href="/cart"><i class="fa-solid fa-cart-shopping"></i></a></li>
             </ul>
          </div>
       </div>

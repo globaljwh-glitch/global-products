@@ -39,16 +39,31 @@
                   <div class="smallDesc">
                      {!! $product->description ?? '<p>No description available.</p>' !!}
                   </div>
+                  <div id="successMessage" class="success-message" style="display:none;"></div>
                   <div class="cart-box">
                      <!-- Quantity Box -->
                      <div class="qty-box">
-                        <button onclick="decreaseQty()">-</button>
-                        <input type="number" id="qty" value="1" min="1">
-                        <button onclick="increaseQty()">+</button>
+                        <button onclick="minus_cart_quantity();">-</button>
+                        <input type="number" id="quantity" value="1" min="1">
+                        <button onclick="plus_cart_quantity();">+</button>
                      </div>
                      <!-- Add to Cart -->
-                     <button class="customBtn01 redBg text-white">Add to Cart</button>
-                     <button class="customBtn01 blueBg">Add to Wishlist</button>
+                     <!-- <button class="customBtn01 redBg text-white">Add to Cart</button> -->
+                     <button 
+                        type="button"
+                        class="customBtn01 redBg text-white add-to-cart-btn"
+                        data-product-id="{{ $product->id }}">
+
+                        ADD TO CART
+
+                     </button>
+                     <button class="customBtn01 blueBg add-to-wishlist"
+                        data-product-id="{{ $product->id }}">
+                        {{ auth()->check() && auth()->user()->favoriteProducts->contains($product->id)
+        ? 'Remove from Wishlist'
+        : 'Add to Wishlist' }}
+                        
+                     </button>
                   </div>
                   <div class="shipBy w-100 borderTop">
                      <h6>Ships Same Day</h6>
@@ -381,3 +396,155 @@
    </section>
 
 @endsection
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script>
+
+$(document).ready(function(){
+
+    $(document).on('click', '.add-to-wishlist', function(e){
+
+        e.preventDefault();
+
+        let button = $(this);
+
+        let productId = button.data('product-id');
+
+        console.log(productId);
+
+        $.ajax({
+
+            url: '/favorite/toggle/' + productId,
+
+            type: 'POST',
+
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+
+            success: function(response){
+
+                console.log(response);
+
+                if(response.status == 'added'){
+
+                    button.text('REMOVE FROM WISHLIST');
+
+                }else{
+
+                    button.text('Add to Wishlist');
+
+                }
+
+            },
+
+            error: function(xhr){
+
+                console.log(xhr.responseText);
+
+                alert('AJAX Error');
+
+            }
+
+        });
+
+    });
+
+});
+
+</script>
+
+
+<script>
+
+$(document).on('click', '.add-to-cart-btn', function(e){
+
+    e.preventDefault();
+
+    let button = $(this);
+
+    let productId = button.data('product-id');
+
+    let quantity = $("#quantity").val();
+
+    $.ajax({
+
+        url: '/cart/add/' + productId,
+
+        method: 'POST',
+
+        data: {
+            _token: $('meta[name="csrf-token"]').attr('content'),
+            quantity: quantity
+        },
+
+        success: function(response){
+
+            $('#successMessage')
+               .html(response.message)
+               .fadeIn();
+
+            setTimeout(function () {
+               $('#successMessage').fadeOut();
+            }, 5000);
+
+        }
+
+    });
+
+});
+
+
+
+$(document).on('click', '.remove-from-cart-btn', function(e){
+
+    e.preventDefault();
+
+    let button = $(this);
+
+    let productId = button.data('product-id');
+
+    $.ajax({
+
+        url: '/cart/remove/' + productId,
+
+        method: 'POST',
+
+        data: {
+            _token: $('meta[name="csrf-token"]').attr('content')
+        },
+
+        success: function(response){
+
+            button.closest('.cart-item').remove();
+
+            alert(response.message);
+
+        }
+
+    });
+
+});
+
+</script>
+
+
+<script>
+function minus_cart_quantity() {
+   let input = $('#quantity');
+
+   let currentVal = parseInt(input.val());
+
+   if(currentVal > 1) {
+      input.val(currentVal - 1);
+   }
+}
+
+function plus_cart_quantity() {
+   let input = $('#quantity');
+
+   let currentVal = parseInt(input.val());
+
+   input.val(currentVal + 1);
+}
+</script>

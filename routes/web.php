@@ -20,6 +20,32 @@ use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Frontend\NewsController as FrontendNewsController;
+use App\Http\Controllers\Frontend\FavoriteController;
+use App\Http\Controllers\Frontend\CartController;
+
+Route::prefix('cart')->group(function () {
+
+    Route::post('/add/{product}', [CartController::class, 'add'])
+        ->name('cart.add');
+
+    Route::post('/remove/{product}', [CartController::class, 'remove'])
+        ->name('cart.remove');
+
+    Route::post('/update-quantity', [CartController::class, 'updateQuantity'])
+        ->name('cart.update.quantity');
+
+});
+
+Route::post('/favorite/toggle/{product}', 
+    [FavoriteController::class, 'toggle'])
+    ->middleware('auth')
+    ->name('favorite.toggle');
+
+Route::get('/cart', [CartController::class, 'index'])
+    ->name('cart.index');
+
+Route::get('/checkout', [CartController::class, 'checkout'])
+    ->name('cart.checkout');
 
 Route::get('/news', [FrontendNewsController::class, 'index'])
     ->name('news.index');
