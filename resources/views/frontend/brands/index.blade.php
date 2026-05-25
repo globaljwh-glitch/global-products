@@ -41,7 +41,7 @@
                     @empty
 
                         <div class="col-12 text-center">
-                            <p>No categories found.</p>
+                            <p>No brands found.</p>
                         </div>
 
                     @endforelse
