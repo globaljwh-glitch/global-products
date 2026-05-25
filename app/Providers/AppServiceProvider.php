@@ -123,9 +123,9 @@ Cache::forget('header_industries');
                 'offer_featured' => $offerFeaturedData,
                 'news_data' => $newsData,
                 'latestProducts' => $latestProducts,
-                'categories' => $categories,
-                'brands' => $brands,
-                'industries' => $industries,
+                'f_categories' => $categories,
+                'f_brands' => $brands,
+                'f_industries' => $industries,
             ]);
         });
     }

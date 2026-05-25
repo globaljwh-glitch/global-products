@@ -16,7 +16,7 @@
             <div class="productCategoriesList">
                 <div class="row">
 
-                    @forelse($categories as $category)
+                    @forelse($f_categories as $category)
 
                         <div class="col-sm-3 col-lg-2 d-flex">
 
