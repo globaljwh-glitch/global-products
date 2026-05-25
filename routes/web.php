@@ -22,6 +22,18 @@ use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Frontend\NewsController as FrontendNewsController;
 use App\Http\Controllers\Frontend\FavoriteController;
 use App\Http\Controllers\Frontend\CartController;
+use App\Http\Controllers\Frontend\CheckoutController;
+
+Route::post('/paypal/payment', [CheckoutController::class, 'paypalPayment'])
+    ->name('paypal.payment');
+
+Route::get('/paypal/success', [CheckoutController::class, 'paypalSuccess'])
+    ->name('paypal.success');
+
+Route::get('/paypal/cancel', [CheckoutController::class, 'paypalCancel'])
+    ->name('paypal.cancel');
+
+//Route::get('/paypal/cancel', [CheckoutController::class, 'paypalCancel'])
 
 Route::prefix('cart')->group(function () {
 
@@ -29,7 +41,10 @@ Route::prefix('cart')->group(function () {
         ->name('cart.add');
 
     Route::post('/remove/{product}', [CartController::class, 'remove'])
-        ->name('cart.remove');
+        ->name('cart.remove'); // not in use
+
+    Route::post('/remove-item', [CartController::class, 'removeItem'])
+    ->name('cart.remove.item');
 
     Route::post('/update-quantity', [CartController::class, 'updateQuantity'])
         ->name('cart.update.quantity');
@@ -45,7 +60,7 @@ Route::get('/cart', [CartController::class, 'index'])
     ->name('cart.index');
 
 Route::get('/checkout', [CartController::class, 'checkout'])
-    ->name('cart.checkout');
+    ->name('checkout');
 
 Route::get('/news', [FrontendNewsController::class, 'index'])
     ->name('news.index');

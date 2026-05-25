@@ -43,6 +43,36 @@
 
         <div class="row">
 
+        @if(session('success'))
+
+    <div class="alert alert-success alert-dismissible fade show">
+
+        {{ session('success') }}
+
+        <button type="button"
+                class="btn-close"
+                data-bs-dismiss="alert">
+        </button>
+
+    </div>
+
+@endif
+
+@if(session('error'))
+
+    <div class="alert alert-danger alert-dismissible fade show">
+
+        {{ session('error') }}
+
+        <button type="button"
+                class="btn-close"
+                data-bs-dismiss="alert">
+        </button>
+
+    </div>
+
+@endif
+
             <!-- LEFT -->
             <div class="col-lg-8 d-flex">
 
@@ -91,11 +121,10 @@
                                     Model #: {{ $product->sku ?? 'N/A' }}
                                 </div>
 
-                                <a href="{{ route('cart.remove', $item->id) }}" 
-                                   class="text-red remove-from-cart-btn">
-
+                                <a href="javascript:void(0)"
+                                    class="text-red remove-from-cart-btn"
+                                    data-cart-item="{{ $item->id }}">
                                     <i class="fa-solid fa-trash-can"></i>
-
                                 </a>
 
                             </div>
@@ -167,7 +196,7 @@
 
                     @endforelse
 
-                    <a href="{{ url('/') }}"
+                    <a href="{{ url('/categories') }}"
                        class="customBtn01 bg-white text-blue">
 
                         ← Continue Shopping
@@ -262,155 +291,6 @@
 
 </section>
 
-
-<section class="sectionPadding imageBackground02">
-         <div class="container">
-            <div class="row">
-               <div class="col-md-12">
-                  <div class="text-center">
-                     <h2 class="fw-bold welcomeUser"><span class="text-red">Welcome</span> User Name</h2>
-                  </div>
-                  <div class="userProfileImage">
-                     <a href="#" class="d-block shadow"><img src="images/user-image.jpg" alt="User" class="imgResponsive"></a>
-                     <div class="memberSince fw-bold">Member Since 2026</div>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </section>
-      <section class="sectionPadding profileInfoOuter">
-         <div class="container">
-            <div class="row ">
-               <!-- LEFT: CART ITEMS -->
-               <div class="col-lg-8 d-flex">
-                  <div class="shopCartBox">
-                     <h5 class="mb-4">Shopping Cart (3 Items)</h5>
-                     <hr>
-                     <!-- ITEM 1 -->
-                     <div class="row align-items-center mb-4">
-                        <div class="col-md-2">
-                           <img src="images/products/product-thumb-02.jpg" class="product-img">
-                        </div>
-                        <div class="col-md-4">
-                           <h6>Nexel® Stem Casters Set (4), 5" Polyurethane Wheel, 2 with Brakes, 1200 Lb Capacity</h6>
-                           <div class="productModel fw-semibold">Model #: WB500592</div>
-                           <a href="#" class="text-red"><i class="fa-solid fa-trash-can"></i></a>
-                        </div>
-                        <div class="col-md-2">
-                           <div class="qty-box">
-                              <button>-</button>
-                              <input type="text" value="2">
-                              <button>+</button>
-                           </div>
-                        </div>
-                        <div class="col-md-2">
-                           <small class="text-red"><del>$35.95</del></small><br>
-                           <strong>$30.95</strong>
-                        </div>
-                        <div class="col-md-2 text-end">
-                           <strong>$61.90</strong>
-                        </div>
-                     </div>
-                     <hr>
-                     <!-- ITEM 2 -->
-                     <div class="row align-items-center mb-4">
-                        <div class="col-md-2">
-                           <img src="images/products/product-thumb-03.jpg" class="product-img">
-                        </div>
-                        <div class="col-md-4">
-                           <h6>L-Desks with Adjustable Height Return</h6>
-                           <div class="productModel fw-semibold">Model #: WB761215PF</div>
-                           <a href="#" class="text-red"><i class="fa-solid fa-trash-can"></i></a>
-                        </div>
-                        <div class="col-md-2">
-                           <div class="qty-box">
-                              <button>-</button>
-                              <input type="text" value="1">
-                              <button>+</button>
-                           </div>
-                        </div>
-                        <div class="col-md-2">
-                           <strong>$45.75</strong>
-                        </div>
-                        <div class="col-md-2 text-end">
-                           <strong>$45.75</strong>
-                        </div>
-                     </div>
-                     <hr>
-                     <!-- ITEM 3 -->
-                     <div class="row align-items-center mb-4">
-                        <div class="col-md-2">
-                           <img src="images/products/product-thumb-04.jpg" class="product-img">
-                        </div>
-                        <div class="col-md-4">
-                           <h6>Pure Flow 1000® Eyewash Station Self-contained unit collects used eyewash solution</h6>
-                           <div class="productModel fw-semibold">Model #: WB761215PF</div>
-                           <a href="#" class="text-red"><i class="fa-solid fa-trash-can"></i></a>
-                        </div>
-                        <div class="col-md-2">
-                           <div class="qty-box">
-                              <button>-</button>
-                              <input type="text" value="1">
-                              <button>+</button>
-                           </div>
-                        </div>
-                        <div class="col-md-2">
-                           <strong>$45.75</strong>
-                        </div>
-                        <div class="col-md-2 text-end">
-                           <strong>$45.75</strong>
-                        </div>
-                     </div>
-                     <hr>
-                     <!-- CONTINUE SHOPPING -->
-                     <a href="#" class="customBtn01 bg-white text-blue">
-                     ← Continue Shopping
-                     </a>
-                  </div>
-               </div>
-               <!-- RIGHT: SUMMARY -->
-               <div class="col-lg-4 d-flex">
-                  <div class="shopCartBox greyBg sticky-summary w-100">
-                     <h5>Order Summary</h5>
-                     <!-- Coupon -->
-                     <div class="input-group coupon-box my-3">
-                        <input type="text" class="form-control mb-0" placeholder="Apply Coupon">
-                        <button class="btn btn-primary customBtn01 blueBg">Apply</button>
-                     </div>
-                     <!-- Price -->
-                     <div class="d-flex justify-content-between">
-                        <span>Subtotal</span>
-                        <span>$153.40</span>
-                     </div>
-                     <div class="d-flex justify-content-between">
-                        <span>Discount</span>
-                        <span class="text-success">-$20</span>
-                     </div>
-                     <div class="d-flex justify-content-between">
-                        <span>Shipping</span>
-                        <span>$25</span>
-                     </div>
-                     <div class="d-flex justify-content-between">
-                        <span>Tax (GST)</span>
-                        <span class="fw-bold">$25</span>
-                     </div>
-                     <hr>
-                     <div class="d-flex justify-content-between fw-bold">
-                        <span>Total</span>
-                        <span class="productPrice text-red">$183.40</span>
-                     </div>
-                     <a href="checkout.html" class="btn btn-primary w-100 mt-2 mt-md-3 customBtn01 redBg text-white">
-                     Proceed to Checkout
-                     </a>
-                     <small class="text-muted text-center d-block mt-2">
-                     Safe & Secure Payments
-                     </small>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </section>
-
 @endsection
 
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -502,6 +382,45 @@ $(document).on('click', '.remove-from-cart-btn', function(e){
 
             success: function(response){
 
+                location.reload();
+
+            }
+
+        });
+
+    });
+
+
+    $(document).on('click', '.remove-from-cart-btn', function () {
+
+        let button = $(this);
+
+        let cartItemId = button.data('cart-item');
+
+        if(!confirm('Remove this item from cart?')) {
+            return;
+        }
+
+        $.ajax({
+
+            url: '/cart/remove-item',
+
+            method: 'POST',
+
+            data: {
+
+                _token: $('meta[name="csrf-token"]').attr('content'),
+
+                cart_item_id: cartItemId
+
+            },
+
+            success: function(response){
+
+                // Remove item row
+                button.closest('.cart-item').remove();
+
+                // Optional:
                 location.reload();
 
             }

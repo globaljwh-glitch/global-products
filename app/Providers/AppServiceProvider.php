@@ -34,7 +34,7 @@ class AppServiceProvider extends ServiceProvider
                     ->orderBy('display_order')
                     ->get();
             });
-
+Cache::forget('header_brands');
             $brandsData = Cache::remember('header_brands', 3600, function () {
                 return Brand::where('status', 1)
                     ->where('is_featured', 1)
@@ -62,7 +62,7 @@ class AppServiceProvider extends ServiceProvider
                     ->take(2)
                     ->get();
             });
-
+Cache::forget('header_industries');
             $industriesData = Cache::remember('header_industries', 3600, function () {
                 return Industry::where('status', 1)
                     ->where('is_featured', 1)
@@ -92,6 +92,27 @@ class AppServiceProvider extends ServiceProvider
             }
 
             // ✅ Pass both globally
+            //dd($brandsData);
+
+            $latestProducts = Product::with('mainImage')
+            ->where('status', 1)
+            ->latest()
+            ->take(4)
+            ->get();
+
+            $categories = Category::whereNull('parent_id')
+                ->where('status', 1)
+                ->orderBy('display_order', 'asc')
+                ->get();
+
+            $brands = Brand::where('status', 1)
+                ->orderBy('display_order', 'asc')
+                ->get();
+
+            $industries = Industry::where('status', 1)
+                ->orderBy('display_order', 'asc')
+                ->get();
+
             $view->with([
                 'categories_data' => $categoriesData,
                 'brands_data' => $brandsData,
@@ -100,7 +121,11 @@ class AppServiceProvider extends ServiceProvider
                 'banner' => $bannerData, 
                 'offer' => $offerData,
                 'offer_featured' => $offerFeaturedData,
-                'news_data' => $newsData
+                'news_data' => $newsData,
+                'latestProducts' => $latestProducts,
+                'categories' => $categories,
+                'brands' => $brands,
+                'industries' => $industries,
             ]);
         });
     }

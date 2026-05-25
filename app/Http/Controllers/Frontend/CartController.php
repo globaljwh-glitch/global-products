@@ -96,7 +96,9 @@ class CartController extends Controller
         ]);
     }
 
-
+    /**
+     * This method is not in use, this is also use for remove product from cart
+     */
     public function remove(Product $product)
     {
         $cart = Cart::where('user_id', auth()->id())->first();
@@ -111,6 +113,35 @@ class CartController extends Controller
         return response()->json([
             'status' => 'success',
             'message' => 'Product removed from cart'
+        ]);
+    }
+
+    /**
+     * Remove item from cart
+     */
+    public function removeItem(Request $request)
+    {
+        $request->validate([
+            'cart_item_id' => 'required|exists:cart_items,id'
+        ]);
+
+        $cartItem = CartItem::findOrFail($request->cart_item_id);
+
+        // Security check
+        if ($cartItem->cart->user_id != auth()->id()) {
+
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Unauthorized'
+            ], 403);
+
+        }
+
+        $cartItem->delete();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Item removed from cart'
         ]);
     }
 
@@ -156,5 +187,10 @@ class CartController extends Controller
             'cart_subtotal' => number_format($cartSubtotal, 2)
 
         ]);
+    }
+
+    public function checkout()
+    {
+        return view('frontend.checkout.index');
     }
 }
