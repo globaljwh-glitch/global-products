@@ -181,7 +181,7 @@ class CheckoutController extends Controller
 
             $order->update([
                 'payment_status' => 'cancelled',
-                //'status' => 'cancelled',
+                'status' => 'cancelled',
             ]);
         }
 
