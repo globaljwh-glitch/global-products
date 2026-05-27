@@ -147,6 +147,8 @@
          </div>
       </div>
    </section>
+
+   @include('frontend.partials.subscribe')
    <!-- <section class="newsLetterBlock greyBg sectionPadding">
       <div class="container">
          <div class="row">
@@ -167,7 +169,6 @@
          </div>
       </div>
    </section> -->
-   @include('frontend.partials.subscribe')
 
 
 

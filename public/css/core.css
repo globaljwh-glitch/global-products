@@ -1713,3 +1713,7 @@ footer li span {
     margin-top: 10px;
     font-size: 14px;
 }
+
+.subscribeNews form{
+    width: 100%;
+}

@@ -50,7 +50,7 @@ Route::get('/paypal/cancel', [CheckoutController::class, 'paypalCancel'])
     ->name('paypal.cancel');
 
 //Route::get('/paypal/cancel', [CheckoutController::class, 'paypalCancel'])
-
+Route::middleware('frontauth')->group(function () {
 Route::prefix('cart')->group(function () {
 
     Route::post('/add/{product}', [CartController::class, 'add'])
@@ -66,17 +66,23 @@ Route::prefix('cart')->group(function () {
         ->name('cart.update.quantity');
 
 });
+});
 
 Route::post('/favorite/toggle/{product}', 
     [FavoriteController::class, 'toggle'])
     ->middleware('auth')
     ->name('favorite.toggle');
 
-Route::get('/cart', [CartController::class, 'index'])
-    ->name('cart.index');
+    Route::middleware('frontauth')->group(function () {
+        Route::get('/cart', [CartController::class, 'index'])
+            ->name('cart.index');
 
-Route::get('/checkout', [CartController::class, 'checkout'])
-    ->name('checkout');
+        Route::get('/checkout', [CartController::class, 'checkout'])
+            ->name('checkout');
+
+        Route::get('/my-wishlist', [FrontProductController::class, 'wishlist'])
+            ->name('wishlist');
+});
 
 Route::get('/news', [FrontendNewsController::class, 'index'])
     ->name('news.index');
@@ -179,7 +185,10 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     Route::get('/contacts/{id}', [AdminContactController::class, 'show'])->name('admin.contacts.show');
 });
 
+
 Route::get('/products/{type?}/{slug?}', [FrontProductController::class, 'index'])
+    ->name('products.index');
+Route::get('/products', [FrontProductController::class, 'index'])
     ->name('products.index');
 Route::get('/categories', [CategoryController::class, 'index'])
 ->name('categories.index');

@@ -145,6 +145,111 @@ class ProductController extends Controller
         ));
     }
 
+    public function wishlist(Request $request, $type = null, $slug = null)
+    {
+        // $query = Product::with([
+        //         'mainImage',
+        //         'categories',
+        //         'brands',
+        //         'industries'
+        //     ])
+        //     ->where('status', 1);
+
+            $query = Product::with([
+                'mainImage',
+                'categories',
+                'brands',
+                'industries'
+            ])
+            ->join('favorites', 'products.id', '=', 'favorites.product_id')
+            ->where('favorites.user_id', auth()->id())
+            ->where('products.status', 1)
+            ->select('products.*');
+
+        // FILTERING
+        // if ($type && $slug) {
+
+        //     switch ($type) {
+
+        //         case 'category':
+
+        //             $category = Category::where('slug', $slug)
+        //                 ->firstOrFail();
+
+        //             $query->whereHas('categories', function ($q) use ($category) {
+
+        //                 $q->where('categories.id', $category->id);
+
+        //             });
+
+        //             break;
+
+        //         case 'brand':
+
+        //             $brand = Brand::where('slug', $slug)
+        //                 ->firstOrFail();
+
+        //             $query->whereHas('brands', function ($q) use ($brand) {
+
+        //                 $q->where('brands.id', $brand->id);
+
+        //             });
+
+        //             break;
+
+        //         case 'industry':
+
+        //             $industry = Industry::where('slug', $slug)
+        //                 ->firstOrFail();
+
+        //             $query->whereHas('industries', function ($q) use ($industry) {
+
+        //                 $q->where('industries.id', $industry->id);
+
+        //             });
+
+        //             break;
+
+        //         default:
+
+        //             abort(404);
+        //     }
+        // }
+
+        // SORTING
+        switch ($request->get('sort')) {
+
+            case 'price_low':
+
+                $query->orderBy('price', 'asc');
+
+                break;
+
+            case 'price_high':
+
+                $query->orderBy('price', 'desc');
+
+                break;
+
+            case 'new':
+
+                $query->latest();
+
+                break;
+
+            default:
+
+                $query->latest();
+        }
+
+        $products = $query->paginate(9)
+            ->withQueryString();
+
+        return view('frontend.wishlist.index', compact(
+            'products'
+        ));
+    }
+
     // public function index(Request $request, $type = null, $slug = null)
     // {
     //     $query = Product::with('mainImage', 'categories')
