@@ -25,7 +25,7 @@
 
                                 <div class="categoriesThumb">
 
-                                    <img src="{{ asset('uploads/categories/'.$category->image) }}"
+                                    <img src="{{ asset('storage/'.$category->image) }}"
                                          class="imgResponsive"
                                          alt="{{ $category->name }}">
 
