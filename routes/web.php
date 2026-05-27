@@ -24,6 +24,20 @@ use App\Http\Controllers\Frontend\FavoriteController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\CheckoutController;
 
+use App\Http\Controllers\Admin\OrderController;
+
+Route::prefix('admin')
+    ->name('admin.')
+    ->group(function () {
+
+        Route::get('/orders', [OrderController::class, 'index'])
+            ->name('orders.index');
+
+        Route::get('/orders/{id}', [OrderController::class, 'show'])
+            ->name('orders.show');
+
+    });
+    
 Route::post('/paypal/payment', [CheckoutController::class, 'paypalPayment'])
     ->name('paypal.payment');
 

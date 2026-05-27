@@ -222,7 +222,7 @@
 
             @if($offers->hasPages())
 
-                <div class="mt-6">
+                <div class="adminPagination mt-6">
                     {{ $offers->links() }}
                 </div>
 

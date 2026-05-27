@@ -92,7 +92,7 @@
 
         </table>
 
-        <div class="p-4">
+        <div class="adminPagination p-4">
             {{ $brands->links() }}
         </div>
 

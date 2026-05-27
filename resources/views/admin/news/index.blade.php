@@ -142,7 +142,7 @@
 
         </div>
 
-        <div class="mt-6">
+        <div class="adminPagination mt-6">
             {{ $news->links() }}
         </div>
 

@@ -273,7 +273,7 @@
             <!-- Pagination -->
             @if($subscribers->hasPages())
 
-                <div class="mt-6">
+                <div class="adminPagination mt-6">
 
                     {{ $subscribers->links() }}
 

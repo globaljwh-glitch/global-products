@@ -25,6 +25,7 @@ class AppServiceProvider extends ServiceProvider
     {
 
         Paginator::useBootstrapFive();
+        //Paginator::useBootstrap();
         
         View::composer('*', function ($view) {
           

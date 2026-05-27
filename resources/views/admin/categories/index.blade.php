@@ -163,7 +163,7 @@
                     </tbody>
                 </table>
             </div>
-            <div class="mt-6">
+            <div class="adminPagination mt-4">
                 {{ $categories->links() }}
             </div>
         </div>

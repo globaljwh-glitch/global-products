@@ -79,7 +79,7 @@
             </tbody>
         </table>
 
-        <div class="mt-4">
+        <div class="adminPagination mt-4">
             {{ $industries->links() }}
         </div>
     </div>

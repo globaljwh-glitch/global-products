@@ -72,8 +72,8 @@
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('admin.news.index')" :active="request()->routeIs('admin.news.index')">
-                        {{ __('News') }}
+                    <x-nav-link :href="route('admin.orders.index')" :active="request()->routeIs('admin.orders.index')">
+                        {{ __('Orders') }}
                     </x-nav-link>
                 </div>
 
@@ -120,6 +120,10 @@
                         
                             <x-dropdown-link :href="route('admin.newsletter-subscribers.index')" :active="request()->routeIs('admin.newsletter-subscribers.index')">
                                 {{ __('Subscribers') }}
+                            </x-dropdown-link>
+
+                            <x-dropdown-link :href="route('admin.news.index')" :active="request()->routeIs('admin.news.index')">
+                                {{ __('News') }}
                             </x-dropdown-link>
                         </x-slot>
                     </x-dropdown>

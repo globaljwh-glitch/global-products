@@ -1,3 +1,84 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+/* Main pagination wrapper */
+.adminPagination nav{
+    display:flex;
+    justify-content:center;
+    margin-top:20px;
+    padding-bottom: 15px;
+}
+
+/* Hide mobile version completely */
+.adminPagination .d-sm-none{
+    display:none !important;
+}
+
+/* Desktop pagination wrapper */
+.adminPagination .d-sm-flex{
+    display:flex !important;
+    align-items:center;
+    justify-content:center !important;
+    gap:10px;
+}
+
+/* Remove flex-fill issue */
+.adminPagination .d-sm-flex > div{
+    flex:none !important;
+}
+
+/* Pagination UL */
+.adminPagination .pagination{
+    display:flex;
+    flex-direction:row !important;
+    gap:8px;
+    margin:0;
+    padding:0;
+    list-style:none;
+}
+
+/* Pagination item */
+.adminPagination .page-item{
+    margin:0 !important;
+}
+
+/* Pagination links */
+.adminPagination .page-link{
+    min-width:42px;
+    height:42px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:10px !important;
+    border:1px solid #dbe2ea;
+    background:#fff;
+    color:#334155;
+    font-size:14px;
+    font-weight:500;
+    transition:all 0.2s ease;
+    text-decoration:none;
+    padding:0 14px;
+}
+
+/* Hover */
+.adminPagination .page-link:hover{
+    background:#2563eb;
+    border-color:#2563eb;
+    color:#fff;
+}
+
+/* Active */
+.adminPagination .active .page-link{
+    background:#2563eb !important;
+    border-color:#2563eb !important;
+    color:#fff !important;
+}
+
+/* Disabled */
+.adminPagination .disabled .page-link{
+    opacity:0.45;
+    background:#f8fafc;
+    cursor:not-allowed;
+}

@@ -133,7 +133,7 @@ class CheckoutController extends Controller
         $provider->getAccessToken();
 
         $response = $provider->capturePaymentOrder($request->token);
-        dd($response);
+        //dd($response);
 
         if (isset($response['status']) && $response['status'] == 'COMPLETED') {
 

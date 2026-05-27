@@ -73,7 +73,7 @@
         </div>
 
         <!-- PAGINATION -->
-        <div class="mt-4">
+        <div class="adminPagination mt-4">
             {{ $products->links() }}
         </div>
 
