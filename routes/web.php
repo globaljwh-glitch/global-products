@@ -38,6 +38,8 @@ Route::prefix('admin')
 
     });
     
+    Route::view('/thank-you', 'frontend.checkout.thank-you');
+
 Route::post('/paypal/payment', [CheckoutController::class, 'paypalPayment'])
     ->name('paypal.payment');
 
