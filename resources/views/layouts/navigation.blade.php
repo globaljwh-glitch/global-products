@@ -125,6 +125,10 @@
                             <x-dropdown-link :href="route('admin.news.index')" :active="request()->routeIs('admin.news.index')">
                                 {{ __('News') }}
                             </x-dropdown-link>
+
+                            <x-dropdown-link :href="route('admin.product-questions.index')" :active="request()->routeIs('admin.product-questions.index')">
+                                {{ __('Q & A') }}
+                            </x-dropdown-link>
                         </x-slot>
                     </x-dropdown>
                 </div>

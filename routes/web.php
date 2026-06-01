@@ -23,9 +23,21 @@ use App\Http\Controllers\Frontend\NewsController as FrontendNewsController;
 use App\Http\Controllers\Frontend\FavoriteController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\CheckoutController;
-
 use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\ProductQuestionController;
 
+Route::prefix('admin')
+    ->name('admin.')
+    ->middleware(['auth'])
+    ->group(function () {
+
+        Route::resource(
+            'product-questions',
+            ProductQuestionController::class
+        );
+
+    });
+    
 Route::prefix('admin')
     ->name('admin.')
     ->group(function () {
