@@ -77,11 +77,11 @@
                     </x-nav-link>
                 </div>
 
-                <!-- <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('admin.banners.index')" :active="request()->routeIs('admin.banners.index')">
-                        {{ __('Banners') }}
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('admin.careers.index')" :active="request()->routeIs('admin.careers.index')">
+                        {{ __('Careers') }}
                     </x-nav-link>
-                </div> -->
+                </div>
 
                 <div class="hidden sm:flex sm:items-center sm:ms-6">
                     <x-dropdown align="right" width="48">
@@ -112,6 +112,10 @@
                         
                             <x-dropdown-link :href="route('admin.contacts.index')" :active="request()->routeIs('admin.contacts.index')">
                                 {{ __('Contacts') }}
+                            </x-dropdown-link>
+
+                            <x-dropdown-link :href="route('admin.job-applications.index')" :active="request()->routeIs('admin.job-applications.index')">
+                                {{ __('Job Applications') }}
                             </x-dropdown-link>
                         
                             <x-dropdown-link :href="route('attributes.index')" :active="request()->routeIs('attributes.index')">

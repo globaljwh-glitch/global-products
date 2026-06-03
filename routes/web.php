@@ -25,6 +25,28 @@ use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\CheckoutController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductQuestionController;
+use App\Http\Controllers\Admin\CareerController as AdminCareerController;
+use App\Http\Controllers\Frontend\CareerController;
+use App\Http\Controllers\Admin\JobApplicationController as AdminJobApplicationController;
+use App\Http\Controllers\Frontend\JobApplicationController;
+
+Route::post('/careers/{career}/apply', [JobApplicationController::class, 'store'])
+    ->name('careers.apply');
+
+Route::prefix('admin')
+    ->name('admin.')
+    ->group(function () {
+        Route::resource('job-applications', AdminJobApplicationController::class)
+            ->only(['index', 'show', 'update', 'destroy']);
+    });
+
+Route::prefix('admin')
+    ->name('admin.')
+    ->group(function () {
+
+        Route::resource('careers', AdminCareerController::class);
+
+    });
 
 Route::prefix('admin')
     ->name('admin.')
@@ -51,6 +73,11 @@ Route::prefix('admin')
     });
     
     Route::view('/thank-you', 'frontend.checkout.thank-you');
+    //Route::view('/careers', 'frontend.career.index');
+    Route::get('/careers', [CareerController::class, 'index'])
+    ->name('careers.index');
+    Route::get('/careers/{career}', [CareerController::class, 'show'])
+    ->name('careers.show');
 
 Route::post('/paypal/payment', [CheckoutController::class, 'paypalPayment'])
     ->name('paypal.payment');
