@@ -30,7 +30,13 @@ use App\Http\Controllers\Frontend\CareerController;
 use App\Http\Controllers\Admin\JobApplicationController as AdminJobApplicationController;
 use App\Http\Controllers\Frontend\JobApplicationController;
 use App\Http\Controllers\Frontend\OrderController as FrontendOrderController;
+use App\Http\Controllers\Frontend\OfferController as FrontendOfferController;
 
+Route::get('/offers', [FrontendOfferController::class, 'index'])
+    ->name('offers.index');
+
+Route::get('/offers/{slug}', [FrontendOfferController::class, 'show'])
+    ->name('offers.show');
 
 Route::get('/track-order', [FrontendOrderController::class, 'trackForm'])
     ->name('orders.track');
