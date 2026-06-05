@@ -22,11 +22,11 @@ class OrderItem extends Model
 
     ];
 
-    protected $attributes = [
+    // protected $attributes = [
 
-        'product_name' => 'N/A',
+    //     'product_name' => 'N/A',
 
-    ];
+    // ];
 
     /*
     |--------------------------------------------------------------------------

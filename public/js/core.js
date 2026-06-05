@@ -122,3 +122,21 @@ $(document).ready(function () {
   });
 
 });
+
+
+/*--------------------------------- Search Header -------------------------*/
+
+$(document).ready(function () {
+
+    $(".searchToggle").click(function (e) {
+        e.preventDefault();
+        $(".searchBarHeader").toggleClass("active");
+    });
+
+    $(document).click(function (e) {
+        if (!$(e.target).closest('.searchBarHeader, .searchToggle').length) {
+            $(".searchBarHeader").removeClass("active");
+        }
+    });
+
+});

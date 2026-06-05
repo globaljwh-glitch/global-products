@@ -29,6 +29,28 @@ use App\Http\Controllers\Admin\CareerController as AdminCareerController;
 use App\Http\Controllers\Frontend\CareerController;
 use App\Http\Controllers\Admin\JobApplicationController as AdminJobApplicationController;
 use App\Http\Controllers\Frontend\JobApplicationController;
+use App\Http\Controllers\Frontend\OrderController as FrontendOrderController;
+
+
+Route::get('/track-order', [FrontendOrderController::class, 'trackForm'])
+    ->name('orders.track');
+
+Route::post('/track-order', [FrontendOrderController::class, 'track'])
+    ->name('orders.track.submit');
+
+
+Route::middleware('frontauth')->group(function () {
+
+    Route::get('/my-orders', [FrontendOrderController::class, 'index'])
+        ->name('orders.index');
+
+    Route::get('/my-orders/{order}', [FrontendOrderController::class, 'show'])
+        ->name('orders.show');
+
+    Route::get('/my-orders/{order}/invoice', [FrontendOrderController::class, 'invoice'])
+        ->name('orders.invoice');
+
+});
 
 Route::post('/careers/{career}/apply', [JobApplicationController::class, 'store'])
     ->name('careers.apply');
@@ -72,6 +94,7 @@ Route::prefix('admin')
 
     });
     
+    Route::view('/affiliate', 'frontend.affiliate.index');
     Route::view('/thank-you', 'frontend.checkout.thank-you');
     //Route::view('/careers', 'frontend.career.index');
     Route::get('/careers', [CareerController::class, 'index'])

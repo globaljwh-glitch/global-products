@@ -65,6 +65,8 @@ class CheckoutController extends Controller
 
                 'product_id' => $item->product_id,
 
+                'product_name' => $item->product->name,
+
                 'quantity' => $item->quantity,
 
                 'price' => $item->price,

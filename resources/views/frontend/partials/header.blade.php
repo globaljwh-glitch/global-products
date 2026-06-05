@@ -55,9 +55,9 @@
                   </a>
                </li>
 
-               <li>
+               <!-- <li>
                   <a class="nav-link" href="{{ route('about') }}">About Us</a>
-               </li>
+               </li> -->
 
                <li>
                   <a href="{{ route('contact') }}">
@@ -157,19 +157,38 @@
                <li class="nav-item">
                   <a class="nav-link" href="#" id="" role="">Catalog</a>
                </li>
+
                <li class="nav-item">
                   <a class="nav-link" href="#" id="" role="">Special Offers</a>
+               </li>
+
+               <li class="nav-item">
+                  <a class="nav-link" href="{{ route('about') }}">About Us</a>
                </li>
                
             </ul>
          </div>
          <div class="headerIcons order-0 order-md-0 order-lg-1 ms-auto me-2 me-sm-4 me-lg-0">
             <ul class="mb-0 ps-0">
-               <li><a href="#"><i class="fa-solid fa-magnifying-glass"></i></a></li>
+               <!-- <li><a href="#"><i class="fa-solid fa-magnifying-glass"></i></a></li> -->
+               <li><a href="javascript:void(0)" class="searchToggle"><i class="fa-solid fa-magnifying-glass"></i></a></li>
                <li><a href="{{ route('customer.account') }}"><i class="fa-regular fa-user"></i></a></li>
                <li><a href="/my-wishlist"><i class="fa-regular fa-heart"></i></a></li>
                <li><a href="/cart"><i class="fa-solid fa-cart-shopping"></i></a></li>
             </ul>
+         </div>
+         <div class="searchBarHeader greyBg">
+            <form action="{{ route('products.index') }}" method="GET" class="form-inline d-flex">
+               <input 
+                     class="form-control mb-0" 
+                     type="text"
+                     name="search" 
+                     placeholder="Enter a product name" 
+                     aria-label="Search"
+                     value="{{ request('search') }}"
+               >
+               <button class="btn btn-outline-success ms-2 customBtn01 blackBg" type="submit">Search</button>
+            </form>
          </div>
       </div>
    </nav>

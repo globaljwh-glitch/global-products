@@ -9,11 +9,11 @@
                               <h5 class="">Company Information</h5>
                               <ul>
                                  <li><a href="{{ route('about') }}">About Us</a></li>
-                                 <li><a href="#">Careers</a></li>
-                                 <li><a href="#">News &amp; Press</a></li>
+                                 <li><a href="/careers">Careers</a></li>
+                                 <li><a href="/news">News &amp; Press</a></li>
                                  <li><a href="#">Investor Relations</a></li>
-                                 <li><a href="#">CSR</a></li>
-                                 <li><a href="#">Distribution Centers</a></li>
+                                 <li><a href="https://static.globalindustrial.com/site42/pdf/2025-csr-report.pdf" target="_blank">CSR</a></li>
+                                 <!-- <li><a href="#">Distribution Centers</a></li> -->
                               </ul>
                            </div>
                         </div>
@@ -21,12 +21,12 @@
                            <div>
                               <h5 class="">Customer Support</h5>
                               <ul>
-                                 <li><a href="#">Help Center</a></li>
-                                 <li><a href="#">My Account</a></li>
-                                 <li><a href="#">My Orders</a></li>
-                                 <li><a href="#">Track My Order</a></li>
+                                 <li><a href="{{ route('contact') }}">Help Center</a></li>
+                                 <li><a href="{{ route('customer.account') }}">My Account</a></li>
+                                 <li><a href="/my-orders">My Orders</a></li>
+                                 <li><a href="/track-order">Track My Order</a></li>
                                  <li><a href="#">Shipping & Returns</a></li>
-                                 <li><a href="#">Product Recall / Safety Info</a></li>
+                                 <!-- <li><a href="#">Product Recall / Safety Info</a></li> -->
                               </ul>
                            </div>
                         </div>
@@ -34,11 +34,11 @@
                            <div>
                               <h5 class="">More Ways To Shop</h5>
                               <ul>
-                                 <li><a href="#">Inventory Clearance</a></li>
-                                 <li><a href="#">Free Shipping</a></li>
-                                 <li><a href="#">New Products</a></li>
-                                 <li><a href="#">Knowledge Center</a></li>
-                                 <li><a href="#">Industrial How-Tos</a></li>
+                                 <!-- <li><a href="#">Inventory Clearance</a></li>
+                                 <li><a href="#">Free Shipping</a></li> -->
+                                 <li><a href="/products">New Products</a></li>
+                                 <li><a href="/news">Knowledge Center</a></li>
+                                 <li><a href="/news">Industrial How-Tos</a></li>
                                  <li><a href="#">Equipment Financing</a></li>
                               </ul>
                            </div>
@@ -48,11 +48,11 @@
                               <h5 class="">Services</h5>
                               <ul>
                                  <li><a href="#">Extended Service Plan</a></li>
-                                 <li><a href="#">Affiliate Program</a></li>
+                                 <li><a href="/affiliate">Affiliate Program</a></li>
                                  <li><a href="#">Resellers</a></li>
-                                 <li><a href="#">Become A Supplier</a></li>
+                                 <!-- <li><a href="#">Become A Supplier</a></li> -->
                                  <li><a href="#">Safety Services</a></li>
-                                 <li><a href="#">Accessibility Options</a></li>
+                                 <!-- <li><a href="#">Accessibility Options</a></li> -->
                               </ul>
                            </div>
                         </div>

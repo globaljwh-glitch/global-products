@@ -96,6 +96,11 @@ strong {
   background-size: cover;
 }
 
+.imageBackground03 {
+  background: url(../images/background-03.jpg) no-repeat center top;
+  background-size: cover;
+}
+
 .text-red {
   color: #eb001b !important;
 }
@@ -358,6 +363,48 @@ a.dropdown-item:last-child {
   color: #303030;
 }
 
+span.badge.redBg {
+  border-radius: 50%;
+  position: absolute;
+  left: 28px;
+  padding: 4px 3px;
+  font-size: 15px;
+  text-align: center;
+  top: -10px;
+  min-width: 23px;
+}
+
+.searchBarHeader {
+    position: absolute;
+    width: 100%;
+    padding: 20px;
+    border-radius: 5px;
+    top: 128%;
+    right: 0px;
+    left: 0px;
+    z-index: 1;
+    border: 1px solid #ced4da;
+      box-shadow: 0 1px 3px 0px rgba(0, 0, 0, 0.10);
+    -webkit-box-shadow: 0 1px 3px 0px rgba(0, 0, 0, 0.10);
+    -moz-box-shadow: 0 1px 3px 0px rgba(0, 0, 0, 0.10);
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition:
+        max-height 0.4s ease,
+        opacity 0.3s ease,
+        padding 0.3s ease;
+}
+
+.searchBarHeader input {
+  border: 1px solid #e2e2e2;
+}
+
+.searchBarHeader.active {
+    opacity: 1;
+    max-height: 200px;
+}
+
 /*----------------------------- Banner ------------------------------------------*/
 .mainBanner {
   position: relative;
@@ -520,8 +567,15 @@ tr.tableHeading th {
   text-align: center;
 }
 
+/*.productThumb img {
+  max-width: 270px;
+}*/
+
 .productThumb img {
   max-width: 270px;
+  object-fit: contain;
+  height: 270px;
+  width: 100%;
 }
 
 .productInfo {
@@ -1030,6 +1084,33 @@ button svg,
 }
 
 
+/*----------------------------- Accordion  ---------------------------------------*/
+
+.accordion-header {
+    margin-bottom: 0;
+    padding-bottom: 0px;
+}
+
+.accordion-button {
+    padding: 10px 18px;
+    font-size: 19px;
+    color: #293341;
+}
+
+.accordion-item {
+    margin-bottom: 5px;
+    border: 1px solid #dddddd !important;
+    border-radius: 8px !important;
+    overflow: hidden;
+}
+
+.accordion-button:not(.collapsed) {
+  background-color: #f5f5f5 !important;
+  box-shadow: none;
+  font-weight: 600;
+  color: #293341;
+}
+
 /*----------------------------- Footers ------------------------------------------------*/
 
 .subscribeNews input,
@@ -1199,6 +1280,10 @@ footer li span {
 
   .productRating.productRatingLarge svg {
     font-size: 17px;
+  }
+
+  .accordion-button {
+    font-size: 16px;
   }
 }
 
@@ -1513,6 +1598,13 @@ footer li span {
     margin-top: 20px;
   }
 
+  .accordion-button {
+    padding: 8px 16px;
+  }
+
+  .searchBarHeader {
+    top: 61px;
+  }
 }
 
 /*------------------------------------- Max-Width: 767 ----------------------------------*/
@@ -1629,6 +1721,8 @@ footer li span {
   .policyTextBlock h5 {
     margin-top: 15px;
   }
+
+
 }
 
 /*------------------------------------- Max-Width: 575 ----------------------------------*/
@@ -1670,6 +1764,21 @@ footer li span {
   .jobCard {
     padding: 10px;
   }
+
+  span.badge.redBg {
+    border-radius: 50%;
+    position: absolute;
+    left: 13px;
+    padding: 4px 3px;
+    font-size: 12px;
+    text-align: center;
+    top: -12px;
+    min-width: 21px;
+  }
+
+  .searchBarHeader {
+    top: 58px;
+  }
 }
 
 /*------------------------------------- Max-Width: 410 ----------------------------------*/
@@ -1701,6 +1810,11 @@ footer li span {
   .qty-box {
     margin-bottom: 20px;
   }
+
+  .searchBarHeader {
+    top: 99px;
+  }
+
 }
 
 /* Custom css added by raman */

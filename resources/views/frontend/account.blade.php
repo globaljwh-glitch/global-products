@@ -76,7 +76,7 @@
     </button>
     </li>
 
-    <li class="nav-item">
+    <!-- <li class="nav-item">
     <button class="nav-link" data-target="#userProfileTabs2">
     <i class="fa-solid fa-heart"></i> My Wishlist
     </button>
@@ -86,7 +86,7 @@
     <button class="nav-link" data-target="#userProfileTabs3">
     <i class="fa-solid fa-list"></i> Order History
     </button>
-    </li>
+    </li> -->
 
     <li class="nav-item">
     <button class="nav-link" data-target="#userProfileTabs4">

@@ -111,6 +111,22 @@ class ProductController extends Controller
             }
         }
 
+
+        // SEARCH
+        if ($request->filled('search')) {
+
+            $search = trim($request->search);
+
+            $query->where(function ($q) use ($search) {
+
+                $q->where('name', 'like', "%{$search}%")
+                ->orWhere('sku', 'like', "%{$search}%")
+                ->orWhere('model_number', 'like', "%{$search}%");
+
+            });
+        }
+
+
         // SORTING
         switch ($request->get('sort')) {
 
