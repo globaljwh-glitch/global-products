@@ -22,7 +22,7 @@
                     <a href="#">
 
                         <img
-                            src="{{ asset($offer->image) }}"
+                            src="{{ asset('storage/'.$offer->image) }}"
                             alt="{{ $offer->title }}"
                             class="img-fluid rounded shadow">
 
