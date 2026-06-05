@@ -12,7 +12,7 @@
                                  <li><a href="/careers">Careers</a></li>
                                  <li><a href="/news">News &amp; Press</a></li>
                                  <li><a href="#">Investor Relations</a></li>
-                                 <li><a href="https://static.globalindustrial.com/site42/pdf/2025-csr-report.pdf" target="_blank">CSR</a></li>
+                                 <li><a href="/pdf/csr-report.pdf" target="_blank">CSR</a></li>
                                  <!-- <li><a href="#">Distribution Centers</a></li> -->
                               </ul>
                            </div>

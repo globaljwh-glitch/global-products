@@ -155,11 +155,11 @@
                         <a class="nav-link" href="#" id="" role="" >Quick Order</a>
                      </li> -->
                <li class="nav-item">
-                  <a class="nav-link" href="#" id="" role="">Catalog</a>
+                  <a class="nav-link" href="/pdf/csr-report.pdf" target="_blank" id="" role="">Catalog</a>
                </li>
 
                <li class="nav-item">
-                  <a class="nav-link" href="#" id="" role="">Special Offers</a>
+                  <a class="nav-link" href="/offers" id="" role="">Special Offers</a>
                </li>
 
                <li class="nav-item">
