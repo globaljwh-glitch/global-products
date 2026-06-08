@@ -108,4 +108,11 @@ class Product extends Model
             'favorites'
         )->withTimestamps();
     }
+
+    public function questions()
+    {
+        return $this->hasMany(ProductQuestion::class, 'product_id')
+            ->orderBy('id');
+    }
+
 }

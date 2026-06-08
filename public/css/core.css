@@ -1831,3 +1831,12 @@ footer li span {
 .subscribeNews form{
     width: 100%;
 }
+
+.thumbImg {
+    cursor: pointer;
+    border: 2px solid transparent;
+}
+
+.thumbImg.active {
+    border: 2px solid #dc3545;
+}

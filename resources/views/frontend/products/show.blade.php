@@ -6,17 +6,30 @@
       <div class="container">
          <div class="row">
             <div class="col-md-4 col-lg-5">
-               <div class="productLargeThumb positionRelative">
+               <!-- <div class="productLargeThumb positionRelative">
                   <img class="imgResponsive" src="{{ $product->mainImage
-      ? asset('storage/' . $product->mainImage->image)
-      : asset('images/no-product.png') }}">
+                     ? asset('storage/' . $product->mainImage->image)
+                     : asset('images/no-product.png') }}">
+               </div> -->
+               <div class="productLargeThumb positionRelative">
+                  <img
+                     id="mainProductImage"
+                     class="imgResponsive"
+                     src="{{ $product->mainImage
+                           ? asset('storage/' . $product->mainImage->image)
+                           : asset('images/no-product.png') }}">
                </div>
                <div class="productThumbnailList mb-4 mb-md-2">
+
                   @foreach($product->images as $img)
-                     <div class="thumbImg">
-                        <img src="{{ asset('storage/' . $img->image) }}" class="imgResponsive">
+                     <div class="thumbImg {{ $loop->first ? 'active' : '' }}">
+                        <img
+                              src="{{ asset('storage/' . $img->image) }}"
+                              data-image="{{ asset('storage/' . $img->image) }}"
+                              class="imgResponsive thumbnailImage">
                      </div>
                   @endforeach
+
                </div>
             </div>
             <div class="col-md-8 col-lg-7">
@@ -232,7 +245,36 @@
                </h2>
                <div id="collapse4" class="accordion-collapse collapse d-md-block">
                   <div class="accordion-body">
-                     <div class="qaList mt-2">
+                     @if($product->questions->count())
+
+                        <div class="qaList mt-2">
+
+                           @foreach($product->questions as $index => $qa)
+
+                                 <div class="qa {{ $index > 0 ? 'borderTop' : '' }}">
+
+                                    <h5 class="mb-1">
+                                       {{ $index + 1 }}) {{ $qa->question }}
+                                    </h5>
+
+                                    <p>
+                                       {!! nl2br(e($qa->answer)) !!}
+                                    </p>
+
+                                 </div>
+
+                           @endforeach
+
+                        </div>
+
+                     @else
+
+                        <div class="alert alert-light">
+                           No questions available for this product.
+                        </div>
+
+                     @endif
+                     <!-- <div class="qaList mt-2">
                         <div class="qa">
                            <h5 class="mb-1">1) What is the shipping cost for this pallet jack?</h5>
                            <p>Ideal for use in construction, manufacturing, retail, and more, the Global Industrial™
@@ -255,7 +297,7 @@
                               of hand-picked and tested industrial-strength products, including material handling, storage
                               & shelving, safety & security, janitorial & facility maintenance, and HVAC & fans. </p>
                         </div>
-                     </div>
+                     </div> -->
                   </div>
                </div>
             </div>
@@ -268,47 +310,53 @@
             <div class="col-md-12">
                <div class="headingBlock underLineHeading d-flex align-items-center justify-content-between">
                   <h2>Explore Related Products</h2>
-                  <a href="#" class="customBtn01 blackBg">View All</a>
+                  <a href="/products" class="customBtn01 blackBg">View All</a>
                </div>
             </div>
             <div class="productList">
                <div class="row">
-                  @foreach($relatedProducts as $rel)
-                              <div class="d-flex col-md-3">
-                                 <div class="product w-100">
+                  @if(isset($relatedProducts) && $relatedProducts->count())
+                     @foreach($relatedProducts as $rel)
+                                 <div class="d-flex col-md-3">
+                                    <div class="product w-100">
 
-                                    <div class="productThumb positionRelative">
-                                       <img class="imgResponsive" src="{{ $rel->mainImage
-                     ? asset('storage/' . $rel->mainImage->image)
-                     : asset('images/no-product.png') }}">
+                                       <div class="productThumb positionRelative">
+                                          <img class="imgResponsive" src="{{ $rel->mainImage
+                        ? asset('storage/' . $rel->mainImage->image)
+                        : asset('images/no-product.png') }}">
 
-                                       <div class="actionBtn">
-                                          <button onclick="window.location.href='{{ route('products.show', $rel->slug) }}'"
-                                             class="customBtn01 mt-2 me-1 bg-white text-blue">
-                                             Quick View
-                                          </button>
+                                          <div class="actionBtn">
+                                             <button onclick="window.location.href='{{ route('products.show', $rel->slug) }}'"
+                                                class="customBtn01 mt-2 me-1 bg-white text-blue">
+                                                Quick View
+                                             </button>
 
-                                          <button class="customBtn01 mt-2 redBg text-white">
-                                             Add to Cart
-                                          </button>
+                                             <button class="customBtn01 mt-2 redBg text-white">
+                                                Add to Cart
+                                             </button>
+                                          </div>
                                        </div>
+
+                                       <div class="productInfo">
+                                          <h6>{{ $rel->name }}</h6>
+
+                                          <div class="productModel fw-semibold">
+                                             Model #: {{ $rel->sku ?? 'N/A' }}
+                                          </div>
+
+                                          <div class="productPrice text-red fw-bold">
+                                             ${{ number_format($rel->price, 2) }}
+                                          </div>
+                                       </div>
+
                                     </div>
-
-                                    <div class="productInfo">
-                                       <h6>{{ $rel->name }}</h6>
-
-                                       <div class="productModel fw-semibold">
-                                          Model #: {{ $rel->sku ?? 'N/A' }}
-                                       </div>
-
-                                       <div class="productPrice text-red fw-bold">
-                                          ${{ number_format($rel->price, 2) }}
-                                       </div>
-                                    </div>
-
                                  </div>
-                              </div>
-                  @endforeach
+                     @endforeach
+                  @else
+                  <div class="col-12">
+                     <p class="text-center">No related products</p>
+                  </div>
+               @endif
                </div>
             </div>
          </div>
@@ -374,7 +422,7 @@
          </div>
       </div>
    </section>
-   <section class="newsLetterBlock greyBg sectionPadding">
+   <!-- <section class="newsLetterBlock greyBg sectionPadding">
       <div class="container">
          <div class="row">
             <div class="col-md-12 col-lg-6 d-flex align-items-center">
@@ -393,7 +441,9 @@
             </div>
          </div>
       </div>
-   </section>
+   </section> -->
+
+   @include('frontend.partials.subscribe')
 
 @endsection
 
@@ -547,4 +597,21 @@ function plus_cart_quantity() {
 
    input.val(currentVal + 1);
 }
+</script>
+
+<script>
+$(document).ready(function() {
+
+    $('.thumbnailImage').click(function() {
+
+        let imageUrl = $(this).data('image');
+
+        $('#mainProductImage').attr('src', imageUrl);
+
+        $('.thumbImg').removeClass('active');
+
+        $(this).closest('.thumbImg').addClass('active');
+    });
+
+});
 </script>

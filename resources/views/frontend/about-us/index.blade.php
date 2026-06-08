@@ -9,7 +9,7 @@
                   <div class="bannerContent mw-100 w-100">
                      <h1>OVER 75 YEARS OF <br><span>INDUSTRIAL INNOVATION & EXPERIENCE</span></h1>
                      <p>We have—and continue to be—a leader, and an authority, for supplying industrial-strength<br> equipment that delivers uncompromising quality at an exceptional value.</p>
-                     <a href="#" class="customBtn01 blackBg mt-2">Explore Our Products</a>
+                     <a href="/products" class="customBtn01 blackBg mt-2">Explore Our Products</a>
                   </div>
                </div>
             </div>
