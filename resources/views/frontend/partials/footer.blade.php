@@ -11,7 +11,7 @@
                                  <li><a href="{{ route('about') }}">About Us</a></li>
                                  <li><a href="/careers">Careers</a></li>
                                  <li><a href="/news">News &amp; Press</a></li>
-                                 <li><a href="#">Investor Relations</a></li>
+                                 <li><a href="/investor-relations">Investor Relations</a></li>
                                  <li><a href="/pdf/csr-report.pdf" target="_blank">CSR</a></li>
                                  <!-- <li><a href="#">Distribution Centers</a></li> -->
                               </ul>
@@ -25,7 +25,7 @@
                                  <li><a href="{{ route('customer.account') }}">My Account</a></li>
                                  <li><a href="/my-orders">My Orders</a></li>
                                  <li><a href="/track-order">Track My Order</a></li>
-                                 <li><a href="#">Shipping & Returns</a></li>
+                                 <li><a href="/shipping-returns">Shipping & Returns</a></li>
                                  <!-- <li><a href="#">Product Recall / Safety Info</a></li> -->
                               </ul>
                            </div>
@@ -47,11 +47,11 @@
                            <div>
                               <h5 class="">Services</h5>
                               <ul>
-                                 <li><a href="#">Extended Service Plan</a></li>
+                                 <li><a href="/extended-service-plan">Extended Service Plan</a></li>
                                  <li><a href="/affiliate">Affiliate Program</a></li>
                                  <li><a href="#">Resellers</a></li>
                                  <!-- <li><a href="#">Become A Supplier</a></li> -->
-                                 <li><a href="#">Safety Services</a></li>
+                                 <li><a href="/safety-services">Safety Services</a></li>
                                  <!-- <li><a href="#">Accessibility Options</a></li> -->
                               </ul>
                            </div>

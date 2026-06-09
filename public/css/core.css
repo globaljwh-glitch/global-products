@@ -126,7 +126,8 @@ strong {
 .blueBg p,
 .blueBg h2,
 .blueBg h1,
-.blueBg h3 {
+.blueBg h3,
+.blueBg ul li {
   color: #fff !important;
 }
 
@@ -551,6 +552,10 @@ tr.tableHeading th {
   margin-top: 30px;
 }
 
+.faqTable td:first-child {
+  font-weight: 700;
+  min-width: 200px;
+}
 /*----------------------------- Products pages  -----------------------------------------*/
 
 .productSliderOuter {
@@ -1131,6 +1136,10 @@ footer ul {
 footer li a {
   margin-bottom: 3px;
   display: inline-block;
+}
+
+footer li a.active {
+  color: #eb001b ;
 }
 
 footer li a,
@@ -1722,6 +1731,9 @@ footer li span {
     margin-top: 15px;
   }
 
+  .faqTable td:first-child {
+    min-width: 100px;
+  }
 
 }
 

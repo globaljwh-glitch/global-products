@@ -103,7 +103,11 @@ Route::prefix('admin')
             ->name('orders.show');
 
     });
-    
+
+    Route::view('/shipping-returns', 'frontend.shipping-returns.index');
+    Route::view('/safety-services', 'frontend.safety-services.index');
+    Route::view('/investor-relations', 'frontend.investor-relations.index');
+    Route::view('/extended-service-plan', 'frontend.service-plan.index');
     Route::view('/affiliate', 'frontend.affiliate.index');
     Route::view('/thank-you', 'frontend.checkout.thank-you');
     //Route::view('/careers', 'frontend.career.index');
