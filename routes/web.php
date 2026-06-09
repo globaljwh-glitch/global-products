@@ -32,6 +32,10 @@ use App\Http\Controllers\Frontend\JobApplicationController;
 use App\Http\Controllers\Frontend\OrderController as FrontendOrderController;
 use App\Http\Controllers\Frontend\OfferController as FrontendOfferController;
 
+
+Route::post('/delivery-check', [FrontProductController::class, 'checkDelivery'])
+    ->name('delivery.check');
+
 Route::get('/offers', [FrontendOfferController::class, 'index'])
     ->name('offers.index');
 

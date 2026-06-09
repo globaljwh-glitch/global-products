@@ -81,11 +81,44 @@
                   <div class="shipBy w-100 borderTop">
                      <h6>Ships Same Day</h6>
                      <div class="d-flex mb-2">
-                        <input type="text" id="" value="Enter Zip Code">
-                        <button class="customBtn01 redBg">Save</button>
+                        <form method="POST" action="{{ route('delivery.check') }}">
+                           @csrf
+
+                           <input 
+                              type="text"
+                              name="zip_code"
+                              placeholder="Enter Zip Code"
+                              required>
+
+                           <input
+                              type="hidden"
+                              name="product_id"
+                              value="{{ $product->id }}">
+
+                           <button type="submit" class="customBtn01 redBg">
+                              SAVE
+                           </button>
+                        </form>
                      </div>
-                     <p class="d-none mb-2">Ship to 16001 | <a href="#">Change zipcode</a></p>
-                     <p>Estimated delivery to <strong>16001</strong> by <strong>23rd Apr 2026</strong></p>
+                     <!-- <p class="d-none mb-2">Ship to 16001 | <a href="#">Change zipcode</a></p>
+                     <p>Estimated delivery to <strong>16001</strong> by <strong>23rd Apr 2026</strong></p> -->
+
+                     @if(session()->has('delivery_zip'))
+
+                        <p class="mb-2">
+                           Ship to {{ session('delivery_zip') }}
+                           <!-- |
+                           <a href="#" id="changeZipCode">Change zipcode</a> -->
+                        </p>
+
+                        <p>
+                           Estimated delivery to
+                           <strong>{{ session('delivery_zip') }}</strong>
+                           by
+                           <strong>{{ session('delivery_date') }}</strong>
+                        </p>
+
+                     @endif
                   </div>
                </div>
             </div>

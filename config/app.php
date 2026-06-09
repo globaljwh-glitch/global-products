@@ -13,7 +13,8 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'Global Products'),
+    'warehouse_zip' => env('WAREHOUSE_ZIP'),
 
     /*
     |--------------------------------------------------------------------------

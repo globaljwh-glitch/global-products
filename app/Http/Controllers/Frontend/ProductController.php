@@ -7,6 +7,8 @@ use App\Models\Product;
 use App\Models\Industry;
 use App\Models\Category;
 use App\Models\Brand;
+use App\Models\DeliveryZip;
+use Carbon\Carbon;
 
 class ProductController extends Controller
 {
@@ -261,5 +263,30 @@ class ProductController extends Controller
 
 
         return view('frontend.products.brand', compact('products'));
+    }
+
+    public function checkDelivery(Request $request)
+    {
+        $zip = DeliveryZip::where(
+            'zip_code',
+            $request->zip_code
+        )->first();
+
+        if (!$zip) {
+
+            return back()->with(
+                'delivery_error',
+                'Delivery not available for this ZIP code.'
+            );
+        }
+
+        $deliveryDate = Carbon::now()
+            ->addDays($zip->delivery_days)
+            ->format('jS M Y');
+
+        return back()->with([
+            'delivery_zip' => $request->zip_code,
+            'delivery_date' => $deliveryDate,
+        ]);
     }
 }
