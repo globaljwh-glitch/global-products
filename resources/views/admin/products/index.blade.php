@@ -6,8 +6,7 @@
         <div class="flex justify-between items-center mb-6">
             <h1 class="text-2xl font-semibold">Products</h1>
 
-            <a href="{{ route('admin.products.create') }}"
-               class="bg-blue-600 text-white px-4 py-2 rounded">
+            <a href="{{ route('admin.products.create') }}" class="bg-blue-600 text-white px-4 py-2 rounded">
                 + Add Product
             </a>
         </div>
@@ -29,6 +28,7 @@
                         <th class="px-4 py-3">Name</th>
                         <th class="px-4 py-3">Price</th>
                         <th class="px-4 py-3">Status</th>
+                        <th class="px-4 py-3">Rating</th>
                         <th class="px-4 py-3">Actions</th>
                     </tr>
                 </thead>
@@ -42,19 +42,34 @@
                             <td class="px-4 py-3">
                                 {{ $product->status ?? 'Active' }}
                             </td>
+                            <td class="px-4 py-3">
+                                @php
+                                    $avgRating = $product->reviews_avg_rating ?? 0;
+                                @endphp
+
+                                <div class="flex items-center">
+                                    @for ($i = 1; $i <= 5; $i++)
+                                        @if ($i <= round($avgRating))
+                                            <span class="text-yellow-500">★</span>
+                                        @else
+                                            <span class="text-gray-300">☆</span>
+                                        @endif
+                                    @endfor
+
+                                    <span class="ml-2 text-sm text-gray-600">
+                                        {{ number_format($avgRating, 1) }}
+                                    </span>
+                                </div>
+                            </td>
 
                             <td class="px-4 py-3 space-x-2">
-                                <a href="{{ route('admin.products.edit', $product) }}"
-                                   class="text-blue-600">Edit</a>
+                                <a href="{{ route('admin.products.edit', $product) }}" class="text-blue-600">Edit</a>
 
-                                <form action="{{ route('admin.products.destroy', $product) }}"
-                                      method="POST"
-                                      class="inline">
+                                <form action="{{ route('admin.products.destroy', $product) }}" method="POST" class="inline">
                                     @csrf
                                     @method('DELETE')
 
-                                    <button onclick="return confirm('Delete?')"
-                                            class="text-red-600">
+                                    <button onclick="return confirm('Delete?')" class="text-red-600">
                                         Delete
                                     </button>
                                 </form>

@@ -9,17 +9,18 @@ use App\Models\Category;
 use App\Models\Brand;
 use App\Models\DeliveryZip;
 use Carbon\Carbon;
+use App\Models\ProductReview;
 
 class ProductController extends Controller
 {
     public function index(Request $request, $type = null, $slug = null)
     {
         $query = Product::with([
-                'mainImage',
-                'categories',
-                'brands',
-                'industries'
-            ])
+            'mainImage',
+            'categories',
+            'brands',
+            'industries'
+        ])
             ->where('status', 1);
 
         // FILTERING
@@ -81,8 +82,8 @@ class ProductController extends Controller
             $query->where(function ($q) use ($search) {
 
                 $q->where('name', 'like', "%{$search}%")
-                ->orWhere('sku', 'like', "%{$search}%")
-                ->orWhere('model_number', 'like', "%{$search}%");
+                    ->orWhere('sku', 'like', "%{$search}%")
+                    ->orWhere('model_number', 'like', "%{$search}%");
 
             });
         }
@@ -124,12 +125,12 @@ class ProductController extends Controller
 
     public function wishlist(Request $request, $type = null, $slug = null)
     {
-            $query = Product::with([
-                'mainImage',
-                'categories',
-                'brands',
-                'industries'
-            ])
+        $query = Product::with([
+            'mainImage',
+            'categories',
+            'brands',
+            'industries'
+        ])
             ->join('favorites', 'products.id', '=', 'favorites.product_id')
             ->where('favorites.user_id', auth()->id())
             ->where('products.status', 1)
@@ -191,18 +192,18 @@ class ProductController extends Controller
         // Remove if already exists
         $recent = array_diff($recent, [$product->id]);
 
-      
+
         array_unshift($recent, $product->id);
 
-       
+
         $recent = array_slice($recent, 0, 8);
 
-        
+
         session()->put('recently_viewed', $recent);
 
-       
+
         $recentlyViewed = Product::whereIn('id', $recent)
-            ->where('id', '!=', $product->id) 
+            ->where('id', '!=', $product->id)
             ->with('mainImage')
             ->get();
 
@@ -288,5 +289,26 @@ class ProductController extends Controller
             'delivery_zip' => $request->zip_code,
             'delivery_date' => $deliveryDate,
         ]);
+    }
+
+
+    public function store_product_review(Request $request)
+    {
+        $request->validate([
+            'product_id' => 'required',
+            'rating' => 'required|min:1|max:5',
+            'review' => 'required',
+        ]);
+
+        ProductReview::create([
+            'product_id' => $request->product_id,
+            'user_id' => auth()->id(),
+            'rating' => $request->rating,
+            'title' => $request->title,
+            'review' => $request->review,
+            'status' => 1,
+        ]);
+
+        return back()->with('success', 'Review submitted successfully.');
     }
 }

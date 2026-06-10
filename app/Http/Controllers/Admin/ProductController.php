@@ -15,6 +15,7 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         $products = Product::with(['categories', 'brands'])
+            ->withAvg('reviews', 'rating')
             ->orderBy('display_order')
             ->paginate(10);
 

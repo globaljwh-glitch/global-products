@@ -176,6 +176,9 @@ Route::post('/favorite/toggle/{product}',
             ->name('wishlist');
 });
 
+Route::post('/product-review-submit', [FrontProductController::class, 'store_product_review'])
+    ->name('product.review.store')->middleware('frontauth');
+
 Route::get('/news', [FrontendNewsController::class, 'index'])
     ->name('news.index');
 

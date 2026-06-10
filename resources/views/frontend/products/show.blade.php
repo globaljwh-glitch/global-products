@@ -174,99 +174,179 @@
             </div>
             <!-- Item 3 -->
             <div class="tab-pane fade accordion-item" id="reviews">
+
                <h2 class="accordion-header d-md-none">
+
                   <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                      data-bs-target="#collapse3">
+
                      Reviews
+
                   </button>
+
                </h2>
+
                <div id="collapse3" class="accordion-collapse collapse d-md-block">
+
                   <div class="accordion-body">
-                     <div class="noReview mt-0 mt-md-2">
-                        <h6>There are no reviews yet.</h6>
-                        <h3 class="mt-0 mt-md-3">Be the first to review “Product Name”</h3>
-                        <p>Your email address will not be published. Required fields are marked *</p>
-                     </div>
+
+                     {{-- NO REVIEWS --}}
+                     @if($product->reviews->count() <= 0)
+
+                        <div class="noReview mt-0 mt-md-2">
+
+                           <h6>There are no reviews yet.</h6>
+
+                           <h3 class="mt-0 mt-md-3">
+                              Be the first to review "{{ $product->name }}"
+                           </h3>
+
+                           <p>
+                              Your email address will not be published.
+                              Required fields are marked *
+                           </p>
+
+                        </div>
+
+                     @endif
+
+                     {{-- REVIEW LIST --}}
                      <div class="reviewListing">
-                        <div class="productReview">
-                           <h6 class="reviewUsername">Ramankant Vashisht</h6>
-                           <div class="productRating productRatingLarge mb-2">
-                              <span class="fa fa-star checked"></span>
-                              <span class="fa fa-star checked"></span>
-                              <span class="fa fa-star checked"></span>
-                              <span class="fa fa-star checked"></span>
-                              <span class="fa fa-star checked"></span>
-                              <span class="verified">Verified Purchase</span>
+
+                        @foreach($product->reviews as $review)
+
+                           <div class="productReview {{ !$loop->first ? 'borderTop' : '' }}">
+
+                              <h6 class="reviewUsername">
+
+                                 {{ $review->user->name ?? 'User' }}
+
+                              </h6>
+
+                              <div class="productRating productRatingLarge mb-2">
+
+                                 @for($i = 1; $i <= 5; $i++)
+
+                                    <span class="fa fa-star {{ $i <= $review->rating ? 'checked' : '' }}"></span>
+
+                                 @endfor
+
+                                 <span class="verified">
+                                    Verified Purchase
+                                 </span>
+
+                              </div>
+
+                              @if($review->title)
+
+                                 <h5 class="reviewSubject mb-1">
+                                    {{ $review->title }}
+                                 </h5>
+
+                              @endif
+
+                              <p>
+                                 {{ $review->review }}
+                              </p>
+
                            </div>
-                           <h5 class="reviewSubject mb-1">Great Service</h5>
-                           <p>Very well packed and tied down to a pallet for safe travel. Exactly as described and works
-                              very well. I could have used shorter forks (as short as 24”) but anything shorter was higher
-                              cost. </p>
-                        </div>
-                        <div class="productReview borderTop">
-                           <h6 class="reviewUsername">Tony</h6>
-                           <div class="productRating productRatingLarge mb-2">
-                              <span class="fa fa-star checked"></span>
-                              <span class="fa fa-star checked"></span>
-                              <span class="fa fa-star checked"></span>
-                              <span class="fa fa-star checked"></span>
-                              <span class="fa fa-star "></span>
-                           </div>
-                           <h5 class="reviewSubject mb-1">Very please with pallet jack!!</h5>
-                           <p>Very pleased with this purchase. Pallet jack has a very smooth operation, was packaged very
-                              well and delivered very promptly.</p>
-                        </div>
-                        <div class="productReview borderTop">
-                           <h6 class="reviewUsername">Pavani</h6>
-                           <div class="productRating productRatingLarge mb-2">
-                              <span class="fa fa-star checked"></span>
-                              <span class="fa fa-star checked"></span>
-                              <span class="fa fa-star checked"></span>
-                              <span class="fa fa-star "></span>
-                              <span class="fa fa-star "></span>
-                              <span class="verified">Verified Purchase</span>
-                           </div>
-                           <h5 class="reviewSubject mb-1">Quick Delivery</h5>
-                           <p>The Pallet jack is very well made, the welds are nearly perfect and I believe it will give us
-                              many years of service.</p>
-                        </div>
+
+                        @endforeach
+
                      </div>
+
+                     {{-- REVIEW FORM --}}
                      <div class="reviewForm">
-                        <div class="form-group mb-3">
-                           <label>Your Rating <span>*</span></label>
-                           <div class="productRating productRatingLarge mb-2">
-                              <span class="fa fa-star"></span>
-                              <span class="fa fa-star"></span>
-                              <span class="fa fa-star"></span>
-                              <span class="fa fa-star "></span>
-                              <span class="fa fa-star "></span>
+
+                        @if(session('success'))
+
+                           <div class="alert alert-success">
+                              {{ session('success') }}
                            </div>
-                        </div>
-                        <div class="row">
-                           <div class="col-md-6">
-                              <div class="form-group">
-                                 <label>Your Name <span>*</span></label>
-                                 <input class="form-control" type="text" value="" name="name">
+
+                        @endif
+
+                        <form action="{{ route('product.review.store') }}" method="POST">
+
+                           @csrf
+
+                           <input type="hidden" name="product_id" value="{{ $product->id }}">
+
+                           <input type="hidden" name="rating" id="selected_rating" value="5">
+
+                           <div class="form-group mb-3">
+
+                              <label>
+                                 Your Rating <span>*</span>
+                              </label>
+
+                              <div class="productRating productRatingLarge mb-2">
+
+                                 <span class="fa fa-star checked rating-star" data-rating="1"></span>
+
+                                 <span class="fa fa-star checked rating-star" data-rating="2"></span>
+
+                                 <span class="fa fa-star checked rating-star" data-rating="3"></span>
+
+                                 <span class="fa fa-star checked rating-star" data-rating="4"></span>
+
+                                 <span class="fa fa-star checked rating-star" data-rating="5"></span>
+
                               </div>
+
                            </div>
-                           <div class="col-md-6">
-                              <div class="form-group">
-                                 <label>Your Email <span>*</span></label>
-                                 <input class="form-control" type="text" value="" name="name">
+
+                           @guest
+
+                              <div class="alert alert-warning">
+
+                                 Please login to submit review.
+
                               </div>
-                           </div>
-                        </div>
-                        <div class="form-group">
-                           <label>Your Review <span>*</span></label>
-                           <textarea name="interests" rows="9" class="form-control"></textarea>
-                        </div>
-                        <div>
-                           <button type="submit"
-                              class="mt-2 submitBtn btn-lg btn-block customBtn01 redBg d-inline-block">SUBMIT</button>
-                        </div>
+
+                           @else
+
+                              <div class="form-group">
+
+                                 <label>
+                                    Review Title
+                                 </label>
+
+                                 <input type="text" name="title" class="form-control">
+
+                              </div>
+
+                              <div class="form-group">
+
+                                 <label>
+                                    Your Review <span>*</span>
+                                 </label>
+
+                                 <textarea name="review" rows="6" class="form-control" required></textarea>
+
+                              </div>
+
+                              <div>
+
+                                 <button type="submit"
+                                    class="mt-2 submitBtn btn-lg btn-block customBtn01 redBg d-inline-block">
+
+                                    SUBMIT
+
+                                 </button>
+
+                              </div>
+
+                           @endguest
+
+                        </form>
+
                      </div>
+
                   </div>
+
                </div>
+
             </div>
             <!-- Item 4 -->
             <div class="tab-pane fade accordion-item" id="questionsAnswers">
@@ -609,6 +689,25 @@ $(document).on('click', '.remove-from-cart-btn', function(e){
 
 });
 
+ $(document).on('click', '.rating-star', function () {
+
+      let rating = $(this).data('rating');
+
+      $('#selected_rating').val(rating);
+
+      $('.rating-star').removeClass('checked');
+
+      $('.rating-star').each(function () {
+
+         if ($(this).data('rating') <= rating) {
+
+            $(this).addClass('checked');
+
+         }
+
+      });
+
+   });
 </script>
 
 

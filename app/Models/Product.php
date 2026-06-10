@@ -115,4 +115,11 @@ class Product extends Model
             ->orderBy('id');
     }
 
+     public function reviews()
+    {
+        return $this->hasMany(ProductReview::class)
+            ->where('status', 1)
+            ->latest();
+    }
+
 }
