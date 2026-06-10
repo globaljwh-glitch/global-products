@@ -33,6 +33,11 @@ use App\Http\Controllers\Frontend\OrderController as FrontendOrderController;
 use App\Http\Controllers\Frontend\OfferController as FrontendOfferController;
 use App\Http\Controllers\Frontend\SafetyServiceController;
 use App\Http\Controllers\Admin\SafetyServiceRequestController;
+use App\Http\Controllers\Admin\DashboardController;
+
+Route::get('/dashboard', [DashboardController::class, 'index'])
+    ->middleware(['auth'])
+    ->name('dashboard');
 
 Route::prefix('admin')
     ->name('admin.')
@@ -413,9 +418,9 @@ Route::prefix('admin')
 //         ->except(['show']);
 // });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
