@@ -31,7 +31,23 @@ use App\Http\Controllers\Admin\JobApplicationController as AdminJobApplicationCo
 use App\Http\Controllers\Frontend\JobApplicationController;
 use App\Http\Controllers\Frontend\OrderController as FrontendOrderController;
 use App\Http\Controllers\Frontend\OfferController as FrontendOfferController;
+use App\Http\Controllers\Frontend\SafetyServiceController;
+use App\Http\Controllers\Admin\SafetyServiceRequestController;
 
+Route::prefix('admin')
+    ->name('admin.')
+    ->group(function () {
+
+        Route::resource(
+            'safety-service-requests',
+            SafetyServiceRequestController::class
+        );
+    });
+    
+Route::post(
+    '/safety-services',
+    [SafetyServiceController::class, 'store']
+)->name('safety-services.store');
 
 Route::post('/delivery-check', [FrontProductController::class, 'checkDelivery'])
     ->name('delivery.check');

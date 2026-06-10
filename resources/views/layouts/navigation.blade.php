@@ -133,6 +133,10 @@
                             <x-dropdown-link :href="route('admin.product-questions.index')" :active="request()->routeIs('admin.product-questions.index')">
                                 {{ __('Q & A') }}
                             </x-dropdown-link>
+
+                            <x-dropdown-link :href="route('admin.safety-service-requests.index')" :active="request()->routeIs('admin.safety-service-requests.index')">
+                                {{ __('Safety Service Request') }}
+                            </x-dropdown-link>
                         </x-slot>
                     </x-dropdown>
                 </div>
