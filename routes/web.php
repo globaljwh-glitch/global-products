@@ -34,6 +34,19 @@ use App\Http\Controllers\Frontend\OfferController as FrontendOfferController;
 use App\Http\Controllers\Frontend\SafetyServiceController;
 use App\Http\Controllers\Admin\SafetyServiceRequestController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\ProductVariantController;
+
+Route::prefix('admin')
+    ->name('admin.')
+    ->middleware(['auth'])
+    ->group(function () {
+
+        Route::resource(
+            'product-variants',
+            ProductVariantController::class
+        );
+
+    });
 
 Route::get('/dashboard', [DashboardController::class, 'index'])
     ->middleware(['auth'])

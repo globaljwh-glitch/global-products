@@ -122,4 +122,10 @@ class Product extends Model
             ->latest();
     }
 
+    public function variants()
+    {
+        return $this->hasMany(ProductVariant::class)
+            ->orderBy('display_order');
+    }
+
 }
