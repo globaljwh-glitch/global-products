@@ -172,7 +172,7 @@
             <ul class="mb-0 ps-0">
                <!-- <li><a href="#"><i class="fa-solid fa-magnifying-glass"></i></a></li> -->
                <li><a href="javascript:void(0)" class="searchToggle"><i class="fa-solid fa-magnifying-glass"></i></a></li>
-               <li><a href="{{ route('customer.account') }}"><i class="fa-regular fa-user"></i></a></li>
+               <li><a href="/account/login"><i class="fa-regular fa-user"></i></a></li>
                <li><a href="/my-wishlist"><i class="fa-regular fa-heart"></i></a></li>
                <li><a href="/cart"><i class="fa-solid fa-cart-shopping"></i></a></li>
             </ul>

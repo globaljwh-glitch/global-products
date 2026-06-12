@@ -26,7 +26,7 @@
                                  <li><a href="/my-orders">My Orders</a></li>
                                  <li><a href="/track-order">Track My Order</a></li>
                                  <li><a href="/shipping-returns">Shipping & Returns</a></li>
-                                 <!-- <li><a href="#">Product Recall / Safety Info</a></li> -->
+                                 <li><a href="/pdf/2026-W9-Remit-To-Chicago.pdf" target="_blank">W-9 Form</a></li>
                               </ul>
                            </div>
                         </div>
@@ -39,7 +39,7 @@
                                  <li><a href="/products">New Products</a></li>
                                  <li><a href="/news">Knowledge Center</a></li>
                                  <li><a href="/news">Industrial How-Tos</a></li>
-                                 <li><a href="#">Equipment Financing</a></li>
+                                 <!-- <li><a href="#">Equipment Financing</a></li> -->
                               </ul>
                            </div>
                         </div>
@@ -49,7 +49,7 @@
                               <ul>
                                  <li><a href="/extended-service-plan">Extended Service Plan</a></li>
                                  <li><a href="/affiliate">Affiliate Program</a></li>
-                                 <li><a href="#">Resellers</a></li>
+                                 <!-- <li><a href="#">Resellers</a></li> -->
                                  <!-- <li><a href="#">Become A Supplier</a></li> -->
                                  <li><a href="/safety-services">Safety Services</a></li>
                                  <!-- <li><a href="#">Accessibility Options</a></li> -->
