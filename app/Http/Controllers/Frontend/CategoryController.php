@@ -39,21 +39,46 @@ class CategoryController extends Controller
     {
         $category = Category::with('children')
             ->where('slug', $slug)
+            ->where('status', 1)
             ->firstOrFail();
 
-        if ($category->children->count() == 0) {
+        $children = $category->children()
+            ->where('status', 1)
+            ->get();
+
+        // No more children? Show products
+        if ($children->count() == 0) {
 
             return redirect(
-                '/products/category/'.$category->slug
+                route('products.category', $category->slug)
             );
         }
 
         return view(
             'frontend.categories.show',
-            [
-                'category' => $category,
-                'subCategories' => $category->children
-            ]
+            compact('category', 'children')
         );
     }
+
+    // public function show($slug)
+    // {
+    //     $category = Category::with('children')
+    //         ->where('slug', $slug)
+    //         ->firstOrFail();
+
+    //     if ($category->children->count() == 0) {
+
+    //         return redirect(
+    //             '/products/category/'.$category->slug
+    //         );
+    //     }
+
+    //     return view(
+    //         'frontend.categories.show',
+    //         [
+    //             'category' => $category,
+    //             'subCategories' => $category->children
+    //         ]
+    //     );
+    // }
 }
