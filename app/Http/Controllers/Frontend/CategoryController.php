@@ -54,9 +54,16 @@ class CategoryController extends Controller
             );
         }
 
+        // return view(
+        //     'frontend.categories.show',
+        //     compact('category', 'children')
+        // );
+
+        $subCategories = $category->children;
+
         return view(
             'frontend.categories.show',
-            compact('category', 'children')
+            compact('category', 'subCategories')
         );
     }
 
