@@ -25,10 +25,18 @@
                 <div class="row">
 
                     @forelse($subCategories as $subCategory)
+                        @php
+                            $hasChildren = $subCategory->children()->exists();
+
+                            $url = $hasChildren
+                                ? url('/category/'.$subCategory->slug)
+                                : url('/products/category/'.$subCategory->slug);
+                        @endphp
 
                         <div class="col-sm-3 col-lg-2 d-flex">
 
-                            <a href="{{ url('/products/category/'.$subCategory->slug) }}"
+                            <a href="{{ $url }}"
+                        
                                class="categoriesBox text-center">
 
                                 <div class="categoriesThumb">
