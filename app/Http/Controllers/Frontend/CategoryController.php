@@ -15,26 +15,6 @@ class CategoryController extends Controller
         return view('frontend.categories.index', compact('categories'));
     }
 
-    // public function show($slug)
-    // {
-    //     $category = Category::with('children')
-    //         ->where('slug', $slug)
-    //         ->where('status', 1)
-    //         ->firstOrFail();
-
-    //     $subCategories = $category->children()
-    //         ->where('status', 1)
-    //         ->get();
-
-    //     return view(
-    //         'frontend.categories.show',
-    //         compact(
-    //             'category',
-    //             'subCategories'
-    //         )
-    //     );
-    // }
-
     public function show($slug)
     {
         $category = Category::with('children')
@@ -49,8 +29,11 @@ class CategoryController extends Controller
         // No more children? Show products
         if ($children->count() == 0) {
 
+            // return redirect(
+            //     route('products.category', $category->slug)
+            // );
             return redirect(
-                route('products.category', $category->slug)
+                url('/products/category/' . $category->slug)
             );
         }
 
@@ -67,25 +50,4 @@ class CategoryController extends Controller
         );
     }
 
-    // public function show($slug)
-    // {
-    //     $category = Category::with('children')
-    //         ->where('slug', $slug)
-    //         ->firstOrFail();
-
-    //     if ($category->children->count() == 0) {
-
-    //         return redirect(
-    //             '/products/category/'.$category->slug
-    //         );
-    //     }
-
-    //     return view(
-    //         'frontend.categories.show',
-    //         [
-    //             'category' => $category,
-    //             'subCategories' => $category->children
-    //         ]
-    //     );
-    // }
 }

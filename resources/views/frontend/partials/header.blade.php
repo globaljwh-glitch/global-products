@@ -92,7 +92,10 @@
                      <li>
                         {{-- Show only 6 categories --}}
                         @foreach($categories_data->take(6) as $category)
-                           <a class="dropdown-item" href="{{ route('products.index', ['type' => 'category', 'slug' => $category->slug]) }}">
+                           <!-- <a class="dropdown-item" href="{{ route('products.index', ['type' => 'category', 'slug' => $category->slug]) }}">
+                              {{ ucfirst($category->name) }}
+                           </a> -->
+                           <a class="dropdown-item" href="{{ url('/category/'.$category->slug) }}">
                               {{ ucfirst($category->name) }}
                            </a>
                         @endforeach
