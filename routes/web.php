@@ -36,6 +36,11 @@ use App\Http\Controllers\Admin\SafetyServiceRequestController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProductVariantController;
 
+
+Route::get('/category/{slug}', [CategoryController::class, 'show'])
+    ->name('category.show');
+
+    
 Route::prefix('admin')
     ->name('admin.')
     ->middleware(['auth'])

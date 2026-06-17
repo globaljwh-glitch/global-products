@@ -82,3 +82,20 @@
     background:#f8fafc;
     cursor:not-allowed;
 }
+
+/* .sidebar-scroll::-webkit-scrollbar {
+    width: 6px;
+}
+
+.sidebar-scroll::-webkit-scrollbar-track {
+    background: #0f172a;
+}
+
+.sidebar-scroll::-webkit-scrollbar-thumb {
+    background: #475569;
+    border-radius: 20px;
+}
+
+.sidebar-scroll::-webkit-scrollbar-thumb:hover {
+    background: #64748b;
+} */

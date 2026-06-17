@@ -13,6 +13,13 @@ class DashboardController extends Controller
 {
     public function index()
     {
+
+        if (auth()->user()->role != 1) {
+
+            return redirect()
+                ->route('customer.account');
+
+        }
         /*
         |--------------------------------------------------------------------------
         | Stats Cards

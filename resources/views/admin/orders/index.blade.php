@@ -33,9 +33,9 @@
                                 Customer
                             </th>
 
-                            <th class="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase">
+                            <!-- <th class="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase">
                                 Phone
-                            </th>
+                            </th> -->
 
                             <th class="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase">
                                 Total
@@ -67,16 +67,16 @@
                             <tr class="hover:bg-gray-50 transition">
 
                                 <td class="px-6 py-4 font-semibold text-gray-800">
-                                    #{{ $order->id }}
+                                    #{{ $order->order_number }}
                                 </td>
 
                                 <td class="px-6 py-4">
-                                    {{ $order->customer_name }}
+                                    {{ $order->user->name }}
                                 </td>
 
-                                <td class="px-6 py-4">
+                                <!-- <td class="px-6 py-4">
                                     {{ $order->customer_phone }}
-                                </td>
+                                </td> -->
 
                                 <td class="px-6 py-4 font-medium">
                                     ₹{{ number_format($order->grand_total, 2) }}

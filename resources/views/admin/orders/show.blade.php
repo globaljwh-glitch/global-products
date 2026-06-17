@@ -8,7 +8,7 @@
 
             <div>
                 <h1 class="text-2xl font-bold text-gray-800">
-                    Order #{{ $order->id }}
+                    Order #{{ $order->order_number }}
                 </h1>
 
                 <p class="text-sm text-gray-500">
@@ -38,22 +38,22 @@
 
                     <div>
                         <strong>Name:</strong>
-                        {{ $order->customer_name }}
+                        {{ $order->user->name }}
                     </div>
 
                     <div>
                         <strong>Email:</strong>
-                        {{ $order->customer_email }}
+                        {{ $order->user->email }}
                     </div>
 
                     <div>
                         <strong>Phone:</strong>
-                        {{ $order->customer_phone }}
+                        {{ $order->user->profileDetail->phone }}
                     </div>
 
                     <div>
                         <strong>Address:</strong>
-                        {{ $order->shipping_address }}
+                        {{ $order->user->profileDetail->address_line1 }}
                     </div>
 
                 </div>

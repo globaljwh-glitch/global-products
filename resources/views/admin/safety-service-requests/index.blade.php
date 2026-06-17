@@ -20,7 +20,7 @@
                             <thead class="bg-gray-100">
 
                                 <tr>
-                                    <th class="px-4 py-3 border">#</th>
+                                    <!-- <th class="px-4 py-3 border">#</th> -->
                                     <th class="px-4 py-3 border">Company</th>
                                     <th class="px-4 py-3 border">Contact Name</th>
                                     <th class="px-4 py-3 border">Email</th>
@@ -38,9 +38,9 @@
 
                                     <tr>
 
-                                        <td class="px-4 py-3 border">
+                                        <!-- <td class="px-4 py-3 border">
                                             {{ $request->id }}
-                                        </td>
+                                        </td> -->
 
                                         <td class="px-4 py-3 border">
                                             {{ $request->company_name }}

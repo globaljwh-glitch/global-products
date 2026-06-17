@@ -1,7 +1,7 @@
 @extends('layouts.frontend')
 
 @section('content')
-<!-- <section class="sectionPadding">
+<section class="sectionPadding">
     <div class="container">
         <div class="row">
 
@@ -58,10 +58,10 @@
 
         </div>
     </div>
-</section> -->
+</section>
 
 
-<section class="sectionPadding">
+<!-- <section class="sectionPadding">
          <div class="container">
             <div class="row">
                <div class="col-md-10 m-auto">
@@ -154,7 +154,7 @@
                </div>
             </div>
          </div>
-      </section>
+      </section> -->
       <!-- <section class="blogSection greyBg sectionPadding">
          <div class="container">
             <div class="row">

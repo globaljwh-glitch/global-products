@@ -89,6 +89,26 @@
     </li> -->
 
     <li class="nav-item">
+        <button class="nav-link"
+                onclick="window.open('/my-wishlist')">
+
+            <i class="fa-solid fa-heart"></i>
+            My Wishlist
+
+        </button>
+    </li>
+
+    <li class="nav-item">
+        <button class="nav-link"
+                onclick="window.open('/my-orders')">
+
+            <i class="fa-solid fa-list"></i>
+            Order History
+
+        </button>
+    </li>
+
+    <li class="nav-item">
     <button class="nav-link" data-target="#userProfileTabs4">
     <i class="fa-solid fa-key"></i> Change Password
     </button>
