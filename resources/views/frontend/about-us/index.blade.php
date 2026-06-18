@@ -115,19 +115,19 @@
             <div class="mt-lg-5 mt-md-4 mt-3">
                <div class="row">
                   <div class="col-md-3 col-sm-6">
-                     <h3 class="text-red fw-bold mb-1 mt-2 mt-md-0 mb-md-2">50K+</h3>
+                     <h2 class="text-red fw-bold pb-1 mt-2 mt-md-0 pb-md-2">50K+</h3>
                      <p class="fw-semibold">Happy Customers</p>
                   </div>
                   <div class="col-md-3 col-sm-6">
-                     <h3 class="text-red fw-bold mb-1 mt-2 mt-md-0 mb-md-2">100K+</h3>
+                     <h2 class="text-red fw-bold pb-1 mt-2 mt-md-0 pb-md-2">100K+</h3>
                      <p class="fw-semibold">Orders Delivered</p>
                   </div>
                   <div class="col-md-3 col-sm-6">
-                     <h3 class="text-red fw-bold mb-1 mt-2 mt-md-0 mb-md-2">500+</h3>
+                     <h2 class="text-red fw-bold pb-1 mt-2 mt-md-0 pb-md-2">500+</h3>
                      <p class="fw-semibold">Products</p>
                   </div>
                   <div class="col-md-3 col-sm-6">
-                     <h3 class="text-red fw-bold mb-1 mt-2 mt-md-0 mb-md-2">4.8★</h3>
+                     <h2 class="text-red fw-bold pb-1 mt-2 mt-md-0 pb-md-2">4.8★</h3>
                      <p class="fw-semibold">Customer Rating</p>
                   </div>
                </div>
