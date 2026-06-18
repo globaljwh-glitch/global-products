@@ -303,14 +303,24 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
                 <a href="{{ route('categories.index') }}" class="block py-2 hover:text-white {{ request()->routeIs('categories.*')
         ? 'bg-slate-800 text-white border-l-4 border-blue-500'
         : 'text-slate-300 hover:bg-slate-800' }}"><i class="fa-solid fa-tags text-green-400"></i> &nbsp;Categories</a>
-                <a href="{{ route('admin.products.index') }}" class="block py-2 hover:text-white {{ request()->routeIs('products.*')
+                <a href="{{ route('admin.products.index') }}" class="block py-2 hover:text-white {{ request()->routeIs('admin.products.*')
         ? 'bg-slate-800 text-white border-l-4 border-blue-500'
         : 'text-slate-300 hover:bg-slate-800' }}"><i class="fa-solid fa-box text-orange-400"></i> &nbsp;Products</a>
-                <a href="{{ route('admin.product-variants.index') }}" class="block py-2 hover:text-white">🔀 Product Variants</a>
-                <a href="{{ route('attributes.index') }}" class="block py-2 hover:text-white">⚙️ Attribute Groups</a>
-                <a href="{{ route('admin.product-questions.index') }}" class="block py-2 hover:text-white">❓ Q & A</a>
-                <a href="{{ route('brands.index') }}" class="block py-2 hover:text-white"><i class="fa-solid fa-copyright text-purple-400"></i> &nbsp;Brands</a>
-                <a href="{{ route('admin.industries.index') }}" class="block py-2 hover:text-white"><i class="fa-solid fa-industry text-cyan-400"></i> &nbsp;Industries</a>
+                <a href="{{ route('admin.product-variants.index') }}" class="block py-2 hover:text-white {{ request()->routeIs('admin.product-variants.*')
+        ? 'bg-slate-800 text-white border-l-4 border-blue-500'
+        : 'text-slate-300 hover:bg-slate-800' }}">🔀 Product Variants</a>
+                <a href="{{ route('attributes.index') }}" class="block py-2 hover:text-white {{ request()->routeIs('attributes.*')
+        ? 'bg-slate-800 text-white border-l-4 border-blue-500'
+        : 'text-slate-300 hover:bg-slate-800' }}">⚙️ Attribute Groups</a>
+                <a href="{{ route('admin.product-questions.index') }}" class="block py-2 hover:text-white {{ request()->routeIs('admin.product-questions.*')
+        ? 'bg-slate-800 text-white border-l-4 border-blue-500'
+        : 'text-slate-300 hover:bg-slate-800' }}">❓ Q & A</a>
+                <a href="{{ route('brands.index') }}" class="block py-2 hover:text-white {{ request()->routeIs('brands.*')
+        ? 'bg-slate-800 text-white border-l-4 border-blue-500'
+        : 'text-slate-300 hover:bg-slate-800' }}"><i class="fa-solid fa-copyright text-purple-400"></i> &nbsp;Brands</a>
+                <a href="{{ route('admin.industries.index') }}" class="block py-2 hover:text-white {{ request()->routeIs('admin.industries.*')
+        ? 'bg-slate-800 text-white border-l-4 border-blue-500'
+        : 'text-slate-300 hover:bg-slate-800' }}"><i class="fa-solid fa-industry text-cyan-400"></i> &nbsp;Industries</a>
             </div>
         </div>
 

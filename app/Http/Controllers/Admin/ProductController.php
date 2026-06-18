@@ -25,7 +25,9 @@ class ProductController extends Controller
     public function create()
     {
         $product = null;
-        $categories = Category::pluck('name', 'id');
+        //$categories = Category::pluck('name', 'id');
+        $categories = Category::whereNull('parent_id')
+            ->pluck('name', 'id');
         $brands = Brand::pluck('name', 'id');
         $attributes = \App\Models\Attribute::orderBy('display_order')->get();
 
