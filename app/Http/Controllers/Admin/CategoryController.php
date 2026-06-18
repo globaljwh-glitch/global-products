@@ -37,13 +37,25 @@ class CategoryController extends Controller
         return view('admin.categories.index', compact('categories'));
     }
 
+    // public function create()
+    // {
+    //     $categories = buildCategoryTree(
+    //         Category::orderBy('display_order')->get()
+    //     );
+
+    //     return view('admin.categories.create', compact('categories'));
+    // }
+
     public function create()
     {
-        $categories = buildCategoryTree(
-            Category::orderBy('display_order')->get()
-        );
+        $parentCategories = Category::whereNull('parent_id')
+            ->orderBy('name')
+            ->get();
 
-        return view('admin.categories.create', compact('categories'));
+        return view(
+            'admin.categories.create',
+            compact('parentCategories')
+        );
     }
 
     public function store(Request $request)
@@ -170,5 +182,14 @@ class CategoryController extends Controller
                 ];
             })
         );
+    }
+
+    public function getChildCategories($id)
+    {
+        $categories = Category::where('parent_id', $id)
+            ->orderBy('name')
+            ->get(['id', 'name']);
+
+        return response()->json($categories);
     }
 }
