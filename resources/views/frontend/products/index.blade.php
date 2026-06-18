@@ -24,36 +24,7 @@
                </div>
             </div>
             @include('frontend.partials.sidebar')
-            <!-- <div class="col-md-4 col-lg-3">
-               <div class="filterByList mt-lg-4 mt-2">
-                  <div class="productCategoriesFilter">
-                     <h4 class="text-uppercase">Categories</h4>
-                     <ul class="ps-0">
-                        <li><a href="#">Storage & Shelving</a></li>
-                        <li><a href="#">Safety & Security</a></li>
-                        <li><a href="#">Carts & Trucks</a></li>
-                        <li><a href="#">Furniture & Decor</a></li>
-                        <li><a href="#">Material Handling</a></li>
-                        <li><a href="#">HVAC & Fans</a></li>
-                        <li class="fw-bold"><a href="#">See More +</a></li>
-                     </ul>
-                  </div>
-
-                  <div class="productCategoriesFilter mt-lg-5 mt-md-4 mt-2">
-                     <h4 class="text-uppercase">Shop By Industry</h4>
-                     <ul class="ps-0">
-                        <li><a href="#">Warehouse</a></li>
-                        <li><a href="#">Manufacturing</a></li>
-                        <li><a href="#">Construction</a></li>
-                        <li><a href="#">Retail</a></li>
-                        <li><a href="#">Education</a></li>
-                        <li><a href="#">Public Sector</a></li>
-                        <li><a href="#">Healthcare</a></li>
-                        <li><a href="#">Hospitality</a></li>
-                     </ul>
-                  </div>
-               </div>
-            </div> -->
+            
             <div class="col-md-8 col-lg-9">
                <div class="productList">
                   <div class="row">
@@ -71,7 +42,7 @@
                                                    class="customBtn01 mt-2 me-1 bg-white text-blue">
                                                    Quick View
                                                 </button>
-                                                <button class="customBtn01 mt-2 redBg text-white">Add to Cart</button>
+                                                <button class="customBtn01 mt-2 redBg text-white add-to-cart-btn" data-product-id="{{ $product->id }}">Add to Cart</button>
                                              </div>
                                           </div>
 
@@ -147,71 +118,89 @@
          </div>
       </div>
    </section>
-   <!-- <section class="newsLetterBlock greyBg sectionPadding">
-      <div class="container">
-         <div class="row">
-            <div class="col-md-12 col-lg-6 d-flex align-items-center">
-               <div class="w-100">
-                  <h2 class="fw-bold">Be the first to know about our daily sales!</h2>
-                  <p class="mb-lg-0 pe-lg-4">Subscribe to our newsletters now and stay up-to-date with new collections, the
-                     latest lookbooks.</p>
-               </div>
+   
+   <div id="successToast"
+    style="display:none; position:fixed; top:20px; right:20px; z-index:9999; min-width:320px;"
+    class="shadow-lg">
+
+    <div style="
+        background:linear-gradient(135deg,#16a34a,#22c55e);
+        color:#fff;
+        padding:16px 20px;
+        border-radius:12px;
+        display:flex;
+        align-items:center;
+        gap:12px;
+        box-shadow:0 10px 25px rgba(0,0,0,.15);
+    ">
+        <div style="font-size:24px;">✓</div>
+
+        <div>
+            <div style="font-weight:700;">
+                Success
             </div>
-            <div class="col-md-12 col-lg-6 d-flex align-items-center">
-               <div class="input-group subscribeNews ps-lg-3">
-                  <input type="text" class="form-control form-control-lg text-end-0" id=""
-                     placeholder="Enter Email Address">
-                  <button class="btn btn-lg customBtn01 redBg" type="submit" id="btnSearch">SubScribe</button>
-               </div>
+
+            <div id="successToastMessage">
             </div>
-         </div>
-      </div>
-   </section> -->
+        </div>
+    </div>
+</div>
+
    @include('frontend.partials.subscribe')
 
+   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script>
+
+$(document).on('click', '.add-to-cart-btn', function(e){
+
+    e.preventDefault();
+
+    let button = $(this);
+
+    let productId = button.data('product-id');
+
+    let quantity = 1; //$("#quantity").val();
+
+    $.ajax({
+
+        url: '/cart/add/' + productId,
+
+        method: 'POST',
+
+        data: {
+            _token: $('meta[name="csrf-token"]').attr('content'),
+            quantity: quantity
+        },
+
+        success: function(response){
+
+            // $('#successMessage')
+            //    .html(response.message)
+            //    .fadeIn();
+
+            // setTimeout(function () {
+            //    $('#successMessage').fadeOut();
+            // }, 5000);
+
+            $('#successToastMessage').html(response.message);
+
+               $('#successToast')
+                  .stop(true,true)
+                  .fadeIn(300);
+
+               setTimeout(function(){
+
+                  $('#successToast').fadeOut(400);
+
+               }, 3000);
 
 
+        }
 
-   <!-- <div class="container py-5">
-                                  <h2 class="mb-4">Products</h2>
+    });
 
-                                  <div class="row">
-                                      @forelse($products as $product)
-                                          <div class="col-md-3 mb-4">
-                                              <div class="card h-100">
+});
 
-                                                  {{-- Product Image --}}
-                                                  <img 
-                                                      src="{{ $product->images->first()->image ?? asset('placeholder.jpg') }}" 
-                                                      class="card-img-top"
-                                                      alt="{{ $product->name }}"
-                                                  >
-
-                                                  <div class="card-body">
-                                                      <h5 class="card-title">
-                                                          {{ $product->name }}
-                                                      </h5>
-
-                                                      <p class="card-text">
-                                                          ₹{{ $product->price ?? 'N/A' }}
-                                                      </p>
-
-                                                      <a href="#" class="btn btn-primary btn-sm">
-                                                          View Details
-                                                      </a>
-                                                  </div>
-
-                                              </div>
-                                          </div>
-                                      @empty
-                                          <p>No products found.</p>
-                                      @endforelse
-                                  </div>
-
-                                  {{-- Pagination --}}
-                                  <div class="mt-4">
-                                      {{ $products->links() }}
-                                  </div>
-                              </div> -->
+</script>
 
 @endsection
