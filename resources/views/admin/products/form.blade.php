@@ -24,7 +24,7 @@
                 <!-- NAME -->
                 <div>
                     <label class="block text-sm font-medium">Name</label>
-                    <input type="text" name="name"
+                    <input required type="text" name="name"
                         value="{{ old('name', $product->name ?? '') }}"
                         class="w-full border rounded p-2">
                 </div>
@@ -93,9 +93,9 @@
 
                 <div>
                     <label class="block text-sm font-medium">Price</label>
-                    <input type="text" name="price"
+                    <input type="number" name="price"
                         value="{{ old('price', $product->price ?? '') }}"
-                        class="w-full border rounded p-2">
+                        class="w-full border rounded p-2" min="0" step="0.01" required>
                 </div>
 
                 <div>
@@ -350,7 +350,7 @@
                 <div>
                     <label class="block font-medium">Status</label>
                     <select name="status" class="w-full border rounded px-3 py-2">
-                        <option value="1" @selected(old('status', optional($product)->status) == 1)>Active</option>
+                        <option selected value="1" @selected(old('status', optional($product)->status) == 1)>Active</option>
                         <option value="0" @selected(old('status', optional($product)->status) == 0)>Inactive</option>
                     </select>
                 </div>
@@ -359,7 +359,7 @@
                     <label class="block font-medium">Display Order</label>
                     <input type="number"
                         name="display_order" required 
-                        value="{{ old('display_order', optional($product)->display_order) }}"
+                        value="{{ old('display_order', optional($product)->display_order ?? 2) }}"
                         class="border rounded px-3 py-2">
                 </div>
             </div>
