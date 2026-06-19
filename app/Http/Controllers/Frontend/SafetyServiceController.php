@@ -47,7 +47,10 @@ class SafetyServiceController extends Controller
         */
 
         Mail::to($requestRecord->email)
-            ->send(new UserSafetyServiceMail($requestRecord));
+            ->send(new UserSafetyServiceMail($requestRecord->all()));
+
+        // Mail::to($request->email)->send(
+        //     new SafetyServiceUserMail($request->all()));
 
         return back()->with(
             'success',
