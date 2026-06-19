@@ -138,7 +138,7 @@
 
                     </div>
 
-                    @foreach($selectedCategories as $index => $selectedId)
+                    @foreach(($selectedCategories ?? []) as $index => $selectedId)
 
                     @if($index > 0)
 

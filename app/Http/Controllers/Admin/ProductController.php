@@ -31,11 +31,13 @@ class ProductController extends Controller
         $brands = Brand::pluck('name', 'id');
         $attributes = \App\Models\Attribute::orderBy('display_order')->get();
 
+        $selectedCategories = []; // add this
+
         $attributeGroups = \App\Models\AttributeGroup::with('attributes')
         ->orderBy('display_order')
         ->get();
 
-        return view('admin.products.create', compact('categories', 'brands', 'attributes', 'attributeGroups', 'product'));
+        return view('admin.products.create', compact('categories', 'brands', 'attributes', 'attributeGroups', 'product', 'selectedCategories'));
     }
 
     public function store(Request $request)
