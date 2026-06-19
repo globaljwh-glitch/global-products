@@ -1,6 +1,6 @@
 <h2>Thank You for Contacting Global Products</h2>
 
-<p>Hello {{ $data['name'] }},</p>
+<p>Hello {{ $data['company_name'] }},</p>
 
 <p>
     We have received your Safety Service request successfully.
