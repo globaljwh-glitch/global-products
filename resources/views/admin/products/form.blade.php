@@ -806,7 +806,7 @@ $(document).on('change', '.category-dropdown', function(){
                         Sub Category
                     </label>
 
-                    <select required class="w-full mt-1 border rounded-lg px-3 py-2 form-control category-dropdown">
+                    <select class="w-full mt-1 border rounded-lg px-3 py-2 form-control category-dropdown">
 
                         <option value="">
                             Select Sub Category

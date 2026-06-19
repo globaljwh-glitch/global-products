@@ -281,7 +281,9 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
         <div class="p-4 space-y-2 flex-1 overflow-y-auto">
 
         <a href="{{ route('dashboard') }}"
-           class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-slate-800">
+           class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-slate-800 {{ request()->routeIs('dashboard')
+        ? 'bg-slate-800 text-white border-l-4 border-blue-500'
+        : 'text-slate-300 hover:bg-slate-800' }}">
 
             <i class="fa-solid fa-chart-line text-blue-400"></i>
             Dashboard
@@ -336,8 +338,12 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
             </button>
 
             <div x-show="open" x-transition class="ml-6 mt-2 space-y-2">
-                <a href="{{ route('admin.orders.index') }}" class="block py-2 hover:text-white"><i class="fa-solid fa-cart-shopping text-red-400"></i> &nbsp;Orders</a>
-                <a href="{{ route('admin.offers.index') }}" class="block py-2 hover:text-white">🎁 Offers</a>
+                <a href="{{ route('admin.orders.index') }}" class="block py-2 hover:text-white {{ request()->routeIs('admin.orders.*')
+        ? 'bg-slate-800 text-white border-l-4 border-blue-500'
+        : 'text-slate-300 hover:bg-slate-800' }}"><i class="fa-solid fa-cart-shopping text-red-400"></i> &nbsp;Orders</a>
+                <a href="{{ route('admin.offers.index') }}" class="block py-2 hover:text-white {{ request()->routeIs('admin.offers.*')
+        ? 'bg-slate-800 text-white border-l-4 border-blue-500'
+        : 'text-slate-300 hover:bg-slate-800' }}">🎁 Offers</a>
             </div>
         </div>
         
@@ -353,20 +359,30 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
             </button>
 
             <div x-show="open" x-transition class="ml-6 mt-2 space-y-2">
-                <a href="{{ route('admin.users.index') }}" class="block py-2 hover:text-white"><i class="fa-solid fa-users text-yellow-400"></i> &nbsp;Users</a>
-                <a href="{{ route('admin.newsletter-subscribers.index') }}" class="block py-2 hover:text-white">📧 &nbsp;Subscribers</a>
+                <a href="{{ route('admin.users.index') }}" class="block py-2 hover:text-white {{ request()->routeIs('admin.users.*')
+        ? 'bg-slate-800 text-white border-l-4 border-blue-500'
+        : 'text-slate-300 hover:bg-slate-800' }}"><i class="fa-solid fa-users text-yellow-400"></i> &nbsp;Users</a>
+                <a href="{{ route('admin.newsletter-subscribers.index') }}" class="block py-2 hover:text-white {{ request()->routeIs('admin.newsletter-subscribers.*')
+        ? 'bg-slate-800 text-white border-l-4 border-blue-500'
+        : 'text-slate-300 hover:bg-slate-800' }}">📧 &nbsp;Subscribers</a>
             </div>
         </div>
 
-        <a href="{{ route('admin.banners.index') }}" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-slate-800">
+        <a href="{{ route('admin.banners.index') }}" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-slate-800 {{ request()->routeIs('admin.banners.*')
+        ? 'bg-slate-800 text-white border-l-4 border-blue-500'
+        : 'text-slate-300 hover:bg-slate-800' }}">
             🖼️ Banners
         </a>
 
-        <a href="{{ route('admin.careers.index') }}" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-slate-800">
+        <a href="{{ route('admin.careers.index') }}" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-slate-800 {{ request()->routeIs('admin.careers.*')
+        ? 'bg-slate-800 text-white border-l-4 border-blue-500'
+        : 'text-slate-300 hover:bg-slate-800' }}">
             💼 Careers
         </a>
 
-        <a href="{{ route('admin.news.index') }}" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-slate-800">
+        <a href="{{ route('admin.news.index') }}" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-slate-800 {{ request()->routeIs('admin.news.*')
+        ? 'bg-slate-800 text-white border-l-4 border-blue-500'
+        : 'text-slate-300 hover:bg-slate-800' }}">
             📰 News
         </a>
 
@@ -381,9 +397,15 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
             </button>
 
             <div x-show="open" x-transition class="ml-6 mt-2 space-y-2">
-                <a href="{{ route('admin.contacts.index') }}" class="block py-2 hover:text-white">📞 Contacts</a>
-                <a href="{{ route('admin.job-applications.index') }}" class="block py-2 hover:text-white">📄 Job Applications</a>
-                <a href="{{ route('admin.safety-service-requests.index') }}" class="block py-2 hover:text-white">🛡️ Safety Requests</a>
+                <a href="{{ route('admin.contacts.index') }}" class="block py-2 hover:text-white {{ request()->routeIs('admin.contacts.*')
+        ? 'bg-slate-800 text-white border-l-4 border-blue-500'
+        : 'text-slate-300 hover:bg-slate-800' }}">📞 Contacts</a>
+                <a href="{{ route('admin.job-applications.index') }}" class="block py-2 hover:text-white {{ request()->routeIs('admin.job-applications.*')
+        ? 'bg-slate-800 text-white border-l-4 border-blue-500'
+        : 'text-slate-300 hover:bg-slate-800' }}">📄 Job Applications</a>
+                <a href="{{ route('admin.safety-service-requests.index') }}" class="block py-2 hover:text-white {{ request()->routeIs('admin.safety-service-requests.*')
+        ? 'bg-slate-800 text-white border-l-4 border-blue-500'
+        : 'text-slate-300 hover:bg-slate-800' }}">🛡️ Safety Requests</a>
             </div>
         </div>
 
@@ -403,7 +425,9 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
             <div x-show="open" x-transition class="ml-6 mt-2 space-y-2">
 
                 <a href="{{ route('profile.edit') }}"
-                class="block py-2 hover:text-white">
+                class="block py-2 hover:text-white {{ request()->routeIs('profile.*')
+        ? 'bg-slate-800 text-white border-l-4 border-blue-500'
+        : 'text-slate-300 hover:bg-slate-800' }}">
                     <i class="fa-solid fa-user-gear text-green-400"></i>
                     &nbsp;Profile
                 </a>
