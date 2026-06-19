@@ -95,13 +95,13 @@
                      <div class="row">
                           @forelse($products as $product)
                         <div class="d-flex col-lg-4 col-sm-6">
-                           <a href="#" class="product w-100">
+                           <a href="{{route('products.show',$product->slug)}}" class="product w-100">
                               <div class="productThumb positionRelative">
                                  <img alt="" class="imgResponsive" src="{{ $product->primaryImage
             ? asset('storage/'.$product->primaryImage->image)
             : asset('images/no-image.png') }}"  alt="{{ $product->name }}">
                                  <div class="actionBtn">
-                                    <button class="customBtn01 mt-2 me-1 bg-white text-blue" href="#">Quick View</button> 
+                                    <button class="customBtn01 mt-2 me-1 bg-white text-blue" href="{{route('products.show',$product->slug)}}">Quick View</button> 
                                     <button class="customBtn01 mt-2 redBg text-white" href="#">Add to Cart</button>
                                  </div>
                               </div>
@@ -115,9 +115,9 @@
                                     <span class="fa fa-star"></span>
                                     <span class="fa fa-star"></span>
                                  </div>
-                                 <div class="productPrice text-red fw-bold">{{ $product->price }}</div>
+                                 <div class="productPrice text-red fw-bold">${{ $product->price }}</div>
                                  <div class="actionBtnMob d-md-none">
-                                    <button class="customBtn01 mt-2 me-1 bg-white text-blue" href="#">Quick View</button> 
+                                    <button class="customBtn01 mt-2 me-1 bg-white text-blue" href="{{route('products.show',$product->slug)}}">Quick View</button> 
                                     <button class="customBtn01 mt-2 redBg text-white" href="#">Add to Cart</button>
                                  </div>
                               </div>
@@ -128,7 +128,7 @@
                           <div class="col-12">
 
                               <div class="alert alert-light text-center py-5 border">
-                                 <img src="{{ asset('images/no-product.png') }}" width="400">
+                                 <img src="{{ asset('images/no-product.png') }}" width="300">
                                   <h4>No products found</h4>
 
                                   <p class="mb-0">
