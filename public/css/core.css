@@ -1829,26 +1829,3 @@ footer li span {
 
 }
 
-/* Custom css added by raman */
-
-.success-message{
-    background: #28a745;
-    color: #fff;
-    padding: 12px 15px;
-    border-radius: 5px;
-    margin-top: 10px;
-    font-size: 14px;
-}
-
-.subscribeNews form{
-    width: 100%;
-}
-
-.thumbImg {
-    cursor: pointer;
-    border: 2px solid transparent;
-}
-
-.thumbImg.active {
-    border: 2px solid #dc3545;
-}
