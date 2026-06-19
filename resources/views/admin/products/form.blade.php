@@ -24,7 +24,7 @@
                 <!-- NAME -->
                 <div>
                     <label class="block text-sm font-medium">Name</label>
-                    <input type="text" name="name"
+                    <input required type="text" name="name"
                         value="{{ old('name', $product->name ?? '') }}"
                         class="w-full border rounded p-2">
                 </div>
@@ -93,9 +93,9 @@
 
                 <div>
                     <label class="block text-sm font-medium">Price</label>
-                    <input type="text" name="price"
+                    <input type="number" name="price"
                         value="{{ old('price', $product->price ?? '') }}"
-                        class="w-full border rounded p-2">
+                        class="w-full border rounded p-2" min="0" step="0.01" required>
                 </div>
 
                 <div>
@@ -113,19 +113,74 @@
                         value="{{ old('external_url', optional($product)->external_url) }}"
                         class="w-full border rounded px-3 py-2">
                 </div>
-
+                
                 <!-- CATEGORY -->
-                <div>
-                    <label class="block text-sm font-medium">Categories</label>
-                    <select name="categories[]" multiple class="w-full border rounded p-2">
-                        @foreach($categories as $id => $name)
-                            <option value="{{ $id }}"
-                                {{ isset($product) && $product->categories->pluck('id')->contains($id) ? 'selected' : '' }}>
-                                {{ $name }}
+                
+                <div id="category-selects">
+
+                    <div class="mb-4">
+                        <label class="text-sm font-medium">Parent Category</label>
+
+                        <select class="w-full mt-1 border rounded-lg px-3 py-2 form-control category-dropdown">
+
+                            <option value="">
+                                Select Category
                             </option>
-                        @endforeach
-                    </select>
+
+                            @foreach($categories as $id => $name)
+                                <option value="{{ $id }}"
+                                    {{ in_array($id, $selectedCategories ?? []) ? 'selected' : '' }}>
+                                    {{ $name }}
+                                </option>
+                            @endforeach
+
+                        </select>
+
+                    </div>
+
+                    @foreach(($selectedCategories ?? []) as $index => $selectedId)
+
+                    @if($index > 0)
+
+                        @php
+                            $children = \App\Models\Category::where(
+                                'parent_id',
+                                $selectedCategories[$index - 1]
+                            )->get();
+                        @endphp
+
+                        <div class="mb-4">
+
+                            <label class="text-sm font-medium">
+                                Sub Category
+                            </label>
+
+                            <select class="w-full mt-1 border rounded-lg px-3 py-2 form-control category-dropdown">
+
+                                <option value="">
+                                    Select Sub Category
+                                </option>
+
+                                @foreach($children as $child)
+
+                                    <option value="{{ $child->id }}"
+                                        {{ $child->id == $selectedId ? 'selected' : '' }}>
+                                        {{ $child->name }}
+                                    </option>
+
+                                @endforeach
+
+                            </select>
+
+                        </div>
+
+                    @endif
+
+                @endforeach
+
                 </div>
+
+                <input type="hidden" name="categories[]" id="selected_category_id" value="{{ end($selectedCategories) ?: '' }}">
 
                 <!-- BRAND -->
                 <div>
@@ -335,8 +390,13 @@
                 <div>
                     <label class="block font-medium">Status</label>
                     <select name="status" class="w-full border rounded px-3 py-2">
-                        <option value="1" @selected(old('status', optional($product)->status) == 1)>Active</option>
-                        <option value="0" @selected(old('status', optional($product)->status) == 0)>Inactive</option>
+                        <option value="1" @selected(old('status', optional($product)->status ?? 1) == 1)>
+                            Active
+                        </option>
+
+                        <option value="0" @selected(old('status', optional($product)->status ?? 1) == 0)>
+                            Inactive
+                        </option>
                     </select>
                 </div>
 
@@ -344,7 +404,7 @@
                     <label class="block font-medium">Display Order</label>
                     <input type="number"
                         name="display_order" required 
-                        value="{{ old('display_order', optional($product)->display_order) }}"
+                        value="{{ old('display_order', optional($product)->display_order ?? 2) }}"
                         class="border rounded px-3 py-2">
                 </div>
             </div>
@@ -762,4 +822,62 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 });
+</script>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script>
+
+$(document).on('change', '.category-dropdown', function(){
+
+    let categoryId = $(this).val();
+
+    // remove all lower level dropdowns
+    $(this).closest('.mb-4').nextAll().remove();
+
+    $('#selected_category_id').val(categoryId);
+
+    if(!categoryId){
+        return;
+    }
+
+    $.get('/admin/categories/children/' + categoryId, function(response){
+
+        if(response.length > 0){
+
+            let html = `
+                <div class="mb-4">
+
+                    <label class="text-sm font-medium">
+                        Sub Category
+                    </label>
+
+                    <select class="w-full mt-1 border rounded-lg px-3 py-2 form-control category-dropdown">
+
+                        <option value="">
+                            Select Sub Category
+                        </option>
+            `;
+
+            response.forEach(function(item){
+
+                html += `
+                    <option value="${item.id}">
+                        ${item.name}
+                    </option>
+                `;
+
+            });
+
+            html += `
+                    </select>
+                </div>
+            `;
+
+            $('#category-selects').append(html);
+        }
+
+    });
+
+});
+
 </script>

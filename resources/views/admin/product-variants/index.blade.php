@@ -1,25 +1,26 @@
 <x-app-layout>
 
-    <x-slot name="header">
-        <div class="flex justify-between items-center">
+    <div class="max-w-7xl mx-auto py-6">
 
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Product Variants
-            </h2>
+        <!-- HEADER -->
+        <div class="flex justify-between items-center mb-6">
+            <h1 class="text-2xl font-semibold">Product Variants</h1>
 
             <a href="{{ route('admin.product-variants.create') }}"
                class="px-4 py-2 bg-blue-600 text-white rounded">
-                Add Variant
+                + Add Variant
             </a>
-
         </div>
-    </x-slot>
 
-    <div class="py-6">
+        <!-- SUCCESS -->
+        @if(session('success'))
+            <div class="mb-4 bg-green-50 border border-green-200 text-green-800 px-4 py-3 rounded">
+                {{ session('success') }}
+            </div>
+        @endif
 
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-
-            <div class="bg-white shadow-sm rounded-lg overflow-hidden">
+        <!-- TABLE -->
+        <div class="bg-white shadow rounded-lg overflow-hidden">
 
                 <table class="min-w-full">
 
@@ -154,7 +155,7 @@
 
             </div>
 
-        </div>
+        <!-- </div> -->
 
     </div>
 

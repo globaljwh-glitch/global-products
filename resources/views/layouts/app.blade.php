@@ -28,8 +28,12 @@
             @endisset
 
             <!-- Page Content -->
-            <main>
-                {{ $slot }}
+            
+
+            <main class="ml-80 p-6">
+                <div class="max-w-full">
+                    {{ $slot }}
+                </div>
             </main>
         </div>
         <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

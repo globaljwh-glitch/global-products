@@ -36,18 +36,37 @@
                 class="w-full mt-1 border rounded-lg px-3 py-2">
         </div>
 
-        <div>
-            <label class="text-sm font-medium">Parent Category</label>
-            <select name="parent_id" class="w-full mt-1 border rounded-lg px-3 py-2 form-control select2">
-                <option value="">-- None --</option>
-                @foreach($categories as $cat)
-                    <option value="{{ $cat->id }}"
-                        {{ old('parent_id', $category->parent_id ?? '') == $cat->id ? 'selected' : '' }}>
-                        {{ $cat->label }}
+       
+
+        <div id="category-selects">
+
+            <div class="mb-4">
+                <label class="text-sm font-medium">Parent Category</label>
+                <!-- <label class="form-label">
+                    Parent Category
+                </label> -->
+
+                <select class="w-full mt-1 border rounded-lg px-3 py-2 form-control category-dropdown">
+
+                    <option value="">
+                        Select Category
                     </option>
-                @endforeach
-            </select>
+
+                    @foreach($parentCategories as $category)
+
+                        <option value="{{ $category->id }}">
+                            {{ $category->name }}
+                        </option>
+
+                    @endforeach
+
+                </select>
+
+            </div>
+
         </div>
+
+        <input type="hidden" name="parent_id" id="selected_category_id">
 
         <div>
             <label>Description</label>
@@ -146,4 +165,62 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     //}
 });
+</script>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script>
+
+$(document).on('change', '.category-dropdown', function(){
+
+    let categoryId = $(this).val();
+
+    // remove all lower level dropdowns
+    $(this).closest('.mb-4').nextAll().remove();
+
+    $('#selected_category_id').val(categoryId);
+
+    if(!categoryId){
+        return;
+    }
+
+    $.get('/admin/categories/children/' + categoryId, function(response){
+
+        if(response.length > 0){
+
+            let html = `
+                <div class="mb-4">
+
+                    <label class="text-sm font-medium">
+                        Sub Category
+                    </label>
+
+                    <select class="w-full mt-1 border rounded-lg px-3 py-2 form-control category-dropdown">
+
+                        <option value="">
+                            Select Sub Category
+                        </option>
+            `;
+
+            response.forEach(function(item){
+
+                html += `
+                    <option value="${item.id}">
+                        ${item.name}
+                    </option>
+                `;
+
+            });
+
+            html += `
+                    </select>
+                </div>
+            `;
+
+            $('#category-selects').append(html);
+        }
+
+    });
+
+});
+
 </script>
