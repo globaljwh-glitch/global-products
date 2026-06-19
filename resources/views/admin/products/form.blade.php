@@ -180,7 +180,7 @@
 
                 </div>
 
-                <input type="hidden" name="categories[]" id="selected_category_id" value="{{ $product->category_id ?? '' }}">
+                <input type="hidden" name="categories[]" id="selected_category_id" value="{{ end($selectedCategories) ?: '' }}">
 
                 <!-- BRAND -->
                 <div>
