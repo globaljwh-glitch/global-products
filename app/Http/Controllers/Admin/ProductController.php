@@ -49,7 +49,9 @@ class ProductController extends Controller
             'model_number' => 'nullable|string',
             'price' => 'required|numeric',
             //'categories' => 'required|array',
-            'categories' => 'required|exists:categories,id',
+            //'categories' => 'required|exists:categories,id',
+            'categories' => 'nullable|array',
+            'categories.*' => 'exists:categories,id',
             'brands' => 'nullable|array',
             'image' => 'nullable|image|max:2048',
             'is_featured' => 'required|boolean',
@@ -128,7 +130,9 @@ class ProductController extends Controller
 
     public function edit(Product $product)
     {
-        $categories = Category::pluck('name', 'id');
+        //$categories = Category::pluck('name', 'id');
+        $categories = Category::whereNull('parent_id')
+            ->pluck('name', 'id');
         $brands = Brand::pluck('name', 'id');
         $attributes = \App\Models\Attribute::orderBy('display_order')->get();
 
@@ -142,6 +146,19 @@ class ProductController extends Controller
         //     'relatedProducts'
         // ])->findOrFail($id);
 
+        $selectedCategories = [];
+
+        $lastCategory = $product->categories()->latest('categories.id')->first();
+
+        $current = $lastCategory;
+
+        while ($current) {
+            $selectedCategories[] = $current->id;
+            $current = $current->parent;
+        }
+
+        $selectedCategories = array_reverse($selectedCategories);
+
         $product->load([
             'images',
             'attributes',
@@ -153,7 +170,9 @@ class ProductController extends Controller
             'categories',
             'brands',
             'attributes',
-            'attributeGroups'
+            'attributeGroups',
+            //'parentCategories',
+            'selectedCategories'
         ));
     }
 
@@ -163,7 +182,9 @@ class ProductController extends Controller
             'name' => 'required',
             'price' => 'required|numeric',
             //'categories' => 'required|array',
-            'categories' => 'required|exists:categories,id',
+            //'categories' => 'required|exists:categories,id',
+            'categories' => 'nullable|array',
+            'categories.*' => 'exists:categories,id',
             'brands' => 'nullable|array',
             'description' => 'nullable|string',
             'other' => 'nullable|string',

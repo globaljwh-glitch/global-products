@@ -113,7 +113,7 @@
                         value="{{ old('external_url', optional($product)->external_url) }}"
                         class="w-full border rounded px-3 py-2">
                 </div>
-
+                
                 <!-- CATEGORY -->
                 
                 <div id="category-selects">
@@ -129,7 +129,7 @@
 
                             @foreach($categories as $id => $name)
                                 <option value="{{ $id }}"
-                                    {{ isset($product) && $product->categories->pluck('id')->contains($id) ? 'selected' : '' }}>
+                                    {{ in_array($id, $selectedCategories ?? []) ? 'selected' : '' }}>
                                     {{ $name }}
                                 </option>
                             @endforeach
@@ -138,9 +138,49 @@
 
                     </div>
 
+                    @foreach($selectedCategories as $index => $selectedId)
+
+                    @if($index > 0)
+
+                        @php
+                            $children = \App\Models\Category::where(
+                                'parent_id',
+                                $selectedCategories[$index - 1]
+                            )->get();
+                        @endphp
+
+                        <div class="mb-4">
+
+                            <label class="text-sm font-medium">
+                                Sub Category
+                            </label>
+
+                            <select class="w-full mt-1 border rounded-lg px-3 py-2 form-control category-dropdown">
+
+                                <option value="">
+                                    Select Sub Category
+                                </option>
+
+                                @foreach($children as $child)
+
+                                    <option value="{{ $child->id }}"
+                                        {{ $child->id == $selectedId ? 'selected' : '' }}>
+                                        {{ $child->name }}
+                                    </option>
+
+                                @endforeach
+
+                            </select>
+
+                        </div>
+
+                    @endif
+
+                @endforeach
+
                 </div>
 
-                <input type="hidden" name="categories" id="selected_category_id">
+                <input type="hidden" name="categories[]" id="selected_category_id" value="{{ $product->category_id ?? '' }}">
 
                 <!-- BRAND -->
                 <div>
@@ -350,8 +390,13 @@
                 <div>
                     <label class="block font-medium">Status</label>
                     <select name="status" class="w-full border rounded px-3 py-2">
-                        <option selected value="1" @selected(old('status', optional($product)->status) == 1)>Active</option>
-                        <option value="0" @selected(old('status', optional($product)->status) == 0)>Inactive</option>
+                        <option value="1" @selected(old('status', optional($product)->status ?? 1) == 1)>
+                            Active
+                        </option>
+
+                        <option value="0" @selected(old('status', optional($product)->status ?? 1) == 0)>
+                            Inactive
+                        </option>
                     </select>
                 </div>
 
