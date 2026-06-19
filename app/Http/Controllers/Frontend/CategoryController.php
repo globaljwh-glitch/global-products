@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Models\Product;
 
 class CategoryController extends Controller
 {
@@ -48,6 +49,96 @@ class CategoryController extends Controller
             'frontend.categories.show',
             compact('category', 'subCategories')
         );
+    }
+    public function category($slug)
+    {
+        $category = Category::with('parentRecursive', 'childrenRecursive')
+        ->where('slug', $slug)
+        ->firstOrFail();
+        $breadcrumbs = $category->breadcrumbs();
+         /*
+        |--------------------------------------------------------------------------
+        | Find Root Category
+        |--------------------------------------------------------------------------
+        */
+
+        $root = $category;
+
+        while ($root->parent) {
+            $root = $root->parent;
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | Sidebar Categories
+        |--------------------------------------------------------------------------
+        */
+
+        $sidebarCategories = Category::with('childrenRecursive')
+            ->where('id', $root->id)
+            ->get();
+            //echo $sidebarCategories;die;
+       // echo "<pre>";print_r($sidebarCategories->toArray());die;
+        /*
+        |--------------------------------------------------------------------------
+        | Active Parent IDs (Auto Expand)
+        |--------------------------------------------------------------------------
+        */
+
+        $activeParents = [];
+
+        $temp = $category;
+
+        while ($temp->parent) {
+            $activeParents[] = $temp->parent_id;
+            $temp = $temp->parent;
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | Current Category + Child Categories
+        |--------------------------------------------------------------------------
+        */
+
+        $categoryIds = $this->getCategoryIds($category);
+
+        /*
+        |--------------------------------------------------------------------------
+        | Products
+        |--------------------------------------------------------------------------
+        */
+        //echo "<pre>";print_r($categoryIds);die;
+        //$products = Product::whereIn('category_id', $categoryIds)->paginate(20);
+        $products = Product::with('primaryImage')->whereHas('categories', function ($query) use ($categoryIds) {
+                $query->whereIn('categories.id', $categoryIds);
+                })->distinct()->paginate(20);
+
+        return view('frontend.categories.products-list', compact(
+            'category',
+            'sidebarCategories',
+            'products',
+            'activeParents',
+            'breadcrumbs'
+        ));
+    }
+
+    private function getCategoryIds($category)
+    {
+        $ids = [$category->id];
+
+        foreach ($category->childrenRecursive as $child) {
+            $ids = array_merge($ids, $this->getCategoryIds($child));
+        }
+
+        return $ids;
+    }
+    private function getRootCategory($category)
+    {
+        while ($category->parent) {
+            $category = $category->parent;
+        }
+
+        return $category;
     }
 
 }

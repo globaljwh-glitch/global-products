@@ -23,6 +23,10 @@ class Product extends Model
         'model_number',
     ];
 
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
     // Categories
     public function categories()
     {
@@ -80,8 +84,8 @@ class Product extends Model
     public function primaryImage()
     {
         return $this->hasOne(ProductImage::class)
-            ->where('is_primary', 1)
-            ->orderBy('display_order');
+            ->where('display_order', 0);
+            //->orderBy('display_order');
     }
 
     public function mainImage()

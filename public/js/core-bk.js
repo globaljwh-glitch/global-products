@@ -140,25 +140,3 @@ $(document).ready(function () {
     });
 
 });
-
-/*--------------------------------- Search Header -------------------------*/
-$(document).ready(function () {
-
-    $('.productCategoriesFilter [data-bs-toggle="collapse"]').on('click', function () {
-
-        var target = $(this).attr('href');
-
-        // Close all opened collapses except current target and its parents
-        $('.productCategoriesFilter .collapse.show').each(function () {
-
-            if ($(this).attr('id') !== target.replace('#', '') &&
-                !$(this).find(target).length) {
-
-                bootstrap.Collapse.getOrCreateInstance(this).hide();
-            }
-
-        });
-
-    });
-
-});

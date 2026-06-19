@@ -37,7 +37,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProductVariantController;
 
 
-Route::get('/category/{slug}', [CategoryController::class, 'show'])
+Route::get('/category/{slug}', [CategoryController::class, 'category'])
     ->name('category.show');
 
     

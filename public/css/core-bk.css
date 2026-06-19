@@ -377,21 +377,24 @@ span.badge.redBg {
 
 .searchBarHeader {
     position: absolute;
-    width: 34%;
+    width: 100%;
     padding: 20px;
     border-radius: 5px;
-    top: 76%;
-    right: 0%;
-    left: auto;
+    top: 128%;
+    right: 0px;
+    left: 0px;
     z-index: 1;
     border: 1px solid #ced4da;
-    box-shadow: 0 1px 3px 0px rgba(0, 0, 0, 0.10);
+      box-shadow: 0 1px 3px 0px rgba(0, 0, 0, 0.10);
     -webkit-box-shadow: 0 1px 3px 0px rgba(0, 0, 0, 0.10);
     -moz-box-shadow: 0 1px 3px 0px rgba(0, 0, 0, 0.10);
     max-height: 0;
     overflow: hidden;
     opacity: 0;
-    transition: max-height 0.4s ease, opacity 0.3s ease, padding 0.3s ease;
+    transition:
+        max-height 0.4s ease,
+        opacity 0.3s ease,
+        padding 0.3s ease;
 }
 
 .searchBarHeader input {
@@ -659,20 +662,6 @@ tr.tableHeading th {
   color: #eb001b;
 }
 
-.categories-list-group-item.categories-list-group-item-action.collapsed {
-  background-color: #efefef;
-  color: #55544f;
-}
-.categories-list-group-item.categories-list-group-item-action, .categories-list-group-item.categories-list-group-item-action:hover {
-  background-color: #eb001b;
-  color: #fff;
-}
-
-.productCategoriesFilter ul li .subCatBg a, .subCatBg .categories-list-group-item.categories-list-group-item-action.collapsed {
-  background-color: #293341;
-  color: #fff;
-  padding: 6px 14px;
-}
 /*----------------------------- Product Detail pages  ---------------------------------------*/
 
 .productLargeThumb {
@@ -1305,9 +1294,6 @@ footer li span {
   .accordion-button {
     font-size: 16px;
   }
-  .breadcrumb a, .breadcrumb li {
-    font-size: 14px;
-  }
 }
 
 /*------------------------------------- Max-Width: 991 ----------------------------------*/
@@ -1841,4 +1827,28 @@ footer li span {
     top: 99px;
   }
 
+}
+
+/* Custom css added by raman */
+
+.success-message{
+    background: #28a745;
+    color: #fff;
+    padding: 12px 15px;
+    border-radius: 5px;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.subscribeNews form{
+    width: 100%;
+}
+
+.thumbImg {
+    cursor: pointer;
+    border: 2px solid transparent;
+}
+
+.thumbImg.active {
+    border: 2px solid #dc3545;
 }

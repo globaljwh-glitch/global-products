@@ -51,7 +51,7 @@ class Category extends Model
 
     public function products()
     {
-        return $this->belongsToMany(Product::class, 'category_product');
+        return $this->hasMany(Product::class, 'category_product');
     }
 
     public function brands()
@@ -93,5 +93,28 @@ class Category extends Model
         }
 
         return implode(' > ', $path);
+    }
+    public function breadcrumbs()
+    {
+        $breadcrumbs = collect();
+
+        $category = $this;
+
+        while ($category) {
+            $breadcrumbs->prepend($category);
+            $category = $category->parent;
+        }
+
+        return $breadcrumbs;
+    }
+    public function parentRecursive()
+    {
+        return $this->parent()->with('parentRecursive');
+    }
+
+    public function childrenRecursive()
+    {
+        return $this->hasMany(Category::class, 'parent_id')
+            ->with('childrenRecursive');
     }
 }
