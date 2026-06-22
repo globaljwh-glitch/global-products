@@ -559,9 +559,14 @@ tr.tableHeading th {
   padding: 25px 13px;
 }
 
-.product {
-  margin-top: 25px;
-}
+.productList {
+    margin-top: 25px;
+  }
+
+  .product {
+    margin-bottom: 25px;
+  }
+
 
 .productThumb {
   border: 1px solid #dddddd;
@@ -840,7 +845,6 @@ tr.tableHeading th {
 .paginationOuter {
   border-top: 1px solid #e2e2e2;
   width: 100%;
-  margin-top: 25px;
   padding-top: 25px;
   margin-bottom: 20px;
 }
@@ -1450,8 +1454,12 @@ footer li span {
     margin-top: 10px;
   }
 
-  .product {
+  .productList {
     margin-top: 15px;
+  }
+
+  .product {
+    margin-bottom: 15px;
   }
 
   .productInfo h6 {
@@ -1844,5 +1852,38 @@ footer li span {
 
 }
 
+
+
+/*********************** categories ***************************/
+
+ul.ps-0.active-0 {
+  background: #efefef;
+}
+ul.ps-0.active-1 li a {
+    background-color: #293341 !important;
+    color: #fff;
+    padding: 7px 12px;
+    line-height: 20px;
 }
 
+ul.ps-0.active-1 li {
+  margin-bottom: 1px !important;
+}
+
+ul.ps-0.active-2 li {
+  margin-bottom: 0px !important;
+}
+ul.ps-0.active-2 li a {
+    background-color: #efefef !important;
+    color: #55544f;
+}
+
+ul.ps-0.active-1 li a:hover, ul.ps-0.active-1 li a.active {
+  color: #eb001b !important;
+}
+
+ul.ps-0.active-3, ul.ps-0.active-4, ul.ps-0.active-5, ul.ps-0.active-6, ul.ps-0.active-7 {
+    margin-left: 9px !important;
+    background: #efefef;
+    border-left: 1px solid #e2e2e2;
+}

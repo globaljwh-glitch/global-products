@@ -85,12 +85,12 @@ class CategoryController extends Controller
         |--------------------------------------------------------------------------
         */
 
-        $activeParents = [];
+        $activeCategories = [];
 
         $temp = $category;
 
-        while ($temp->parent) {
-            $activeParents[] = $temp->parent_id;
+        while ($temp) {
+            $activeCategories[] = $temp->id;
             $temp = $temp->parent;
         }
 
@@ -109,15 +109,15 @@ class CategoryController extends Controller
         */
         //echo "<pre>";print_r($categoryIds);die;
         //$products = Product::whereIn('category_id', $categoryIds)->paginate(20);
-        $products = Product::with('primaryImage')->whereHas('categories', function ($query) use ($categoryIds) {
+        $products = Product::with('primaryImage')->withAvg('reviews', 'rating')->whereHas('categories', function ($query) use ($categoryIds) {
                 $query->whereIn('categories.id', $categoryIds);
                 })->distinct()->paginate(20);
-
+        //echo "<pre>";print_r($products->toArray());die;
         return view('frontend.categories.products-list', compact(
             'category',
             'sidebarCategories',
             'products',
-            'activeParents',
+            'activeCategories',
             'breadcrumbs'
         ));
     }

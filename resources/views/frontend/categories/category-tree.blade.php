@@ -1,47 +1,32 @@
-<ul class="ps-{{ $level }} blueBg">
+<ul class="ps-0 active-{{ $level }}">
 
-@foreach($items as $index=>$cat)
+@foreach($items as $cat)
 
     <li>
-        <div class="categories-list-group">
-        @if($cat->childrenRecursive->count())
 
-            <a
-                class="categories-list-group-item categories-list-group-item-action {{ $cat->id == $category->id ? 'fw-bold text-primary' : '' }}"
-                data-bs-toggle="collapse"
-                href="#cat{{ $cat->id }}"
-                role="button">
+        <a href="{{ url('category/'.$cat->slug) }}"
+           class="categories-list-group-item categories-list-group-item-action
+                  {{ $cat->id == $category->id ? 'active fw-bold ' : '' }}">
 
-                {{ $cat->name }}
+            {{ $cat->name }}
 
-            </a>
+        </a>
 
-            <div
-                class="collapse subCatBg {{ in_array($cat->id,$activeParents) || $cat->id == $category->id ? 'show' : '' }}"
-                id="cat{{ $cat->id }}">
+        {{-- Show children only if this category is in active path --}}
+        @if(
+            $cat->childrenRecursive->isNotEmpty()
+            && in_array($cat->id, $activeCategories)
+        )
 
-                @include('frontend.categories.category-tree',[
-                    'items'=>$cat->childrenRecursive,
-                    'category'=>$category,
-                    'activeParents'=>$activeParents,
-                     'level' => $level + 1
-
-                ])
-
-            </div>
-
-        @else
-
-            <a
-                href="{{ url('category/'.$cat->slug) }}"
-                class="categories-list-group-item categories-list-group-item-action {{ $cat->id == $category->id ? 'fw-bold text-primary' : '' }}">
-
-                {{ $cat->name }}
-
-            </a>
+            @include('frontend.categories.category-tree', [
+                'items' => $cat->childrenRecursive,
+                'category' => $category,
+                'activeCategories' => $activeCategories,
+                'level' => $level + 1
+            ])
 
         @endif
-    </div>
+
     </li>
 
 @endforeach

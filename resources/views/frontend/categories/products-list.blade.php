@@ -69,7 +69,7 @@
                          @include('frontend.categories.category-tree',[
                               'items'=>$sidebarCategories,
                               'category'=>$category,
-                              'activeParents'=>$activeParents,
+                              'activeCategories'=>$activeCategories,
                               'level' => 0
                           ])
                         
@@ -109,11 +109,18 @@
                                  <h6>{{ $product->name }}</h6>
                                  <div class="productModel fw-semibold">Model #: {{ $product->model_number }}</div>
                                  <div class="productRating">
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star"></span>
-                                    <span class="fa fa-star"></span>
+                                    @php
+                                        $rating = $product->reviews_avg_rating ?? 0;
+                                    @endphp
+
+                                    @for($i = 1; $i <= 5; $i++)
+
+                                       @if($rating >= $i)
+                                       <span class="fa fa-star checked"></span>
+                                       @else
+                                       <span class="fa fa-star"></span>
+                                       @endif
+                                    @endfor
                                  </div>
                                  <div class="productPrice text-red fw-bold">${{ $product->price }}</div>
                                  <div class="actionBtnMob d-md-none">
@@ -144,7 +151,7 @@
                         
                      </div>
                   </div>
-                  <div class="paginationOuter d-flex align-items-center justify-content-between">
+                  <div class="paginationOuter">
                       {{ $products->links() }}
                      <!-- <div>Showing 1-10 of 45 results</div>
                      <ul class="pagination mb-0">
