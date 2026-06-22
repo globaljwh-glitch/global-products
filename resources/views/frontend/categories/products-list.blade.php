@@ -102,7 +102,7 @@
             : asset('images/no-image.png') }}"  alt="{{ $product->name }}">
                                  <div class="actionBtn">
                                     <button class="customBtn01 mt-2 me-1 bg-white text-blue" href="{{route('products.show',$product->slug)}}">Quick View</button> 
-                                    <button class="customBtn01 mt-2 redBg text-white" href="#">Add to Cart</button>
+                                    <button class="customBtn01 mt-2 redBg text-white add-to-cart-btn" data-product-id="{{ $product->id }}">Add to Cart</button>
                                  </div>
                               </div>
                               <div class="productInfo">
@@ -153,16 +153,6 @@
                   </div>
                   <div class="paginationOuter">
                       {{ $products->links() }}
-                     <!-- <div>Showing 1-10 of 45 results</div>
-                     <ul class="pagination mb-0">
-                        <li class="page-item disabled"><a class="page-link" href="#" tabindex="-1">Previous</a></li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item active"><a class="page-link" href="#">2 <span class="sr-only">(current)</span></a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">4</a></li>
-                        <li class="page-item"><a class="page-link" href="#">5</a></li>
-                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                     </ul> -->
                   </div>
                </div>
             </div>
