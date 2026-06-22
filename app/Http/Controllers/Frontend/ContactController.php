@@ -52,7 +52,8 @@ class ContactController extends Controller
 
         $contact = Contact::create($validated);
 
-        Mail::to(env('ADMIN_EMAIL'))->send(new ContactAdminMail($contact));
+        //Mail::to(env('ADMIN_EMAIL'))->send(new ContactAdminMail($contact));
+        Mail::to(config('mail.admin_email'))->send(new ContactAdminMail($contact));
         Mail::to($contact->email)->send(new ContactUserMail($contact));
 
         return redirect()->back()->with('success', 'Your inquiry has been submitted successfully.');
