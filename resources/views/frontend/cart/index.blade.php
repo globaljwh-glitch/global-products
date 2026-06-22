@@ -197,18 +197,11 @@
 
                         <div class="input-group coupon-box my-3">
 
-                            <input type="text" id="offer_code" class="form-control mb-0" @if($offer)
-                            value="{{ $offer->offer_code }}" readonly @endif placeholder="Apply Coupon">
+                            <input type="text" id="offer_code" class="form-control mb-0" placeholder="Apply Coupon">
 
-                            @if($offer)
+                           
 
-                                <button type="button" id="removeCouponBtn" class="btn btn-danger">
-
-                                    Remove
-
-                                </button>
-
-                            @else
+                          
 
                                 <button type="button" id="applyOfferBtn" class="btn btn-primary customBtn01 blueBg">
 
@@ -216,7 +209,7 @@
 
                                 </button>
 
-                            @endif
+                            
 
                         </div>
 
@@ -230,7 +223,7 @@
 
                         <div id="offerBadge">
 
-                            @if($offer)
+                            @if($offer != null)
 
                                 <div class="alert alert-success d-flex justify-content-between align-items-center">
 
