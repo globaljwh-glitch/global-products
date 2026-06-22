@@ -7,20 +7,52 @@ use App\Models\Cart;
 use App\Models\CartItem;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use App\Services\OfferService;
+
+use App\Services\CartCalculationService;
 
 class CartController extends Controller
 {
-    public function index()
-    {
+    public function index(
+        OfferService $offerService,
+        CartCalculationService $cartCalculationService
+    ) {
+
+
         $cart = Cart::with('items.product')
             ->where('user_id', auth()->id())
             ->first();
 
+
         $cartItems = $cart ? $cart->items : collect();
 
-        return view('frontend.cart.index', compact('cartItems'));
 
-        //return view('frontend.cart.index');
+        $subtotal = 0;
+
+        foreach ($cartItems as $item) {
+
+            $subtotal += $item->price * $item->quantity;
+        }
+
+
+        $offer = null;
+
+        $discount = 0;
+
+
+        $summary = $cartCalculationService->calculate(
+            $subtotal,
+            $discount
+        );
+
+        return view(
+            'frontend.cart.index',
+            compact(
+                'cartItems',
+                'summary',
+                'offer'
+            )
+        );
     }
 
     // public function shopping_cart()
@@ -83,15 +115,15 @@ class CartController extends Controller
         } else {
 
             CartItem::create([
-                'cart_id'    => $cart->id,
+                'cart_id' => $cart->id,
                 'product_id' => $product->id,
-                'quantity'   => $quantity,
-                'price'      => $product->sale_price ?? $product->price,
+                'quantity' => $quantity,
+                'price' => $product->sale_price ?? $product->price,
             ]);
         }
 
         return response()->json([
-            'status'  => 'success',
+            'status' => 'success',
             'message' => 'Product added to cart'
         ]);
     }
@@ -149,7 +181,7 @@ class CartController extends Controller
     {
         $request->validate([
             'cart_item_id' => 'required|exists:cart_items,id',
-            'quantity'     => 'required|integer|min:1',
+            'quantity' => 'required|integer|min:1',
         ]);
 
         $cartItem = CartItem::findOrFail($request->cart_item_id);
@@ -192,5 +224,92 @@ class CartController extends Controller
     public function checkout()
     {
         return view('frontend.checkout.index');
+    }
+
+
+    public function applyOffer(
+        Request $request,
+
+        OfferService $offerService,
+
+        CartCalculationService $cartCalculationService
+    ) {
+
+
+        $request->validate([
+
+            'offer_code' => 'required'
+        ]);
+
+        $cart = Cart::with('items.product')
+
+            ->where('user_id', auth()->id())
+
+            ->first();
+
+        $cartItems = $cart ? $cart->items : collect();
+
+        $subtotal = 0;
+
+        foreach ($cartItems as $item) {
+
+            $subtotal += $item->price * $item->quantity;
+        }
+        $offer = $offerService->getValidOffer(
+
+            $request->offer_code
+        );
+
+        if (!$offer) {
+
+            return response()->json([
+
+                'status' => false,
+
+                'message' => 'Invalid offer code'
+            ]);
+        }
+
+        $discount = $offerService->calculateDiscount(
+
+            $subtotal,
+
+            $offer
+        );
+
+        $result = $cartCalculationService->calculate(
+
+            $subtotal,
+
+            $discount
+        );
+
+        session([
+
+            'offer_code' => $offer->offer_code
+        ]);
+
+        return response()->json([
+
+            'status' => true,
+
+            'message' => 'Offer applied successfully',
+
+            'offer' => $offer,
+
+            'data' => $result
+        ]);
+    }
+
+    public function removeOffer()
+    {
+        session()->forget('offer_code');
+
+        return response()->json([
+
+            'status' => true,
+
+            'message' => 'Offer removed'
+        ]);
     }
 }

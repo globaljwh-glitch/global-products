@@ -2,284 +2,356 @@
 
 @section('content')
 
-<section class="sectionPadding imageBackground02">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
+    <section class="sectionPadding imageBackground02">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
 
-                <div class="text-center">
-                    <h2 class="fw-bold welcomeUser">
-                        <span class="text-red">Welcome</span>
-                        {{ auth()->user()->name }}
-                    </h2>
-                </div>
+                    <div class="text-center">
+                        <h2 class="fw-bold welcomeUser">
+                            <span class="text-red">Welcome</span>
+                            {{ auth()->user()->name }}
+                        </h2>
+                    </div>
 
-                <div class="userProfileImage">
+                    <div class="userProfileImage">
 
-                    <a href="#" class="d-block shadow">
+                        <a href="#" class="d-block shadow">
 
-                        <img
-                            src="{{ auth()->user()->image ? asset(auth()->user()->image) : asset('images/user-image.jpg') }}"
-                            alt="User"
-                            class="imgResponsive"
-                        >
+                            <img src="{{ auth()->user()->image ? asset(auth()->user()->image) : asset('images/user-image.jpg') }}"
+                                alt="User" class="imgResponsive">
 
-                    </a>
+                        </a>
 
-                    <div class="memberSince fw-bold">
-                        Member Since {{ auth()->user()->created_at->format('Y') }}
+                        <div class="memberSince fw-bold">
+                            Member Since {{ auth()->user()->created_at->format('Y') }}
+                        </div>
+
                     </div>
 
                 </div>
-
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<section class="sectionPadding profileInfoOuter">
+    <section class="sectionPadding profileInfoOuter">
 
-    <div class="container">
+        <div class="container">
 
-        <div class="row">
+            <div class="row">
 
-        @if(session('success'))
+                @if(session('success'))
 
-    <div class="alert alert-success alert-dismissible fade show">
+                    <div class="alert alert-success alert-dismissible fade show">
 
-        {{ session('success') }}
+                        {{ session('success') }}
 
-        <button type="button"
-                class="btn-close"
-                data-bs-dismiss="alert">
-        </button>
-
-    </div>
-
-@endif
-
-@if(session('error'))
-
-    <div class="alert alert-danger alert-dismissible fade show">
-
-        {{ session('error') }}
-
-        <button type="button"
-                class="btn-close"
-                data-bs-dismiss="alert">
-        </button>
-
-    </div>
-
-@endif
-
-            <!-- LEFT -->
-            <div class="col-lg-8 d-flex">
-
-                <div class="shopCartBox">
-
-                    <h5 class="mb-4">
-                        Shopping Cart ({{ $cartItems->count() }} Items)
-                    </h5>
-
-                    <hr>
-
-                    @php
-                        $subtotal = 0;
-                        $i = 1;
-                    @endphp
-
-                    @forelse($cartItems as $item)
-
-                        @php
-                            $product = $item->product;
-
-                            $price = $item->price;
-
-                            $total = $price * $item->quantity;
-
-                            $subtotal += $total;
-                        @endphp
-
-
-                        <div class="row align-items-center mb-4 cart-item">
-
-                            <div class="col-md-2">
-
-                                <img
-                                    src="{{ asset($product->thumbnail ?? 'images/no-image.png') }}"
-                                    class="product-img"
-                                >
-
-                            </div>
-
-                            <div class="col-md-4">
-
-                                <h6>{{ $product->name }}</h6>
-
-                                <div class="productModel fw-semibold">
-                                    Model #: {{ $product->sku ?? 'N/A' }}
-                                </div>
-
-                                <a href="javascript:void(0)"
-                                    class="text-red remove-from-cart-btn"
-                                    data-cart-item="{{ $item->id }}">
-                                    <i class="fa-solid fa-trash-can"></i>
-                                </a>
-
-                            </div>
-
-                            <div class="col-md-2">
-
-                                <div class="qty-box">
-
-                                    <button 
-                                        class="minus update-qty update_cart_quantity"
-                                        data-type="minus"
-                                        data-cart-item="{{ $item->id }}"
-                                    >
-                                        -
-                                    </button>
-
-                                    <input
-                                        type="text" id="quantity_{{ $i }}"
-                                        value="{{ $item->quantity }}"
-                                        class="qty-input"
-                                    >
-
-                                    <button 
-                                        class="plus update-qty update_cart_quantity"
-                                        data-type="plus"
-                                        data-cart-item="{{ $item->id }}"
-                                    >
-                                        +
-                                    </button>
-
-                                </div>
-
-                            </div>
-
-                            <div class="col-md-2">
-
-                                @if($product->sale_price)
-
-                                    <small class="text-red">
-                                        <del>${{ number_format($product->price, 2) }}</del>
-                                    </small>
-                                    <br>
-
-                                @endif
-
-                                <strong>
-                                    ${{ number_format($price, 2) }}
-                                </strong>
-
-                            </div>
-
-                            <div class="col-md-2 text-end">
-
-                                <strong>
-                                    ${{ number_format($total, 2) }}
-                                </strong>
-
-                            </div>
-
-                        </div>
-
-                        <hr>
-
-                    @empty
-
-                        <div class="text-center py-5">
-                            <h5>Your cart is empty</h5>
-                        </div>
-
-                    @endforelse
-
-                    <a href="{{ url('/categories') }}"
-                       class="customBtn01 bg-white text-blue">
-
-                        ← Continue Shopping
-
-                    </a>
-
-                </div>
-
-            </div>
-
-            <!-- RIGHT -->
-            <div class="col-lg-4 d-flex">
-
-                <div class="shopCartBox greyBg sticky-summary w-100">
-
-                    <h5>Order Summary</h5>
-
-                    <div class="input-group coupon-box my-3">
-
-                        <input type="text"
-                               class="form-control mb-0"
-                               placeholder="Apply Coupon">
-
-                        <button class="btn btn-primary customBtn01 blueBg">
-                            Apply
+                        <button type="button" class="btn-close" data-bs-dismiss="alert">
                         </button>
 
                     </div>
 
-                    @php
-                        $discount = 0;
-                        $shipping = 25;
-                        $tax = 25;
+                @endif
 
-                        $grandTotal = $subtotal - $discount + $shipping + $tax;
-                    @endphp
+                @if(session('error'))
 
-                    <div class="d-flex justify-content-between">
-                        <span>Subtotal</span>
-                        <span>${{ number_format($subtotal, 2) }}</span>
-                    </div>
+                    <div class="alert alert-danger alert-dismissible fade show">
 
-                    <div class="d-flex justify-content-between">
-                        <span>Discount</span>
-                        <span class="text-success">
-                            -${{ number_format($discount, 2) }}
-                        </span>
-                    </div>
+                        {{ session('error') }}
 
-                    <div class="d-flex justify-content-between">
-                        <span>Shipping</span>
-                        <span>${{ number_format($shipping, 2) }}</span>
-                    </div>
-
-                    <div class="d-flex justify-content-between">
-                        <span>Tax (GST)</span>
-                        <span class="fw-bold">
-                            ${{ number_format($tax, 2) }}
-                        </span>
-                    </div>
-
-                    <hr>
-
-                    <div class="d-flex justify-content-between fw-bold">
-
-                        <span>Total</span>
-
-                        <span class="productPrice text-red">
-                            ${{ number_format($grandTotal, 2) }}
-                        </span>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert">
+                        </button>
 
                     </div>
 
-                    <a href="{{ url('/checkout') }}"
-                       class="btn btn-primary w-100 mt-2 mt-md-3 customBtn01 redBg text-white">
+                @endif
 
-                        Proceed to Checkout
+                <!-- LEFT -->
+                <div class="col-lg-8 d-flex">
 
-                    </a>
+                    <div class="shopCartBox">
 
-                    <small class="text-muted text-center d-block mt-2">
-                        Safe & Secure Payments
-                    </small>
+                        <h5 class="mb-4">
+                            Shopping Cart ({{ $cartItems->count() }} Items)
+                        </h5>
+
+                        <hr>
+
+                        @php
+                            $subtotal = 0;
+                            $i = 1;
+                        @endphp
+
+                        @forelse($cartItems as $item)
+
+                            @php
+                                $product = $item->product;
+
+                                $price = $item->price;
+
+                                $total = $price * $item->quantity;
+
+                                $subtotal += $total;
+                            @endphp
+
+
+                            <div class="row align-items-center mb-4 cart-item">
+
+                                <div class="col-md-2">
+
+                                    <img src="{{ asset($product->thumbnail ?? 'images/no-image.png') }}" class="product-img">
+
+                                </div>
+
+                                <div class="col-md-4">
+
+                                    <h6>{{ $product->name }}</h6>
+
+                                    <div class="productModel fw-semibold">
+                                        Model #: {{ $product->sku ?? 'N/A' }}
+                                    </div>
+
+                                    <a href="javascript:void(0)" class="text-red remove-from-cart-btn"
+                                        data-cart-item="{{ $item->id }}">
+                                        <i class="fa-solid fa-trash-can"></i>
+                                    </a>
+
+                                </div>
+
+                                <div class="col-md-2">
+
+                                    <div class="qty-box">
+
+                                        <button class="minus update-qty update_cart_quantity" data-type="minus"
+                                            data-cart-item="{{ $item->id }}">
+                                            -
+                                        </button>
+
+                                        <input type="text" id="quantity_{{ $i }}" value="{{ $item->quantity }}"
+                                            class="qty-input">
+
+                                        <button class="plus update-qty update_cart_quantity" data-type="plus"
+                                            data-cart-item="{{ $item->id }}">
+                                            +
+                                        </button>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-2">
+
+                                    @if($product->sale_price)
+
+                                        <small class="text-red">
+                                            <del>${{ number_format($product->price, 2) }}</del>
+                                        </small>
+                                        <br>
+
+                                    @endif
+
+                                    <strong>
+                                        ${{ number_format($price, 2) }}
+                                    </strong>
+
+                                </div>
+
+                                <div class="col-md-2 text-end">
+
+                                    <strong>
+                                        ${{ number_format($total, 2) }}
+                                    </strong>
+
+                                </div>
+
+                            </div>
+
+                            <hr>
+
+                        @empty
+
+                            <div class="text-center py-5">
+                                <h5>Your cart is empty</h5>
+                            </div>
+
+                        @endforelse
+
+                        <a href="{{ url('/categories') }}" class="customBtn01 bg-white text-blue">
+
+                            ← Continue Shopping
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+                <!-- RIGHT -->
+                <div class="col-lg-4 d-flex">
+
+                    <div class="shopCartBox greyBg sticky-summary w-100">
+
+                        <h5>Order Summary</h5>
+
+                        {{-- Coupon Box --}}
+
+                        <div class="input-group coupon-box my-3">
+
+                            <input type="text" id="offer_code" class="form-control mb-0" @if($offer)
+                            value="{{ $offer->offer_code }}" readonly @endif placeholder="Apply Coupon">
+
+                            @if($offer)
+
+                                <button type="button" id="removeCouponBtn" class="btn btn-danger">
+
+                                    Remove
+
+                                </button>
+
+                            @else
+
+                                <button type="button" id="applyOfferBtn" class="btn btn-primary customBtn01 blueBg">
+
+                                    Apply
+
+                                </button>
+
+                            @endif
+
+                        </div>
+
+
+                        {{-- Success/Error Message --}}
+
+                        <div id="offerMessage"></div>
+
+
+                        {{-- Applied Coupon Badge --}}
+
+                        <div id="offerBadge">
+
+                            @if($offer)
+
+                                <div class="alert alert-success d-flex justify-content-between align-items-center">
+
+                                    <div>
+
+                                        🎉
+
+                                        <strong>{{ $offer->offer_code }}</strong>
+
+                                        @if($offer->discount_type == 'percentage')
+
+                                            ({{ $offer->discount_value }}% OFF)
+
+                                        @else
+
+                                            (${{ $offer->discount_value }} OFF)
+
+                                        @endif
+
+                                    </div>
+
+                                </div>
+
+                            @endif
+
+                        </div>
+
+
+                        {{-- Subtotal --}}
+
+                        <div class="d-flex justify-content-between">
+
+                            <span>Subtotal</span>
+
+                            <span id="subtotalPrice">
+
+                                ${{ number_format($summary['subtotal'], 2) }}
+
+                            </span>
+
+                        </div>
+
+
+                        {{-- Discount --}}
+
+                        <div class="d-flex justify-content-between">
+
+                            <span>Discount</span>
+
+                            <span id="discountPrice" class="text-success">
+
+                                -${{ number_format($summary['discount'], 2) }}
+
+                            </span>
+
+                        </div>
+
+
+                        {{-- Shipping --}}
+
+                        <div class="d-flex justify-content-between">
+
+                            <span>Shipping</span>
+
+                            <span id="shippingPrice">
+
+                                ${{ number_format($summary['shipping'], 2) }}
+
+                            </span>
+
+                        </div>
+
+
+                        {{-- Tax --}}
+
+                        <div class="d-flex justify-content-between">
+
+                            <span>Tax</span>
+
+                            <span id="taxPrice">
+
+                                ${{ number_format($summary['tax'], 2) }}
+
+                            </span>
+
+                        </div>
+
+
+                        <hr>
+
+
+                        {{-- Grand Total --}}
+
+                        <div class="d-flex justify-content-between fw-bold">
+
+                            <span>Total</span>
+
+                            <span id="grandTotal" class="productPrice text-red">
+
+                                ${{ number_format($summary['grand_total'], 2) }}
+
+                            </span>
+
+                        </div>
+
+
+                        <a href="{{ url('/checkout') }}"
+                            class="btn btn-primary w-100 mt-2 mt-md-3 customBtn01 redBg text-white">
+
+                            Proceed to Checkout
+
+                        </a>
+
+
+                        <small class="text-muted text-center d-block mt-2">
+
+                            Safe & Secure Payments
+
+                        </small>
+
+                    </div>
 
                 </div>
 
@@ -287,51 +359,51 @@
 
         </div>
 
-    </div>
-
-</section>
+    </section>
 
 @endsection
 
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
 
-$(document).on('click', '.remove-from-cart-btn', function(e){
 
-    e.preventDefault();
 
-    let button = $(this);
+    $(document).on('click', '.remove-from-cart-btn', function (e) {
 
-    let productId = button.data('product-id');
+        e.preventDefault();
 
-    $.ajax({
+        let button = $(this);
 
-        url: '/cart/remove/' + productId,
+        let productId = button.data('product-id');
 
-        method: 'POST',
+        $.ajax({
 
-        data: {
-            _token: $('meta[name="csrf-token"]').attr('content')
-        },
+            url: '/cart/remove/' + productId,
 
-        success: function(response){
+            method: 'POST',
 
-            button.closest('.cart-item').remove();
+            data: {
+                _token: $('meta[name="csrf-token"]').attr('content')
+            },
 
-            alert(response.message);
+            success: function (response) {
 
-        }
+                button.closest('.cart-item').remove();
+
+                alert(response.message);
+
+            }
+
+        });
 
     });
-
-});
 
 </script>
 
 
 <script>
 
-    $(document).on('click', '.update_cart_quantity', function(){
+    $(document).on('click', '.update_cart_quantity', function () {
 
         //e.preventDefault();
         let button = $(this);
@@ -344,13 +416,13 @@ $(document).on('click', '.remove-from-cart-btn', function(e){
 
         let currentQty = parseInt(input.val());
 
-        if(type == 'plus') {
+        if (type == 'plus') {
 
             currentQty++;
 
         } else {
 
-            if(currentQty > 1) {
+            if (currentQty > 1) {
                 currentQty--;
             }
 
@@ -380,7 +452,7 @@ $(document).on('click', '.remove-from-cart-btn', function(e){
 
             },
 
-            success: function(response){
+            success: function (response) {
 
                 location.reload();
 
@@ -397,7 +469,7 @@ $(document).on('click', '.remove-from-cart-btn', function(e){
 
         let cartItemId = button.data('cart-item');
 
-        if(!confirm('Remove this item from cart?')) {
+        if (!confirm('Remove this item from cart?')) {
             return;
         }
 
@@ -415,13 +487,190 @@ $(document).on('click', '.remove-from-cart-btn', function(e){
 
             },
 
-            success: function(response){
+            success: function (response) {
 
                 // Remove item row
                 button.closest('.cart-item').remove();
 
                 // Optional:
                 location.reload();
+
+            }
+
+        });
+
+    });
+
+    $(document).on('click', '#applyOfferBtn', function (e) {
+
+        e.preventDefault();
+
+
+
+        let offerCode = $('#offer_code').val();
+
+        if (offerCode == '') {
+
+            return;
+        }
+
+        $.ajax({
+
+            url: '/cart/apply-offer',
+
+            method: 'POST',
+
+            data: {
+
+                _token: $('meta[name="csrf-token"]').attr('content'),
+
+                offer_code: offerCode
+
+            },
+
+            beforeSend: function () {
+
+                $('#applyOfferBtn')
+
+                    .prop('disabled', true)
+
+                    .html('Applying...');
+            },
+
+            success: function (response) {
+
+                $('#applyOfferBtn')
+
+                    .prop('disabled', false)
+
+                    .html('Apply');
+
+                if (response.status) {
+
+                    let d = response.data;
+
+                    $('#subtotalPrice').html('$' + d.subtotal);
+
+                    $('#discountPrice').html('-$' + d.discount);
+
+                    $('#shippingPrice').html('$' + d.shipping);
+
+                    $('#taxPrice').html('$' + d.tax);
+
+                    $('#grandTotal').html('$' + d.grand_total);
+
+                    $('#offerMessage').html(`
+            <div class="alert alert-success">
+
+                ${response.message}
+
+            </div>
+        `);
+
+                    let offerText = response.offer.discount_type == 'percentage'
+
+                        ? response.offer.discount_value + '% OFF'
+
+                        : '$' + response.offer.discount_value + ' OFF';
+
+                    $('#offerBadge').html(`
+
+            <div class="alert alert-success d-flex justify-content-between align-items-center">
+
+                <div>
+
+                    🎉 <strong>${response.offer.offer_code}</strong>
+
+                    (${offerText})
+
+                </div>
+
+                <button
+                    type="button"
+                    id="removeCouponBtn"
+                    class="btn btn-sm btn-danger">
+
+                    Remove
+
+                </button>
+
+            </div>
+
+        `);
+
+                } else {
+
+                    $('#offerMessage').html(`
+
+            <div class="alert alert-danger">
+
+                ${response.message}
+
+            </div>
+
+        `);
+
+                }
+
+            },
+
+            error: function () {
+
+                $('#applyOfferBtn')
+
+                    .prop('disabled', false)
+
+                    .html('Apply');
+
+            }
+
+        });
+
+    });
+
+    $(document).on('click', '#removeCouponBtn', function (e) {
+
+        e.preventDefault();
+
+        $.ajax({
+
+            url: '/cart/remove-offer',
+
+            type: 'POST',
+
+            data: {
+
+                _token: $('meta[name="csrf-token"]').attr('content')
+
+            },
+
+            beforeSend: function () {
+
+                $('#removeCouponBtn')
+
+                    .prop('disabled', true)
+
+                    .html('Removing...');
+            },
+
+            success: function (response) {
+
+                if (response.status) {
+
+                    location.reload();
+                }
+
+            },
+
+            error: function () {
+
+                $('#removeCouponBtn')
+
+                    .prop('disabled', false)
+
+                    .html('Remove');
+
+                //alert('Unable to remove coupon.');
 
             }
 

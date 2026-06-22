@@ -43,7 +43,7 @@ Route::get(
 
 Route::get('/category/{slug}', [CategoryController::class, 'category'])
     ->name('category.show');
-  
+
 Route::prefix('admin')
     ->name('admin.')
     ->middleware(['auth'])
@@ -69,7 +69,7 @@ Route::prefix('admin')
             SafetyServiceRequestController::class
         );
     });
-    
+
 Route::post(
     '/safety-services',
     [SafetyServiceController::class, 'store']
@@ -133,7 +133,7 @@ Route::prefix('admin')
         );
 
     });
-    
+
 Route::prefix('admin')
     ->name('admin.')
     ->group(function () {
@@ -146,16 +146,16 @@ Route::prefix('admin')
 
     });
 
-    Route::view('/shipping-returns', 'frontend.shipping-returns.index');
-    Route::view('/safety-services', 'frontend.safety-services.index');
-    Route::view('/investor-relations', 'frontend.investor-relations.index');
-    Route::view('/extended-service-plan', 'frontend.service-plan.index');
-    Route::view('/affiliate', 'frontend.affiliate.index');
-    Route::view('/thank-you', 'frontend.checkout.thank-you');
-    //Route::view('/careers', 'frontend.career.index');
-    Route::get('/careers', [CareerController::class, 'index'])
+Route::view('/shipping-returns', 'frontend.shipping-returns.index');
+Route::view('/safety-services', 'frontend.safety-services.index');
+Route::view('/investor-relations', 'frontend.investor-relations.index');
+Route::view('/extended-service-plan', 'frontend.service-plan.index');
+Route::view('/affiliate', 'frontend.affiliate.index');
+Route::view('/thank-you', 'frontend.checkout.thank-you');
+//Route::view('/careers', 'frontend.career.index');
+Route::get('/careers', [CareerController::class, 'index'])
     ->name('careers.index');
-    Route::get('/careers/{career}', [CareerController::class, 'show'])
+Route::get('/careers/{career}', [CareerController::class, 'show'])
     ->name('careers.show');
 
 Route::post('/paypal/payment', [CheckoutController::class, 'paypalPayment'])
@@ -169,37 +169,49 @@ Route::get('/paypal/cancel', [CheckoutController::class, 'paypalCancel'])
 
 //Route::get('/paypal/cancel', [CheckoutController::class, 'paypalCancel'])
 Route::middleware('frontauth')->group(function () {
-Route::prefix('cart')->group(function () {
+    Route::prefix('cart')->group(function () {
 
-    Route::post('/add/{product}', [CartController::class, 'add'])
-        ->name('cart.add');
+        Route::post('/add/{product}', [CartController::class, 'add'])
+            ->name('cart.add');
 
-    Route::post('/remove/{product}', [CartController::class, 'remove'])
-        ->name('cart.remove'); // not in use
+        Route::post('/remove/{product}', [CartController::class, 'remove'])
+            ->name('cart.remove'); // not in use
 
-    Route::post('/remove-item', [CartController::class, 'removeItem'])
-    ->name('cart.remove.item');
+        Route::post('/remove-item', [CartController::class, 'removeItem'])
+            ->name('cart.remove.item');
 
-    Route::post('/update-quantity', [CartController::class, 'updateQuantity'])
-        ->name('cart.update.quantity');
+        Route::post('/update-quantity', [CartController::class, 'updateQuantity'])
+            ->name('cart.update.quantity');
 
+        Route::post(
+            '/apply-offer',
+            [CartController::class, 'applyOffer']
+        );
+
+        Route::post(
+            '/remove-offer',
+            [CartController::class, 'removeOffer']
+        );
+
+    });
 });
-});
 
-Route::post('/favorite/toggle/{product}', 
-    [FavoriteController::class, 'toggle'])
+Route::post(
+    '/favorite/toggle/{product}',
+    [FavoriteController::class, 'toggle']
+)
     ->middleware('auth')
     ->name('favorite.toggle');
 
-    Route::middleware('frontauth')->group(function () {
-        Route::get('/cart', [CartController::class, 'index'])
-            ->name('cart.index');
+Route::middleware('frontauth')->group(function () {
+    Route::get('/cart', [CartController::class, 'index'])
+        ->name('cart.index');
 
-        Route::get('/checkout', [CartController::class, 'checkout'])
-            ->name('checkout');
+    Route::get('/checkout', [CartController::class, 'checkout'])
+        ->name('checkout');
 
-        Route::get('/my-wishlist', [FrontProductController::class, 'wishlist'])
-            ->name('wishlist');
+    Route::get('/my-wishlist', [FrontProductController::class, 'wishlist'])
+        ->name('wishlist');
 });
 
 Route::post('/product-review-submit', [FrontProductController::class, 'store_product_review'])
@@ -218,7 +230,7 @@ Route::prefix('admin')
 
         Route::resource('banners', BannerController::class);
     });
-    
+
 Route::prefix('admin')
     ->name('admin.')
     ->middleware(['auth'])
@@ -238,14 +250,14 @@ Route::prefix('admin')
         Route::get('/users/{user}', [AdminUserController::class, 'show'])
             ->name('users.show');
     });
-    
+
 Route::get('/storage/{path}', function ($path) {
     $fullPath = storage_path('app/public/' . $path);
-    
+
     if (!File::exists($fullPath)) {
         abort(404);
     }
-    
+
     $mime = File::mimeType($fullPath);
     return response(File::get($fullPath), 200)
         ->header('Content-Type', $mime);
@@ -272,13 +284,13 @@ Route::get('/newsletter/unsubscribe/{token}', [
 
 Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::get('/categories/search', [App\Http\Controllers\Admin\CategoryController::class, 'search'])
-    ->name('categories.search');
+        ->name('categories.search');
     Route::resource('categories', App\Http\Controllers\Admin\CategoryController::class);
     //Route::resource('products', App\Http\Controllers\Admin\ProductController::class);
     Route::resource('brands', App\Http\Controllers\Admin\BrandController::class);
     Route::resource('attributes', App\Http\Controllers\Admin\AttributeController::class);
     Route::get('/products/search', [ProductController::class, 'search']);
-    
+
 });
 
 
@@ -312,11 +324,11 @@ Route::get('/products/{type?}/{slug?}', [FrontProductController::class, 'index']
 Route::get('/products', [FrontProductController::class, 'index'])
     ->name('products.index');
 Route::get('/categories', [CategoryController::class, 'index'])
-->name('categories.index');
+    ->name('categories.index');
 Route::get('/brands', [BrandController::class, 'index'])
-->name('brands.index');
+    ->name('brands.index');
 Route::get('/industries', [FrontendIndustryController::class, 'index'])
-->name('industries.index');
+    ->name('industries.index');
 
 Route::get('/contact', function () {
     return view('frontend.contact.index'); // adjust if path differs
