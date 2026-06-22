@@ -18,9 +18,16 @@ class UserSafetyServiceMail extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct($requestRecord)
+    // public function __construct($requestRecord)
+    // {
+    //     $this->request = $requestRecord;
+    // }
+
+    public $data;
+
+    public function __construct($data)
     {
-        $this->request = $requestRecord;
+        $this->data = $data;
     }
 
     /**
