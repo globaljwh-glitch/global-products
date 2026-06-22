@@ -46,6 +46,11 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
+        if (session()->has('cart')) {
+            app(\App\Http\Controllers\Frontend\CartController::class)
+                ->syncSessionToDatabase();
+        }
+
         return redirect(route('dashboard', absolute: false));
     }
 }
