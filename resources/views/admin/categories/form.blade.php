@@ -70,7 +70,7 @@
 
         <div>
             <label>Description</label>
-            <textarea name="description" class="w-full mt-1 border rounded-lg px-3 py-2">{!! old('description', $category->description ?? '') !!}</textarea>
+            <textarea name="description" class="w-full mt-1 border rounded-lg px-3 py-2">{{ old('description', $category?->description ?? '') }}</textarea>
         </div>
 
         <div>
