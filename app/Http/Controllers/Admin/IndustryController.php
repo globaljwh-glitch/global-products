@@ -21,7 +21,7 @@ class IndustryController extends Controller
     public function create()
     {
         $industry = null;
-        $categories = Category::all();
+        $categories = Category::whereNull('parent_id')->get();
         $products = Product::all();
         $brands = Brand::all();
 
@@ -54,7 +54,7 @@ class IndustryController extends Controller
 
     public function edit(Industry $industry)
     {
-        $categories = Category::all();
+        $categories = Category::whereNull('parent_id')->get();
         $products = Product::all();
         $brands = Brand::all();
 
