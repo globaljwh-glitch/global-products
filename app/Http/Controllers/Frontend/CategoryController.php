@@ -111,7 +111,7 @@ class CategoryController extends Controller
         //$products = Product::whereIn('category_id', $categoryIds)->paginate(20);
         $products = Product::with('primaryImage')->withAvg('reviews', 'rating')->whereHas('categories', function ($query) use ($categoryIds) {
                 $query->whereIn('categories.id', $categoryIds);
-                })->distinct()->paginate(20);
+                })->distinct()->paginate(21);
         //echo "<pre>";print_r($products->toArray());die;
         return view('frontend.categories.products-list', compact(
             'category',
