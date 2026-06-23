@@ -38,7 +38,7 @@ class AppServiceProvider extends ServiceProvider
             //Cache::forget('header_brands');
             $brandsData = Cache::remember('header_brands', 3600, function () {
                 return Brand::where('status', 1)
-                    ->where('is_featured', 1)
+                    //->where('is_featured', 1)
                     ->orderBy('display_order')
                     ->get();
             });
@@ -66,11 +66,11 @@ class AppServiceProvider extends ServiceProvider
             //Cache::forget('header_industries');
             $industriesData = Cache::remember('header_industries', 3600, function () {
                 return Industry::where('status', 1)
-                    ->where('is_featured', 1)
+                    //->where('is_featured', 1)
                     ->orderBy('display_order')
                     ->get();
             });
-
+            //echo "<pre>";print_r($industriesData);die;
             $newsData = Cache::remember('header_news', 3600, function () {
                 return News::where('is_featured', 1)
                     ->where('status', 'published')

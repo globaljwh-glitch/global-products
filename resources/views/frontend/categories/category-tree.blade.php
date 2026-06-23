@@ -4,9 +4,9 @@
 
     <li>
 
-        <a href="{{ url('category/'.$cat->slug) }}"
+        <a href="{{ route('products.index', ['type' => 'category', 'slug' => $cat->slug]) }}"
            class="categories-list-group-item categories-list-group-item-action
-                  {{ $cat->id == $category->id ? 'active fw-bold ' : '' }}">
+                  {{(!empty($category->id) && $cat->id == $category->id) ? 'active fw-bold ' : '' }}">
 
             {{ $cat->name }}
 
