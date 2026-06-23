@@ -35,7 +35,7 @@ class AppServiceProvider extends ServiceProvider
                     ->orderBy('display_order')
                     ->get();
             });
-            Cache::forget('header_brands');
+            //Cache::forget('header_brands');
             $brandsData = Cache::remember('header_brands', 3600, function () {
                 return Brand::where('status', 1)
                     ->where('is_featured', 1)
@@ -63,7 +63,7 @@ class AppServiceProvider extends ServiceProvider
                     ->take(2)
                     ->get();
             });
-            Cache::forget('header_industries');
+            //Cache::forget('header_industries');
             $industriesData = Cache::remember('header_industries', 3600, function () {
                 return Industry::where('status', 1)
                     ->where('is_featured', 1)

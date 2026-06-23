@@ -168,7 +168,7 @@ Route::get('/paypal/cancel', [CheckoutController::class, 'paypalCancel'])
     ->name('paypal.cancel');
 
 //Route::get('/paypal/cancel', [CheckoutController::class, 'paypalCancel'])
-Route::middleware('frontauth')->group(function () {
+//Route::middleware('frontauth')->group(function () {
     Route::prefix('cart')->group(function () {
 
         Route::post('/add/{product}', [CartController::class, 'add'])
@@ -194,7 +194,7 @@ Route::middleware('frontauth')->group(function () {
         );
 
     });
-});
+//});
 
 Route::post(
     '/favorite/toggle/{product}',
@@ -203,9 +203,10 @@ Route::post(
     ->middleware('auth')
     ->name('favorite.toggle');
 
-Route::middleware('frontauth')->group(function () {
-    Route::get('/cart', [CartController::class, 'index'])
+Route::get('/cart', [CartController::class, 'index'])
         ->name('cart.index');
+
+Route::middleware('frontauth')->group(function () {
 
     Route::get('/checkout', [CartController::class, 'checkout'])
         ->name('checkout');

@@ -10,21 +10,20 @@
                     <div class="text-center">
                         <h2 class="fw-bold welcomeUser">
                             <span class="text-red">Welcome</span>
-                            {{ auth()->user()->name }}
+                            {{ auth()->user()?->name ?? 'Guest' }}
                         </h2>
                     </div>
 
                     <div class="userProfileImage">
 
                         <a href="#" class="d-block shadow">
-
-                            <img src="{{ auth()->user()->image ? asset(auth()->user()->image) : asset('images/user-image.jpg') }}"
+                            <img src="{{ auth()->user()?->image ? asset(auth()->user()->image) : asset('images/guest-user.jpg') }}"
                                 alt="User" class="imgResponsive">
 
                         </a>
 
                         <div class="memberSince fw-bold">
-                            Member Since {{ auth()->user()->created_at->format('Y') }}
+                            Member Since {{ auth()->user()?->created_at->format('Y') }}
                         </div>
 
                     </div>
@@ -112,7 +111,7 @@
                                     </div>
 
                                     <a href="javascript:void(0)" class="text-red remove-from-cart-btn"
-                                        data-cart-item="{{ $item->id }}">
+                                        data-cart-item="{{ auth()->check() ? $item->id : $item->product_id }}">
                                         <i class="fa-solid fa-trash-can"></i>
                                     </a>
 
@@ -123,7 +122,7 @@
                                     <div class="qty-box">
 
                                         <button class="minus update-qty update_cart_quantity" data-type="minus"
-                                            data-cart-item="{{ $item->id }}">
+                                            data-cart-item="{{ auth()->check() ? $item->id : $item->product_id }}">
                                             -
                                         </button>
 
@@ -131,7 +130,7 @@
                                             class="qty-input">
 
                                         <button class="plus update-qty update_cart_quantity" data-type="plus"
-                                            data-cart-item="{{ $item->id }}">
+                                            data-cart-item="{{ auth()->check() ? $item->id : $item->product_id }}">
                                             +
                                         </button>
 
@@ -197,26 +196,13 @@
 
                         <div class="input-group coupon-box my-3">
 
-                            <input type="text" id="offer_code" class="form-control mb-0" @if($offer)
-                            value="{{ $offer->offer_code }}" readonly @endif placeholder="Apply Coupon">
-
-                            @if($offer)
-
-                                <button type="button" id="removeCouponBtn" class="btn btn-danger">
-
-                                    Remove
-
-                                </button>
-
-                            @else
+                            <input type="text" id="offer_code" class="form-control mb-0" placeholder="Apply Coupon">
 
                                 <button type="button" id="applyOfferBtn" class="btn btn-primary customBtn01 blueBg">
 
                                     Apply
 
                                 </button>
-
-                            @endif
 
                         </div>
 

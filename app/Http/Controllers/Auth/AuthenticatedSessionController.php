@@ -28,6 +28,12 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
+        // Merge guest cart into DB cart
+        if (session()->has('cart')) {
+            app(\App\Http\Controllers\Frontend\CartController::class)
+                ->syncSessionToDatabase();
+        }
+
         return redirect()->intended(route('dashboard', absolute: false));
     }
 
