@@ -121,7 +121,7 @@ class AppServiceProvider extends ServiceProvider
                 'globalRecentProducts' => $recentProducts,
                 'banner' => $bannerData, 
                 //'offer' => $offerData,
-                'headerOffer', $offerData,
+                'headerOffer' => $offerData,
                 'offer_featured' => $offerFeaturedData,
                 'news_data' => $newsData,
                 'latestProducts' => $latestProducts,
