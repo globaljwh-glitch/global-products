@@ -12,14 +12,52 @@ use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
+    // public function index(Request $request)
+    // {
+    //     $products = Product::with(['categories', 'brands'])
+    //         ->withAvg('reviews', 'rating')
+    //         ->orderBy('display_order')
+    //         ->paginate(10);
+
+    //     return view('admin.products.index', compact('products'));
+    // }
+
     public function index(Request $request)
     {
-        $products = Product::with(['categories', 'brands'])
-            ->withAvg('reviews', 'rating')
-            ->orderBy('display_order')
-            ->paginate(10);
+        $query = Product::with(['categories', 'brands'])
+            ->withAvg('reviews', 'rating');
 
-        return view('admin.products.index', compact('products'));
+        // Search by product name
+        if ($request->filled('search')) {
+            $query->where('name', 'like', '%' . $request->search . '%');
+        }
+
+        // Filter by status
+        if ($request->filled('status')) {
+            $query->where('status', $request->status);
+        }
+
+        // Filter by category (pivot table)
+        if ($request->filled('category')) {
+            $query->whereHas('categories', function ($q) use ($request) {
+                $q->where('categories.id', $request->category);
+            });
+        }
+
+        $products = $query
+            ->orderBy('display_order')
+            ->paginate(10)
+            ->withQueryString();
+
+        // For filter dropdowns
+        $categories = Category::whereNull('parent_id')->get();
+        $brands = Brand::all();
+
+        return view('admin.products.index', compact(
+            'products',
+            'categories',
+            'brands'
+        ));
     }
 
     public function create()

@@ -18,6 +18,59 @@
             </div>
         @endif
 
+        
+
+        <div class="bg-white rounded-xl shadow-sm border mb-6">
+            <form method="GET" action="{{ route('admin.products.index') }}" class="p-5">
+                <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
+
+                    {{-- Search --}}
+                    <input type="text"
+                        name="search"
+                        value="{{ request('search') }}"
+                        placeholder="Search products..."
+                        class="w-full border rounded-lg px-4 py-2">
+
+                    {{-- Status --}}
+                    <select name="status"
+                            class="w-full border rounded-lg px-4 py-2">
+                        <option value="">All Status</option>
+                        <option value="1" {{ request('status') == '1' ? 'selected' : '' }}>
+                            Active
+                        </option>
+                        <option value="0" {{ request('status') == '0' ? 'selected' : '' }}>
+                            Inactive
+                        </option>
+                    </select>
+
+                    {{-- Category --}}
+                    <select name="category"
+                            class="w-full border rounded-lg px-4 py-2">
+                        <option value="">All Categories</option>
+                        @foreach($categories as $category)
+                            <option value="{{ $category->id }}"
+                                {{ request('category') == $category->id ? 'selected' : '' }}>
+                                {{ $category->name }}
+                            </option>
+                        @endforeach
+                    </select>
+
+                    {{-- Buttons --}}
+                    <div class="flex items-center gap-3">
+                        <button type="submit"
+                                class="bg-slate-800 text-white px-5 py-2 rounded-lg">
+                            Filter
+                        </button>
+
+                        <a href="{{ route('admin.products.index') }}"
+                        class="text-slate-600">
+                            Reset
+                        </a>
+                    </div>
+
+                </div>
+            </form>
+        </div>
         <!-- TABLE -->
         <div class="bg-white shadow rounded-lg overflow-hidden">
             <table class="w-full text-left">
