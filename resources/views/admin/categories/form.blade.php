@@ -1,5 +1,3 @@
-{{-- resources/views/admin/categories/form.blade.php --}}
-
 @if(session('error'))
     <div class="mb-4 flex items-center justify-between bg-red-50 border border-red-200 text-red-800 px-4 py-3 rounded-lg shadow-sm">
 
@@ -52,10 +50,10 @@
                         Select Category
                     </option>
 
-                    @foreach($parentCategories as $category)
+                    @foreach($parentCategories as $pCategory)
 
-                        <option value="{{ $category->id }}">
-                            {{ $category->name }}
+                        <option value="{{ $pCategory->id }}">
+                            {{ $pCategory->name }}
                         </option>
 
                     @endforeach
