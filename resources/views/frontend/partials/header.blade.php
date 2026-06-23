@@ -2,8 +2,8 @@
    <div class="container">
       <div class="row">
          <div class="col-md-6 d-flex align-items-center">
-            @if($offer)
-            <p class="mb-0 fw-medium">{{ $offer->title }} <a href="{{ route('products.index') }}">{{ ucwords(strtolower($offer->button_text)) }}</a>
+            @if($headerOffer)
+            <p class="mb-0 fw-medium">{{ $headerOffer->title }} <a href="{{ route('products.index') }}">{{ ucwords(strtolower($headerOffer->button_text)) }}</a>
             </p>
             @endif
          </div>

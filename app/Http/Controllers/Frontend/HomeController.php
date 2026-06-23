@@ -41,7 +41,7 @@ class HomeController extends Controller
             ->latest()
             ->first();
 
-        $offer = Offer::where('offer_code', 'OFFER50')
+        $headerOffer = Offer::where('offer_code', 'OFFER50')
             ->where('status', 1)
             ->latest()
             ->first();
@@ -58,7 +58,7 @@ class HomeController extends Controller
 
         return view(
             'frontend.home',
-            compact('categories', 'bestSellers', 'latestProducts', 'banner', 'offer', 'offer_featured', 'news_data')
+            compact('categories', 'bestSellers', 'latestProducts', 'banner', 'headerOffer', 'offer_featured', 'news_data')
         );
     }
 

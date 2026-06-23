@@ -70,9 +70,7 @@
 
         <div>
             <label>Description</label>
-            <textarea name="description" class="w-full mt-1 border rounded-lg px-3 py-2">
-                {{ old('description', $category->description ?? '') }}
-            </textarea>
+            <textarea name="description" class="w-full mt-1 border rounded-lg px-3 py-2">{!! old('description', $category->description ?? '') !!}</textarea>
         </div>
 
         <div>
@@ -128,9 +126,7 @@
 
             <label>Meta Description</label>
             <textarea name="meta_description"
-                class="w-full border rounded-lg px-3 py-2">
-                {{ old('meta_description', $category->meta_description ?? '') }}
-            </textarea>
+                class="w-full border rounded-lg px-3 py-2">{{ old('meta_description', $category->meta_description ?? '') }}</textarea>
         </div>
 
     </div>
