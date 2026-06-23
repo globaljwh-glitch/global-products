@@ -14,7 +14,7 @@
                             <input
                                 type="text"
                                 name="title"
-                                value="{{ old('title', $offer?->title) }}"
+                                value="{{ old('title', $offer?->title ?? '') }}"
                                 placeholder="Enter offer title"
                                 class="w-full rounded-xl border-gray-300 focus:border-indigo-500 focus:ring-indigo-500"
                             >

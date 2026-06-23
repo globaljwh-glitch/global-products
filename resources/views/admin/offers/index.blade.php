@@ -1,35 +1,21 @@
 <x-app-layout>
+    <div class="p-6">
 
-    <x-slot name="header">
-
-        <div class="flex items-center justify-between">
-
+        <div class="flex items-center justify-between mb-6">
             <div>
-
-                <h2 class="font-semibold text-2xl text-gray-800 leading-tight">
-                    Offers
-                </h2>
-
-                <p class="text-sm text-gray-500 mt-1">
-                    Manage promotional offers
-                </p>
-
+                <h1 class="text-2xl font-semibold text-gray-800">Offers</h1>
+                <p class="text-sm text-gray-500">Manage promotional offers</p>
             </div>
 
             <a
                 href="{{ route('admin.offers.create') }}"
                 class="inline-flex items-center px-5 py-2.5 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition"
             >
-                Create Offer
+                + Create Offer
             </a>
-
         </div>
 
-    </x-slot>
-
-    <div class="py-8">
-
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
 
             @if(session('success'))
 

@@ -1,19 +1,9 @@
 <x-app-layout>
-
-    <x-slot name="header">
-
-        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-
+    <div class="p-8">
+        <div class="max-w-4xl mx-auto mb-6 flex items-center justify-between">
             <div>
-
-                <h2 class="font-semibold text-2xl text-gray-800 leading-tight">
-                    Create Offer
-                </h2>
-
-                <p class="text-sm text-gray-500 mt-1">
-                    Add a new promotional offer
-                </p>
-
+                <h1 class="text-2xl font-semibold text-gray-800">Create Offer</h1>
+                <p class="text-sm text-gray-500">Add a new promotional offer</p>
             </div>
 
             <a
@@ -22,14 +12,9 @@
             >
                 ← Back
             </a>
-
         </div>
 
-    </x-slot>
-
-    <div class="py-8">
-
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto bg-white shadow rounded-xl p-6">
 
             @if ($errors->any())
 
