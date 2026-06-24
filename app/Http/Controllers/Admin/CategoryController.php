@@ -99,7 +99,13 @@ class CategoryController extends Controller
                 ->get()
         );
 
-        return view('admin.categories.edit', compact('category', 'categories'));
+        $parentCategories = buildCategoryTree(
+            Category::where('id', '!=', $category->id) // prevent self parent
+                ->orderBy('display_order')
+                ->get()
+        );
+
+        return view('admin.categories.edit', compact('category', 'categories', 'parentCategories'));
     }
 
     public function update(Request $request, Category $category)
