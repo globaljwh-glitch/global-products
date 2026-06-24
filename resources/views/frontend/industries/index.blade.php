@@ -24,7 +24,7 @@
 
                                 <div class="categoriesThumb">
 
-                                    <img src="{{ asset('storage/'.$industry->image) }}"
+                                    <img src="{{ asset('storage/'.$industry->logo) }}"
                                          class="imgResponsive"
                                          alt="{{ $industry->name }}">
 
