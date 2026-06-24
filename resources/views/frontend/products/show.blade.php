@@ -7,26 +7,21 @@
          <div class="row">
             <div class="col-md-4 col-lg-5">
                <!-- <div class="productLargeThumb positionRelative">
-                  <img class="imgResponsive" src="{{ $product->mainImage
-                     ? asset('storage/' . $product->mainImage->image)
-                     : asset('images/no-product.png') }}">
-               </div> -->
-               <div class="productLargeThumb positionRelative">
-                  <img
-                     id="mainProductImage"
-                     class="imgResponsive"
-                     src="{{ $product->mainImage
+                        <img class="imgResponsive" src="{{ $product->mainImage
                            ? asset('storage/' . $product->mainImage->image)
                            : asset('images/no-product.png') }}">
+                     </div> -->
+               <div class="productLargeThumb positionRelative">
+                  <img id="mainProductImage" class="imgResponsive" src="{{ $product->mainImage
+      ? asset('storage/' . $product->mainImage->image)
+      : asset('images/no-product.png') }}">
                </div>
                <div class="productThumbnailList mb-4 mb-md-2">
 
                   @foreach($product->images as $img)
                      <div class="thumbImg {{ $loop->first ? 'active' : '' }}">
-                        <img
-                              src="{{ asset('storage/' . $img->image) }}"
-                              data-image="{{ asset('storage/' . $img->image) }}"
-                              class="imgResponsive thumbnailImage">
+                        <img src="{{ asset('storage/' . $img->image) }}" data-image="{{ asset('storage/' . $img->image) }}"
+                           class="imgResponsive thumbnailImage">
                      </div>
                   @endforeach
 
@@ -62,20 +57,17 @@
                      </div>
                      <!-- Add to Cart -->
                      <!-- <button class="customBtn01 redBg text-white">Add to Cart</button> -->
-                     <button 
-                        type="button"
-                        class="customBtn01 redBg text-white add-to-cart-btn"
+                     <button type="button" class="customBtn01 redBg text-white add-to-cart-btn"
                         data-product-id="{{ $product->id }}">
 
                         ADD TO CART
 
                      </button>
-                     <button class="customBtn01 blueBg add-to-wishlist"
-                        data-product-id="{{ $product->id }}">
+                     <button class="customBtn01 blueBg add-to-wishlist" data-product-id="{{ $product->id }}">
                         {{ auth()->check() && auth()->user()->favoriteProducts->contains($product->id)
-        ? 'Remove from Wishlist'
-        : 'Add to Wishlist' }}
-                        
+      ? 'Remove from Wishlist'
+      : 'Add to Wishlist' }}
+
                      </button>
                   </div>
                   <div class="shipBy w-100 borderTop">
@@ -84,16 +76,9 @@
                         <form method="POST" action="{{ route('delivery.check') }}">
                            @csrf
 
-                           <input 
-                              type="text"
-                              name="zip_code"
-                              placeholder="Enter Zip Code"
-                              required>
+                           <input type="text" name="zip_code" placeholder="Enter Zip Code" required>
 
-                           <input
-                              type="hidden"
-                              name="product_id"
-                              value="{{ $product->id }}">
+                           <input type="hidden" name="product_id" value="{{ $product->id }}">
 
                            <button type="submit" class="customBtn01 redBg">
                               SAVE
@@ -101,14 +86,14 @@
                         </form>
                      </div>
                      <!-- <p class="d-none mb-2">Ship to 16001 | <a href="#">Change zipcode</a></p>
-                     <p>Estimated delivery to <strong>16001</strong> by <strong>23rd Apr 2026</strong></p> -->
+                           <p>Estimated delivery to <strong>16001</strong> by <strong>23rd Apr 2026</strong></p> -->
 
                      @if(session()->has('delivery_zip'))
 
                         <p class="mb-2">
                            Ship to {{ session('delivery_zip') }}
                            <!-- |
-                           <a href="#" id="changeZipCode">Change zipcode</a> -->
+                                       <a href="#" id="changeZipCode">Change zipcode</a> -->
                         </p>
 
                         <p>
@@ -364,17 +349,17 @@
 
                            @foreach($product->questions as $index => $qa)
 
-                                 <div class="qa {{ $index > 0 ? 'borderTop' : '' }}">
+                              <div class="qa {{ $index > 0 ? 'borderTop' : '' }}">
 
-                                    <h5 class="mb-1">
-                                       {{ $index + 1 }}) {{ $qa->question }}
-                                    </h5>
+                                 <h5 class="mb-1">
+                                    {{ $index + 1 }}) {{ $qa->question }}
+                                 </h5>
 
-                                    <p>
-                                       {!! nl2br(e($qa->answer)) !!}
-                                    </p>
+                                 <p>
+                                    {!! nl2br(e($qa->answer)) !!}
+                                 </p>
 
-                                 </div>
+                              </div>
 
                            @endforeach
 
@@ -388,29 +373,29 @@
 
                      @endif
                      <!-- <div class="qaList mt-2">
-                        <div class="qa">
-                           <h5 class="mb-1">1) What is the shipping cost for this pallet jack?</h5>
-                           <p>Ideal for use in construction, manufacturing, retail, and more, the Global Industrial™
-                              Industrial-Duty Pallet Jack Truck is equipped with a strong & durable reinforced steel frame
-                              and a German-engineered pump that allows users to raise and lower pallets or skids up to
-                              5,500 lbs with ease.</p>
-                        </div>
-                        <div class="qa borderTop">
-                           <h5 class="mb-1">2) Could you please tell me where this pallet jack is made? I need it's point
-                              of origin for my customs paperwork.</h5>
-                           <p>Ideal for use in construction, manufacturing, retail, and more, the Global Industrial™
-                              Industrial-Duty Pallet Jack Truck is equipped with a strong & durable reinforced steel frame.
-                           </p>
-                        </div>
-                        <div class="qa borderTop">
-                           <h5 class="mb-1">3) Do you have a parts diagram for this pallet jacK?</h5>
-                           <p>With over 75 years of experience and hundreds of thousands of products, Global Industrial
-                              continues to be the source for industrial equipment and supplies that keep your business
-                              running efficiently. Serving all of North America, Global Industrial offers a vast selection
-                              of hand-picked and tested industrial-strength products, including material handling, storage
-                              & shelving, safety & security, janitorial & facility maintenance, and HVAC & fans. </p>
-                        </div>
-                     </div> -->
+                              <div class="qa">
+                                 <h5 class="mb-1">1) What is the shipping cost for this pallet jack?</h5>
+                                 <p>Ideal for use in construction, manufacturing, retail, and more, the Global Industrial™
+                                    Industrial-Duty Pallet Jack Truck is equipped with a strong & durable reinforced steel frame
+                                    and a German-engineered pump that allows users to raise and lower pallets or skids up to
+                                    5,500 lbs with ease.</p>
+                              </div>
+                              <div class="qa borderTop">
+                                 <h5 class="mb-1">2) Could you please tell me where this pallet jack is made? I need it's point
+                                    of origin for my customs paperwork.</h5>
+                                 <p>Ideal for use in construction, manufacturing, retail, and more, the Global Industrial™
+                                    Industrial-Duty Pallet Jack Truck is equipped with a strong & durable reinforced steel frame.
+                                 </p>
+                              </div>
+                              <div class="qa borderTop">
+                                 <h5 class="mb-1">3) Do you have a parts diagram for this pallet jacK?</h5>
+                                 <p>With over 75 years of experience and hundreds of thousands of products, Global Industrial
+                                    continues to be the source for industrial equipment and supplies that keep your business
+                                    running efficiently. Serving all of North America, Global Industrial offers a vast selection
+                                    of hand-picked and tested industrial-strength products, including material handling, storage
+                                    & shelving, safety & security, janitorial & facility maintenance, and HVAC & fans. </p>
+                              </div>
+                           </div> -->
                   </div>
                </div>
             </div>
@@ -430,46 +415,46 @@
                <div class="row">
                   @if(isset($relatedProducts) && $relatedProducts->count())
                      @foreach($relatedProducts as $rel)
-                                 <div class="d-flex col-md-3">
-                                    <div class="product w-100">
+                              <div class="d-flex col-md-3">
+                                 <div class="product w-100">
 
-                                       <div class="productThumb positionRelative">
-                                          <img class="imgResponsive" src="{{ $rel->mainImage
+                                    <div class="productThumb positionRelative">
+                                       <img class="imgResponsive" src="{{ $rel->mainImage
                         ? asset('storage/' . $rel->mainImage->image)
                         : asset('images/no-product.png') }}">
 
-                                          <div class="actionBtn">
-                                             <button onclick="window.location.href='{{ route('products.show', $rel->slug) }}'"
-                                                class="customBtn01 mt-2 me-1 bg-white text-blue">
-                                                Quick View
-                                             </button>
+                                       <div class="actionBtn">
+                                          <button onclick="window.location.href='{{ route('products.show', $rel->slug) }}'"
+                                             class="customBtn01 mt-2 me-1 bg-white text-blue">
+                                             Quick View
+                                          </button>
 
-                                             <button class="customBtn01 mt-2 redBg text-white">
-                                                Add to Cart
-                                             </button>
-                                          </div>
+                                          <button class="customBtn01 mt-2 redBg text-white">
+                                             Add to Cart
+                                          </button>
                                        </div>
-
-                                       <div class="productInfo">
-                                          <h6>{{ $rel->name }}</h6>
-
-                                          <div class="productModel fw-semibold">
-                                             Model #: {{ $rel->sku ?? 'N/A' }}
-                                          </div>
-
-                                          <div class="productPrice text-red fw-bold">
-                                             ${{ number_format($rel->price, 2) }}
-                                          </div>
-                                       </div>
-
                                     </div>
+
+                                    <div class="productInfo">
+                                       <h6>{{ $rel->name }}</h6>
+
+                                       <div class="productModel fw-semibold">
+                                          Model #: {{ $rel->sku ?? 'N/A' }}
+                                       </div>
+
+                                       <div class="productPrice text-red fw-bold">
+                                          ${{ number_format($rel->price, 2) }}
+                                       </div>
+                                    </div>
+
                                  </div>
+                              </div>
                      @endforeach
                   @else
-                  <div class="col-12">
-                     <p class="text-center">No related products</p>
-                  </div>
-               @endif
+                     <div class="col-12">
+                        <p class="text-center">No related products</p>
+                     </div>
+                  @endif
                </div>
             </div>
          </div>
@@ -536,25 +521,25 @@
       </div>
    </section>
    <!-- <section class="newsLetterBlock greyBg sectionPadding">
-      <div class="container">
-         <div class="row">
-            <div class="col-md-12 col-lg-6 d-flex align-items-center">
-               <div class="w-100">
-                  <h2 class="fw-bold">Be the first to know about our daily sales!</h2>
-                  <p class="mb-lg-0 pe-lg-4">Subscribe to our newsletters now and stay up-to-date with new collections, the
-                     latest lookbooks.</p>
+            <div class="container">
+               <div class="row">
+                  <div class="col-md-12 col-lg-6 d-flex align-items-center">
+                     <div class="w-100">
+                        <h2 class="fw-bold">Be the first to know about our daily sales!</h2>
+                        <p class="mb-lg-0 pe-lg-4">Subscribe to our newsletters now and stay up-to-date with new collections, the
+                           latest lookbooks.</p>
+                     </div>
+                  </div>
+                  <div class="col-md-12 col-lg-6 d-flex align-items-center">
+                     <div class="input-group subscribeNews ps-lg-3">
+                        <input type="text" class="form-control form-control-lg text-end-0" id=""
+                           placeholder="Enter Email Address">
+                        <button class="btn btn-lg customBtn01 redBg" type="submit" id="btnSearch">SubScribe</button>
+                     </div>
+                  </div>
                </div>
             </div>
-            <div class="col-md-12 col-lg-6 d-flex align-items-center">
-               <div class="input-group subscribeNews ps-lg-3">
-                  <input type="text" class="form-control form-control-lg text-end-0" id=""
-                     placeholder="Enter Email Address">
-                  <button class="btn btn-lg customBtn01 redBg" type="submit" id="btnSearch">SubScribe</button>
-               </div>
-            </div>
-         </div>
-      </div>
-   </section> -->
+         </section> -->
 
    @include('frontend.partials.subscribe')
 
@@ -563,86 +548,86 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
 
-$(document).ready(function(){
+   $(document).ready(function () {
 
-    $(document).on('click', '.add-to-wishlist', function(e){
+      $(document).on('click', '.add-to-wishlist', function (e) {
 
-        e.preventDefault();
+         e.preventDefault();
 
-        let button = $(this);
+         let button = $(this);
 
-        let productId = button.data('product-id');
+         let productId = button.data('product-id');
 
-        console.log(productId);
+         console.log(productId);
 
-        $.ajax({
+         $.ajax({
 
             url: '/favorite/toggle/' + productId,
 
             type: 'POST',
 
             headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
 
-            success: function(response){
+            success: function (response) {
 
-                console.log(response);
+               // console.log(response);
+                  updateHeaderCounts();
+               if (response.status == 'added') {
 
-                if(response.status == 'added'){
+                  button.text('REMOVE FROM WISHLIST');
 
-                    button.text('REMOVE FROM WISHLIST');
+               } else {
 
-                }else{
+                  button.text('Add to Wishlist');
 
-                    button.text('Add to Wishlist');
-
-                }
+               }
 
             },
 
-            error: function(xhr){
+            error: function (xhr) {
 
-                console.log(xhr.responseText);
+               console.log(xhr.responseText);
 
-                alert('AJAX Error');
+               alert('AJAX Error');
 
             }
 
-        });
+         });
 
-    });
+      });
 
-});
+   });
 
 </script>
 
 
 <script>
 
-$(document).on('click', '.add-to-cart-btn', function(e){
+   $(document).on('click', '.add-to-cart-btn', function (e) {
 
-    e.preventDefault();
+      e.preventDefault();
 
-    let button = $(this);
+      let button = $(this);
 
-    let productId = button.data('product-id');
+      let productId = button.data('product-id');
 
-    let quantity = $("#quantity").val();
+      let quantity = $("#quantity").val();
 
-    $.ajax({
+      $.ajax({
 
-        url: '/cart/add/' + productId,
+         url: '/cart/add/' + productId,
 
-        method: 'POST',
+         method: 'POST',
 
-        data: {
+         data: {
             _token: $('meta[name="csrf-token"]').attr('content'),
             quantity: quantity
-        },
+         },
 
-        success: function(response){
-
+         success: function (response) {
+            updateHeaderCounts();
             $('#successMessage')
                .html(response.message)
                .fadeIn();
@@ -651,45 +636,45 @@ $(document).on('click', '.add-to-cart-btn', function(e){
                $('#successMessage').fadeOut();
             }, 5000);
 
-        }
+         }
 
-    });
+      });
 
-});
+   });
 
 
 
-$(document).on('click', '.remove-from-cart-btn', function(e){
+   $(document).on('click', '.remove-from-cart-btn', function (e) {
 
-    e.preventDefault();
+      e.preventDefault();
 
-    let button = $(this);
+      let button = $(this);
 
-    let productId = button.data('product-id');
+      let productId = button.data('product-id');
 
-    $.ajax({
+      $.ajax({
 
-        url: '/cart/remove/' + productId,
+         url: '/cart/remove/' + productId,
 
-        method: 'POST',
+         method: 'POST',
 
-        data: {
+         data: {
             _token: $('meta[name="csrf-token"]').attr('content')
-        },
+         },
 
-        success: function(response){
-
+         success: function (response) {
+            updateHeaderCounts();
             button.closest('.cart-item').remove();
 
             alert(response.message);
 
-        }
+         }
 
-    });
+      });
 
-});
+   });
 
- $(document).on('click', '.rating-star', function () {
+   $(document).on('click', '.rating-star', function () {
 
       let rating = $(this).data('rating');
 
@@ -712,38 +697,38 @@ $(document).on('click', '.remove-from-cart-btn', function(e){
 
 
 <script>
-function minus_cart_quantity() {
-   let input = $('#quantity');
+   function minus_cart_quantity() {
+      let input = $('#quantity');
 
-   let currentVal = parseInt(input.val());
+      let currentVal = parseInt(input.val());
 
-   if(currentVal > 1) {
-      input.val(currentVal - 1);
+      if (currentVal > 1) {
+         input.val(currentVal - 1);
+      }
    }
-}
 
-function plus_cart_quantity() {
-   let input = $('#quantity');
+   function plus_cart_quantity() {
+      let input = $('#quantity');
 
-   let currentVal = parseInt(input.val());
+      let currentVal = parseInt(input.val());
 
-   input.val(currentVal + 1);
-}
+      input.val(currentVal + 1);
+   }
 </script>
 
 <script>
-$(document).ready(function() {
+   $(document).ready(function () {
 
-    $('.thumbnailImage').click(function() {
+      $('.thumbnailImage').click(function () {
 
-        let imageUrl = $(this).data('image');
+         let imageUrl = $(this).data('image');
 
-        $('#mainProductImage').attr('src', imageUrl);
+         $('#mainProductImage').attr('src', imageUrl);
 
-        $('.thumbImg').removeClass('active');
+         $('.thumbImg').removeClass('active');
 
-        $(this).closest('.thumbImg').addClass('active');
-    });
+         $(this).closest('.thumbImg').addClass('active');
+      });
 
-});
+   });
 </script>

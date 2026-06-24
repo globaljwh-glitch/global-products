@@ -60,7 +60,7 @@ class UserController extends Controller
 
 
         return redirect()
-            ->route('customer.account')
+            ->intended(route('customer.account'))
             ->with('success', 'Account created successfully.');
     }
 
@@ -86,7 +86,7 @@ class UserController extends Controller
             $request->session()->regenerate();
 
             return redirect()
-                ->route('customer.account')
+                ->intended(route('customer.account'))
                 ->with('success', 'Welcome back.');
         }
 

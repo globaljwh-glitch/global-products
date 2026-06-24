@@ -23,14 +23,14 @@
 
                         <!-- <ul class="dropdown-menu shadow border-0"> -->
                         <!-- <li>
-                                                <form method="POST" action="{{ route('customer.logout') }}">
-                                                   @csrf
+                                                            <form method="POST" action="{{ route('customer.logout') }}">
+                                                               @csrf
 
-                                                   <button type="submit" class="dropdown-item">
-                                                      Logout
-                                                   </button>
-                                                </form>
-                                             </li> -->
+                                                               <button type="submit" class="dropdown-item">
+                                                                  Logout
+                                                               </button>
+                                                            </form>
+                                                         </li> -->
 
                         <!-- </ul> -->
 
@@ -116,7 +116,8 @@
                   <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                      <li>
                         @foreach($brands_data->take(6) as $brand)
-                           <a class="dropdown-item" href="{{ route('products.index', ['type' => 'brand', 'slug' => $brand->slug]) }}">
+                           <a class="dropdown-item"
+                              href="{{ route('products.index', ['type' => 'brand', 'slug' => $brand->slug]) }}">
                               {{ ucfirst($brand->name) }}
                            </a>
                         @endforeach
@@ -133,7 +134,8 @@
                   <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                      <li>
                         @foreach($industries_data->take(6) as $industry)
-                           <a class="dropdown-item" href="{{ route('products.index', ['type' => 'industry', 'slug' => $industry->slug]) }}">
+                           <a class="dropdown-item"
+                              href="{{ route('products.index', ['type' => 'industry', 'slug' => $industry->slug]) }}">
                               {{ ucfirst($industry->name) }}
                            </a>
                         @endforeach
@@ -163,28 +165,35 @@
                <li class="nav-item">
                   <a class="nav-link" href="{{ route('about') }}">About Us</a>
                </li>
-               
+
             </ul>
          </div>
          <div class="headerIcons order-0 order-md-0 order-lg-1 ms-auto me-2 me-sm-4 me-lg-0">
             <ul class="mb-0 ps-0">
                <!-- <li><a href="#"><i class="fa-solid fa-magnifying-glass"></i></a></li> -->
-               <li><a href="javascript:void(0)" class="searchToggle"><i class="fa-solid fa-magnifying-glass"></i></a></li>
+               <li><a href="javascript:void(0)" class="searchToggle"><i class="fa-solid fa-magnifying-glass"></i></a>
+               </li>
                <li><a href="/account/login"><i class="fa-regular fa-user"></i></a></li>
-               <li><a href="/my-wishlist"><i class="fa-regular fa-heart"></i></a></li>
-               <li><a href="/cart"><i class="fa-solid fa-cart-shopping"></i></a></li>
+
+               <li class="positionRelative"> <a href="/my-wishlist"><i class="fa-regular fa-heart"></i> <span id="wishlistCount" class="badge redBg">
+                       {{ $headerCounts['wishlist_count'] }}
+                      </span>
+                    </a>
+
+               </li>
+
+
+               <li class="positionRelative"> <a href="/cart"><i class="fa-solid fa-cart-shopping"></i> <span
+                        id="cartCount" class="badge redBg">
+                        {{ $headerCounts['cart_count'] }}
+                  </a>
+               </li>
             </ul>
          </div>
          <div class="searchBarHeader greyBg">
             <form action="{{ route('products.index') }}" method="GET" class="form-inline d-flex">
-               <input 
-                     class="form-control mb-0" 
-                     type="text"
-                     name="search" 
-                     placeholder="Enter a product name" 
-                     aria-label="Search"
-                     value="{{ request('search') }}"
-               >
+               <input class="form-control mb-0" type="text" name="search" placeholder="Enter a product name"
+                  aria-label="Search" value="{{ request('search') }}">
                <button class="btn btn-outline-success ms-2 customBtn01 blackBg" type="submit">Search</button>
             </form>
          </div>
