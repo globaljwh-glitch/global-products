@@ -15,7 +15,8 @@ class FrontAuth
     public function handle(Request $request, Closure $next): Response
     {
         if (!Auth::check()) {
-            return redirect('/account/login');
+            return redirect()->guest('/account/login');
+            //return redirect('/account/login');
         }
 
         return $next($request);
