@@ -24,7 +24,7 @@
                </div>
             </div>
             @include('frontend.partials.sidebar')
-            
+
             <div class="col-md-8 col-lg-9">
                <div class="productList">
                   <div class="row">
@@ -42,7 +42,8 @@
                                                    class="customBtn01 mt-2 me-1 bg-white text-blue">
                                                    Quick View
                                                 </button>
-                                                <button class="customBtn01 mt-2 redBg text-white add-to-cart-btn" data-product-id="{{ $product->id }}">Add to Cart</button>
+                                                <button class="customBtn01 mt-2 redBg text-white add-to-cart-btn"
+                                                   data-product-id="{{ $product->id }}">Add to Cart</button>
                                              </div>
                                           </div>
 
@@ -118,89 +119,88 @@
          </div>
       </div>
    </section>
-   
-   <div id="successToast"
-    style="display:none; position:fixed; top:20px; right:20px; z-index:9999; min-width:320px;"
-    class="shadow-lg">
 
-    <div style="
-        background:linear-gradient(135deg,#16a34a,#22c55e);
-        color:#fff;
-        padding:16px 20px;
-        border-radius:12px;
-        display:flex;
-        align-items:center;
-        gap:12px;
-        box-shadow:0 10px 25px rgba(0,0,0,.15);
-    ">
-        <div style="font-size:24px;">✓</div>
+   <div id="successToast" style="display:none; position:fixed; top:20px; right:20px; z-index:9999; min-width:320px;"
+      class="shadow-lg">
 
-        <div>
+      <div style="
+           background:linear-gradient(135deg,#16a34a,#22c55e);
+           color:#fff;
+           padding:16px 20px;
+           border-radius:12px;
+           display:flex;
+           align-items:center;
+           gap:12px;
+           box-shadow:0 10px 25px rgba(0,0,0,.15);
+       ">
+         <div style="font-size:24px;">✓</div>
+
+         <div>
             <div style="font-weight:700;">
-                Success
+               Success
             </div>
 
             <div id="successToastMessage">
             </div>
-        </div>
-    </div>
-</div>
+         </div>
+      </div>
+   </div>
 
    @include('frontend.partials.subscribe')
 
    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<script>
+   <script>
 
-$(document).on('click', '.add-to-cart-btn', function(e){
+      $(document).on('click', '.add-to-cart-btn', function (e) {
 
-    e.preventDefault();
+         e.preventDefault();
 
-    let button = $(this);
+         let button = $(this);
 
-    let productId = button.data('product-id');
+         let productId = button.data('product-id');
 
-    let quantity = 1; //$("#quantity").val();
+         let quantity = 1; //$("#quantity").val();
 
-    $.ajax({
+         $.ajax({
 
-        url: '/cart/add/' + productId,
+            url: '/cart/add/' + productId,
 
-        method: 'POST',
+            method: 'POST',
 
-        data: {
-            _token: $('meta[name="csrf-token"]').attr('content'),
-            quantity: quantity
-        },
+            data: {
+               _token: $('meta[name="csrf-token"]').attr('content'),
+               quantity: quantity
+            },
 
-        success: function(response){
+            success: function (response) {
+                 updateHeaderCounts();
+               // $('#successMessage')
+               //    .html(response.message)
+               //    .fadeIn();
 
-            // $('#successMessage')
-            //    .html(response.message)
-            //    .fadeIn();
-
-            // setTimeout(function () {
-            //    $('#successMessage').fadeOut();
-            // }, 5000);
-
-            $('#successToastMessage').html(response.message);
+               // setTimeout(function () {
+               //    $('#successMessage').fadeOut();
+               // }, 5000);
+             
+               $('#successToastMessage').html(response.message);
 
                $('#successToast')
-                  .stop(true,true)
+                  .stop(true, true)
                   .fadeIn(300);
 
-               setTimeout(function(){
+               setTimeout(function () {
 
                   $('#successToast').fadeOut(400);
 
                }, 3000);
 
 
-        }
+            }
 
-    });
+         });
 
-});
+      });
 
-</script>
+   </script>
 
 @endsection

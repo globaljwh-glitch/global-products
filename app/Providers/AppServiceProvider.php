@@ -4,6 +4,9 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
+
+
+use App\Services\HeaderCountService;
 use Illuminate\Support\Facades\Cache;
 use App\Models\Category;
 use App\Models\Brand;
@@ -26,9 +29,9 @@ class AppServiceProvider extends ServiceProvider
 
         Paginator::useBootstrapFive();
         //Paginator::useBootstrap();
-        
+
         View::composer('*', function ($view) {
-          
+
             $categoriesData = Cache::remember('header_categories', 3600, function () {
                 return Category::whereNull('parent_id')
                     ->where('status', 1)
@@ -96,10 +99,10 @@ class AppServiceProvider extends ServiceProvider
             //dd($brandsData);
 
             $latestProducts = Product::with('mainImage')
-            ->where('status', 1)
-            ->latest()
-            ->take(4)
-            ->get();
+                ->where('status', 1)
+                ->latest()
+                ->take(4)
+                ->get();
 
             $categories = Category::whereNull('parent_id')
                 ->where('status', 1)
@@ -114,12 +117,16 @@ class AppServiceProvider extends ServiceProvider
                 ->orderBy('display_order', 'asc')
                 ->get();
 
+            $counts = app(HeaderCountService::class)->getCounts();
+
+
+
             $view->with([
                 'categories_data' => $categoriesData,
                 'brands_data' => $brandsData,
                 'industries_data' => $industriesData,
                 'globalRecentProducts' => $recentProducts,
-                'banner' => $bannerData, 
+                'banner' => $bannerData,
                 'offer' => $offerData,
                 'offer_featured' => $offerFeaturedData,
                 'news_data' => $newsData,
@@ -127,6 +134,7 @@ class AppServiceProvider extends ServiceProvider
                 'f_categories' => $categories,
                 'f_brands' => $brands,
                 'f_industries' => $industries,
+                'headerCounts' => $counts,
             ]);
         });
     }

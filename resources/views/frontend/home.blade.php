@@ -342,7 +342,7 @@ $(document).on('click', '.add-to-cart-btn', function(e){
             // setTimeout(function () {
             //    $('#successMessage').fadeOut();
             // }, 5000);
-
+             updateHeaderCounts();
             $('#successToastMessage').html(response.message);
 
                $('#successToast')

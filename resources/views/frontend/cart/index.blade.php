@@ -198,11 +198,11 @@
 
                             <input type="text" id="offer_code" class="form-control mb-0" placeholder="Apply Coupon">
 
-                                <button type="button" id="applyOfferBtn" class="btn btn-primary customBtn01 blueBg">
+                            <button type="button" id="applyOfferBtn" class="btn btn-primary customBtn01 blueBg">
 
-                                    Apply
+                                Apply
 
-                                </button>
+                            </button>
 
                         </div>
 
@@ -216,31 +216,7 @@
 
                         <div id="offerBadge">
 
-                            @if($offer)
-
-                                <div class="alert alert-success d-flex justify-content-between align-items-center">
-
-                                    <div>
-
-                                        🎉
-
-                                        <strong>{{ $offer->offer_code }}</strong>
-
-                                        @if($offer->discount_type == 'percentage')
-
-                                            ({{ $offer->discount_value }}% OFF)
-
-                                        @else
-
-                                            (${{ $offer->discount_value }} OFF)
-
-                                        @endif
-
-                                    </div>
-
-                                </div>
-
-                            @endif
+                            
 
                         </div>
 
@@ -439,7 +415,7 @@
             },
 
             success: function (response) {
-
+                updateHeaderCounts();
                 location.reload();
 
             }
@@ -474,7 +450,7 @@
             },
 
             success: function (response) {
-
+                updateHeaderCounts();
                 // Remove item row
                 button.closest('.cart-item').remove();
 

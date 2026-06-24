@@ -9,6 +9,7 @@ use App\Models\Product;
 use App\Models\Banner;
 use App\Models\Offer;
 use App\Models\News;
+use App\Services\HeaderCountService;
 
 class HomeController extends Controller
 {
@@ -34,7 +35,7 @@ class HomeController extends Controller
             ->take(4)
             ->get();
 
-        
+
         $banner = Banner::where('is_featured', 1)
             ->where('status', 1)
             //->where('page', 'home')
@@ -45,7 +46,7 @@ class HomeController extends Controller
             ->where('status', 1)
             ->latest()
             ->first();
-        
+
         $offer_featured = Offer::where('is_featured', 1)
             ->where('status', 1)
             ->take(2)
@@ -59,6 +60,20 @@ class HomeController extends Controller
         return view(
             'frontend.home',
             compact('categories', 'bestSellers', 'latestProducts', 'banner', 'offer', 'offer_featured', 'news_data')
+        );
+
+    }
+
+    public function counts(
+        HeaderCountService $headerCountService
+    ) {
+
+        return response()->json(
+
+            $headerCountService
+
+                ->getCounts()
+
         );
     }
 
