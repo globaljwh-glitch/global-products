@@ -93,17 +93,25 @@ class CategoryController extends Controller
 
     public function edit(Category $category)
     {
-        $categories = buildCategoryTree(
-            Category::where('id', '!=', $category->id) // prevent self parent
-                ->orderBy('display_order')
-                ->get()
-        );
+        // $categories = buildCategoryTree(
+        //     Category::where('id', '!=', $category->id) // prevent self parent
+        //         ->orderBy('display_order')
+        //         ->get()
+        // );
 
-        $parentCategories = buildCategoryTree(
-            Category::where('id', '!=', $category->id) // prevent self parent
-                ->orderBy('display_order')
-                ->get()
-        );
+        // $parentCategories = buildCategoryTree(
+        //     Category::where('id', '!=', $category->id) // prevent self parent
+        //         ->orderBy('display_order')
+        //         ->get()
+        // );
+
+        $categories = Category::whereNull('parent_id')
+            ->orderBy('name')
+            ->get();
+
+        $parentCategories = Category::whereNull('parent_id')
+        ->orderBy('name')
+        ->get();
 
         return view('admin.categories.edit', compact('category', 'categories', 'parentCategories'));
     }
