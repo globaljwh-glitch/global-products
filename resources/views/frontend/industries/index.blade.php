@@ -19,7 +19,7 @@
 
                         <div class="col-sm-3 col-lg-2 d-flex">
 
-                            <a href="{{ url('category/'.$category->slug) }}"
+                            <a href="{{ url('industries/'.$category->slug) }}"
                                class="categoriesBox text-center">
 
                                 <div class="categoriesThumb">

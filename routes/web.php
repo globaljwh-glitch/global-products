@@ -321,17 +321,15 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
 
 
 //Route::get('/products/{type?}/{slug?}', [FrontProductController::class, 'index'])->name('products.index');
-Route::get('/products/{type?}/{slug?}/{slug2?}', [CategoryController::class, 'getProducts'])->name('products.index');
+Route::get('/products/{type?}/{slug?}', [CategoryController::class, 'getProducts'])->name('products.index');
 
 
-Route::get('/products', [FrontProductController::class, 'index'])
-    ->name('products.index');
-Route::get('/categories', [CategoryController::class, 'index'])
-    ->name('categories.index');
-Route::get('/brands', [BrandController::class, 'index'])
-    ->name('brands.index');
-Route::get('/industries', [FrontendIndustryController::class, 'index'])
-    ->name('industries.index');
+Route::get('/products', [FrontProductController::class, 'index'])->name('products.index');
+Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
+Route::get('/brands', [BrandController::class, 'index'])->name('brands.all');
+Route::get('/brands/{slug}', [BrandController::class, 'brandDetails'])->name('brands.details');
+Route::get('/industries', [FrontendIndustryController::class, 'index'])->name('industries.index');
+Route::get('/industries/{slug}', [FrontendIndustryController::class, 'industryDetails'])->name('industries.details');
 
 Route::get('/contact', function () {
     return view('frontend.contact.index'); // adjust if path differs

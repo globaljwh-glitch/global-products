@@ -102,7 +102,7 @@
                <div class="col-md-8 col-lg-9">
                   <div class="productList">
                      <div class="row">
-                          @forelse($products as $product)
+                        @forelse($products as $product)
                         <div class="d-flex col-lg-4 col-sm-6">
                            <a href="{{route('products.show',$product->slug)}}" class="product w-100">
                               <div class="productThumb positionRelative">

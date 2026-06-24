@@ -53,7 +53,10 @@ class Product extends Model
     {
         return $this->belongsToMany(Industry::class, 'industry_products');
     }
-
+    public function brandProducts()
+    {
+        return $this->belongsToMany(Brand::class, 'brand_product');
+    }
     // Vendors
     public function vendors()
     {
