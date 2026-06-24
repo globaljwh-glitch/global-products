@@ -15,23 +15,23 @@
             <div class="productCategoriesList">
                 <div class="row">
 
-                    @forelse($f_industries as $category)
+                    @forelse($f_industries as $industry)
 
                         <div class="col-sm-3 col-lg-2 d-flex">
 
-                            <a href="{{ url('industries/'.$category->slug) }}"
+                            <a href="{{ url('industries/'.$industry->slug) }}"
                                class="categoriesBox text-center">
 
                                 <div class="categoriesThumb">
 
-                                    <img src="{{ asset('uploads/categories/'.$category->image) }}"
+                                    <img src="{{ asset('uploads/industries/'.$industry->image) }}"
                                          class="imgResponsive"
-                                         alt="{{ $category->name }}">
+                                         alt="{{ $industry->name }}">
 
                                 </div>
 
                                 <h6 class="categoriesName mb-0">
-                                    {{ $category->name }}
+                                    {{ $industry->name }}
                                 </h6>
 
                             </a>
