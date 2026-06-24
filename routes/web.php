@@ -341,6 +341,8 @@ Route::get('/products', [FrontProductController::class, 'index'])->name('product
 Route::get('/product/{slug}', [FrontProductController::class, 'show'])->name('products.show');
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
 
+Route::get( '/header-counts',[HomeController::class,'counts'])->name('header.counts');
+
 // Route::get('/', function () {
 //     return view('welcome');
 // });
