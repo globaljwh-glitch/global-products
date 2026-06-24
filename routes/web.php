@@ -320,8 +320,10 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
 });
 
 
-Route::get('/products/{type?}/{slug?}', [FrontProductController::class, 'index'])
-    ->name('products.index');
+//Route::get('/products/{type?}/{slug?}', [FrontProductController::class, 'index'])->name('products.index');
+Route::get('/products/{type?}/{slug?}/{slug2?}', [CategoryController::class, 'getProducts'])->name('products.index');
+
+
 Route::get('/products', [FrontProductController::class, 'index'])
     ->name('products.index');
 Route::get('/categories', [CategoryController::class, 'index'])

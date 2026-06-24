@@ -48,45 +48,54 @@
             <div class="row">
                <div class="col-md-12">
                   <div class="headingBlock underLineHeading d-flex align-items-center justify-content-between">
-                     <h2>{{$category->name}}</h2>
+                     <h2>@if($type == 'category')
+                           {{$category->name}}
+                        @elseif($type == 'industry')
+                           {{$industry->name}}
+                        @elseif($type == 'brand')
+                           {{$brand->name}}
+                        @endif
+                     </h2>
                      <div class="sortBy d-flex align-items-center">
                         <label for="sortProducts" class="">Sort by:</label>
-                        <select class="form-control ">
-                           <option value="">Best Sellers</option>
-                           <option value="">Newest Arrivals</option>
-                           <option value="">Price: Low to High</option>
-                           <option value="">Price: High to Low</option>
-                        </select>
+                        <select class="form-control" onchange="window.location.href='?sort='+this.value">
+                        <option value="">Best Sellers</option>
+                        <option value="new" {{ request('sort') == 'new' ? 'selected' : '' }}>Newest Arrivals</option>
+                        <option value="price_low" {{ request('sort') == 'price_low' ? 'selected' : '' }}>Price: Low to High
+                        </option>
+                        <option value="price_high" {{ request('sort') == 'price_high' ? 'selected' : '' }}>Price: High to Low
+                        </option>
+                     </select>
                      </div>
                   </div>
                </div>
                
                <div class="col-md-4 col-lg-3">
                   <div class="filterByList mt-lg-4 mt-2">
-                     <div class="productCategoriesFilter">
-                        <h4 class="text-uppercase">Categories</h4>
-                       
-                         @include('frontend.categories.category-tree',[
-                              'items'=>$sidebarCategories,
-                              'category'=>$category,
-                              'activeCategories'=>$activeCategories,
-                              'level' => 0
-                          ])
-                        
-                     </div>
-                     <!-- <div class="productCategoriesFilter mt-lg-5 mt-md-4 mt-2">
-                        <h4 class="text-uppercase">Shop By Industry</h4>
-                        <ul class="ps-0">
-                           <li><a href="#">Warehouse</a></li>
-                           <li><a href="#">Manufacturing</a></li>
-                           <li><a href="#">Construction</a></li>
-                           <li><a href="#">Retail</a></li>
-                           <li><a href="#">Education</a></li>
-                           <li><a href="#">Public Sector</a></li>
-                           <li><a href="#">Healthcare</a></li>
-                           <li><a href="#">Hospitality</a></li>
-                        </ul>
-                     </div> -->
+
+                     @if($type == 'category')
+
+                         @include('frontend.categories.categories')
+                         @include('frontend.categories.industries')
+                         @include('frontend.categories.brands')
+
+                     @elseif($type == 'industry')
+
+                         @include('frontend.categories.industries')
+                         @include('frontend.categories.categories')
+                         @include('frontend.categories.brands')
+
+                     @elseif($type == 'brand')
+
+                         @include('frontend.categories.brands')
+                         @include('frontend.categories.categories')
+                         @include('frontend.categories.industries')
+
+                     @endif
+
+                     
+                     
+                     
                   </div>
                </div>
                
@@ -97,9 +106,7 @@
                         <div class="d-flex col-lg-4 col-sm-6">
                            <a href="{{route('products.show',$product->slug)}}" class="product w-100">
                               <div class="productThumb positionRelative">
-                                 <img alt="" class="imgResponsive" src="{{ $product->primaryImage
-            ? asset('storage/'.$product->primaryImage->image)
-            : asset('images/no-image.png') }}"  alt="{{ $product->name }}">
+                                 <img alt="" class="imgResponsive" src="{{ $product->primaryImage? asset('storage/'.$product->primaryImage->image): asset('images/no-image.png') }}"  alt="{{ $product->name }}">
                                  <div class="actionBtn">
                                     <button class="customBtn01 mt-2 me-1 bg-white text-blue" href="{{route('products.show',$product->slug)}}">Quick View</button> 
                                     <button class="customBtn01 mt-2 redBg text-white add-to-cart-btn" data-product-id="{{ $product->id }}">Add to Cart</button>

@@ -38,7 +38,7 @@ class Industry extends Model
     // Relationships
     public function categories()
     {
-        return $this->belongsToMany(Category::class, 'industry_categories');
+        return $this->belongsToMany(Category::class, 'industry_categories')->distinct();
     }
 
     public function products()
@@ -49,5 +49,18 @@ class Industry extends Model
     public function brands()
     {
         return $this->belongsToMany(Brand::class, 'industry_brands');
+    }
+    public function breadcrumbs()
+    {
+        $breadcrumbs = collect();
+
+        $industry = $this;
+
+        while ($industry) {
+            $breadcrumbs->prepend($industry);
+            $industry = $industry->parent;
+        }
+
+        return $breadcrumbs;
     }
 }

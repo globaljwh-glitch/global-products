@@ -35,4 +35,17 @@ class Brand extends Model
     {
         return $this->belongsToMany(Category::class);
     }
+    public function breadcrumbs()
+    {
+        $breadcrumbs = collect();
+
+        $brand = $this;
+
+        while ($brand) {
+            $breadcrumbs->prepend($brand);
+            $brand = $brand->parent;
+        }
+
+        return $breadcrumbs;
+    }
 }

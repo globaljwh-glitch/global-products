@@ -92,12 +92,12 @@
                      <li>
                         {{-- Show only 6 categories --}}
                         @foreach($categories_data->take(6) as $category)
-                           <!-- <a class="dropdown-item" href="{{ route('products.index', ['type' => 'category', 'slug' => $category->slug]) }}">
-                              {{ ucfirst($category->name) }}
-                           </a> -->
-                           <a class="dropdown-item" href="{{ url('/category/'.$category->slug) }}">
+                           <a class="dropdown-item" href="{{ route('products.index', ['type' => 'category', 'slug' => $category->slug]) }}">
                               {{ ucfirst($category->name) }}
                            </a>
+                              <!-- <a class="dropdown-item" href="{{ url('/category/'.$category->slug) }}">
+                                 {{ ucfirst($category->name) }}
+                              </a> -->
                         @endforeach
 
                         {{-- Divider --}}
@@ -123,12 +123,7 @@
                         <a class="dropdown-item fw-bold text-center" href="/brands">
                            View All Brands →
                         </a>
-                        <!-- <a class="dropdown-item" href="{{ route('products.index') }}">Storage &amp; Shelving</a>
-                        <a class="dropdown-item" href="{{ route('products.index') }}">Safety &amp; Security</a>
-                        <a class="dropdown-item" href="{{ route('products.index') }}">Plumbing &amp; Pumps</a>
-                        <a class="dropdown-item" href="{{ route('products.index') }}">Material Handling</a>
-                        <a class="dropdown-item" href="{{ route('products.index') }}">HVAC &amp; Fans</a>
-                        <a class="dropdown-item" href="{{ route('products.index') }}">Workbenches &amp; Shop Desks</a> -->
+                        
                      </li>
                   </ul>
                </li>

@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Industry;
 
+use App\Models\Brand;
 class CategoryController extends Controller
 {
     public function index()
@@ -50,7 +52,7 @@ class CategoryController extends Controller
             compact('category', 'subCategories')
         );
     }
-    public function category($slug)
+    public function category(Request $request,$slug)
     {
         $category = Category::with('parentRecursive', 'childrenRecursive')
         ->where('slug', $slug)
@@ -109,9 +111,35 @@ class CategoryController extends Controller
         */
         //echo "<pre>";print_r($categoryIds);die;
         //$products = Product::whereIn('category_id', $categoryIds)->paginate(20);
-        $products = Product::with('primaryImage')->withAvg('reviews', 'rating')->whereHas('categories', function ($query) use ($categoryIds) {
+        $query = Product::with('primaryImage')->withAvg('reviews', 'rating')->whereHas('categories', function ($query) use ($categoryIds) {
                 $query->whereIn('categories.id', $categoryIds);
-                })->distinct()->paginate(20);
+                });
+        // SORTING
+        switch ($request->get('sort')) {
+
+            case 'price_low':
+
+                $query->orderBy('price', 'asc');
+
+                break;
+
+            case 'price_high':
+
+                $query->orderBy('price', 'desc');
+
+                break;
+
+            case 'new':
+
+                $query->latest();
+
+                break;
+
+            default:
+
+                $query->latest();
+        }
+        $products = $query->paginate(24)->withQueryString();
         //echo "<pre>";print_r($products->toArray());die;
         return view('frontend.categories.products-list', compact(
             'category',
@@ -121,7 +149,138 @@ class CategoryController extends Controller
             'breadcrumbs'
         ));
     }
+    public function getProducts(Request $request, $type = null, $slug = null, $slug2 = null)
+    {
+        $query = Product::with([
+            'primaryImage',
+            'categories',
+            'brands',
+            'industries'
+            ])->withAvg('reviews', 'rating')->where('status', 1);
+        $category          = [];
+        $industry          = [];
+        $sidebarCategories = [];
+        $products          = [];
+        $activeCategories  = [];
+        $breadcrumbs       = [];
+        $brand             = [];
+       if ($type && $slug) 
+       {
+          switch ($type) 
+          {
+            case 'category':
+              $category = Category::with('parentRecursive', 'childrenRecursive')->where('slug', $slug)->firstOrFail();
+              $breadcrumbs = $category->breadcrumbs();
+              /****** Find Root Category ******/
+              $root = $category;
+              while ($root->parent) {
+                  $root = $root->parent;
+              }
 
+              /****** Sidebar Categories ******/
+              $sidebarCategories = Category::with('childrenRecursive')->where('id', $root->id)->get();
+              /****** Active Parent IDs (Auto Expand) ******/
+
+              $temp = $category;
+
+              while ($temp) {
+                  $activeCategories[] = $temp->id;
+                  $temp = $temp->parent;
+              }
+
+              /****** Current Category + Child Categories ******/
+
+              $categoryIds = $this->getCategoryIds($category);
+              $query->whereHas('categories', function ($q) use ($categoryIds) {
+                  $q->whereIn('categories.id', $categoryIds);
+              });
+              break;
+            
+            case 'industry':
+              $industry = Industry::with('categories')->where('slug', $slug)->firstOrFail();
+              $breadcrumbs = $industry->breadcrumbs();
+              $sidebarCategories = $industry->categories;
+              //echo "<pre>";print_r($sidebarCategories->toArray());die;
+              $query->whereHas('industries', function ($q) use ($industry) {
+
+                  $q->where('industries.id', $industry->id);
+
+              });
+
+              break;
+            case 'brand':
+              $brand = Brand::with('categories')->where('slug', $slug)->firstOrFail();
+              $sidebarCategories = $brand->categories;
+              $breadcrumbs = $brand->breadcrumbs();
+              $query->whereHas('brands', function ($q) use ($brand) {
+
+                  $q->where('brands.id', $brand->id);
+              });
+
+              break;
+
+            default:
+
+                    abort(404);
+            }
+        }
+
+
+        // SEARCH
+        // if ($request->filled('search')) {
+
+        //     $search = trim($request->search);
+
+        //     $query->where(function ($q) use ($search) {
+
+        //         $q->where('name', 'like', "%{$search}%")
+        //             ->orWhere('sku', 'like', "%{$search}%")
+        //             ->orWhere('model_number', 'like', "%{$search}%");
+
+        //     });
+        // }
+
+
+        // SORTING
+        switch ($request->get('sort')) {
+
+            case 'price_low':
+
+                $query->orderBy('price', 'asc');
+
+                break;
+
+            case 'price_high':
+
+                $query->orderBy('price', 'desc');
+
+                break;
+
+            case 'new':
+
+                $query->latest();
+
+                break;
+
+            default:
+
+                $query->latest();
+        }
+
+        $products = $query->paginate(9)
+            ->withQueryString();
+
+        return view('frontend.categories.products-list', compact(
+            'category',
+            'sidebarCategories',
+            'products',
+            'activeCategories',
+            'breadcrumbs',
+            'industry',
+            'brand',
+            'type'
+        )); 
+    }
     private function getCategoryIds($category)
     {
         $ids = [$category->id];

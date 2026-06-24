@@ -668,7 +668,8 @@ tr.tableHeading th {
   background-color: #efefef;
   color: #55544f;
 }
-.categories-list-group-item.categories-list-group-item-action, .categories-list-group-item.categories-list-group-item-action:hover {
+.categories-list-group-item.categories-list-group-item-action.active, 
+.categories-list-group-item.categories-list-group-item-action:hover {
   background-color: #eb001b;
   color: #fff;
 }
@@ -1886,4 +1887,12 @@ ul.ps-0.active-3, ul.ps-0.active-4, ul.ps-0.active-5, ul.ps-0.active-6, ul.ps-0.
     margin-left: 9px !important;
     background: #efefef;
     border-left: 1px solid #e2e2e2;
+}
+.partner {
+    border: 1px solid #dddddd;
+    border-radius: 5px;
+    overflow: hidden;
+    display: inline-block;
+    width: 100%;
+    margin-top: 25px;
 }
