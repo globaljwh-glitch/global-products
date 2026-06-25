@@ -1897,10 +1897,11 @@ ul.ps-0.active-3, ul.ps-0.active-4, ul.ps-0.active-5, ul.ps-0.active-6, ul.ps-0.
     width: 100%;
     margin-top: 25px;
     padding: 15px;
-    min-height: 170px;
 }
  
 .partner .imgResponsive {
-    width: 90%;
     max-width: 140px;
+    height: 100px;
+    object-fit: contain;
+    width: 100%;
 }
