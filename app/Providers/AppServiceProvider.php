@@ -35,7 +35,7 @@ class AppServiceProvider extends ServiceProvider
             $categoriesData = Cache::remember('header_categories', 3600, function () {
                 return Category::whereNull('parent_id')
                     ->where('status', 1)
-                    ->orderBy('display_order')
+                    ->orderBy('name', 'asc')
                     ->get();
             });
             //Cache::forget('header_brands');
@@ -106,7 +106,7 @@ class AppServiceProvider extends ServiceProvider
 
             $categories = Category::whereNull('parent_id')
                 ->where('status', 1)
-                ->orderBy('display_order', 'asc')
+                ->orderBy('name', 'asc')
                 ->get();
 
             $brands = Brand::where('status', 1)
