@@ -17,23 +17,19 @@
 
                     @forelse($f_brands as $brand)
 
-                        <div class="col-sm-3 col-lg-2 d-flex">
+                        <div class="col-lg-2 col-md-3 col-sm-4 d-flex">
 
                             <a href="{{route('brands.details',$brand->slug)}}"
-                               class="categoriesBox text-center">
+                               class="partner d-flex align-items-center justify-content-end">
 
-                                <div class="categoriesThumb">
+                                <div class="partnerLogo w-100 text-center">
 
                                     <img src="{{ asset('storage/'.$brand->logo) }}"
                                          class="imgResponsive"
                                          alt="{{ $brand->name }}">
 
                                 </div>
-
-                                <h6 class="categoriesName mb-0">
-                                    {{ $brand->name }}
-                                </h6>
-
+                                
                             </a>
 
                         </div>

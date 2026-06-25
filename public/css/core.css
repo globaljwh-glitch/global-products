@@ -1888,6 +1888,7 @@ ul.ps-0.active-3, ul.ps-0.active-4, ul.ps-0.active-5, ul.ps-0.active-6, ul.ps-0.
     background: #efefef;
     border-left: 1px solid #e2e2e2;
 }
+
 .partner {
     border: 1px solid #dddddd;
     border-radius: 5px;
@@ -1895,4 +1896,11 @@ ul.ps-0.active-3, ul.ps-0.active-4, ul.ps-0.active-5, ul.ps-0.active-6, ul.ps-0.
     display: inline-block;
     width: 100%;
     margin-top: 25px;
+    padding: 15px;
+    min-height: 170px;
+}
+ 
+.partner .imgResponsive {
+    width: 90%;
+    max-width: 140px;
 }
