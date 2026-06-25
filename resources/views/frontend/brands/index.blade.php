@@ -12,7 +12,7 @@
                 </div>
             </div>
 
-            <div class="productCategoriesList">
+            <div class="ourBrandList">
                 <div class="row">
 
                     @forelse($f_brands as $brand)

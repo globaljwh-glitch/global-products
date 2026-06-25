@@ -1814,6 +1814,11 @@ footer li span {
   .searchBarHeader {
     top: 58px;
   }
+
+  .ourBrandList .col-lg-2.col-md-3.col-sm-4.d-flex {
+    width: 48%;
+  }
+  
 }
 
 /*------------------------------------- Max-Width: 410 ----------------------------------*/
