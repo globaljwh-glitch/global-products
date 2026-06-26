@@ -4,8 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
-
-
+use Illuminate\Support\Facades\URL;
 use App\Services\HeaderCountService;
 use Illuminate\Support\Facades\Cache;
 use App\Models\Category;
