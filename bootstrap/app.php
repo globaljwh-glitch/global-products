@@ -15,8 +15,11 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'frontauth' => \App\Http\Middleware\FrontAuth::class,
         ]);
+
+    $middleware->trustProxies(at: '*');
         //
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
     })->create();
+
