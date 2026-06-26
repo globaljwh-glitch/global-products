@@ -66,7 +66,7 @@
             </div>
          </div>
       </section>
-      <section class="newsLetterBlock greyBg sectionPadding">
+      <!-- <section class="newsLetterBlock greyBg sectionPadding">
          <div class="container">
             <div class="row">
                <div class="col-md-12 col-lg-6 d-flex align-items-center">
@@ -83,7 +83,8 @@
                </div>
             </div>
          </div>
-      </section>
+      </section> -->
+      @include('frontend.partials.subscribe')
 
 
 <!-- <div class="container py-5">
