@@ -35,6 +35,12 @@ use App\Http\Controllers\Frontend\SafetyServiceController;
 use App\Http\Controllers\Admin\SafetyServiceRequestController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProductVariantController;
+use App\Http\Controllers\Admin\SettingController;
+
+Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () {
+    Route::get('settings', [SettingController::class, 'index'])->name('settings.index');
+    Route::post('settings', [SettingController::class, 'update'])->name('settings.update');
+});
 
 Route::get(
     '/admin/categories/children/{id}',

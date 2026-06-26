@@ -432,6 +432,19 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
                     &nbsp;Profile
                 </a>
 
+                <!-- <a href="{{ route('admin.settings.index') }}"
+                class="block py-2 px-3 rounded-md transition 
+                {{ request()->routeIs('admin.settings.*')
+                        ? 'bg-slate-800 text-white border-l-4 border-blue-500'
+                        : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
+                    
+                    <i class="fa-solid fa-gears text-yellow-400"></i>
+                    &nbsp;Settings
+                </a> -->
+                <a href="{{ route('admin.settings.index') }}" class="block py-2 hover:text-white {{ request()->routeIs('admin.settings.*')
+        ? 'bg-slate-800 text-white border-l-4 border-blue-500'
+        : 'text-slate-300 hover:bg-slate-800' }}"><i class="fa-solid fa-gears text-yellow-400"></i>&nbsp; Settings</a>
+
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
 
