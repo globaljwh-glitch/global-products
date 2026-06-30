@@ -3,7 +3,7 @@
       <div class="row">
          <div class="col-md-6 d-flex align-items-center">
             @if($headerOffer)
-            <p class="mb-0 fw-medium">{{ $headerOffer->title }} <a href="{{ route('products.index') }}">{{ ucwords(strtolower($headerOffer->button_text)) }}</a>
+            <p class="mb-0 fw-medium">{{ $headerOffer->title }} <a href="{{ $headerOffer->button_url ?? '#' }}">{{ ucwords(strtolower($headerOffer->button_text)) }}</a>
             </p>
             @endif
          </div>
