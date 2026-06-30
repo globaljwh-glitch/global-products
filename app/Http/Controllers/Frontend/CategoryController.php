@@ -141,12 +141,14 @@ class CategoryController extends Controller
         }
         $products = $query->paginate(24)->withQueryString();
         //echo "<pre>";print_r($products->toArray());die;
+        $type = "category";
         return view('frontend.categories.products-list', compact(
             'category',
             'sidebarCategories',
             'products',
             'activeCategories',
-            'breadcrumbs'
+            'breadcrumbs',
+            'type'
         ));
     }
     public function getProducts(Request $request, $type = null, $slug = null, $slug2 = null)
