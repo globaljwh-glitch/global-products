@@ -20,7 +20,7 @@ class ProductController extends Controller
             'categories',
             'brands',
             'industries'
-        ])
+        ])->withAvg('reviews', 'rating')->withCount('reviews')
             ->where('status', 1);
 
         // FILTERING
@@ -123,7 +123,7 @@ class ProductController extends Controller
         ));
     }
 
-    public function wishlist(Request $request, $type = null, $slug = null)
+    public function wishlist(Request $request)
     {
         $query = Product::with([
             'mainImage',
@@ -131,43 +131,31 @@ class ProductController extends Controller
             'brands',
             'industries'
         ])
-            ->join('favorites', 'products.id', '=', 'favorites.product_id')
-            ->where('favorites.user_id', auth()->id())
-            ->where('products.status', 1)
-            ->select('products.*');
+            ->withAvg('reviews', 'rating')
+            ->withCount('reviews')
+            ->where('status', 1)
+            ->whereHas('favoritedByUsers', function ($q) {
+                $q->where('users.id', auth()->id());
+            });
 
-        // SORTING
         switch ($request->get('sort')) {
-
             case 'price_low':
-
                 $query->orderBy('price', 'asc');
-
                 break;
 
             case 'price_high':
-
                 $query->orderBy('price', 'desc');
-
                 break;
 
             case 'new':
-
-                $query->latest();
-
-                break;
-
             default:
-
                 $query->latest();
+                break;
         }
 
-        $products = $query->paginate(9)
-            ->withQueryString();
+        $products = $query->paginate(9)->withQueryString();
 
-        return view('frontend.wishlist.index', compact(
-            'products'
-        ));
+        return view('frontend.wishlist.index', compact('products'));
     }
 
     public function show($slug)
@@ -177,7 +165,7 @@ class ProductController extends Controller
             'mainImage',
             'categories',
             'questions'
-        ])
+        ])->withAvg('reviews', 'rating')->withCount('reviews')
             ->where('slug', $slug)
             ->where('status', 1)
             ->firstOrFail();
@@ -295,20 +283,25 @@ class ProductController extends Controller
     public function store_product_review(Request $request)
     {
         $request->validate([
-            'product_id' => 'required',
-            'rating' => 'required|min:1|max:5',
-            'review' => 'required',
+            'product_id' => 'required|exists:products,id',
+            'rating' => 'required|integer|min:1|max:5',
+            'review' => 'required|string',
+            'title' => 'nullable|string|max:255',
         ]);
 
-        ProductReview::create([
-            'product_id' => $request->product_id,
-            'user_id' => auth()->id(),
-            'rating' => $request->rating,
-            'title' => $request->title,
-            'review' => $request->review,
-            'status' => 1,
-        ]);
+        ProductReview::updateOrCreate(
+            [
+                'product_id' => $request->product_id,
+                'user_id' => auth()->id(),
+            ],
+            [
+                'rating' => $request->rating,
+                'title' => $request->title,
+                'review' => $request->review,
+                'status' => 1,
+            ]
+        );
 
-        return back()->with('success', 'Review submitted successfully.');
+        return back()->with('success', 'Your review has been saved successfully.');
     }
 }

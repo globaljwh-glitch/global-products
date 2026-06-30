@@ -22,14 +22,17 @@ class HomeController extends Controller
             ->get();
 
         $bestSellers = Product::with('mainImage')
+            ->withAvg('reviews', 'rating')
+            ->withCount('reviews')
             ->where('status', 1)
             ->where('is_featured', 1)
             ->orderBy('display_order')
             ->take(10)
             ->get();
 
-
         $latestProducts = Product::with('mainImage')
+            ->withAvg('reviews', 'rating')
+            ->withCount('reviews')
             ->where('status', 1)
             ->latest()
             ->take(4)

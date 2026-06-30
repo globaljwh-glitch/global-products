@@ -44,7 +44,22 @@
                                        </div>
 
                                        <div class="productRating">
-                                          ⭐⭐⭐⭐⭐
+                                          @php
+                                             $rating = round($product->reviews_avg_rating ?? 0);
+                                          @endphp
+
+                                          @for($i = 1; $i <= 5; $i++)
+                                             @if($i <= $rating)
+                                                   ⭐
+                                             @else
+                                                   ☆
+                                             @endif
+                                          @endfor
+
+                                         <small class="text-muted">
+                                          {{ number_format($product->reviews_avg_rating ?? 0, 1) }}
+                                          ({{ $product->reviews_count ?? 0 }} {{ Str::plural('Review', $product->reviews_count ?? 0) }})
+                                       </small>
                                        </div>
 
                                        <div class="productPrice text-red fw-bold">

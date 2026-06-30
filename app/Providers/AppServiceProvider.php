@@ -5,8 +5,11 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\URL;
-use App\Services\HeaderCountService;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Pagination\Paginator;
+
+use App\Services\HeaderCountService;
+
 use App\Models\Category;
 use App\Models\Brand;
 use App\Models\Industry;
@@ -14,7 +17,6 @@ use App\Models\Product;
 use App\Models\Banner;
 use App\Models\Offer;
 use App\Models\News;
-use Illuminate\Pagination\Paginator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -25,29 +27,52 @@ class AppServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
-        if ($_ENV['APP_ENV'] ?? 'local' === 'production') {
+<<<<<<< Updated upstream
+        if (config('app.env') === 'production') {
+=======
+        //if ($_ENV['APP_ENV'] ?? 'local' === 'production') {
+>>>>>>> Stashed changes
             URL::forceScheme('https');
-        }
+        //}
 
         Paginator::useBootstrapFive();
-        //Paginator::useBootstrap();
 
-        View::composer('*', function ($view) {
+        View::composer([
+            'layouts.frontend',
+            'frontend.*',
+        ], function ($view) {
 
+            // ===============================
+            // Categories
+            // ===============================
             $categoriesData = Cache::remember('header_categories', 3600, function () {
                 return Category::whereNull('parent_id')
                     ->where('status', 1)
-                    ->orderBy('name', 'asc')
+                    ->orderBy('name')
                     ->get();
             });
-            //Cache::forget('header_brands');
+
+            // ===============================
+            // Brands
+            // ===============================
             $brandsData = Cache::remember('header_brands', 3600, function () {
                 return Brand::where('status', 1)
-                    //->where('is_featured', 1)
                     ->orderBy('display_order')
                     ->get();
             });
 
+            // ===============================
+            // Industries
+            // ===============================
+            $industriesData = Cache::remember('header_industries', 3600, function () {
+                return Industry::where('status', 1)
+                    ->orderBy('display_order')
+                    ->get();
+            });
+
+            // ===============================
+            // Banner
+            // ===============================
             $bannerData = Cache::remember('header_banner', 3600, function () {
                 return Banner::where('is_featured', 1)
                     ->where('status', 1)
@@ -55,6 +80,9 @@ class AppServiceProvider extends ServiceProvider
                     ->first();
             });
 
+            // ===============================
+            // Header Offer
+            // ===============================
             $offerData = Cache::remember('header_offer', 3600, function () {
                 return Offer::where('offer_code', 'OFFER50')
                     ->where('status', 1)
@@ -62,20 +90,19 @@ class AppServiceProvider extends ServiceProvider
                     ->first();
             });
 
+            // ===============================
+            // Featured Offers
+            // ===============================
             $offerFeaturedData = Cache::remember('header_offer_featured', 3600, function () {
                 return Offer::where('is_featured', 1)
                     ->where('status', 1)
                     ->take(2)
                     ->get();
             });
-            //Cache::forget('header_industries');
-            $industriesData = Cache::remember('header_industries', 3600, function () {
-                return Industry::where('status', 1)
-                    //->where('is_featured', 1)
-                    ->orderBy('display_order')
-                    ->get();
-            });
-            //echo "<pre>";print_r($industriesData);die;
+
+            // ===============================
+            // News
+            // ===============================
             $newsData = Cache::remember('header_news', 3600, function () {
                 return News::where('is_featured', 1)
                     ->where('status', 'published')
@@ -83,60 +110,60 @@ class AppServiceProvider extends ServiceProvider
                     ->get();
             });
 
+            // ===============================
+            // Latest Products (Cached)
+            // ===============================
+            $latestProducts = Cache::remember('latest_products', 1800, function () {
+                return Product::with('mainImage')
+                    ->withAvg('reviews', 'rating')
+                    ->withCount('reviews')
+                    ->where('status', 1)
+                    ->latest()
+                    ->take(4)
+                    ->get();
+            });
 
-            $recentlyViewedIds = session()->get('recently_viewed', []);
+            // ===============================
+            // Header Counts (Cached)
+            // ===============================
+            $counts = Cache::remember('header_counts', 600, function () {
+                return app(HeaderCountService::class)->getCounts();
+            });
 
+            // ===============================
+            // Recently Viewed
+            // ===============================
             $recentProducts = collect();
 
+            $recentlyViewedIds = session('recently_viewed', []);
+
             if (!empty($recentlyViewedIds)) {
-                $recentProducts = Product::whereIn('id', $recentlyViewedIds)
-                    ->with('mainImage')
+
+                $recentProducts = Product::with('mainImage')
+                    ->whereIn('id', $recentlyViewedIds)
                     ->get()
-                    ->sortByDesc(function ($product) use ($recentlyViewedIds) {
+                    ->sortBy(function ($product) use ($recentlyViewedIds) {
                         return array_search($product->id, $recentlyViewedIds);
                     });
             }
-
-            // ✅ Pass both globally
-            //dd($brandsData);
-
-            $latestProducts = Product::with('mainImage')
-                ->where('status', 1)
-                ->latest()
-                ->take(4)
-                ->get();
-
-            $categories = Category::whereNull('parent_id')
-                ->where('status', 1)
-                ->orderBy('name', 'asc')
-                ->get();
-
-            $brands = Brand::where('status', 1)
-                ->orderBy('display_order', 'asc')
-                ->get();
-
-            $industries = Industry::where('status', 1)
-                ->orderBy('display_order', 'asc')
-                ->get();
-
-            $counts = app(HeaderCountService::class)->getCounts();
-
-
 
             $view->with([
                 'categories_data' => $categoriesData,
                 'brands_data' => $brandsData,
                 'industries_data' => $industriesData,
-                'globalRecentProducts' => $recentProducts,
-                'banner' => $bannerData, 
-                //'offer' => $offerData,
+
+                // Reuse cached data
+                'f_categories' => $categoriesData,
+                'f_brands' => $brandsData,
+                'f_industries' => $industriesData,
+
+                'banner' => $bannerData,
                 'headerOffer' => $offerData,
                 'offer_featured' => $offerFeaturedData,
                 'news_data' => $newsData,
+
                 'latestProducts' => $latestProducts,
-                'f_categories' => $categories,
-                'f_brands' => $brands,
-                'f_industries' => $industries,
+                'globalRecentProducts' => $recentProducts,
                 'headerCounts' => $counts,
             ]);
         });

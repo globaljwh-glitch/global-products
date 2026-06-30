@@ -54,11 +54,23 @@
                                                 Model #: {{ $product->sku ?? 'N/A' }}
                                              </div>
                                              <div class="productRating">
-                                                <i class="fa-solid fa-star text-warning"></i>
-                                                <i class="fa-solid fa-star text-warning"></i>
-                                                <i class="fa-solid fa-star text-warning"></i>
-                                                <i class="fa-regular fa-star"></i>
-                                                <i class="fa-regular fa-star"></i>
+                                                @php
+                                                   $rating = round($product->reviews_avg_rating ?? 0);
+                                                @endphp
+
+                                                @for($i = 1; $i <= 5; $i++)
+                                                   @if($i <= $rating)
+                                                      ⭐
+                                                   @else
+                                                      ☆
+                                                   @endif
+                                                @endfor
+
+                                                <small class="text-muted">
+                                                   {{ number_format($product->reviews_avg_rating ?? 0, 1) }}
+                                                   ({{ $product->reviews_count ?? 0 }}
+                                                   {{ Str::plural('Review', $product->reviews_count ?? 0) }})
+                                                </small>
                                              </div>
 
                                              <div class="productPrice text-red fw-bold">
@@ -124,15 +136,15 @@
       class="shadow-lg">
 
       <div style="
-           background:linear-gradient(135deg,#16a34a,#22c55e);
-           color:#fff;
-           padding:16px 20px;
-           border-radius:12px;
-           display:flex;
-           align-items:center;
-           gap:12px;
-           box-shadow:0 10px 25px rgba(0,0,0,.15);
-       ">
+                 background:linear-gradient(135deg,#16a34a,#22c55e);
+                 color:#fff;
+                 padding:16px 20px;
+                 border-radius:12px;
+                 display:flex;
+                 align-items:center;
+                 gap:12px;
+                 box-shadow:0 10px 25px rgba(0,0,0,.15);
+             ">
          <div style="font-size:24px;">✓</div>
 
          <div>
@@ -173,7 +185,7 @@
             },
 
             success: function (response) {
-                 updateHeaderCounts();
+               updateHeaderCounts();
                // $('#successMessage')
                //    .html(response.message)
                //    .fadeIn();
@@ -181,7 +193,7 @@
                // setTimeout(function () {
                //    $('#successMessage').fadeOut();
                // }, 5000);
-             
+
                $('#successToastMessage').html(response.message);
 
                $('#successToast')
