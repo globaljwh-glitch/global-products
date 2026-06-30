@@ -20,7 +20,7 @@ class BrandController extends Controller
     {
         $brand = Brand::with('categories')->where('slug', $slug)->firstOrFail();
         //echo "<pre>";print_r($industry->toArray());die;
-        $products = Product::with('primaryImage')->withAvg('reviews', 'rating')->whereHas('brandProducts', function ($query) use ($brand) {
+        $products = Product::with('primaryImage')->withAvg('reviews', 'rating')->withCount('reviews')->whereHas('brandProducts', function ($query) use ($brand) {
                 $query->where('brands.id', $brand->id);
                 })->paginate(8);
         return view('frontend.brands.brand-details', compact('brand','products'));
