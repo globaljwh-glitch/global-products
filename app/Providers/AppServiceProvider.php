@@ -100,11 +100,16 @@ class AppServiceProvider extends ServiceProvider
             // ✅ Pass both globally
             //dd($brandsData);
 
+
             $latestProducts = Product::with('mainImage')
+                ->withAvg('reviews', 'rating')
+                ->withCount('reviews')
                 ->where('status', 1)
                 ->latest()
                 ->take(4)
                 ->get();
+
+
 
             $categories = Category::whereNull('parent_id')
                 ->where('status', 1)
@@ -128,7 +133,7 @@ class AppServiceProvider extends ServiceProvider
                 'brands_data' => $brandsData,
                 'industries_data' => $industriesData,
                 'globalRecentProducts' => $recentProducts,
-                'banner' => $bannerData, 
+                'banner' => $bannerData,
                 //'offer' => $offerData,
                 'headerOffer' => $offerData,
                 'offer_featured' => $offerFeaturedData,

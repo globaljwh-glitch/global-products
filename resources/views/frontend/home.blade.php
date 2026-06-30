@@ -23,28 +23,26 @@
       }
    </style>
 
-@include('frontend.partials.banner')
+   @include('frontend.partials.banner')
 
    <!-- Paste your homepage HTML here -->
-    @if($offer_featured->count())
-   <section class="sectionPadding pb-0">
-      <div class="container">
-         <div class="row">
+   @if($offer_featured->count())
+      <section class="sectionPadding pb-0">
+         <div class="container">
+            <div class="row">
 
-            @foreach($offer_featured as $offer)
+               @foreach($offer_featured as $offer)
 
-                <div class="col-sm-6">
-                    <div class="smallBannerOffers">
-                        <img src="{{ asset('storage/'.$offer->image) }}" 
-                             class="imgResponsive"
-                             alt="">
-                    </div>
-                </div>
+                  <div class="col-sm-6">
+                     <div class="smallBannerOffers">
+                        <img src="{{ asset('storage/' . $offer->image) }}" class="imgResponsive" alt="">
+                     </div>
+                  </div>
 
-            @endforeach
+               @endforeach
+            </div>
          </div>
-      </div>
-   </section>
+      </section>
    @endif
    <section class="sectionPadding">
       <div class="container">
@@ -102,11 +100,13 @@
                         : asset('images/no-product.png') }}">
 
                                              <div class="actionBtn">
-                                                <button onclick="window.location.href='{{ route('products.show', $product->slug) }}'" class="customBtn01 mt-2 me-1 bg-white text-blue">
+                                                <button onclick="window.location.href='{{ route('products.show', $product->slug) }}'"
+                                                   class="customBtn01 mt-2 me-1 bg-white text-blue">
                                                    Quick View
                                                 </button>
 
-                                                <button class="customBtn01 mt-2 redBg text-white add-to-cart-btn" data-product-id="{{ $product->id }}">
+                                                <button class="customBtn01 mt-2 redBg text-white add-to-cart-btn"
+                                                   data-product-id="{{ $product->id }}">
                                                    Add to Cart
                                                 </button>
                                              </div>
@@ -121,7 +121,23 @@
                                              </div>
 
                                              <div class="productRating">
-                                                ⭐⭐⭐⭐⭐
+                                                @php
+                                                   $rating = round($product->reviews_avg_rating ?? 0);
+                                                @endphp
+
+                                                @for($i = 1; $i <= 5; $i++)
+                                                   @if($i <= $rating)
+                                                      ⭐
+                                                   @else
+                                                      ☆
+                                                   @endif
+                                                @endfor
+
+                                                <small class="text-muted">
+                                                   {{ number_format($product->reviews_avg_rating ?? 0, 1) }}
+                                                   ({{ $product->reviews_count ?? 0 }}
+                                                   {{ Str::plural('Review', $product->reviews_count ?? 0) }})
+                                                </small>
                                              </div>
 
                                              <div class="productPrice text-red fw-bold">
@@ -188,11 +204,13 @@
                      : asset('images/no-product.png') }}">
 
                                        <div class="actionBtn">
-                                          <button onclick="window.location.href='{{ route('products.show', $product->slug) }}'" class="customBtn01 mt-2 me-1 bg-white text-blue">
+                                          <button onclick="window.location.href='{{ route('products.show', $product->slug) }}'"
+                                             class="customBtn01 mt-2 me-1 bg-white text-blue">
                                              Quick View
                                           </button>
 
-                                          <button class="customBtn01 mt-2 redBg text-white add-to-cart-btn" data-product-id="{{ $product->id }}">
+                                          <button class="customBtn01 mt-2 redBg text-white add-to-cart-btn"
+                                             data-product-id="{{ $product->id }}">
                                              Add to Cart
                                           </button>
                                        </div>
@@ -211,7 +229,23 @@
                                        </div>
 
                                        <div class="productRating">
-                                          ⭐⭐⭐⭐⭐
+                                          @php
+                                             $rating = round($product->reviews_avg_rating ?? 0);
+                                          @endphp
+
+                                          @for($i = 1; $i <= 5; $i++)
+                                             @if($i <= $rating)
+                                                ⭐
+                                             @else
+                                                ☆
+                                             @endif
+                                          @endfor
+
+                                          <small class="text-muted">
+                                             {{ number_format($product->reviews_avg_rating ?? 0, 1) }}
+                                             ({{ $product->reviews_count ?? 0 }}
+                                             {{ Str::plural('Review', $product->reviews_count ?? 0) }})
+                                          </small>
                                        </div>
 
                                        <div class="productPrice text-red fw-bold">
@@ -223,7 +257,8 @@
                                              Quick View
                                           </button>
 
-                                          <button class="customBtn01 mt-2 redBg text-white add-to-cart-btn" data-product-id="{{ $product->id }}">
+                                          <button class="customBtn01 mt-2 redBg text-white add-to-cart-btn"
+                                             data-product-id="{{ $product->id }}">
                                              Add to Cart
                                           </button>
                                        </div>
@@ -240,41 +275,40 @@
          </div>
       </div>
    </section>
-      @include('frontend.partials.login')
+   @include('frontend.partials.login')
 
-      @include('frontend.partials.news')
+   @include('frontend.partials.news')
 
-      @include('frontend.partials.subscribe')
-   
+   @include('frontend.partials.subscribe')
 
-   <div id="successToast"
-    style="display:none; position:fixed; top:20px; right:20px; z-index:9999; min-width:320px;"
-    class="shadow-lg">
 
-    <div style="
-        background:linear-gradient(135deg,#16a34a,#22c55e);
-        color:#fff;
-        padding:16px 20px;
-        border-radius:12px;
-        display:flex;
-        align-items:center;
-        gap:12px;
-        box-shadow:0 10px 25px rgba(0,0,0,.15);
-    ">
-        <div style="font-size:24px;">✓</div>
+   <div id="successToast" style="display:none; position:fixed; top:20px; right:20px; z-index:9999; min-width:320px;"
+      class="shadow-lg">
 
-        <div>
+      <div style="
+              background:linear-gradient(135deg,#16a34a,#22c55e);
+              color:#fff;
+              padding:16px 20px;
+              border-radius:12px;
+              display:flex;
+              align-items:center;
+              gap:12px;
+              box-shadow:0 10px 25px rgba(0,0,0,.15);
+          ">
+         <div style="font-size:24px;">✓</div>
+
+         <div>
             <div style="font-weight:700;">
-                Success
+               Success
             </div>
 
             <div id="successToastMessage">
             </div>
-        </div>
-    </div>
-</div>
+         </div>
+      </div>
+   </div>
 
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
    <script>
       $(document).ready(function () {
 
@@ -310,57 +344,57 @@
       });
    </script>
 
-<script>
+   <script>
 
-$(document).on('click', '.add-to-cart-btn', function(e){
+      $(document).on('click', '.add-to-cart-btn', function (e) {
 
-    e.preventDefault();
+         e.preventDefault();
 
-    let button = $(this);
+         let button = $(this);
 
-    let productId = button.data('product-id');
+         let productId = button.data('product-id');
 
-    let quantity = 1; //$("#quantity").val();
+         let quantity = 1; //$("#quantity").val();
 
-    $.ajax({
+         $.ajax({
 
-        url: '/cart/add/' + productId,
+            url: '/cart/add/' + productId,
 
-        method: 'POST',
+            method: 'POST',
 
-        data: {
-            _token: $('meta[name="csrf-token"]').attr('content'),
-            quantity: quantity
-        },
+            data: {
+               _token: $('meta[name="csrf-token"]').attr('content'),
+               quantity: quantity
+            },
 
-        success: function(response){
+            success: function (response) {
 
-            // $('#successMessage')
-            //    .html(response.message)
-            //    .fadeIn();
+               // $('#successMessage')
+               //    .html(response.message)
+               //    .fadeIn();
 
-            // setTimeout(function () {
-            //    $('#successMessage').fadeOut();
-            // }, 5000);
-             updateHeaderCounts();
-            $('#successToastMessage').html(response.message);
+               // setTimeout(function () {
+               //    $('#successMessage').fadeOut();
+               // }, 5000);
+               updateHeaderCounts();
+               $('#successToastMessage').html(response.message);
 
                $('#successToast')
-                  .stop(true,true)
+                  .stop(true, true)
                   .fadeIn(300);
 
-               setTimeout(function(){
+               setTimeout(function () {
 
                   $('#successToast').fadeOut(400);
 
                }, 3000);
 
-        }
+            }
 
-    });
+         });
 
-});
+      });
 
-</script>
+   </script>
 
 @endsection

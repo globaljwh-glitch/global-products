@@ -175,31 +175,31 @@ Route::get('/paypal/cancel', [CheckoutController::class, 'paypalCancel'])
 
 //Route::get('/paypal/cancel', [CheckoutController::class, 'paypalCancel'])
 //Route::middleware('frontauth')->group(function () {
-    Route::prefix('cart')->group(function () {
+Route::prefix('cart')->group(function () {
 
-        Route::post('/add/{product}', [CartController::class, 'add'])
-            ->name('cart.add');
+    Route::post('/add/{product}', [CartController::class, 'add'])
+        ->name('cart.add');
 
-        Route::post('/remove/{product}', [CartController::class, 'remove'])
-            ->name('cart.remove'); // not in use
+    Route::post('/remove/{product}', [CartController::class, 'remove'])
+        ->name('cart.remove'); // not in use
 
-        Route::post('/remove-item', [CartController::class, 'removeItem'])
-            ->name('cart.remove.item');
+    Route::post('/remove-item', [CartController::class, 'removeItem'])
+        ->name('cart.remove.item');
 
-        Route::post('/update-quantity', [CartController::class, 'updateQuantity'])
-            ->name('cart.update.quantity');
+    Route::post('/update-quantity', [CartController::class, 'updateQuantity'])
+        ->name('cart.update.quantity');
 
-        Route::post(
-            '/apply-offer',
-            [CartController::class, 'applyOffer']
-        );
+    Route::post(
+        '/apply-offer',
+        [CartController::class, 'applyOffer']
+    );
 
-        Route::post(
-            '/remove-offer',
-            [CartController::class, 'removeOffer']
-        );
+    Route::post(
+        '/remove-offer',
+        [CartController::class, 'removeOffer']
+    );
 
-    });
+});
 //});
 
 Route::post(
@@ -210,7 +210,7 @@ Route::post(
     ->name('favorite.toggle');
 
 Route::get('/cart', [CartController::class, 'index'])
-        ->name('cart.index');
+    ->name('cart.index');
 
 Route::middleware('frontauth')->group(function () {
 
@@ -345,7 +345,7 @@ Route::get('/products', [FrontProductController::class, 'index'])->name('product
 Route::get('/product/{slug}', [FrontProductController::class, 'show'])->name('products.show');
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
 
-Route::get( '/header-counts',[HomeController::class,'counts'])->name('header.counts');
+Route::get('/header-counts', [HomeController::class, 'counts'])->name('header.counts');
 
 // Route::get('/', function () {
 //     return view('welcome');

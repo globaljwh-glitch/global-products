@@ -7,10 +7,10 @@
          <div class="row">
             <div class="col-md-4 col-lg-5">
                <!-- <div class="productLargeThumb positionRelative">
-                        <img class="imgResponsive" src="{{ $product->mainImage
-                           ? asset('storage/' . $product->mainImage->image)
-                           : asset('images/no-product.png') }}">
-                     </div> -->
+                           <img class="imgResponsive" src="{{ $product->mainImage
+                              ? asset('storage/' . $product->mainImage->image)
+                              : asset('images/no-product.png') }}">
+                        </div> -->
                <div class="productLargeThumb positionRelative">
                   <img id="mainProductImage" class="imgResponsive" src="{{ $product->mainImage
       ? asset('storage/' . $product->mainImage->image)
@@ -34,11 +34,22 @@
                      Model #: {{ $product->sku ?? 'N/A' }}
                   </div>
                   <div class="productRating">
-                     <span class="fa fa-star checked"></span>
-                     <span class="fa fa-star checked"></span>
-                     <span class="fa fa-star checked"></span>
-                     <span class="fa fa-star"></span>
-                     <span class="fa fa-star"></span>
+                     @php
+                        $rating = round($product->reviews_avg_rating ?? 0);
+                     @endphp
+
+                     @for($i = 1; $i <= 5; $i++)
+                        @if($i <= $rating)
+                           ⭐
+                        @else
+                           ☆
+                        @endif
+                     @endfor
+
+                     <small class="text-muted">
+                        {{ number_format($product->reviews_avg_rating ?? 0, 1) }}
+                        ({{ $product->reviews_count ?? 0 }} {{ Str::plural('Review', $product->reviews_count ?? 0) }})
+                     </small>
                   </div>
 
                   <div class="productPrice text-red fw-bold">
@@ -86,14 +97,14 @@
                         </form>
                      </div>
                      <!-- <p class="d-none mb-2">Ship to 16001 | <a href="#">Change zipcode</a></p>
-                           <p>Estimated delivery to <strong>16001</strong> by <strong>23rd Apr 2026</strong></p> -->
+                              <p>Estimated delivery to <strong>16001</strong> by <strong>23rd Apr 2026</strong></p> -->
 
                      @if(session()->has('delivery_zip'))
 
                         <p class="mb-2">
                            Ship to {{ session('delivery_zip') }}
                            <!-- |
-                                       <a href="#" id="changeZipCode">Change zipcode</a> -->
+                                             <a href="#" id="changeZipCode">Change zipcode</a> -->
                         </p>
 
                         <p>
@@ -373,29 +384,29 @@
 
                      @endif
                      <!-- <div class="qaList mt-2">
-                              <div class="qa">
-                                 <h5 class="mb-1">1) What is the shipping cost for this pallet jack?</h5>
-                                 <p>Ideal for use in construction, manufacturing, retail, and more, the Global Industrial™
-                                    Industrial-Duty Pallet Jack Truck is equipped with a strong & durable reinforced steel frame
-                                    and a German-engineered pump that allows users to raise and lower pallets or skids up to
-                                    5,500 lbs with ease.</p>
-                              </div>
-                              <div class="qa borderTop">
-                                 <h5 class="mb-1">2) Could you please tell me where this pallet jack is made? I need it's point
-                                    of origin for my customs paperwork.</h5>
-                                 <p>Ideal for use in construction, manufacturing, retail, and more, the Global Industrial™
-                                    Industrial-Duty Pallet Jack Truck is equipped with a strong & durable reinforced steel frame.
-                                 </p>
-                              </div>
-                              <div class="qa borderTop">
-                                 <h5 class="mb-1">3) Do you have a parts diagram for this pallet jacK?</h5>
-                                 <p>With over 75 years of experience and hundreds of thousands of products, Global Industrial
-                                    continues to be the source for industrial equipment and supplies that keep your business
-                                    running efficiently. Serving all of North America, Global Industrial offers a vast selection
-                                    of hand-picked and tested industrial-strength products, including material handling, storage
-                                    & shelving, safety & security, janitorial & facility maintenance, and HVAC & fans. </p>
-                              </div>
-                           </div> -->
+                                 <div class="qa">
+                                    <h5 class="mb-1">1) What is the shipping cost for this pallet jack?</h5>
+                                    <p>Ideal for use in construction, manufacturing, retail, and more, the Global Industrial™
+                                       Industrial-Duty Pallet Jack Truck is equipped with a strong & durable reinforced steel frame
+                                       and a German-engineered pump that allows users to raise and lower pallets or skids up to
+                                       5,500 lbs with ease.</p>
+                                 </div>
+                                 <div class="qa borderTop">
+                                    <h5 class="mb-1">2) Could you please tell me where this pallet jack is made? I need it's point
+                                       of origin for my customs paperwork.</h5>
+                                    <p>Ideal for use in construction, manufacturing, retail, and more, the Global Industrial™
+                                       Industrial-Duty Pallet Jack Truck is equipped with a strong & durable reinforced steel frame.
+                                    </p>
+                                 </div>
+                                 <div class="qa borderTop">
+                                    <h5 class="mb-1">3) Do you have a parts diagram for this pallet jacK?</h5>
+                                    <p>With over 75 years of experience and hundreds of thousands of products, Global Industrial
+                                       continues to be the source for industrial equipment and supplies that keep your business
+                                       running efficiently. Serving all of North America, Global Industrial offers a vast selection
+                                       of hand-picked and tested industrial-strength products, including material handling, storage
+                                       & shelving, safety & security, janitorial & facility maintenance, and HVAC & fans. </p>
+                                 </div>
+                              </div> -->
                   </div>
                </div>
             </div>
@@ -521,25 +532,25 @@
       </div>
    </section>
    <!-- <section class="newsLetterBlock greyBg sectionPadding">
-            <div class="container">
-               <div class="row">
-                  <div class="col-md-12 col-lg-6 d-flex align-items-center">
-                     <div class="w-100">
-                        <h2 class="fw-bold">Be the first to know about our daily sales!</h2>
-                        <p class="mb-lg-0 pe-lg-4">Subscribe to our newsletters now and stay up-to-date with new collections, the
-                           latest lookbooks.</p>
+               <div class="container">
+                  <div class="row">
+                     <div class="col-md-12 col-lg-6 d-flex align-items-center">
+                        <div class="w-100">
+                           <h2 class="fw-bold">Be the first to know about our daily sales!</h2>
+                           <p class="mb-lg-0 pe-lg-4">Subscribe to our newsletters now and stay up-to-date with new collections, the
+                              latest lookbooks.</p>
+                        </div>
                      </div>
-                  </div>
-                  <div class="col-md-12 col-lg-6 d-flex align-items-center">
-                     <div class="input-group subscribeNews ps-lg-3">
-                        <input type="text" class="form-control form-control-lg text-end-0" id=""
-                           placeholder="Enter Email Address">
-                        <button class="btn btn-lg customBtn01 redBg" type="submit" id="btnSearch">SubScribe</button>
+                     <div class="col-md-12 col-lg-6 d-flex align-items-center">
+                        <div class="input-group subscribeNews ps-lg-3">
+                           <input type="text" class="form-control form-control-lg text-end-0" id=""
+                              placeholder="Enter Email Address">
+                           <button class="btn btn-lg customBtn01 redBg" type="submit" id="btnSearch">SubScribe</button>
+                        </div>
                      </div>
                   </div>
                </div>
-            </div>
-         </section> -->
+            </section> -->
 
    @include('frontend.partials.subscribe')
 
@@ -573,7 +584,7 @@
             success: function (response) {
 
                // console.log(response);
-                  updateHeaderCounts();
+               updateHeaderCounts();
                if (response.status == 'added') {
 
                   button.text('REMOVE FROM WISHLIST');
