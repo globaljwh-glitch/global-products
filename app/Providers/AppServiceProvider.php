@@ -27,9 +27,13 @@ class AppServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
+<<<<<<< Updated upstream
         if (config('app.env') === 'production') {
+=======
+        //if ($_ENV['APP_ENV'] ?? 'local' === 'production') {
+>>>>>>> Stashed changes
             URL::forceScheme('https');
-        }
+        //}
 
         Paginator::useBootstrapFive();
 
