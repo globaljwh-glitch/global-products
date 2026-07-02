@@ -8,7 +8,7 @@ use Illuminate\Queue\SerializesModels;
 class ContactAdminMail extends Mailable
 {
     use SerializesModels;
-
+    public $timeout = 300;
     public $contact;
 
     public function __construct($contact)

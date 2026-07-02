@@ -8,6 +8,7 @@ use Illuminate\Queue\SerializesModels;
 class ContactUserMail extends Mailable
 {
     use SerializesModels;
+    public $timeout = 300;
 
     public $contact;
 
