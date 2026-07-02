@@ -14,7 +14,7 @@ use App\Models\SafetyServiceRequest;
 class UserSafetyServiceMail extends Mailable
 {
     use Queueable, SerializesModels;
-
+    public $timeout = 300;
     /**
      * Create a new message instance.
      */

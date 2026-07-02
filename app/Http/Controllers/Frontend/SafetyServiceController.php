@@ -38,7 +38,7 @@ class SafetyServiceController extends Controller
         */
 
         Mail::to(config('mail.admin_email'))
-            ->send(new AdminSafetyServiceMail($requestRecord));
+            ->queue(new AdminSafetyServiceMail($requestRecord));
 
         /*
         |--------------------------------------------------------------------------
@@ -50,7 +50,7 @@ class SafetyServiceController extends Controller
         //     ->send(new UserSafetyServiceMail($requestRecord->all()));
 
         Mail::to($requestRecord->email)
-            ->send(new UserSafetyServiceMail($requestRecord));
+            ->queue(new UserSafetyServiceMail($requestRecord));
 
         return back()->with(
             'success',

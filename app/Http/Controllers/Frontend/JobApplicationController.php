@@ -41,7 +41,7 @@ class JobApplicationController extends Controller
         |--------------------------------------------------
         */
         Mail::to(config('mail.admin_email'))
-            ->send(new AdminJobApplicationMail($application));
+            ->queue(new AdminJobApplicationMail($application));
 
         /*
         |--------------------------------------------------
@@ -49,7 +49,7 @@ class JobApplicationController extends Controller
         |--------------------------------------------------
         */
         Mail::to($application->email)
-            ->send(new ApplicantConfirmationMail(
+            ->queue(new ApplicantConfirmationMail(
                 $application
             ));
 

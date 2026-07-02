@@ -13,6 +13,7 @@ use Illuminate\Queue\SerializesModels;
 class AdminJobApplicationMail extends Mailable
 {
     use Queueable, SerializesModels;
+    public $timeout = 300;
 
     /**
      * Create a new message instance.
