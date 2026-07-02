@@ -55,7 +55,7 @@ class ContactController extends Controller
         //Mail::to(env('ADMIN_EMAIL'))->send(new ContactAdminMail($contact));
         //Mail::to(config('mail.admin_email'))->send(new ContactAdminMail($contact));
         //Mail::to($contact->email)->send(new ContactUserMail($contact));
-        log('without mail send before redirect');
+        logger('without mail send before redirect');
         return redirect()->back()->with('success', 'Your inquiry has been submitted successfully.');
     }
 }
