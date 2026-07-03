@@ -4,6 +4,33 @@
 
             <h2 class="text-2xl font-semibold mb-6">Settings</h2>
 
+            @if ($errors->any())
+
+                <div class="mb-6 bg-red-100 border border-red-200 text-red-700 px-5 py-4 rounded-xl">
+
+                    <div class="font-semibold mb-2">
+                        Please fix the following errors:
+                    </div>
+
+                    <ul class="list-disc list-inside space-y-1 text-sm">
+
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+
+                    </ul>
+
+                </div>
+
+            @endif
+
+            @if(session('success'))
+
+                <div class="mb-6 bg-green-100 border border-green-200 text-green-700 px-4 py-3 rounded-lg">
+                    {{ session('success') }}
+                </div>
+
+            @endif
             <form action="{{ route('admin.settings.update') }}" method="POST">
                 @csrf
 
