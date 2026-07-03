@@ -155,16 +155,47 @@
                </div>
             </div>
             <!-- Item 2 -->
-            <div class="tab-pane fade accordion-item" id="specifications">
+            <!-- <div class="tab-pane fade accordion-item" id="specifications">
                <h2 class="accordion-header d-md-none">
                   <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                      data-bs-target="#collapse2">
-                     Specifications
+                     Specifications11
                   </button>
                </h2>
-               <div id="collapse2" class="accordion-collapse collapse d-md-block">
+               <div id="collapse2111" class="accordion-collapse collapse d-md-block">
                   <div class="accordion-body">
                      {!! $product->other ?? '<p>No additional details available.</p>' !!}
+                  </div>
+               </div>
+            </div> -->
+
+            <div class="tab-pane fade accordion-item" id="specifications">
+               <h2 class="accordion-header d-md-none">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapse2">
+                        Specifications
+                  </button>
+               </h2>
+
+               <div id="collapse2" class="accordion-collapse collapse d-md-block">
+                  <div class="accordion-body">
+                        <!-- <h5 class="text-red">Weights &amp; Dimensions</h5> -->
+                        
+                        @if($product->attributes->count())
+                           <table class="spec-table">
+                              <!-- <tbody> -->
+                                    @foreach($product->attributes as $attribute)
+                                       <tr>
+                                          <td>{{ $attribute->name }}</td>
+                                          <td>{{ $attribute->value }}</td>
+                                       </tr>
+                                    @endforeach
+                              <!-- </tbody> -->
+                           </table>
+                        @else
+                           <p>No additional details available.</p>
+                        @endif
+                           
                   </div>
                </div>
             </div>
