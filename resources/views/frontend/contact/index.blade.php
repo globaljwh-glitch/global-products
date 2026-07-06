@@ -72,21 +72,21 @@
 
       @include('frontend.partials.subscribe')
 
-<div class="modal fade" id="otpModal" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5>Verify OTP</h5>
+      <div class="modal fade" id="otpModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
+         <div class="modal-dialog">
+            <div class="modal-content">
+                  <div class="modal-header">
+                     <h5>Verify OTP</h5>
+                  </div>
+                  <div class="modal-body">
+                     <input type="text" id="otp" class="form-control" placeholder="Enter OTP">
+                     <button id="verifyOtpBtn" class="btn btn-primary mt-3">
+                        Verify OTP
+                     </button>
+                  </div>
             </div>
-            <div class="modal-body">
-                <input type="text" id="otp" class="form-control" placeholder="Enter OTP">
-                <button id="verifyOtpBtn" class="btn btn-primary mt-3">
-                    Verify OTP
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
+         </div>
+      </div>
 
 <script src="https://code.jquery.com/jquery-4.0.0.min.js"
         integrity="sha256-OaVG6prZf4v69dPg6PhVattBXkcOWQB62pdZ3ORyrao=" crossorigin="anonymous"></script>
