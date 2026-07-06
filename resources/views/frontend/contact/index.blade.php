@@ -148,11 +148,21 @@ $('#verifyOtpBtn').click(function(){
         },
         success: function(response){
             if(response.status){
-                $('#otpModal').modal('hide');
-                alert('Form submitted successfully');
-                location.reload();
+               $('#otpModal').modal('hide');
+               //alert('Form submitted successfully');
+               $('.validation-errors').html(`
+                  <div class="alert alert-success alert-dismissible fade show" role="alert">
+                     Form submitted successfully.
+                     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                  </div>`);
+               location.reload();
             } else {
-                alert('Invalid OTP');
+                //alert('Invalid OTP');
+                $('.validation-errors').html(`
+                  <div class="alert alert-danger">
+                  Invalid OTP
+                  </div>
+                `);
             }
         }
     });
