@@ -85,7 +85,7 @@ class ContactController extends Controller
             'contact_otp' => $otp
         ]);
 
-        Mail::to($validated['email'])->send(new ContactOtpMail($otp));
+        Mail::to($validated['email'])->queue(new ContactOtpMail($otp));
 
         return response()->json([
             'status' => true
@@ -102,8 +102,8 @@ class ContactController extends Controller
 
         $contact = Contact::create(session('contact_form_data'));
 
-        Mail::to(config('mail.admin_email'))
-            ->send(new ContactAdminMail($contact));
+        Mail::to(config('mail.admin_email'))->queue(new ContactAdminMail($contact));
+        Mail::to($contact->email)->queue(new ContactUserMail($contact));
 
         session()->forget([
             'contact_form_data',
