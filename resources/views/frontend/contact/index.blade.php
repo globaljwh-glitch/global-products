@@ -90,6 +90,7 @@
 
 <script src="https://code.jquery.com/jquery-4.0.0.min.js"
         integrity="sha256-OaVG6prZf4v69dPg6PhVattBXkcOWQB62pdZ3ORyrao=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
 // $('#contactForm').submit(function(e){
 //     e.preventDefault();
@@ -150,19 +151,34 @@ $('#verifyOtpBtn').click(function(){
             if(response.status){
                $('#otpModal').modal('hide');
                //alert('Form submitted successfully');
-               $('.validation-errors').html(`
-                  <div class="alert alert-success alert-dismissible fade show" role="alert">
-                     Form submitted successfully.
-                     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                  </div>`);
-               location.reload();
+               // $('.validation-errors').html(`
+               //    <div class="alert alert-success alert-dismissible fade show" role="alert">
+               //       Form submitted successfully.
+               //       <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+               //    </div>`);
+               Swal.fire({
+                  icon: 'success',
+                  title: 'Success!',
+                  text: 'Your inquiry has been submitted successfully.',
+                  confirmButtonText: 'OK',
+                  confirmButtonColor: '#dc3545'
+               }).then(() => {
+                  location.reload();
+               });
+               //location.reload();
             } else {
                 //alert('Invalid OTP');
-                $('.validation-errors').html(`
-                  <div class="alert alert-danger">
-                  Invalid OTP
-                  </div>
-                `);
+               //  $('.validation-errors').html(`
+               //    <div class="alert alert-danger">
+               //    Invalid OTP
+               //    </div>
+               //  `);
+               Swal.fire({
+                  icon: 'error',
+                  title: 'Invalid OTP',
+                  text: 'Please enter the correct OTP.',
+                  confirmButtonColor: '#dc3545'
+               });
             }
         }
     });
