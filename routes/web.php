@@ -37,6 +37,9 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProductVariantController;
 use App\Http\Controllers\Admin\SettingController;
 
+Route::post('/contact/send-otp', [ContactController::class, 'sendOtp'])->name('contact.sendOtp');
+Route::post('/contact/verify-otp', [ContactController::class, 'verifyOtp'])->name('contact.verifyOtp');
+
 Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () {
     Route::get('settings', [SettingController::class, 'index'])->name('settings.index');
     Route::post('settings', [SettingController::class, 'update'])->name('settings.update');

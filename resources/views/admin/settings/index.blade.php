@@ -129,7 +129,7 @@
                         <label>Price Adjustment Value</label>
                         <input type="number" step="0.01"
                                name="global_price_adjustment_value"
-                               value="{{ $settings['global_price_adjustment_value']->value ?? '' }}"
+                               value="0"
                                class="w-full border rounded-lg px-3 py-2">
                     </div>
 

@@ -25,56 +25,31 @@ class SettingController extends Controller
             );
         }
 
-        $adjustmentType = $request->global_price_adjustment_type; // + Percentage, - Percentage, + Fixed, - Fixed
-        $adjustmentValue = $request->global_price_adjustment_value; // example: 20
+        $adjustmentType = $request->global_price_adjustment_type;
+        $adjustmentValue = $request->global_price_adjustment_value;
 
-        //$products = Product::all();
+        if ($adjustmentValue > 0) {
+            switch ($adjustmentType) {
+                case 'percentage_increase':
+                    Product::query()->update([
+                        'price' => \DB::raw("price + (price * $adjustmentValue / 100)")
+                    ]);
+                    break;
 
-        // foreach ($products as $product) {
-        //     $price = $product->price;
+                case 'percentage_decrease':
+                    Product::query()->update([
+                        'price' => \DB::raw("price - (price * $adjustmentValue / 100)")
+                    ]);
+                    break;
 
-        //     switch ($adjustmentType) {
-        //         case '+ Percentage':
-        //             $price += ($price * $adjustmentValue / 100);
-        //             break;
+                case 'fixed_increase':
+                    Product::query()->increment('price', $adjustmentValue);
+                    break;
 
-        //         case '- Percentage':
-        //             $price -= ($price * $adjustmentValue / 100);
-        //             break;
-
-        //         case '+ Fixed':
-        //             $price += $adjustmentValue;
-        //             break;
-
-        //         case '- Fixed':
-        //             $price -= $adjustmentValue;
-        //             break;
-        //     }
-
-        //     $product->price = max(0, $price); // prevent negative price
-        //     $product->save();
-        // }
-//dd($adjustmentType, $adjustmentValue);
-        switch ($adjustmentType) {
-            case 'percentage_increase':
-                Product::query()->update([
-                    'price' => \DB::raw("price + (price * $adjustmentValue / 100)")
-                ]);
-                break;
-
-            case 'percentage_decrease':
-                Product::query()->update([
-                    'price' => \DB::raw("price - (price * $adjustmentValue / 100)")
-                ]);
-                break;
-
-            case 'fixed_increase':
-                Product::query()->increment('price', $adjustmentValue);
-                break;
-
-            case 'fixed_decrease':
-                Product::query()->decrement('price', $adjustmentValue);
-                break;
+                case 'fixed_decrease':
+                    Product::query()->decrement('price', $adjustmentValue);
+                    break;
+            }
         }
 
         return back()->with('success', 'Settings updated successfully.');
