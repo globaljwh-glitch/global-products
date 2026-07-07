@@ -1,15 +1,17 @@
 <x-app-layout>
 
-    <x-slot name="header">
-        <div class="flex justify-between items-center">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+<div class="py-6">
+
+    <div class="flex justify-between items-center mb-6">
+        <div>
+            <h2 class="text-2xl font-semibold text-gray-800 leading-tight">
                 Job Applications
             </h2>
         </div>
-    </x-slot>
+    </div>
 
-    <div class="py-6">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+    
+        <div class="max-w-7xl mx-auto">
 
             @if(session('success'))
                 <div class="mb-4 p-4 bg-green-100 text-green-700 rounded">

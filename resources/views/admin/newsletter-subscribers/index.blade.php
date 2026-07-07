@@ -1,30 +1,21 @@
 <x-app-layout>
 
-    <!-- Header -->
-    <x-slot name="header">
-
-        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
-
-            <div>
-
-                <h2 class="font-semibold text-2xl text-gray-800 leading-tight">
-                    Newsletter Subscribers
-                </h2>
-
-                <p class="text-sm text-gray-500 mt-1">
-                    Manage newsletter subscriber list
-                </p>
-
-            </div>
-
-        </div>
-
-    </x-slot>
-
-    <!-- Content -->
+<!-- Content -->
     <div class="py-8">
 
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center mb-6">
+        <div>
+            <h2 class="font-semibold text-2xl text-gray-800 leading-tight">
+                Newsletter Subscribers
+            </h2>
+
+            <p class="text-sm text-gray-500 mt-1">
+                Manage newsletter subscriber list
+            </p>
+        </div>
+    </div>
+
+        <div class="max-w-7xl mx-auto">
 
             <!-- Success Message -->
             @if(session('success'))

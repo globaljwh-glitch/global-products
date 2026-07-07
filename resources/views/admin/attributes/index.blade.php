@@ -1,7 +1,7 @@
 <x-app-layout>
 <div class="p-6">
 
-    <div class="flex justify-between mb-6 max-w-5xl mx-auto">
+    <!-- <div class="flex justify-between mb-6 max-w-5xl mx-auto">
         <div>
             <h1 class="text-2xl font-semibold">Attributes Groups</h1>
             <p class="text-sm text-gray-500">Manage groups</p>
@@ -9,6 +9,17 @@
 
         <a href="{{ route('attributes.create') }}"
            class="bg-blue-600 text-white px-4 py-2 rounded-lg">
+            + Add Attribute Group
+        </a>
+    </div> -->
+
+    <div class="flex justify-between items-center mb-6">
+        <div>
+            <h1 class="text-2xl font-semibold">Attributes Groups</h1>
+            <p class="text-sm text-gray-500">Manage groups</p>
+        </div>
+        <a href="{{ route('attributes.create') }}"
+            class="bg-blue-600 text-white px-4 py-2 rounded-lg">
             + Add Attribute Group
         </a>
     </div>
@@ -19,7 +30,8 @@
         </div>
     @endif
 
-    <div class="max-w-5xl mx-auto bg-white shadow rounded-xl overflow-hidden">
+    <!-- <div class="max-w-5xl mx-auto bg-white shadow rounded-xl overflow-hidden"> -->
+        <div class="w-full bg-white shadow rounded-xl overflow-hidden">
 
         <table class="w-full text-sm">
 

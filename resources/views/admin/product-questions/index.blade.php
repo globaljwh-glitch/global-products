@@ -1,35 +1,21 @@
 <x-app-layout>
-
-    <x-slot name="header">
-
-        <div class="flex items-center justify-between">
-
-            <div>
-
-                <h2 class="font-semibold text-2xl text-gray-800 leading-tight">
-                    Product Questions & Answers
-                </h2>
-
-                <p class="text-sm text-gray-500 mt-1">
-                    Manage Q & A
-                </p>
-
-            </div>
-
-            <a
-                href="{{ route('admin.product-questions.create') }}"
-                class="inline-flex items-center px-5 py-2.5 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition"
-            >
-                Create Q & A
-            </a>
-
+<div class="py-8">
+    <div class="flex justify-between items-center mb-6">
+        <div>
+            <h1 class="text-2xl font-semibold">Product Questions & Answers</h1>
+            <p class="text-sm text-gray-500">Manage Q & A</p>
         </div>
+        <a
+            href="{{ route('admin.product-questions.create') }}"
+            class="inline-flex items-center px-5 py-2.5 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition"
+        >
+            + Add Q & A
+        </a>
+    </div>
 
-    </x-slot>
+    
 
-    <div class="py-8">
-
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto ">
 
             @if(session('success'))
 

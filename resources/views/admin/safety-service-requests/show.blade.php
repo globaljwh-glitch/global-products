@@ -1,14 +1,19 @@
 <x-app-layout>
 
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Safety Service Request Details
-        </h2>
-    </x-slot>
+<div class="py-6">
+    <div class="flex justify-between items-center mb-6">
+        <div>
+            <h2 class="text-2xl font-semibold text-gray-800 leading-tight">
+                Safety Service Request Details
+            </h2>
+        </div>
 
-    <div class="py-6">
+        <a href="{{ route('admin.safety-service-requests.index') }}"
+        class="px-4 py-2 border border-gray-300 text-gray-700 hover:bg-gray-100 rounded-lg transition">
+            Back
+        </a>
+    </div>
 
-        <div class="max-w-5xl mx-auto sm:px-6 lg:px-8">
 
             <div class="bg-white shadow-sm rounded-lg">
 
@@ -110,7 +115,5 @@
             </div>
 
         </div>
-
-    </div>
 
 </x-app-layout>

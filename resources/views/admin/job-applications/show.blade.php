@@ -1,20 +1,21 @@
 <x-app-layout>
 
-    <x-slot name="header">
-        <div class="flex justify-between items-center">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+ <div class="py-6">
+    <div class="flex justify-between items-center mb-6">
+        <div>
+            <h2 class="text-2xl font-semibold text-gray-800 leading-tight">
                 Job Application Details
             </h2>
-
-            <a href="{{ route('admin.job-applications.index') }}"
-               class="px-4 py-2 bg-gray-600 text-white rounded">
-                Back
-            </a>
         </div>
-    </x-slot>
 
-    <div class="py-6">
-        <div class="max-w-5xl mx-auto sm:px-6 lg:px-8">
+        <a href="{{ route('admin.job-applications.index') }}"
+        class="px-4 py-2 border border-gray-300 text-gray-700 hover:bg-gray-100 rounded-lg transition">
+            Back
+        </a>
+    </div>
+
+   
+        
 
             @if(session('success'))
                 <div class="mb-4 p-4 bg-green-100 text-green-700 rounded">
@@ -188,6 +189,5 @@
             </div>
 
         </div>
-    </div>
 
 </x-app-layout>

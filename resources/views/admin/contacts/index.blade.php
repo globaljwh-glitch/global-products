@@ -1,19 +1,23 @@
 <x-app-layout>
 
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Contact Inquiries
-        </h2>
-    </x-slot>
-
     <div class="py-6">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+
+        <div class="flex justify-between items-center mb-6">
+            <div>
+                <h2 class="text-2xl font-semibold text-gray-800 leading-tight">
+                    Contact Inquiries
+                </h2>
+            </div>
+        </div>
+
+    
+        <div class="max-w-7xl mx-auto">
 
             <div class="bg-white shadow sm:rounded-lg p-6">
 
                 <table class="w-full border">
                     <thead>
-                        <tr class="bg-gray-100">
+                        <tr class="bg-gray-100 text-left">
                             <th class="p-2 border">#</th>
                             <th class="p-2 border">Name</th>
                             <th class="p-2 border">Email</th>
