@@ -51,7 +51,7 @@
 
         <label class="block text-sm font-semibold text-gray-700 mb-2">Question</label>
 
-        <textarea name="question"
+        <textarea name="question" id="question-editor"
                 class="form-control"
                 rows="3"
                 required>{{ old('question', $productQuestion->question ?? '') }}</textarea>
@@ -61,7 +61,7 @@
     <div>
         <label class="block text-sm font-semibold text-gray-700 mb-2">Answer</label>
 
-        <textarea name="answer"
+        <textarea name="answer" id="answer-editor"
                 class="form-control"
                 rows="5">{{ old('answer', $productQuestion->answer ?? '') }}</textarea>
 
@@ -124,3 +124,21 @@
     </div>
 
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        ClassicEditor
+            .create(document.querySelector('#question-editor'))
+            .catch(error => {
+                console.error(error);
+            });
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        ClassicEditor
+            .create(document.querySelector('#answer-editor'))
+            .catch(error => {
+                console.error(error);
+            });
+    });
+</script>

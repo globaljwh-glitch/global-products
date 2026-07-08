@@ -19,7 +19,7 @@
         </label>
 
         <textarea
-            name="description"
+            name="description" id="description-editor"
             rows="5"
             class="w-full rounded-2xl border-gray-300"
         >{{ old('description', $banner->description ?? '') }}</textarea>
@@ -173,3 +173,13 @@
     </div>
 
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        ClassicEditor
+            .create(document.querySelector('#description-editor'))
+            .catch(error => {
+                console.error(error);
+            });
+    });
+</script>

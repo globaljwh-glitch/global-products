@@ -91,29 +91,75 @@ class CategoryController extends Controller
         return redirect()->route('categories.index')->with('success', 'Category created');
     }
 
+    // public function edit(Category $category)
+    // {
+    //     $categories = Category::whereNull('parent_id')
+    //         ->orderBy('name')
+    //         ->get();
+
+    //     $parentCategories = Category::whereNull('parent_id')
+    //     ->orderBy('name')
+    //     ->get();
+
+    //     return view('admin.categories.edit', compact('category', 'categories', 'parentCategories'));
+    // }
+
+    // public function edit(Category $category)
+    // {
+    //     $categories = Category::whereNull('parent_id')
+    //         ->orderBy('name')
+    //         ->get();
+
+    //     $parentCategories = Category::whereNull('parent_id')
+    //         ->orderBy('name')
+    //         ->get();
+
+    //     // $selectedCategories = [];
+
+    //     // $current = $category;
+
+    //     // while ($current) {
+    //     //     array_unshift($selectedCategories, $current->id);
+    //     //     $current = $current->parent;
+    //     // }
+
+    //     $selectedCategories = [];
+
+    //     $current = $category->parent;
+
+    //     while ($current) {
+    //         array_unshift($selectedCategories, $current->id);
+    //         $current = $current->parent;
+    //     }
+
+    //     return view('admin.categories.edit', compact(
+    //         'category',
+    //         'categories',
+    //         'parentCategories',
+    //         'selectedCategories'
+    //     ));
+    // }
+
     public function edit(Category $category)
     {
-        // $categories = buildCategoryTree(
-        //     Category::where('id', '!=', $category->id) // prevent self parent
-        //         ->orderBy('display_order')
-        //         ->get()
-        // );
-
-        // $parentCategories = buildCategoryTree(
-        //     Category::where('id', '!=', $category->id) // prevent self parent
-        //         ->orderBy('display_order')
-        //         ->get()
-        // );
-
-        $categories = Category::whereNull('parent_id')
+        $parentCategories = Category::whereNull('parent_id')
             ->orderBy('name')
             ->get();
 
-        $parentCategories = Category::whereNull('parent_id')
-        ->orderBy('name')
-        ->get();
+        $selectedCategories = [];
 
-        return view('admin.categories.edit', compact('category', 'categories', 'parentCategories'));
+        $current = $category->parent;
+
+        while ($current) {
+            array_unshift($selectedCategories, $current->id);
+            $current = $current->parent;
+        }
+
+        return view('admin.categories.edit', compact(
+            'category',
+            'parentCategories',
+            'selectedCategories'
+        ));
     }
 
     public function update(Request $request, Category $category)

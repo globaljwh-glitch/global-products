@@ -51,16 +51,55 @@
                     </option>
 
                     @foreach($parentCategories as $pCategory)
-
-                        <option value="{{ $pCategory->id }}">
+                        <option value="{{ $pCategory->id }}"
+                            {{ ($selectedCategories[0] ?? '') == $pCategory->id ? 'selected' : '' }}>
                             {{ $pCategory->name }}
                         </option>
-
                     @endforeach
 
                 </select>
 
             </div>
+
+            @foreach(($selectedCategories ?? []) as $index => $selectedId)
+
+                    @if($index > 0)
+
+                        @php
+                            $children = \App\Models\Category::where(
+                                'parent_id',
+                                $selectedCategories[$index - 1]
+                            )->get();
+                        @endphp
+
+                        <div class="mb-4">
+
+                            <label class="text-sm font-medium">
+                                Sub Category
+                            </label>
+
+                            <select class="w-full mt-1 border rounded-lg px-3 py-2 form-control category-dropdown">
+
+                                <option value="">
+                                    Select Sub Category
+                                </option>
+
+                                @foreach($children as $child)
+
+                                    <option value="{{ $child->id }}"
+                                        {{ $child->id == $selectedId ? 'selected' : '' }}>
+                                        {{ $child->name }}
+                                    </option>
+
+                                @endforeach
+
+                            </select>
+
+                        </div>
+
+                    @endif
+
+                @endforeach
 
         </div>
 
@@ -68,7 +107,7 @@
 
         <div>
             <label>Description</label>
-            <textarea name="description" class="w-full mt-1 border rounded-lg px-3 py-2">{{ old('description', $category?->description ?? '') }}</textarea>
+            <textarea name="description" id="description-editor" class="w-full mt-1 border rounded-lg px-3 py-2">{{ old('description', $category?->description ?? '') }}</textarea>
         </div>
 
         <div>
@@ -123,7 +162,7 @@
                 class="w-full mb-2 border rounded-lg px-3 py-2">
 
             <label>Meta Description</label>
-            <textarea name="meta_description"
+            <textarea name="meta_description" id="meta_description-editor"
                 class="w-full border rounded-lg px-3 py-2">{{ old('meta_description', $category->meta_description ?? '') }}</textarea>
         </div>
 
@@ -217,4 +256,22 @@ $(document).on('change', '.category-dropdown', function(){
 
 });
 
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        ClassicEditor
+            .create(document.querySelector('#description-editor'))
+            .catch(error => {
+                console.error(error);
+            });
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        ClassicEditor
+            .create(document.querySelector('#meta_description-editor'))
+            .catch(error => {
+                console.error(error);
+            });
+    });
 </script>

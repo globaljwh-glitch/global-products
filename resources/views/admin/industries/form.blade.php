@@ -10,7 +10,7 @@
 
         <div>
             <label class="text-sm font-medium">Description</label>
-            <textarea name="description" class="w-full mt-1 border rounded-lg px-3 py-2">{{ old('description', $industry->description ?? '') }}</textarea>
+            <textarea name="description" id="description-editor" class="w-full mt-1 border rounded-lg px-3 py-2">{{ old('description', $industry->description ?? '') }}</textarea>
         </div>
 
         <div>
@@ -158,4 +158,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
     }
 });
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        ClassicEditor
+            .create(document.querySelector('#description-editor'))
+            .catch(error => {
+                console.error(error);
+            });
+    });
 </script>

@@ -61,7 +61,7 @@
 <div class="mt-6">
     <label class="block mb-2">Overview</label>
 
-    <textarea name="overview"
+    <textarea name="overview" id="overview-editor"
               rows="5"
               class="w-full border rounded p-2">{{ old('overview', $career->overview ?? '') }}</textarea>
 </div>
@@ -69,7 +69,7 @@
 <div class="mt-6">
     <label class="block mb-2">Responsibilities</label>
 
-    <textarea name="responsibilities"
+    <textarea name="responsibilities" id="responsibilities-editor"
               rows="8"
               class="w-full border rounded p-2">{{ old('responsibilities', $career->responsibilities ?? '') }}</textarea>
 </div>
@@ -77,7 +77,7 @@
 <div class="mt-6">
     <label class="block mb-2">Skills</label>
 
-    <textarea name="skills"
+    <textarea name="skills" id="skills-editor"
               rows="8"
               class="w-full border rounded p-2">{{ old('skills', $career->skills ?? '') }}</textarea>
 </div>
@@ -85,7 +85,7 @@
 <div class="mt-6">
     <label class="block mb-2">Qualifications</label>
 
-    <textarea name="qualifications"
+    <textarea name="qualifications" id="qualifications-editor"
               rows="8"
               class="w-full border rounded p-2">{{ old('qualifications', $career->qualifications ?? '') }}</textarea>
 </div>
@@ -93,7 +93,7 @@
 <div class="mt-6">
     <label class="block mb-2">Offer</label>
 
-    <textarea name="offer"
+    <textarea name="offer" id="offer-editor"
               rows="8"
               class="w-full border rounded p-2">{{ old('offer', $career->offer ?? '') }}</textarea>
 </div>
@@ -108,3 +108,45 @@
         <span class="ml-2">Active</span>
     </label>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        ClassicEditor
+            .create(document.querySelector('#overview-editor'))
+            .catch(error => {
+                console.error(error);
+            });
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        ClassicEditor
+            .create(document.querySelector('#responsibilities-editor'))
+            .catch(error => {
+                console.error(error);
+            });
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        ClassicEditor
+            .create(document.querySelector('#skills-editor'))
+            .catch(error => {
+                console.error(error);
+            });
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        ClassicEditor
+            .create(document.querySelector('#qualifications-editor'))
+            .catch(error => {
+                console.error(error);
+            });
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        ClassicEditor
+            .create(document.querySelector('#offer-editor'))
+            .catch(error => {
+                console.error(error);
+            });
+    });
+</script>

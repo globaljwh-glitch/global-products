@@ -63,13 +63,13 @@
             Status
         </label>
 
-        <select
+        <select 
             name="status"
             class="w-full rounded-2xl border-gray-300"
         >
-            <option value="draft">Draft</option>
-            <option value="published">Published</option>
-            <option value="inactive">Inactive</option>
+            <option value="draft" {{ $news->status == 'draft' ? 'selected' : '' }}>Draft</option>
+            <option value="published" {{ $news->status == 'published' ? 'selected' : '' }}>Published</option>
+            <option value="inactive" {{ $news->status == 'inactive' ? 'selected' : '' }}>Inactive</option>
         </select>
     </div>
 

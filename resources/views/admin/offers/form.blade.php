@@ -197,7 +197,7 @@
                         </label>
 
                         <textarea
-                            name="description"
+                            name="description" id="description-editor"
                             rows="5"
                             placeholder="Write offer description..."
                             class="w-full rounded-xl border-gray-300 focus:border-indigo-500 focus:ring-indigo-500"
@@ -262,3 +262,13 @@
                         </a>
 
             </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        ClassicEditor
+            .create(document.querySelector('#description-editor'))
+            .catch(error => {
+                console.error(error);
+            });
+    });
+</script>
