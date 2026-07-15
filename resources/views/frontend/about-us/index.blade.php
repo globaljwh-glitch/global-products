@@ -7,8 +7,8 @@
             <div class="row">
                <div class="col-md-12 d-flex align-items-center">
                   <div class="bannerContent mw-100 w-100">
-                     <h1>OVER 75 YEARS OF <br><span>INDUSTRIAL INNOVATION & EXPERIENCE</span></h1>
-                     <p>We have—and continue to be—a leader, and an authority, for supplying industrial-strength<br> equipment that delivers uncompromising quality at an exceptional value.</p>
+                     <h1>SETTING THE STANDARD <br><span>IN INDUSTRIAL SOLUTIONS</span></h1>
+                     <p>Supplying durable industrial equipment and trusted workplace solutions that meet the demands<br> of warehouses, manufacturing facilities, and commercial operations. </p>
                      <a href="/products" class="customBtn01 blackBg mt-2">Explore Our Products</a>
                   </div>
                </div>
@@ -23,15 +23,15 @@
                </div>
                <div class="d-flex align-items-center col-md-6">
                   <div class="w-100 pe-0 ps-lg-4 pt-3 pt-lg-0">
-                     <h2>About <span>Our Store</span></h2>
-                     <p class="pe-0 pe-lg-3">With over 75 years of experience and hundreds of thousands of products, Global Industrial continues to be the source for industrial equipment and supplies that keep your business running efficiently. Serving all of North America, Global Industrial offers a vast selection of hand-picked and tested industrial-strength products, including material handling, storage &amp; shelving, safety &amp; security, janitorial &amp; facility maintenance, and HVAC &amp; fans. Our combination of innovative experts and extensive product knowledge allows us to deliver customized solutions to the public sector and businesses of all sizes—prioritizing efficiency, value, and a customer-first approach.</p>
-                     <p>Our experience and hand-picked & tested product selection have positioned us to be the source for industrial equipment and supplies, with teams of experts who know your business & your unique needs.</p>
+                     <h2>About <span>Global Products Corporation</span></h2>
+                     <p class="pe-0 pe-lg-3">We are committed to providing businesses with dependable industrial equipment, material handling solutions, warehouse storage systems, safety products, facility maintenance supplies, HVAC equipment, workbenches, carts & trucks, and workplace essentials that meet the demands of modern operations. Our carefully selected product range is sourced to deliver outstanding performance, durability, and long-term value for warehouses, manufacturing facilities, distribution centers, commercial buildings, educational institutions, and public sector organizations.</p>
+                     <p>Backed by industry expertise and a customer-focused approach, we help businesses find practical solutions that improve workflow, increase efficiency, and support daily operations. Our commitment to quality, competitive pricing, and reliable service has made us a trusted partner for organizations seeking dependable industrial products.</p>
                      <ul>
-                        <li>Extensive account management tools</li>
-                        <li>Selection of hundreds of thousands of products</li>
-                        <li>Same-day shipments on most orders</li>
-                        <li>Competitive, budget-friendly pricing</li>
-                        <li>Extended service plans</li>
+                        <li>Range of industrial equipment & supplies</li>
+                        <li>Tested products from trusted manufacturers</li>
+                        <li>Fast order processing and dependable delivery</li>
+                        <li>Competitive pricing for every business</li>
+                        <li>Customer support and product assistance</li>
                      </ul>
                   </div>
                </div>
@@ -43,7 +43,7 @@
             <div class="row">
                <div class="col-md-12 text-center">
                   <h2 class="text-white fw-bold">Why Choose Us</h2>
-                  <p class="text-white mb-0">We focus on delivering value, quality, and trust in every order.</p>
+                  <p class="text-white mb-0">We deliver industrial solutions with a focus on quality, value, and customer satisfaction.</p>
                </div>
             </div>
             <div class="mt-lg-5 mt-md-4 mt-3">
@@ -51,29 +51,29 @@
                   <div class="col-md-3 col-sm-6 d-flex">
                      <div class="iconBox w-100">
                         <div class="icon mb-lg-3 mb-2"><i class="fa-solid fa-star"></i></div>
-                        <h5>High Quality</h5>
-                        <p>Carefully selected premium products</p>
+                        <h5>Timely Delivery</h5>
+                        <p>Fast and efficient shipping</p>
                      </div>
                   </div>
                   <div class="col-md-3 col-sm-6 d-flex">
                      <div class="iconBox w-100">
                         <div class="icon mb-lg-3 mb-2"><i class="fa-solid fa-truck-fast"></i></div>
-                        <h5>Fast Delivery</h5>
-                        <p>Quick and reliable shipping</p>
+                        <h5>Top Quality</h5>
+                        <p>Long-term performance</p>
                      </div>
                   </div>
                   <div class="col-md-3 col-sm-6 d-flex">
                      <div class="iconBox w-100">
                         <div class="icon mb-lg-3 mb-2"><i class="fa-solid fa-shield-halved"></i></div>
-                        <h5>Secure Payment</h5>
-                        <p>100% safe transactions</p>
+                        <h5>24/7 Assistance</h5>
+                        <p>Helps you when needed</p>
                      </div>
                   </div>
                   <div class="col-md-3 col-sm-6 d-flex">
                      <div class="iconBox w-100">
                         <div class="icon mb-lg-3 mb-2"><i class="fa-solid fa-headset"></i></div>
-                        <h5>24/7 Support</h5>
-                        <p>Always here to help you</p>
+                        <h5>Safe Payment</h5>
+                        <p>Provides safe checkouts</p>
                      </div>
                   </div>
                </div>
@@ -85,16 +85,16 @@
             <div class="row">
                <div class="d-flex align-items-center col-md-6 order-1 order-md-0">
                   <div class="w-100 pe-0 ps-lg-4 pt-3 pt-lg-0">
-                     <h2>Where <span>Quality Meets</span> Excellence</h2>
-                     <p class="pe-0 pe-lg-3">We bring together thoughtful curation, precision, and an unwavering attention to detail to deliver an experience that reflects true quality. From the moment you explore our collection to the final delivery at your doorstep, very touchpoint is carefully designed to feel seamless, refined, and dependable.</p>
-                     <p>Our approach goes beyond simply offering products—we focus on creating a sense of trust, consistency, and lasting value. By continuously refining our processes and elevating our standards, we ensure that every interaction embodies excellence and leaves a lasting impression.</p>
+                     <h2>Quality <span>That Drives</span> Performance</h2>
+                     <p class="pe-0 pe-lg-3">Every product at Global Products Corporation is selected to meet the highest standards of quality, reliability, and workplace performance. From industrial equipment and storage solutions to safety products and facility essentials, we help businesses operate more efficiently with products they can trust.</p>
+                     <p>Our commitment extends beyond supplying products—we strive to deliver dependable service, consistent quality, and practical solutions that support long-term business success. We create a seamless purchasing experience from product selection through delivery.</p>
                      <ul class="">
-                        <li>Curated quality without compromise</li>
-                        <li>Precision in every detail</li>
-                        <li>An experience designed around you</li>
-                        <li>Seamless service from selection to delivery</li>
-                        <li>Trusted standards you can rely on</li>
-                        <li>Crafted for lasting value and satisfaction</li>
+                        <li>Products selected for quality and reliability</li>
+                        <li>Practical solutions for workplaces</li>
+                        <li>Performance you can depend on</li>
+                        <li>Customer-focused service</li>
+                        <li>Products designed for long-term value</li>
+                        <li>Support business growth</li>
                      </ul>
                   </div>
                </div>
@@ -108,8 +108,8 @@
          <div class="container">
             <div class="row">
                <div class="col-lg-10 col-md-12 m-auto">
-                  <h2 class="fw-bold">Our Achievements</h2>
-                  <p>We are honored to have earned the trust of thousands of discerning customers, building relationships that go beyond transactions. Our journey reflects consistent growth and refinement, with a focus on elevating every aspect of the shopping experience.</p>
+                  <h2 class="fw-bold">Our Commitment</h2>
+                  <p>Businesses trust us for dependable industrial products, responsive service, and reliable solutions that help improve productivity every day. We remain committed to delivering quality products, exceptional customer support, and long-term value for organizations across a wide range of industries.</p>
                </div>
             </div>
             <div class="mt-lg-5 mt-md-4 mt-3">
