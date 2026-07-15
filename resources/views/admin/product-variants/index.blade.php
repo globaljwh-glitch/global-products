@@ -55,7 +55,7 @@
                             <tr class="border-t">
 
                                 <td class="px-4 py-3">
-                                    {{ $variant->product?->title }}
+                                    {{ $variant->product?->name }}
                                 </td>
 
                                 <td class="px-4 py-3">
@@ -96,10 +96,10 @@
 
                                     <div class="flex justify-center gap-2">
 
-                                        <a href="{{ route('admin.product-variants.show', $variant) }}"
+                                        <!-- <a href="{{ route('admin.product-variants.show', $variant) }}"
                                            class="px-3 py-1 bg-green-600 text-white rounded">
                                             View
-                                        </a>
+                                        </a> -->
 
                                         <a href="{{ route('admin.product-variants.edit', $variant) }}"
                                            class="px-3 py-1 bg-blue-600 text-white rounded">

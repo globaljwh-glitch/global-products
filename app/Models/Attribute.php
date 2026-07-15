@@ -30,4 +30,9 @@ class Attribute extends Model
     {
         return $this->belongsTo(AttributeGroup::class, 'attribute_group_id');
     }
+
+    public function variantAttributes()
+    {
+        return $this->hasMany(ProductVariantAttribute::class);
+    }
 }

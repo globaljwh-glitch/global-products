@@ -9,7 +9,7 @@ class ProductVariant extends Model
     protected $fillable = [
         'product_id',
         'variant_name',
-        'attributes',
+        //'attributes',
         'sku',
         'minimum_quantity',
         'stock',
@@ -20,7 +20,7 @@ class ProductVariant extends Model
     ];
 
     protected $casts = [
-        'attributes' => 'array',
+        //'attributes' => 'array',
         'status' => 'boolean',
         'price' => 'decimal:2',
         'compare_price' => 'decimal:2',
@@ -32,9 +32,14 @@ class ProductVariant extends Model
     |--------------------------------------------------------------------------
     */
 
+    // public function product()
+    // {
+    //     return $this->belongsTo(Product::class);
+    // }
+
     public function product()
     {
-        return $this->belongsTo(Product::class);
+        return $this->belongsTo(Product::class, 'product_id');
     }
 
     /*
@@ -43,14 +48,20 @@ class ProductVariant extends Model
     |--------------------------------------------------------------------------
     */
 
-    public function getAttributeTextAttribute()
-    {
-        if (!$this->attributes) {
-            return '';
-        }
+    // public function getAttributeTextAttribute()
+    // {
+    //     if (!$this->attributes) {
+    //         return '';
+    //     }
 
-        return collect($this->attributes)
-            ->map(fn ($value, $key) => ucfirst($key) . ': ' . $value)
-            ->implode(' | ');
+    //     return collect($this->attributes)
+    //         ->map(fn ($value, $key) => ucfirst($key) . ': ' . $value)
+    //         ->implode(' | ');
+    // }
+
+    public function variantAttributes()
+    {
+        return $this->hasMany(ProductVariantAttribute::class)
+            ->orderBy('display_order');
     }
 }

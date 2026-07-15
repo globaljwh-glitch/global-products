@@ -28,18 +28,34 @@ class ProductQuestionController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'product_id' => 'required',
-            'question' => 'required',
+            //'product_id' => 'required',
+            'product_ids'   => 'required|array|min:1',
+            'product_ids.*' => 'exists:products,id',
+            'question'      => 'required|string',
+            'answer'        => 'required|string',
         ]);
 
-        ProductQuestion::create([
-            'product_id' => $request->product_id,
-            'question' => $request->question,
-            'answer' => $request->answer,
-            'is_answered' => $request->filled('answer'),
-            'is_published' => $request->has('is_published'),
-            'answered_by' => auth()->id(),
-        ]);
+        foreach ($request->product_ids as $productId) {
+
+            ProductQuestion::create([
+                'product_id'   => $productId,
+                'question'     => $request->question,
+                'answer'       => $request->answer,
+                'is_answered'  => !empty($request->answer),
+                'is_published' => $request->has('is_published'),
+                'answered_by'  => auth()->id(),
+            ]);
+
+        }
+
+        // ProductQuestion::create([
+        //     'product_id' => $request->product_id,
+        //     'question' => $request->question,
+        //     'answer' => $request->answer,
+        //     'is_answered' => $request->filled('answer'),
+        //     'is_published' => $request->has('is_published'),
+        //     'answered_by' => auth()->id(),
+        // ]);
 
         return redirect()
             ->route('admin.product-questions.index')

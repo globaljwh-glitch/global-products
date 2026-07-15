@@ -37,6 +37,11 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProductVariantController;
 use App\Http\Controllers\Admin\SettingController;
 
+Route::get(
+    '/admin/products/{product}/attributes',
+    [ProductController::class, 'getAttributes']
+)->name('admin.products.attributes');
+
 Route::post('/contact/send-otp', [ContactController::class, 'sendOtp'])->name('contact.sendOtp');
 Route::post('/contact/verify-otp', [ContactController::class, 'verifyOtp'])->name('contact.verifyOtp');
 

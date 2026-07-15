@@ -423,4 +423,22 @@ class ProductController extends Controller
         );
     }
 
+    public function getAttributes($productId)
+    {
+        $attributes = Attribute::where('product_id', $productId)
+            ->orderBy('name')
+            ->orderBy('value')
+            ->get()
+            ->map(function ($item) {
+
+                return [
+                    'id'   => $item->id,
+                    'text' => $item->name.' : '.$item->value,
+                ];
+
+            });
+
+        return response()->json($attributes);
+    }
+
 }
