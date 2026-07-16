@@ -17,8 +17,8 @@
          <div class="container">
             <div class="row">
                <div class="col-xl-9 col-lg-10 col-md-12 text-center m-auto">
-                  <h2 class="fw-bold">Transit Time</h2>
-                  <p class="mb-0">Shipping charges are calculated based on the actual weight, distance traveled, and type of shipping service you specify: (Ground, Next Day, Second Day).</p>
+                  <h2 class="fw-bold">Delivery Timelines</h2>
+                  <p class="mb-0">Delivery times vary based on your selected shipping method, product availability, shipment destination, and carrier service. Shipping costs are calculated according to package weight, delivery distance, and the shipping option selected during checkout.</p>
                </div>
             </div>
             <div class="mt-lg-5 mt-md-4 mt-3">
@@ -26,28 +26,28 @@
                   <div class="col-lg-3 col-sm-6 d-flex">
                      <div class="iconBox w-100 ps-4 pe-4">
                         <div class="icon mb-lg-3 mt-1 mb-2"><i class="fa-solid fa-cart-shopping"></i></div>
-                        <h5>UPS Ground</h5>
+                        <h5>Ground Shipping</h5>
                         <p>1-8 Business Days</p>
                      </div>
                   </div>
                   <div class="col-lg-3 col-sm-6 d-flex">
                      <div class="iconBox w-100 ps-4 pe-4">
                         <div class="icon mb-lg-3 mt-1 mb-2"><i class="fa-solid fa-plane"></i></div>
-                        <h5>UPS Second Day:</h5>
+                        <h5>Second-Day Shipping</h5>
                         <p>2 Business Days</p>
                      </div>
                   </div>
                   <div class="col-lg-3 col-sm-6 d-flex">
                      <div class="iconBox w-100 ps-4 pe-4">
                         <div class="icon mb-lg-3 mt-1 mb-2"><i class="fa-solid fa-calendar"></i></div>
-                        <h5>UPS Next Day:</h5>
+                        <h5>Next-Day Shipping</h5>
                         <p>1 Business Day</p>
                      </div>
                   </div>
                   <div class="col-lg-3 col-sm-6 d-flex">
                      <div class="iconBox w-100 ps-4 pe-4">
                         <div class="icon mb-lg-3 mt-1 mb-2"><i class="fa-solid fa-truck"></i></div>
-                        <h5>Truck:</h5>
+                        <h5>Freight Truck Delivery</h5>
                         <p>1-8 Business Days</p>
                      </div>
                   </div>
@@ -59,16 +59,16 @@
          <div class="container">
             <div class="row">
                <div class="col-md-12">
-                  <h2>Same Day Shipping</h2>
-                  <p>Global products offers Same-Day shipping for all in-stock orders placed by 4PM Monday-Friday (excluding observed holidays). While a vast majority of all orders will ship same day, some exclusions will apply:</p>
+                  <h2>Same-Day Order Processing</h2>
+                  <p>Orders for in-stock products placed before 4:00 PM (Monday–Friday), excluding public holidays, are typically processed and shipped the same business day. Same-day shipping may not apply in the following situations:</p>
                   <ul class="listing01">
-                     <li>Large-volume orders that may require specialized handling or trucking</li>
-                     <li>Orders requiring additional review or documentation </li>
-                     <li>Orders for AK, HI or international shipments </li>
-                     <li>Adverse natural and man-made events preventing shipping </li>
-                     <li>Shipments designated to a customer\collect carrier </li>
+                     <li>Large-volume or bulk orders requiring specialized freight handling</li>
+                     <li>Orders requiring additional verification or documentation</li>
+                     <li>Shipments to Alaska, Hawaii, or international destinations</li>
+                     <li>Severe weather or unexpected transportation disruptions</li>
+                     <li>Customer-arranged freight or collect shipments</li>
                   </ul>
-                  <p>Unless otherwise noted, Same Day shipping may not apply when utilizing a vendor partner for fulfillment.</p>
+                  <p>Products fulfilled directly by manufacturing partners</p>
                </div>
             </div>
          </div>
@@ -77,9 +77,9 @@
          <div class="container">
             <div class="row">
                <div class="col-md-12">
-                  <h2>Shipping Charges for Prepaid Shipments</h2>
-                  <p>All shipments are F.O.B. shipping point. Shipping method is determined by the size and weight of each item. Most Items are consolidated onto single shipment, some items of differing size and weight may ship independently, by different methods. Most items will be sent UPS. Items that are too large or too heavy will be sent by truck. There is a minimum $60 shipping fee for truck deliveries. Someone must be present to accept truck deliveries. Standard truck delivery is directed to a dock facility that is designed to receive freight. 24 hour notification, residential deliveries, lift gate, or inside deliveries are available for an additional charge.</p>
-                  <p>Unless otherwise stated, freight and shipping fees will be charged for shipments to anywhere in the contiguous United States, using a carrier of our choice. Other terms apply to Alaska, Hawaii, Puerto Rico, and export orders. Any extra charges incurred for additional services, such as customer's carrier or special handling by the carrier, must be paid by the consignee. Items backordered from an order qualifying for prepaid shipping charges will be shipped prepaid. Title and risk of loss will pass to the customer upon tender of shipment to the carrier. If the product is damaged in transit, customer's only recourse is to file a claim with the carrier.</p>
+                  <h2>Shipping Information</h2>
+                  <p>All shipments are dispatched F.O.B. Shipping Point. Shipping methods are selected based on product size, weight, and destination to ensure the safest and most efficient delivery. Most standard orders are shipped through parcel carriers, while oversized or heavy products are delivered via freight services. Freight deliveries may require someone to be available to receive the shipment.</p>
+                  <p>Additional delivery services—including residential delivery, lift-gate assistance, inside delivery, scheduled appointments, or other special handling—may incur additional charges.Shipping fees apply to eligible orders based on destination, carrier selection, and shipping requirements. Orders shipped to international locations may be subject to additional freight charges and delivery conditions.Ownership and responsibility for products transfer to the customer once the shipment has been accepted by the carrier. Any transit damage should be reported directly to the shipping carrier for claim processing.</p>
                </div>
             </div>
          </div>
@@ -88,17 +88,17 @@
          <div class="container">
             <div class="row">
                <div class="col-md-12">
-                  <h2>Flat Rate Parcel Standard Shipping Offer</h2>
-                  <p>Flat rate shipping fee structure is:</p>
+                  <h2>Standard Flat-Rate Shipping</h2>
+                  <p>Eligible parcel shipments qualify for flat-rate shipping based on the order value:</p>
                   <ul class="listing01">
-                     <li>$19.99 for orders $100.00 and under</li>
-                     <li>$34.99 for orders between $100.01 - $250.00</li>
-                     <li>$44.99 for orders between $250.01 - $500.00</li>
-                     <li>Orders over $500.00 use standard shipping rates</li>
+                     <li>Orders up to $100: $19.99</li>
+                     <li>$100.01 - $250: $34.99</li>
+                     <li>$250.01 - $500: $44.99</li>
+                     <li>Above $500: Standard shipping rates apply</li>
                   </ul>
-                  <p>Offer applies to small pack items up to 50 lb using standard ground shipping and excludes large boxes/items, expedited freight, special delivery services, products shipped via truck and oversized shipments.</p>
-                  <h3 class="mt-4">Collect Shipments</h3>
-                  <p>We will gladly ship via your specified carrier; however, we will not ship with certain carriers due to poor experience. Please note that for freight collect shipments you are responsible for order tracking once freight is loaded onto truck. In addition, Global Products cannot assist you with filing damage claims with your carrier.</p>
+                  <p>Flat-rate shipping applies to qualifying small-parcel shipments weighing up to 50 lbs and excludes oversized items, freight deliveries, expedited shipping, hazardous materials, and special delivery services.</p>
+                  <h3 class="mt-4">Customer Carrier (Collect Shipping)</h3>
+                  <p>Customers may request shipment using their preferred carrier whenever applicable. Once freight has been transferred to the designated carrier, shipment tracking, freight coordination, and damage claims become the responsibility of the customer and carrier.</p>
                </div>
             </div>
          </div>
@@ -107,18 +107,18 @@
          <div class="container">
             <div class="row">
                <div class="col-md-12">
-                  <h2>Return Policy</h2>
-                  <p>If you are not satisfied with a product, please contact us within 30 days of receipt. A refund may be arranged excluding freight charges upon inspection. Returned merchandise must be shipped in original packaging, freight prepaid, unused, and in resalable condition. Returned merchandise is also subject to a 15% restocking fee. Global inspects all returns and reserves the right to refuse credits on damaged, used, or non-resalable items. Your only obligation is the freight charge and stocking fee where applicable, provided your return is complete with original packaging, all documentation, warranty cards, cables etc. Global reserves the right to authorize product returns after 30 days have passed from the invoice date. If the product is accepted after this period, it is subject to a 15% restocking fee and credit will be issued toward future purchases only.</p>
-                  <p>Shipping and handling charges are non-refundable for all returns. The customer may also be responsible for return shipping charges, insurance, and shipment tracking for returned merchandise. For certain returns, UPS Shipping Labels are provided. Please note that while shipping labels may be issued for your convenience, return shipping charges may be incurred depending on the reason(s) for the return request. If you require an estimate of these return shipping costs, please call Customer Service at (800) 123-4567. If an order ships prior to the cancellation request, the customer is responsible for any freight charges incurred.</p>
+                  <h2>Returns & Refund Policy</h2>
+                  <p>If you are not completely satisfied with a product, please contact our Customer Support team within 30 days of delivery. A refund may be considered after inspection, excluding original freight charges. Returned items must be unused, shipped freight prepaid, and returned in their original packaging in resalable condition. Approved returns may be subject to a 15% restocking fee. Global Products Corporation reserves the right to deny credits for items that are damaged, used, incomplete, or unsuitable for resale. Your responsibility may include applicable freight charges and restocking fees, provided the return includes all original packaging, manuals, warranty cards, accessories, cables, and related documentation. Returns requested after 30 days from the invoice date may be reviewed at our discretion. If accepted, a 15% restocking fee may apply and credit may be issued toward future purchases only.</p>
+                  <p>Shipping and handling charges are non-refundable for all returns. Customers may also be responsible for return freight, insurance, and shipment tracking costs. In selected cases, return shipping labels may be provided for convenience; however, return shipping charges may still apply depending on the reason for the return. For an estimate of potential return shipping costs, please contact Customer Service at (800) 123-4567. If an order has already shipped before a cancellation request is processed, any freight charges incurred remain the responsibility of the customer.</p>
                   <h6 class="text-red">Certain Products are Non-Returnable and/or Non-Cancelable.</h6>
-                  <p>Once you place an order for custom-cut, customer built, or special order items (such as matting, slings, cranes, prefab offices, buildings, mezzanines, assembled lockers and regularly stocked items such as generators, pressure washers, water and trash pumps, snow throwers, radio headsets, striping paint, line stripers, floor care machines, vacuums, custom fabric chairs, or forklifts) your order is considered non-cancelable. Any custom-cut, customer built, or special order items purchased by you are also non-returnable. Leased and hazardous items are also non-returnable. Contact customer service for a complete list of applicable products.</p>
-                  <h3 class="mt-3">How to Return</h3>
-                  <p>We have an online return center designed to make returns easy and hassle-free. If you decide not to use the online return center, you can call Customer Service at (800) 123-4567 to process your return. Please have the following information on hand when calling or using our Online Returns Center:</p>
+                  <p>Orders placed for custom-cut, made-to-order, customer-built, or special-order products are considered non-cancelable once confirmed. Such items are also non-returnable after purchase. Examples may include custom materials, specialized equipment, prefabricated structures, mezzanines, assembled storage products, generators, pressure washers, pumps, floor-care equipment, industrial machinery, forklifts, and other designated products. Leased items and hazardous materials are also non-returnable. Please contact Customer Service for a complete list of applicable products and return eligibility.</p>
+                  <h3 class="mt-3">How to Start a Return</h3>
+                  <p>We offer an online return process designed to make returns simple and convenient. If you prefer not to use the online return system, you may contact Customer Service at (800) 123-4567 to request a return authorization. Please have the following information available when submitting your request:</p>
                   <ul class="listing01">
                      <li>Customer Name</li>
-                     <li>Invoice Number</li>
-                     <li>Serial Number (if applicable)</li>
-                     <li>Reason for return</li>
+                     <li>Order or Invoice Number</li>
+                     <li>Product or Serial Number (if applicable)</li>
+                     <li>Reason for the Return</li>
                   </ul>
                </div>
             </div>

@@ -7,8 +7,8 @@
             <div class="row">
                <div class="col-md-12 col-lg-10 m-auto d-flex align-items-center">
                   <div class="bannerContent mw-100 w-100">
-                     <h1>Popular Reads</h1>
-                     <p>Stay ahead with the latest insights, expert tips, and breaking updates that matter. Discover fresh ideas, emerging trends, and exciting news shaping the world around you. Your daily dose of inspiration, knowledge, and what’s next.</p>
+                     <h1>Latest Updates</h1>
+                     <p>Stay informed with the latest company news, industry insights, product announcements, and expert perspectives. Explore valuable information, emerging trends, and updates that highlight innovation, progress, and developments across the industries we serve.</p>
                   </div>
                </div>
             </div>

@@ -8,7 +8,7 @@
 
             <div class="col-md-12">
                 <div class="headingBlock underLineHeading d-flex align-items-center justify-content-between">
-                    <h2>Our Industeries</h2>
+                    <h2>Industries We Serve</h2>
                 </div>
             </div>
 
