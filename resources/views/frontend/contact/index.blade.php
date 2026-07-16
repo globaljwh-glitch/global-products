@@ -8,8 +8,8 @@
             <div class="row">
                <div class="col-md-12">
                   <div class="text-center">
-                     <h2 class="">Get in Touch With Our Team</h2>
-                     <p>We’re here to assist you. Fill out the inquiry form below, or reach out via phone, email, post, or our live chat support for quick assistance.</p>
+                     <h2 class="">Contact Our Team</h2>
+                     <p>We're ready to help. Whether you have questions about our products, need technical assistance, or want to discuss your business requirements, our team is here to provide prompt and reliable support. Complete the inquiry form below or connect with us by phone, email, or mail—we look forward to assisting you.</p>
                   </div>
                </div>
             </div>

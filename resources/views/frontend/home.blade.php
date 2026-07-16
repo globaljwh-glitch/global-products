@@ -162,17 +162,9 @@
                <div class="imgThumbBorder"><img alt="" class="imgHeightResponsive" src="images/image-thumb-01.jpg"></div>
             </div>
             <div class="d-flex align-items-center col-md-6">
-               <div class="w-100 pe-0 ps-lg-4 pt-3 pt-lg-0">
-                  <h2>The Source for <span>Industrial Equipment</span> and <span>Supplies</span></h2>
-                  <p class="pe-0 pe-lg-3">With over 75 years of experience and hundreds of thousands of products, Global
-                     Industrial continues to be the source for industrial equipment and supplies that keep your business
-                     running efficiently. Serving all of North America, Global Industrial offers a vast selection of
-                     hand-picked and tested industrial-strength products, including material handling, storage & shelving,
-                     safety & security, janitorial & facility maintenance, and HVAC & fans. Our combination of innovative
-                     experts and extensive product knowledge allows us to deliver customized solutions to the public sector
-                     and businesses of all sizes—prioritizing efficiency, value, and a customer-first approach. We know
-                     your business & its unique needs and we develop, manufacture, and distribute products that meet your
-                     needs and exceed your expectations.</p>
+               <div class="w-100 pe-0 ps-lg-4 pt-3 pt-lg-0"> 
+                  <h2>Industrial <span>Equipment</span> & <span>Business Supplies</span></h2>
+                  <p class="pe-0 pe-lg-3">Global Products Corporation is your reliable source for high-quality industrial equipment, material handling solutions, warehouse storage systems, safety products, facility maintenance supplies, and workplace essentials. We help businesses across multiple industries streamline operations with durable, performance-driven products that meet demanding workplace requirements. Our carefully selected product range is built to support warehouses, manufacturing facilities, distribution centers, commercial buildings, educational institutions, healthcare organizations, and government sectors. Whether you need material handling equipment, storage & shelving solutions, industrial safety products, janitorial supplies, packaging materials, or facility maintenance equipment, we deliver dependable solutions that combine quality, efficiency, and long-term value.</p>
                   <a href="{{ route('about') }}" class="customBtn01 blackBg mt-2">Know More</a>
                </div>
             </div>

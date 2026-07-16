@@ -6,7 +6,7 @@
             <div class="bannerContent">
                <h5 class="text-uppercase text-red">{{ $banner->page }}</h5>
                <h1>{{ $banner->title }} <span>{{ $banner->position }}</span></h1>
-               <p>{{ $banner->description }}</p>
+               <p>{!! $banner->description !!}</p>
                <a href="{{ $banner->button_link }}" class="customBtn01 blackBg mt-2">{{ $banner->button_text }}</a>
             </div>
          </div>

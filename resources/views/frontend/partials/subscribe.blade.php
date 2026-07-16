@@ -4,8 +4,8 @@
             <div class="row">
                <div class="col-md-12 col-lg-6 d-flex align-items-center">
                   <div class="w-100">
-                     <h2 class="fw-bold">Be the first to know about our daily sales!</h2>
-                     <p class="mb-lg-0 pe-lg-4">Subscribe to our newsletters now and stay up-to-date with new collections, the latest lookbooks.</p>
+                     <h2 class="fw-bold">Stay Updated with Our Latest Offers!</h2>
+                     <p class="mb-lg-0 pe-lg-4">Subscribe to our newsletter to receive updates on featured industrial products, new arrivals, industry insights, seasonal offers & exclusive savings.</p>
                   </div>
                </div>
                <div class="col-md-12 col-lg-6 d-flex align-items-center">
