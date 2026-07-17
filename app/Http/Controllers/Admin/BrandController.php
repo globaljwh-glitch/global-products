@@ -20,7 +20,9 @@ class BrandController extends Controller
 
     public function create()
     {
-        $categories = Category::pluck('name', 'id');
+        $categories = Category::whereNull('parent_id')
+            ->orderBy('name')
+            ->pluck('name', 'id');
 
         return view('admin.brands.create', compact('categories'));
     }
@@ -71,7 +73,9 @@ class BrandController extends Controller
 
     public function edit(Brand $brand)
     {
-        $categories = Category::pluck('name', 'id');
+        $categories = Category::whereNull('parent_id')
+            ->orderBy('name')
+            ->pluck('name', 'id');
 
         return view('admin.brands.edit', compact('brand', 'categories'));
     }
