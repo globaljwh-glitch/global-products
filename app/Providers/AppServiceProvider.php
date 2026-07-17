@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Config;
 
 use App\Services\HeaderCountService;
 
@@ -17,6 +18,7 @@ use App\Models\Product;
 use App\Models\Banner;
 use App\Models\Offer;
 use App\Models\News;
+use App\Models\Setting;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -27,6 +29,25 @@ class AppServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
+        if (\Schema::hasTable('settings')) {
+
+            $settings = Cache::rememberForever('app_settings', function () {
+                return Setting::pluck('value', 'key')->toArray();
+            });
+
+            Config::set('custom.admin_email', $settings['admin_email'] ?? '');
+            Config::set('custom.warehouse_zip', $settings['warehouse_zip'] ?? '');
+            //Config::set('custom.sales_email', $settings['sales_email'] ?? '');
+
+            Config::set('paypal.currency', $settings['paypal_currency'] ?? 'sandbox');
+            Config::set('paypal.mode', $settings['paypal_mode'] ?? 'sandbox');
+            Config::set('paypal.client_id', $settings['paypal_client_id'] ?? '');
+            Config::set('paypal.client_secret', $settings['paypal_client_secret'] ?? '');
+
+            Config::set('services.recaptcha.site_key', $settings['google_recaptcha_key'] ?? '');
+            Config::set('services.recaptcha.secret', $settings['google_recaptcha_secret'] ?? '');
+        }
+
         if (config('app.env') === 'production') {
             URL::forceScheme('https');
         }

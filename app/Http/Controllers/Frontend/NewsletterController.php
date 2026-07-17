@@ -31,7 +31,7 @@ class NewsletterController extends Controller
 
         // verify with Google
         $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
-            'secret' => env('GOOGLE_RECAPTCHA_SECRET'),
+            'secret' => config('services.recaptcha.secret'), //env('GOOGLE_RECAPTCHA_SECRET'),
             'response' => $captcha,
             'remoteip' => $request->ip(),
         ]);

@@ -74,7 +74,7 @@
                         <div class="form-group"><label>What Service Are You Interested In Scheduling? <span>*</span></label><textarea name="service_required" rows="9" class="form-control" required></textarea></div>
                         <div class="form-group">
                            <div class="mt-4">
-                              <div class="g-recaptcha" data-sitekey="{{ env('GOOGLE_RECAPTCHA_KEY') }}"></div>
+                              <div class="g-recaptcha" data-sitekey="{{ config('services.recaptcha.site_key') }}"></div>
 
                               @error('g-recaptcha-response')
                                  <small class="text-danger">{{ $message }}</small>

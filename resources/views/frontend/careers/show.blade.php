@@ -184,7 +184,7 @@
                   </div>
 
                   <div class="col-md-6">
-                        <div class="g-recaptcha" data-sitekey="{{ env('GOOGLE_RECAPTCHA_KEY') }}"></div>
+                        <div class="g-recaptcha" data-sitekey="{{ config('services.recaptcha.site_key') }}"></div>
 
                         @error('g-recaptcha-response')
                            <small class="text-danger">{{ $message }}</small>

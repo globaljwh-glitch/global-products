@@ -17,7 +17,7 @@
                         </div>
                         <div class="d-flex flex-column flex-lg-row align-items-start align-items-lg-center justify-content-between gap-3 mb-3">
                            <div>
-                              <div class="g-recaptcha" data-sitekey="{{ env('GOOGLE_RECAPTCHA_KEY') }}"></div>
+                              <div class="g-recaptcha" data-sitekey="{{ config('services.recaptcha.site_key') }}"></div>
 
                               @error('g-recaptcha-response')
                                  <small class="text-danger">{{ $message }}</small>

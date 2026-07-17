@@ -14,7 +14,7 @@ return [
     */
 
     'name' => env('APP_NAME', 'Global Products'),
-    'warehouse_zip' => env('WAREHOUSE_ZIP'),
+    'warehouse_zip' => config('custom.warehouse_zip', '16001'), //env('WAREHOUSE_ZIP'),
 
     /*
     |--------------------------------------------------------------------------

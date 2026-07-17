@@ -40,7 +40,7 @@ class ContactController extends Controller
 
         // verify with Google
         $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
-            'secret' => env('GOOGLE_RECAPTCHA_SECRET'),
+            'secret' => config('services.recaptcha.secret'), //env('GOOGLE_RECAPTCHA_SECRET'),
             'response' => $captcha,
             'remoteip' => $request->ip(),
         ]);
@@ -53,8 +53,6 @@ class ContactController extends Controller
 
         $contact = Contact::create($validated);
 
-        //Mail::to(env('ADMIN_EMAIL'))->send(new ContactAdminMail($contact));
-        //logger('before first mail');
         //Mail::to(config('mail.admin_email'))->send(new ContactAdminMail($contact));
         Mail::to(config('mail.admin_email'))->queue(new ContactAdminMail($contact));
         Mail::to($contact->email)->queue(new ContactUserMail($contact));

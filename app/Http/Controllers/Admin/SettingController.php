@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Setting;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class SettingController extends Controller
 {
@@ -27,7 +28,9 @@ class SettingController extends Controller
 
         $adjustmentType = $request->global_price_adjustment_type;
         $adjustmentValue = $request->global_price_adjustment_value;
-
+        
+        Cache::forget('app_settings');
+        
         if ($adjustmentValue > 0) {
             switch ($adjustmentType) {
                 case 'percentage_increase':
