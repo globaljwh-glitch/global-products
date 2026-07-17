@@ -40,7 +40,7 @@ class JobApplicationController extends Controller
         | Email Admin
         |--------------------------------------------------
         */
-        Mail::to(config('mail.admin_email'))
+        Mail::to(config('custom.admin_email'))
             ->queue(new AdminJobApplicationMail($application));
 
         /*

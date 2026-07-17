@@ -37,7 +37,7 @@ class SafetyServiceController extends Controller
         |--------------------------------------------------------------------------
         */
 
-        Mail::to(config('mail.admin_email'))
+        Mail::to(config('custom.admin_email'))
             ->queue(new AdminSafetyServiceMail($requestRecord));
 
         /*
