@@ -138,6 +138,8 @@ class CheckoutController extends Controller
         $response = $provider->capturePaymentOrder($request->token);
         //dd($response);
 
+        \Log::info('PayPal Response', $response);
+
         if (isset($response['status']) && $response['status'] == 'COMPLETED') {
 
             $order = Order::where('paypal_order_id', $request->token)
