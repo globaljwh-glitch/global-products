@@ -21,11 +21,11 @@
                                 alt="User" class="imgResponsive">
 
                         </a>
-
+                        @auth
                         <div class="memberSince fw-bold">
                             Member Since {{ auth()->user()?->created_at->format('Y') }}
                         </div>
-
+                        @endauth
                     </div>
 
                 </div>
@@ -98,7 +98,9 @@
 
                                 <div class="col-md-2">
 
-                                    <img src="{{ asset($product->thumbnail ?? 'images/no-image.png') }}" class="product-img">
+                                    <img src="{{ $product->mainImage
+                     ? asset('storage/' . $product->mainImage->image)
+                     : asset('images/no-product.png') }}" class="product-img">
 
                                 </div>
 
