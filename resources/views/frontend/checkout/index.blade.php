@@ -19,7 +19,11 @@
         $subtotal += $item->price * $item->quantity;
     }
 
-    $discount = 0;
+    // Coupon from session
+    $coupon = session('coupon');
+
+    $discount = $coupon['discount'] ?? 0;
+    $couponCode = $coupon['code'] ?? '';
 
     if(!empty($cartItems)) {
         $shipping = config('custom.shipping_charge', 0);
@@ -32,7 +36,7 @@
         $tax = 0;
     }
 
-    $grandTotal = $subtotal - $discount + $shipping + $tax;
+    $grandTotal = ($subtotal - $discount) + $shipping + $tax;
 
 @endphp
 
@@ -419,6 +423,16 @@
 
                     </div>
 
+                    @if(session()->has('coupon'))
+                    <div class="d-flex justify-content-between">
+
+                        
+                            <span>Coupon Applied ({{ $couponCode }})</span> 
+                            <span class="fw-bold text-success">-${{ number_format($discount, 2) }}</span>
+
+                    </div>
+                    @else
+                    
                     <div class="d-flex justify-content-between">
 
                         <span>Discount</span>
@@ -430,6 +444,7 @@
                         </span>
 
                     </div>
+                    @endif
 
                     <div class="d-flex justify-content-between">
 

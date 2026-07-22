@@ -103,43 +103,6 @@ class CartController extends Controller
         );
     }
 
-    // public function add(Request $request, Product $product)
-    // {
-    //     $quantity = (int) $request->quantity;
-
-    //     // Prevent invalid quantity
-    //     if ($quantity < 1) {
-    //         $quantity = 1;
-    //     }
-
-    //     $cart = Cart::firstOrCreate([
-    //         'user_id' => auth()->id(),
-    //     ]);
-
-    //     $cartItem = CartItem::where('cart_id', $cart->id)
-    //         ->where('product_id', $product->id)
-    //         ->first();
-
-    //     if ($cartItem) {
-
-    //         // Add requested quantity dynamically
-    //         $cartItem->increment('quantity', $quantity);
-
-    //     } else {
-
-    //         CartItem::create([
-    //             'cart_id' => $cart->id,
-    //             'product_id' => $product->id,
-    //             'quantity' => $quantity,
-    //             'price' => $product->sale_price ?? $product->price,
-    //         ]);
-    //     }
-
-    //     return response()->json([
-    //         'status' => 'success',
-    //         'message' => 'Product added to cart'
-    //     ]);
-    // }
 
     public function add(Request $request, Product $product)
     {
@@ -262,34 +225,6 @@ class CartController extends Controller
         ]);
     }
 
-    /**
-     * Remove item from cart
-     */
-    // public function removeItem(Request $request)
-    // {
-    //     $request->validate([
-    //         'cart_item_id' => 'required|exists:cart_items,id'
-    //     ]);
-
-    //     $cartItem = CartItem::findOrFail($request->cart_item_id);
-
-    //     // Security check
-    //     if ($cartItem->cart->user_id != auth()->id()) {
-
-    //         return response()->json([
-    //             'status' => 'error',
-    //             'message' => 'Unauthorized'
-    //         ], 403);
-
-    //     }
-
-    //     $cartItem->delete();
-
-    //     return response()->json([
-    //         'status' => 'success',
-    //         'message' => 'Item removed from cart'
-    //     ]);
-    // }
 
     public function removeItem(Request $request)
     {
@@ -339,49 +274,6 @@ class CartController extends Controller
         ]);
     }
 
-    // public function updateQuantity(Request $request)
-    // {
-    //     $request->validate([
-    //         'cart_item_id' => 'required|exists:cart_items,id',
-    //         'quantity' => 'required|integer|min:1',
-    //     ]);
-
-    //     $cartItem = CartItem::findOrFail($request->cart_item_id);
-
-    //     // Security check
-    //     if ($cartItem->cart->user_id != auth()->id()) {
-
-    //         return response()->json([
-    //             'status' => 'error',
-    //             'message' => 'Unauthorized'
-    //         ], 403);
-
-    //     }
-
-    //     // Update quantity
-    //     $cartItem->update([
-    //         'quantity' => $request->quantity
-    //     ]);
-
-    //     // Recalculate totals
-    //     $itemTotal = $cartItem->price * $cartItem->quantity;
-
-    //     $cartSubtotal = CartItem::where('cart_id', $cartItem->cart_id)
-    //         ->selectRaw('SUM(price * quantity) as subtotal')
-    //         ->value('subtotal');
-
-    //     return response()->json([
-
-    //         'status' => 'success',
-
-    //         'message' => 'Quantity updated',
-
-    //         'item_total' => number_format($itemTotal, 2),
-
-    //         'cart_subtotal' => number_format($cartSubtotal, 2)
-
-    //     ]);
-    // }
 
     public function updateQuantity(Request $request)
     {
@@ -457,10 +349,6 @@ class CartController extends Controller
         ]);
     }
 
-    // public function checkout()
-    // {
-    //     return view('frontend.checkout.index');
-    // }
 
     public function checkout(
         OfferService $offerService,
@@ -538,8 +426,9 @@ class CartController extends Controller
             $subtotal += $item->price * $item->quantity;
         }
 
-        $offer = null;
-        $discount = 0;
+        $coupon = session('coupon');
+        $offer = $coupon;
+        $discount = $coupon['discount'] ?? 0;
 
         $summary = $cartCalculationService->calculate(
             $subtotal,
@@ -555,81 +444,6 @@ class CartController extends Controller
             )
         );
     }
-
-
-    // public function applyOffer(
-    //     Request $request,
-
-    //     OfferService $offerService,
-
-    //     CartCalculationService $cartCalculationService
-    // ) {
-
-
-    //     $request->validate([
-
-    //         'offer_code' => 'required'
-    //     ]);
-
-    //     $cart = Cart::with('items.product')
-
-    //         ->where('user_id', auth()->id())
-
-    //         ->first();
-
-    //     $cartItems = $cart ? $cart->items : collect();
-
-    //     $subtotal = 0;
-
-    //     foreach ($cartItems as $item) {
-
-    //         $subtotal += $item->price * $item->quantity;
-    //     }
-    //     $offer = $offerService->getValidOffer(
-
-    //         $request->offer_code
-    //     );
-
-    //     if (!$offer) {
-
-    //         return response()->json([
-
-    //             'status' => false,
-
-    //             'message' => 'Invalid offer code'
-    //         ]);
-    //     }
-
-    //     $discount = $offerService->calculateDiscount(
-
-    //         $subtotal,
-
-    //         $offer
-    //     );
-
-    //     $result = $cartCalculationService->calculate(
-
-    //         $subtotal,
-
-    //         $discount
-    //     );
-
-    //     session([
-
-    //         'offer_code' => $offer->offer_code
-    //     ]);
-
-    //     return response()->json([
-
-    //         'status' => true,
-
-    //         'message' => 'Offer applied successfully',
-
-    //         'offer' => $offer,
-
-    //         'data' => $result
-    //     ]);
-    // }
 
 
     public function applyOffer(
@@ -711,8 +525,17 @@ class CartController extends Controller
         | Store in session (works for guest + logged in)
         |--------------------------------------------------------------------------
         */
+        // session([
+        //     'offer_code' => $offer->offer_code
+        // ]);
         session([
-            'offer_code' => $offer->offer_code
+            'coupon' => [
+                'id'       => $offer->id,
+                'code'     => $offer->offer_code,
+                'type'     => $offer->discount_type,
+                'value'    => $offer->discount_value,
+                'discount' => $discount,
+            ]
         ]);
 
         return response()->json([
@@ -725,7 +548,7 @@ class CartController extends Controller
 
     public function removeOffer()
     {
-        session()->forget('offer_code');
+        session()->forget('coupon');
 
         return response()->json([
 
