@@ -261,7 +261,11 @@
 
                             <span id="shippingPrice">
 
+                            @if($cartItems->isNotEmpty())
                                 ${{ number_format($summary['shipping'], 2) }}
+                            @else
+                                $0.00
+                            @endif
 
                             </span>
 
@@ -294,19 +298,33 @@
 
                             <span id="grandTotal" class="productPrice text-red">
 
+                            @if($cartItems->isNotEmpty())
                                 ${{ number_format($summary['grand_total'], 2) }}
+                            @else
+                                $0.00
+                            @endif
 
                             </span>
 
                         </div>
 
+                        @if($cartItems->isNotEmpty())
 
-                        <a href="{{ url('/checkout') }}"
+                            <a href="{{ url('/checkout') }}"
                             class="btn btn-primary w-100 mt-2 mt-md-3 customBtn01 redBg text-white">
+                                Proceed to Checkout
+                            </a>
 
-                            Proceed to Checkout
+                        @else
 
-                        </a>
+                            <button
+                                type="button"
+                                class="btn btn-secondary w-100 mt-2 mt-md-3 customBtn01"
+                                disabled>
+                                Proceed to Checkout
+                            </button>
+
+                        @endif
 
 
                         <small class="text-muted text-center d-block mt-2">
