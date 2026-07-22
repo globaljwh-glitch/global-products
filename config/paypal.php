@@ -8,13 +8,13 @@
 return [
     'mode' => config('paypal.mode', 'production'), //env('PAYPAL_MODE', 'sandbox'), // Can only be 'sandbox' Or 'live'. If empty or invalid, 'live' will be used.
     'sandbox' => [
-        'client_id' => env('PAYPAL_SANDBOX_CLIENT_ID', ''), //config('paypal.client_id'), //env('PAYPAL_SANDBOX_CLIENT_ID', ''),
-        'client_secret' => env('PAYPAL_SANDBOX_CLIENT_SECRET', ''), //config('paypal.client_secret'), //env('PAYPAL_SANDBOX_CLIENT_SECRET', ''),
+        'client_id' => '', //config('paypal.client_id'), //env('PAYPAL_SANDBOX_CLIENT_ID', ''),
+        'client_secret' => '', //config('paypal.client_secret'), //env('PAYPAL_SANDBOX_CLIENT_SECRET', ''),
         'app_id' => 'APP-80W284485P519543T', // Sandbox app_id is always this fixed value.
     ],
     'live' => [
-        'client_id' => env('PAYPAL_LIVE_CLIENT_ID', ''),
-        'client_secret' => env('PAYPAL_LIVE_CLIENT_SECRET', ''),
+        'client_id' => '', //config('paypal.client_id'), //env('PAYPAL_LIVE_CLIENT_ID', ''),
+        'client_secret' => '', //config('paypal.client_secret'), //env('PAYPAL_LIVE_CLIENT_SECRET', ''),
         // Live app_id: log in to developer.paypal.com → My Apps & Credentials →
         // select your app → the App ID shown at the top (starts with "APP-").
         'app_id' => env('PAYPAL_LIVE_APP_ID', ''),

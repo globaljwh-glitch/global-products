@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Models\CartItem;
 use App\Models\Product;
+use App\Models\ProductVariant;
 use Illuminate\Http\Request;
 use App\Services\OfferService;
 
@@ -13,48 +14,6 @@ use App\Services\CartCalculationService;
 
 class CartController extends Controller
 {
-    // public function index(
-    //     OfferService $offerService,
-    //     CartCalculationService $cartCalculationService
-    // ) {
-
-
-    //     $cart = Cart::with('items.product')
-    //         ->where('user_id', auth()->id())
-    //         ->first();
-
-
-    //     $cartItems = $cart ? $cart->items : collect();
-
-
-    //     $subtotal = 0;
-
-    //     foreach ($cartItems as $item) {
-
-    //         $subtotal += $item->price * $item->quantity;
-    //     }
-
-
-    //     $offer = null;
-
-    //     $discount = 0;
-
-
-    //     $summary = $cartCalculationService->calculate(
-    //         $subtotal,
-    //         $discount
-    //     );
-
-    //     return view(
-    //         'frontend.cart.index',
-    //         compact(
-    //             'cartItems',
-    //             'summary',
-    //             'offer'
-    //         )
-    //     );
-    // }
-
     public function index(
         OfferService $offerService,
         CartCalculationService $cartCalculationService
@@ -102,6 +61,7 @@ class CartController extends Controller
                             'product_id' => $product->id,
                             'product'    => $product,
                             'price'      => $item['price'],
+                            'variant_id' => $item['variant_id'] ?? null,
                             'quantity'   => $item['quantity'],
                         ]);
                     }
@@ -190,6 +150,17 @@ class CartController extends Controller
             $quantity = 1;
         }
 
+        $price = $product->sale_price ?? $product->price;
+
+        if ($request->filled('variant_id')) {
+
+            $variant = ProductVariant::find($request->variant_id);
+
+            if ($variant) {
+                $price = $variant->price;
+            }
+        }
+
         /*
         |--------------------------------------------------------------------------
         | Logged-in user → Database Cart
@@ -214,8 +185,9 @@ class CartController extends Controller
                 CartItem::create([
                     'cart_id'    => $cart->id,
                     'product_id' => $product->id,
+                    'variant_id' => $request->variant_id ?? null,
                     'quantity'   => $quantity,
-                    'price'      => $product->sale_price ?? $product->price,
+                    'price'      => $price, //$product->sale_price ?? $product->price,
                 ]);
             }
 
@@ -237,7 +209,7 @@ class CartController extends Controller
                 $cart[$product->id] = [
                     'product_id' => $product->id,
                     'name'       => $product->name,
-                    'price'      => $product->sale_price ?? $product->price,
+                    'price'      => $price, //$product->sale_price ?? $product->price,
                     'quantity'   => $quantity,
                     'image'      => $product->mainImage?->image,
                 ];
@@ -251,26 +223,6 @@ class CartController extends Controller
             'message' => 'Product added to cart'
         ]);
     }
-
-    /**
-     * This method is not in use, this is also use for remove product from cart
-     */
-    // public function remove(Product $product)
-    // {
-    //     $cart = Cart::where('user_id', auth()->id())->first();
-
-    //     if ($cart) {
-
-    //         CartItem::where('cart_id', $cart->id)
-    //             ->where('product_id', $product->id)
-    //             ->delete();
-    //     }
-
-    //     return response()->json([
-    //         'status' => 'success',
-    //         'message' => 'Product removed from cart'
-    //     ]);
-    // }
 
     public function remove(Product $product)
     {
@@ -559,6 +511,7 @@ class CartController extends Controller
                     CartItem::create([
                         'cart_id'    => $cart->id,
                         'product_id' => $item['product_id'],
+                        'variant_id' => $item['variant_id'] ?? null,
                         'quantity'   => $item['quantity'],
                         'price'      => $item['price'],
                     ]);
@@ -812,6 +765,7 @@ class CartController extends Controller
                 CartItem::create([
                     'cart_id'    => $cart->id,
                     'product_id' => $item['product_id'],
+                    'variant_id' => $item['variant_id'] ?? null,
                     'quantity'   => $item['quantity'],
                     'price'      => $item['price'],
                 ]);

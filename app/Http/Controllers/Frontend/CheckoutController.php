@@ -31,8 +31,11 @@ class CheckoutController extends Controller
             $subtotal += $item->price * $item->quantity;
         }
 
-        $shipping = 25;
-        $tax = 25;
+        // $shipping = 25;
+        // $tax = 25;
+        $shipping = config('custom.shipping_charge', 0);
+        $taxPercentage = config('custom.tax_percentage', 0);
+        $tax = ($subtotal * $taxPercentage) / 100;
 
         $grandTotal = $subtotal + $shipping + $tax;
 

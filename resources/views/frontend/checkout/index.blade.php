@@ -21,9 +21,16 @@
 
     $discount = 0;
 
-    $shipping = 25;
+    if(!empty($cartItems)) {
+        $shipping = config('custom.shipping_charge', 0);
+        $taxPercentage = config('custom.tax_percentage', 0);
 
-    $tax = 25;
+        $tax = ($subtotal * $taxPercentage) / 100;
+
+    } else {
+        $shipping = 0;
+        $tax = 0;
+    }
 
     $grandTotal = $subtotal - $discount + $shipping + $tax;
 
@@ -54,7 +61,7 @@
                     <a href="#" class="d-block shadow">
 
                         <img
-                            src="{{ $user->image ? asset($user->image) : asset('images/user-image.jpg') }}"
+                            src="{{ auth()->user()?->image ? asset(auth()->user()->image) : asset('images/guest-user.jpg') }}"
                             alt="User"
                             class="imgResponsive"
                         >
@@ -355,7 +362,9 @@
                         <div class="d-flex align-items-center mb-3">
 
                             <img
-                                src="{{ asset($product->thumbnail ?? 'images/no-image.png') }}"
+                                src="{{ $product->mainImage
+                     ? asset('storage/' . $product->mainImage->image)
+                     : asset('images/no-product.png') }}"
                                 class="product-img me-2"
                             >
 
@@ -461,20 +470,33 @@
                     </div>
 
                     <!-- PayPal -->
-                    <form action="{{ route('paypal.payment') }}"
-                          method="POST">
+                    @if($cartItems->isNotEmpty())
 
-                        @csrf
+                        <form action="{{ route('paypal.payment') }}"
+                            method="POST">
+
+                            @csrf
+
+                            <button
+                                type="submit"
+                                class="btn btn-primary w-100 mt-2 mt-md-3 customBtn01 redBg text-white">
+
+                                Pay With PayPal
+
+                            </button>
+
+                        </form>
+
+                    @else
 
                         <button
-                            type="submit"
-                            class="btn btn-primary w-100 mt-2 mt-md-3 customBtn01 redBg text-white">
-
+                            type="button"
+                            class="btn btn-secondary w-100 mt-2 mt-md-3 customBtn01"
+                            disabled>
                             Pay With PayPal
-
                         </button>
 
-                    </form>
+                    @endif
 
                 </div>
 

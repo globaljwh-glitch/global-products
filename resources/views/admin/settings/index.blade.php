@@ -73,15 +73,15 @@
 
                     <div>
                         <label>Paypal Client ID</label>
-                        <input type="text" name="paypal_sandbox_client_id"
-                               value="{{ $settings['paypal_sandbox_client_id']->value ?? '' }}"
+                        <input type="text" name="paypal_client_id"
+                               value="{{ $settings['paypal_client_id']->value ?? '' }}"
                                class="w-full border rounded-lg px-3 py-2">
                     </div>
 
                     <div>
                         <label>Paypal Client Secret</label>
-                        <input type="text" name="paypal_sandbox_client_secret"
-                               value="{{ $settings['paypal_sandbox_client_secret']->value ?? '' }}"
+                        <input type="text" name="paypal_client_secret"
+                               value="{{ $settings['paypal_client_secret']->value ?? '' }}"
                                class="w-full border rounded-lg px-3 py-2">
                     </div>
 

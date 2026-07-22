@@ -37,12 +37,18 @@ class AppServiceProvider extends ServiceProvider
 
             Config::set('custom.admin_email', $settings['admin_email'] ?? '');
             Config::set('custom.warehouse_zip', $settings['warehouse_zip'] ?? '');
+            Config::set('custom.tax_percentage', $settings['tax_percentage'] ?? '');
+            Config::set('custom.shipping_charge', $settings['shipping_charge'] ?? '');
             //Config::set('custom.sales_email', $settings['sales_email'] ?? '');
 
-            Config::set('paypal.currency', $settings['paypal_currency'] ?? 'sandbox');
+            Config::set('paypal.currency', $settings['paypal_currency'] ?? 'USD');
             Config::set('paypal.mode', $settings['paypal_mode'] ?? 'sandbox');
-            Config::set('paypal.client_id', $settings['paypal_client_id'] ?? '');
-            Config::set('paypal.client_secret', $settings['paypal_client_secret'] ?? '');
+            Config::set('paypal.client_id', $settings['paypal_sandbox_client_id'] ?? '');
+            Config::set('paypal.client_secret', $settings['paypal_sandbox_client_secret'] ?? '');
+            Config::set('paypal.sandbox.client_id', $settings['paypal_sandbox_client_id'] ?? '');
+            Config::set('paypal.sandbox.client_secret', $settings['paypal_sandbox_client_secret'] ?? '');
+            Config::set('paypal.live.client_id', $settings['paypal_client_id'] ?? '');
+            Config::set('paypal.live.client_secret', $settings['paypal_client_secret'] ?? '');
 
             Config::set('services.recaptcha.site_key', $settings['google_recaptcha_key'] ?? '');
             Config::set('services.recaptcha.secret', $settings['google_recaptcha_secret'] ?? '');

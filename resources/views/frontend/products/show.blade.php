@@ -31,8 +31,62 @@
                <div class="productDetail">
                   <h2>{{ $product->name }}</h2>
                   <div class="productModel fw-semibold">
-                     Model #: {{ $product->sku ?? 'N/A' }}
+                     Model #: <span id="productSku">{{ $product->sku ?? 'N/A' }}</span>
                   </div>
+
+@if($product->variants->count())
+
+<div class="productVariants mb-4">
+
+    <h5 class="fw-bold mb-3">Available Options</h5>
+
+    @foreach($product->variants as $variant)
+
+        <label class="variantBox d-flex align-items-center mb-2">
+
+            <input
+                type="radio"
+                name="variant_id"
+                value="{{ $variant->id }}"
+                class="variant-radio me-2"
+                data-price="{{ $variant->price }}"
+                data-sku="{{ $variant->sku }}"
+                data-stock="{{ $variant->stock }}"
+                {{ $loop->first ? 'checked' : '' }}>
+
+            <div>
+
+                <div class="fw-semibold">
+                    {{ $variant->variant_name }}
+                </div>
+
+                <small class="text-muted">
+
+                    @foreach($variant->variantAttributes as $variantAttribute)
+
+                        {{ $variantAttribute->attribute->name }}
+                        :
+                        {{ $variantAttribute->attribute->value }}
+
+                        @if(!$loop->last)
+                            |
+                        @endif
+
+                    @endforeach
+
+                </small>
+
+            </div>
+
+        </label>
+
+    @endforeach
+
+</div>
+
+@endif
+
+
                   <div class="productRating">
                      @php
                         $rating = round($product->reviews_avg_rating ?? 0);
@@ -52,7 +106,7 @@
                      </small>
                   </div>
 
-                  <div class="productPrice text-red fw-bold">
+                  <div class="productPrice text-red fw-bold" id="productPrice">
                      ${{ number_format($product->price, 2) }}
                   </div>
                   <div class="smallDesc">
@@ -68,12 +122,21 @@
                      </div>
                      <!-- Add to Cart -->
                      <!-- <button class="customBtn01 redBg text-white">Add to Cart</button> -->
-                     <button type="button" class="customBtn01 redBg text-white add-to-cart-btn"
+                     <!-- <button type="button" class="customBtn01 redBg text-white add-to-cart-btn"
                         data-product-id="{{ $product->id }}">
 
                         ADD TO CART
 
+                     </button> -->
+
+                     <button
+                        type="button"
+                        class="customBtn01 redBg text-white add-to-cart-btn"
+                        data-product-id="{{ $product->id }}"
+                        data-variant-id="">
+                        ADD TO CART
                      </button>
+
                      <button class="customBtn01 blueBg add-to-wishlist" data-product-id="{{ $product->id }}">
                         {{ auth()->check() && auth()->user()->favoriteProducts->contains($product->id)
       ? 'Remove from Wishlist'
@@ -654,7 +717,7 @@
       let button = $(this);
 
       let productId = button.data('product-id');
-
+//console.log($('input[name="variant_id"]:checked').val());
       let quantity = $("#quantity").val();
 
       $.ajax({
@@ -665,7 +728,9 @@
 
          data: {
             _token: $('meta[name="csrf-token"]').attr('content'),
-            quantity: quantity
+            quantity: quantity,
+            product_id: $(this).data('product-id'),
+            variant_id: $('input[name="variant_id"]:checked').val(),
          },
 
          success: function (response) {
@@ -771,6 +836,16 @@
 
          $(this).closest('.thumbImg').addClass('active');
       });
+
+   });
+
+   $(document).on('change','.variant-radio',function(){
+
+      $('#productPrice').html('$'+parseFloat($(this).data('price')).toFixed(2));
+
+      $('#productSku').html($(this).data('sku'));
+
+      //$('#productStock').html($(this).data('stock'));
 
    });
 </script>

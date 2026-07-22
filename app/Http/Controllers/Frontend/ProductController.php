@@ -165,7 +165,8 @@ class ProductController extends Controller
             'mainImage',
             'categories',
             'questions',
-            'attributes'
+            'attributes',
+            'variants.variantAttributes.attribute',
         ])->withAvg('reviews', 'rating')->withCount('reviews')
             ->where('slug', $slug)
             ->where('status', 1)
