@@ -200,11 +200,24 @@
 
                             <input type="text" id="offer_code" class="form-control mb-0" placeholder="Apply Coupon">
 
-                            <button type="button" id="applyOfferBtn" class="btn btn-primary customBtn01 blueBg">
 
-                                Apply
+                            @if($cartItems->isNotEmpty())
 
-                            </button>
+                                <button type="button" id="applyOfferBtn" class="btn btn-primary customBtn01 blueBg">
+
+                                    Apply
+
+                                </button>
+
+                            @else
+
+                                <button disabled type="button" class="btn btn-primary customBtn01 blueBg">
+
+                                    Apply
+
+                                </button>
+
+                            @endif
 
                         </div>
 
