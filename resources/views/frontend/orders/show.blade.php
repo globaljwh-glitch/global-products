@@ -416,7 +416,7 @@
                                 Download Invoice
                             </a>
 
-                            <a href="/products" class="customBtn01 blueBg">
+                            <a href="/categories" class="customBtn01 blueBg">
                                 Reorder
                             </a>
 

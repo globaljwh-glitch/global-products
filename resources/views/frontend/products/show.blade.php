@@ -521,7 +521,7 @@
             <div class="col-md-12">
                <div class="headingBlock underLineHeading d-flex align-items-center justify-content-between">
                   <h2>Explore Related Products</h2>
-                  <a href="/products" class="customBtn01 blackBg">View All</a>
+                  <a href="/categories" class="customBtn01 blackBg">View All</a>
                </div>
             </div>
             <div class="productList">

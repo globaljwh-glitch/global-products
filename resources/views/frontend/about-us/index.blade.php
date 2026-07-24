@@ -9,7 +9,7 @@
                   <div class="bannerContent mw-100 w-100">
                      <h1>SETTING THE STANDARD <br><span>IN INDUSTRIAL SOLUTIONS</span></h1>
                      <p>Supplying durable industrial equipment and trusted workplace solutions that meet the demands<br> of warehouses, manufacturing facilities, and commercial operations. </p>
-                     <a href="/products" class="customBtn01 blackBg mt-2">Explore Our Products</a>
+                     <a href="/categories" class="customBtn01 blackBg mt-2">Explore Our Products</a>
                   </div>
                </div>
             </div>

@@ -36,7 +36,7 @@
                               <ul>
                                  <!-- <li><a href="#">Inventory Clearance</a></li>
                                  <li><a href="#">Free Shipping</a></li> -->
-                                 <li><a href="/products">New Products</a></li>
+                                 <li><a href="/categories">New Products</a></li>
                                  <li><a href="/news">Knowledge Center</a></li>
                                  <li><a href="/news">Industrial How-Tos</a></li>
                                  <!-- <li><a href="#">Equipment Financing</a></li> -->
