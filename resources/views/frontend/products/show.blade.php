@@ -176,6 +176,14 @@
                            by
                            <strong>{{ session('delivery_date') }}</strong>
                         </p>
+                     
+                        @else
+
+                        <div class="alert alert-warning mb-0">
+                           <i class="fa fa-exclamation-circle me-2"></i>
+                           <strong>Delivery Unavailable</strong><br>
+                           Sorry, we currently do not deliver to the ZIP code you entered. Please try a different ZIP code or contact our support team for assistance.
+                        </div>
 
                      @endif
                   </div>
@@ -651,10 +659,17 @@
 @endsection
 
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
 
    $(document).ready(function () {
-
+      const Toast = Swal.mixin({
+         toast: true,
+         position: 'top-end',
+         showConfirmButton: false,
+         timer: 3000,
+         timerProgressBar: true
+      });
       $(document).on('click', '.add-to-wishlist', function (e) {
 
          e.preventDefault();
@@ -682,10 +697,18 @@
                if (response.status == 'added') {
 
                   button.text('REMOVE FROM WISHLIST');
+                  Toast.fire({
+                     icon: 'success',
+                     title: 'Added to Wishlist ❤️'
+                  });
 
                } else {
 
                   button.text('Add to Wishlist');
+                  Toast.fire({
+                     icon: 'info',
+                     title: 'Removed from Wishlist'
+                  });
 
                }
 

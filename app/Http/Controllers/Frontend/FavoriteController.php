@@ -10,27 +10,59 @@ class FavoriteController extends Controller
 {
     public function toggle(Product $product)
     {
-        $user = auth()->user();
+        if (auth()->check()) {
+            $user = auth()->user();
 
-        $exists = $user->favoriteProducts()
-            ->where('product_id', $product->id)
-            ->exists();
+            $exists = $user->favoriteProducts()
+                ->where('product_id', $product->id)
+                ->exists();
 
-        if ($exists) {
+            if ($exists) {
 
-            $user->favoriteProducts()->detach($product->id);
+                $user->favoriteProducts()->detach($product->id);
 
-            return response()->json([
-                'status' => 'removed'
-            ]);
+                return response()->json([
+                    'status' => 'removed'
+                ]);
 
+            } else {
+
+                $user->favoriteProducts()->attach($product->id);
+
+                return response()->json([
+                    'status' => 'added'
+                ]);
+            }
         } else {
 
-            $user->favoriteProducts()->attach($product->id);
+            // Guest user
+            $wishlist = session()->get('guest_wishlist', []);
 
-            return response()->json([
-                'status' => 'added'
-            ]);
+            if (in_array($product->id, $wishlist)) {
+
+                $wishlist = array_values(array_diff($wishlist, [$product->id]));
+
+                session()->put('guest_wishlist', $wishlist);
+
+                return response()->json([
+                    'status' => 'removed',
+                    'count'  => count($wishlist),
+                ]);
+
+            } else {
+
+                $wishlist[] = $product->id;
+
+                $wishlist = array_unique($wishlist);
+
+                session()->put('guest_wishlist', $wishlist);
+
+                return response()->json([
+                    'status' => 'added',
+                    'count'  => count($wishlist),
+                ]);
+            }
+            
         }
     }
 }

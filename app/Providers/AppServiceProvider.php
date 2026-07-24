@@ -149,9 +149,10 @@ class AppServiceProvider extends ServiceProvider
             // ===============================
             // Header Counts (Cached)
             // ===============================
-            $counts = Cache::remember('header_counts', 600, function () {
-                return app(HeaderCountService::class)->getCounts();
-            });
+            // $counts = Cache::remember('header_counts', 600, function () {
+            //     return app(HeaderCountService::class)->getCounts();
+            // });
+            $counts = app(HeaderCountService::class)->getCounts();
 
             // ===============================
             // Recently Viewed

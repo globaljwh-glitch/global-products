@@ -214,7 +214,7 @@ Route::post(
     '/favorite/toggle/{product}',
     [FavoriteController::class, 'toggle']
 )
-    ->middleware('auth')
+    //->middleware('auth')
     ->name('favorite.toggle');
 
 Route::get('/cart', [CartController::class, 'index'])
