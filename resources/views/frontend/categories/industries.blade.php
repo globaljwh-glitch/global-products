@@ -6,5 +6,6 @@
          {{ ucfirst($ind->name) }}
       </a></li>
       @endforeach
+      <li class="fw-bold"><a href="{{ route('industries.index') }}">See More +</a></li>
    </ul>
 </div>

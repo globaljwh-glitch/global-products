@@ -6,5 +6,6 @@
          {{ ucfirst($br->name) }}
       </a></li>
       @endforeach
+      <li class="fw-bold"><a href="/brands">See More +</a></li>
    </ul>
 </div>

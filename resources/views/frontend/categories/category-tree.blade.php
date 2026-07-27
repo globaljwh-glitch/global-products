@@ -31,4 +31,6 @@
 
 @endforeach
 
+<li class="fw-bold"><a href="/categories">See More +</a></li>
+
 </ul>
