@@ -73,7 +73,7 @@
             <div class="col-md-4 col-lg-3">
                <div class="filterByList mt-lg-4 mt-2">
 
-                  @if($type == 'category')
+                  @if(empty($type) || $type == 'category')
 
                      @include('frontend.categories.categories')
                      @include('frontend.categories.industries')
