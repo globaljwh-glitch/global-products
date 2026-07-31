@@ -22,16 +22,42 @@ class Industry extends Model
     ];
 
     // Auto slug
+    // protected static function boot()
+    // {
+    //     parent::boot();
+
+    //     static::creating(function ($model) {
+    //         $model->slug = Str::slug($model->name . '-' . time());
+    //     });
+
+    //     static::updating(function ($model) {
+    //         $model->slug = Str::slug($model->name . '-' . time());
+    //     });
+    // }
+
     protected static function boot()
     {
         parent::boot();
 
-        static::creating(function ($model) {
-            $model->slug = Str::slug($model->name . '-' . time());
-        });
+        static::saving(function ($model) {
 
-        static::updating(function ($model) {
-            $model->slug = Str::slug($model->name . '-' . time());
+            if (!$model->isDirty('name')) {
+                return;
+            }
+
+            $slug = Str::slug($model->name);
+            $originalSlug = $slug;
+            $count = 1;
+
+            while (
+                static::where('slug', $slug)
+                    ->where('id', '!=', $model->id)
+                    ->exists()
+            ) {
+                $slug = $originalSlug . '-' . $count++;
+            }
+
+            $model->slug = $slug;
         });
     }
 
