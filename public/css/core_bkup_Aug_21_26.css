@@ -38,7 +38,7 @@ a {
 }
 
 a:hover {
-  color: #54a651;
+  color: #eb001b;
 }
 
 .positionRelative {
@@ -79,11 +79,11 @@ strong {
 }
 
 .blackBg {
-  background-color: #54a651 !important;
+  background-color: #1e1e1e !important;
 }
 
 .redBg {
-  background-color: #0b0bff !important;
+  background-color: #eb001b !important;
 }
 
 .imageBackground01 {
@@ -102,7 +102,7 @@ strong {
 }
 
 .text-red {
-  color: #0b0bff !important;
+  color: #eb001b !important;
 }
 
 .text-blue {
@@ -159,7 +159,7 @@ h2 {
 }
 
 h2 span {
-  color: #0b0bff;
+  color: #eb001b;
   font-weight: 700
 }
 
@@ -237,7 +237,7 @@ ul.listing01 span {
 }
 
 .customBtn01.blackBg:hover {
-  background-color: #0b0bff !important;
+  background-color: #e12426 !important;
   color: #ffffff;
 }
 
@@ -245,7 +245,7 @@ ul.listing01 span {
 .customBtn01.bg-white:hover,
 .customBtn01.blueBg:hover,
 a.blueBg:hover {
-  background-color: #54a651 !important;
+  background-color: #1e1e1e !important;
   color: #ffffff !important;
 }
 
@@ -311,7 +311,7 @@ header,
 }
 
 .navbar-brand {
-  max-width: 280px;
+  max-width: 220px;
 }
 
 .navbar {
@@ -329,7 +329,7 @@ header,
 
 .navbar-nav .nav-link:hover,
 .navbar-nav .nav-link:focus {
-  color: #0b0bff;
+  color: #e12426;
 }
 
 .dropdown-menu {
@@ -350,7 +350,7 @@ a.dropdown-item:last-child {
 .dropdown-item:hover,
 .dropdown-item:focus {
   color: #fff;
-  background-color: #54a651;
+  background-color: #293341;
 }
 
 .headerIcons li {
@@ -427,7 +427,7 @@ span.badge.redBg {
 }
 
 .mainBanner .bannerContent h1 span {
-  color: #0b0bff;
+  color: #e12426;
 }
 
 .innerBanner {
@@ -505,7 +505,7 @@ span.badge.redBg {
 
 .blogDate {
   font-family: "Roboto", sans-serif;
-  color: #0b0bff;
+  color: #e12426;
   padding-bottom: 5px;
 }
 
@@ -524,7 +524,7 @@ span.badge.redBg {
 
 .iconBox .icon svg {
   font-size: 40px;
-  color: #0b0bff;
+  color: #eb001b;
 }
 
 .iconBox p {
@@ -534,7 +534,7 @@ span.badge.redBg {
 }
 
 tr.tableHeading th {
-  background-color: #0b0bff;
+  background-color: #eb001b;
   color: #ffffff;
 }
 
@@ -661,7 +661,7 @@ tr.tableHeading th {
 }
 
 .categoriesBox:hover .categoriesName {
-  color: #0b0bff;
+  color: #eb001b;
 }
 
 .categories-list-group-item.categories-list-group-item-action.collapsed {
@@ -670,7 +670,7 @@ tr.tableHeading th {
 }
 .categories-list-group-item.categories-list-group-item-action.active, 
 .categories-list-group-item.categories-list-group-item-action:hover {
-  background-color: #0b0bff;
+  background-color: #eb001b;
   color: #fff;
 }
 
@@ -834,7 +834,7 @@ tr.tableHeading th {
 .userProfileTabs-links li button.nav-link.active,
 .userProfileTabs-links li a.nav-link.active {
   color: #ffffff !important;
-  background-color: #0b0bff;
+  background-color: #eb001b;
 }
 
 .sortBy label {
@@ -858,8 +858,8 @@ tr.tableHeading th {
 .active>.page-link,
 .paginationOuter .page-link:hover {
   color: #ffffff;
-  background-color: #0b0bff;
-  border-color: #0b0bff;
+  background-color: #eb001b;
+  border-color: #eb001b;
 }
 
 /*----------------------------- Form Fields ------------------------------------------------*/
@@ -1155,7 +1155,7 @@ footer li a {
 }
 
 footer li a.active {
-  color: #0b0bff ;
+  color: #eb001b ;
 }
 
 footer li a,
@@ -1331,7 +1331,7 @@ footer li span {
   }
 
   .navbar-toggler {
-    background-color: #0b0bff;
+    background-color: #eb001b;
     border: 1px solid #fff;
     padding: 4px 5px 3px 6px;
     text-align: center;
@@ -1738,7 +1738,7 @@ footer li span {
   }
 
   .userProfileTabs .userProfileTabs-content.active h2 {
-    background: #0b0bff;
+    background: #eb001b;
     color: #fff;
   }
 
@@ -1885,7 +1885,7 @@ ul.ps-0.active-2 li a {
 }
 
 ul.ps-0.active-1 li a:hover, ul.ps-0.active-1 li a.active {
-  color: #0b0bff !important;
+  color: #eb001b !important;
 }
 
 ul.ps-0.active-3, ul.ps-0.active-4, ul.ps-0.active-5, ul.ps-0.active-6, ul.ps-0.active-7 {
