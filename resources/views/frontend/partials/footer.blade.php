@@ -12,7 +12,8 @@
                                  <li><a href="/careers">Careers</a></li>
                                  <li><a href="/news">News &amp; Press</a></li>
                                  <li><a href="/investor-relations">Investor Relations</a></li>
-                                 <li><a href="/pdf/csr-report.pdf" target="_blank">CSR</a></li>
+                                 <!-- <li><a href="/pdf/csr-report.pdf" target="_blank">CSR</a></li> -->
+                                  <li><a href="">Company Brochure</a></li>
                                  <!-- <li><a href="#">Distribution Centers</a></li> -->
                               </ul>
                            </div>
@@ -26,7 +27,7 @@
                                  <li><a href="/my-orders">My Orders</a></li>
                                  <li><a href="/track-order">Track My Order</a></li>
                                  <li><a href="/shipping-returns">Shipping & Returns</a></li>
-                                 <li><a href="/pdf/2026-W9-Remit-To-Chicago.pdf" target="_blank">W-9 Form</a></li>
+                                 <!-- <li><a href="/pdf/2026-W9-Remit-To-Chicago.pdf" target="_blank">W-9 Form</a></li> -->
                               </ul>
                            </div>
                         </div>
