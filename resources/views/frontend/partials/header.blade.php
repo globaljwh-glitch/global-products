@@ -73,7 +73,7 @@
 <header>
    <nav class="navbar navbar-expand-lg">
       <div class="container positionRelative">
-         <a class="navbar-brand" href="{{ route('home.index') }}"><img src="{{ asset('images/logo.jpg') }}"
+         <a class="navbar-brand" href="{{ route('home.index') }}"><img src="{{ asset('images/logo.png') }}"
                alt="Global Products Corporation" class="imgResponsive" /></a>
          <button class="navbar-toggler order-1 order-md-1" type="button" data-bs-toggle="collapse"
             data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
