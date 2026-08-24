@@ -37,6 +37,18 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProductVariantController;
 use App\Http\Controllers\Admin\SettingController;
 
+
+// Route::get('/clear-delivery', function () {
+//     session()->forget([
+//         'delivery_checked',
+//         'delivery_available',
+//         'delivery_zip',
+//         'delivery_date',
+//     ]);
+
+//     return 'Delivery session cleared';
+// });
+
 Route::get(
     '/admin/products/{product}/attributes',
     [ProductController::class, 'getAttributes']

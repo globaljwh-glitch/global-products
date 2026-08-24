@@ -91,7 +91,7 @@
                   <div class="productSlider">
                      @foreach($bestSellers as $product)
                                     <div>
-                                       <a href="#" class="product">
+                                       <a href="{{ route('products.show', $product->slug) }}" class="product">
 
                                           <div class="productThumb positionRelative">
 
@@ -187,7 +187,7 @@
 
                   @foreach($latestProducts as $product)
                               <div class="d-flex col-md-3 mb-4">
-                                 <a href="#" class="product w-100">
+                                 <a href="{{ route('products.show', $product->slug) }}" class="product w-100">
 
                                     <div class="productThumb positionRelative">
 

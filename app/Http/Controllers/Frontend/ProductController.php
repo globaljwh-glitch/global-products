@@ -258,17 +258,19 @@ class ProductController extends Controller
 
     public function checkDelivery(Request $request)
     {
-        $zip = DeliveryZip::where(
-            'zip_code',
-            $request->zip_code
-        )->first();
+        $zip = DeliveryZip::where('zip_code', $request->zip_code)->first();
 
         if (!$zip) {
 
-            return back()->with(
-                'delivery_error',
-                'Delivery not available for this ZIP code.'
-            );
+            session()->forget([
+                'delivery_zip',
+                'delivery_date',
+            ]);
+
+            return back()->with([
+                'delivery_checked'   => true,
+                'delivery_available' => false,
+            ]);
         }
 
         $deliveryDate = Carbon::now()
@@ -276,8 +278,10 @@ class ProductController extends Controller
             ->format('jS M Y');
 
         return back()->with([
-            'delivery_zip' => $request->zip_code,
-            'delivery_date' => $deliveryDate,
+            'delivery_checked'   => true,
+            'delivery_available' => true,
+            'delivery_zip'       => $request->zip_code,
+            'delivery_date'      => $deliveryDate,
         ]);
     }
 

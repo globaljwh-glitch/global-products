@@ -162,28 +162,31 @@
                      <!-- <p class="d-none mb-2">Ship to 16001 | <a href="#">Change zipcode</a></p>
                               <p>Estimated delivery to <strong>16001</strong> by <strong>23rd Apr 2026</strong></p> -->
 
-                     @if(session()->has('delivery_zip'))
+                     @if(session('delivery_checked'))
 
-                        <p class="mb-2">
-                           Ship to {{ session('delivery_zip') }}
-                           <!-- |
-                                             <a href="#" id="changeZipCode">Change zipcode</a> -->
-                        </p>
+                        @if(session('delivery_available'))
 
-                        <p>
-                           Estimated delivery to
-                           <strong>{{ session('delivery_zip') }}</strong>
-                           by
-                           <strong>{{ session('delivery_date') }}</strong>
-                        </p>
-                     
+                           <p class="mb-2">
+                                 Ship to {{ session('delivery_zip') }}
+                           </p>
+
+                           <p>
+                                 Estimated delivery to
+                                 <strong>{{ session('delivery_zip') }}</strong>
+                                 by
+                                 <strong>{{ session('delivery_date') }}</strong>
+                           </p>
+
                         @else
 
-                        <div class="alert alert-warning mb-0">
-                           <i class="fa fa-exclamation-circle me-2"></i>
-                           <strong>Delivery Unavailable</strong><br>
-                           Sorry, we currently do not deliver to the ZIP code you entered. Please try a different ZIP code or contact our support team for assistance.
-                        </div>
+                           <div class="alert alert-warning mb-0">
+                                 <i class="fa fa-exclamation-circle me-2"></i>
+                                 <strong>Delivery Unavailable</strong><br>
+                                 Sorry, we currently do not deliver to the ZIP code you entered.
+                                 Please try a different ZIP code or contact our support team.
+                           </div>
+
+                        @endif
 
                      @endif
                   </div>
